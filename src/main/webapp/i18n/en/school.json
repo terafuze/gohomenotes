@@ -1,0 +1,26 @@
+{
+    "app": {
+        "school" : {
+            "home": {
+                "title": "Schools",
+                "createLabel": "Create a new School",
+                "createOrEditLabel": "Create or edit a School"
+            },
+            "created": "A new School is created with identifier {{ param }}",
+            "updated": "A School is updated with identifier {{ param }}",
+            "deleted": "A School is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete School {{ id }}?"
+            },
+            "detail": {
+                "title": "School"
+            },
+            "abbreviation": "Abbreviation",
+            "goHomeNotesDailyCutoffTime": "Go Home Notes Daily Cutoff Time",
+            "goHomeNotesStartDate": "Go Home Notes Start Date",
+            "goHomeNotesStopDate": "Go Home Notes Stop Date",
+            "name": "Name",
+            "students": "Students"
+        }
+    }
+}

@@ -1,0 +1,95 @@
+package com.terafuze.gohomenotes.web.models;
+
+
+import javax.validation.constraints.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+
+
+
+/**
+ * A Model based on the School Grade entity.
+ */
+public class SchoolGradeModel implements Serializable {
+
+    private static final long serialVersionUID = 1L;
+
+    private Long id;
+
+    public String identifier;
+
+    
+    @NotNull
+    private String abbreviation;
+    
+    @NotNull
+    private String name;
+    
+
+    public String getIdentifier() {
+        return this.identifier;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    
+    public String getAbbreviation() {
+        return this.abbreviation;
+    }
+
+    public void setAbbreviation(String abbreviation) {
+        this.abbreviation = abbreviation;
+    }
+    
+    
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        SchoolGradeModel schoolGradeModel = (SchoolGradeModel) o;
+        if (schoolGradeModel.getId() == null || getId() == null) {
+            return false;
+        }
+        return Objects.equals(getId(), schoolGradeModel.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getId());
+    }
+
+    @Override
+    public String toString() {
+        return "SchoolGradeModel{" +
+            "id=" + getId() +
+            ", abbreviation='" + this.getAbbreviation() + "'" +
+            ", name='" + this.getName() + "'" +
+            "}";
+    }
+}

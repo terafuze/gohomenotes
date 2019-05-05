@@ -1,0 +1,297 @@
+\subsection{Entities}
+
+\begin{tabular}{lccc}
+\bfseries Name & \bfseries Table Name & \bfseries Pageable & \bfseries Description\\
+After School Program &  &  & \\
+Daily Verification Record &  &  & \\
+Dismissal Location &  &  & \\
+Early Pickup Request &  &  & \\
+Guest Request &  &  & \\
+Host Request &  &  & \\
+Legal Guardian &  &  & \\
+School &  &  & \\
+School Grade &  &  & \\
+Student &  &  & \\
+Teacher &  &  & \\
+Transportation Change &  &  & \\
+\end{tabular}
+
+
+
+\subsubsection{ After School Program Entity }
+
+\subsubsection*{ After School Program - Entity Attributes }
+
+\begin{tabular}{lllcccl}
+\bfseries Name & \bfseries Data Type & \bfseries Column Name & \bfseries Nullable & \bfseries Is Primary Key & \bfseries Is Business Key & \bfseries Description\\
+Abbreviation & String &  &  &  &  &  \\
+Name & String &  &  &  &  &  \\
+\end{tabular}
+
+\subsubsection*{ After School Program - Enumeration Attributes}
+
+\begin{tabular}{lcp{6.0cm}c}
+\bfseries Name & \bfseries Enumeration & \bfseries Description & \bfseries Nullable \\
+\end{tabular}
+
+\subsubsection*{ After School Program - Entity Relationships}
+
+\begin{tabular}{llllllp{2.0cm}}
+\bfseries Name & \bfseries Other Entity & \bfseries Relationship Type & \bfseries Join Column Name & \bfseries Owner & \bfseries Is Navigable & \bfseries Description\\
+\end{tabular}
+
+
+\subsubsection{ Daily Verification Record Entity }
+
+\subsubsection*{ Daily Verification Record - Entity Attributes }
+
+\begin{tabular}{lllcccl}
+\bfseries Name & \bfseries Data Type & \bfseries Column Name & \bfseries Nullable & \bfseries Is Primary Key & \bfseries Is Business Key & \bfseries Description\\
+\end{tabular}
+
+\subsubsection*{ Daily Verification Record - Enumeration Attributes}
+
+\begin{tabular}{lcp{6.0cm}c}
+\bfseries Name & \bfseries Enumeration & \bfseries Description & \bfseries Nullable \\
+\end{tabular}
+
+\subsubsection*{ Daily Verification Record - Entity Relationships}
+
+\begin{tabular}{llllllp{2.0cm}}
+\bfseries Name & \bfseries Other Entity & \bfseries Relationship Type & \bfseries Join Column Name & \bfseries Owner & \bfseries Is Navigable & \bfseries Description\\
+\end{tabular}
+
+
+\subsubsection{ Dismissal Location Entity }
+
+\subsubsection*{ Dismissal Location - Entity Attributes }
+
+\begin{tabular}{lllcccl}
+\bfseries Name & \bfseries Data Type & \bfseries Column Name & \bfseries Nullable & \bfseries Is Primary Key & \bfseries Is Business Key & \bfseries Description\\
+Abbreviation & String &  &  &  &  &  \\
+Assigned Passengers & Integer &  &  &  &  &  \\
+Max Guests Per Student & Integer &  &  &  &  &  \\
+Max Passengers & Integer &  &  &  &  &  \\
+Name & String &  &  &  &  &  \\
+Transfers Allowed & Boolean &  &  &  &  &  \\
+\end{tabular}
+
+\subsubsection*{ Dismissal Location - Enumeration Attributes}
+
+\begin{tabular}{lcp{6.0cm}c}
+\bfseries Name & \bfseries Enumeration & \bfseries Description & \bfseries Nullable \\
+\end{tabular}
+
+\subsubsection*{ Dismissal Location - Entity Relationships}
+
+\begin{tabular}{llllllp{2.0cm}}
+\bfseries Name & \bfseries Other Entity & \bfseries Relationship Type & \bfseries Join Column Name & \bfseries Owner & \bfseries Is Navigable & \bfseries Description\\
+\end{tabular}
+
+
+\subsubsection{ Early Pickup Request Entity }
+
+\subsubsection*{ Early Pickup Request - Entity Attributes }
+
+\begin{tabular}{lllcccl}
+\bfseries Name & \bfseries Data Type & \bfseries Column Name & \bfseries Nullable & \bfseries Is Primary Key & \bfseries Is Business Key & \bfseries Description\\
+\end{tabular}
+
+\subsubsection*{ Early Pickup Request - Enumeration Attributes}
+
+\begin{tabular}{lcp{6.0cm}c}
+\bfseries Name & \bfseries Enumeration & \bfseries Description & \bfseries Nullable \\
+\end{tabular}
+
+\subsubsection*{ Early Pickup Request - Entity Relationships}
+
+\begin{tabular}{llllllp{2.0cm}}
+\bfseries Name & \bfseries Other Entity & \bfseries Relationship Type & \bfseries Join Column Name & \bfseries Owner & \bfseries Is Navigable & \bfseries Description\\
+\end{tabular}
+
+
+\subsubsection{ Guest Request Entity }
+
+\subsubsection*{ Guest Request - Entity Attributes }
+
+\begin{tabular}{lllcccl}
+\bfseries Name & \bfseries Data Type & \bfseries Column Name & \bfseries Nullable & \bfseries Is Primary Key & \bfseries Is Business Key & \bfseries Description\\
+\end{tabular}
+
+\subsubsection*{ Guest Request - Enumeration Attributes}
+
+\begin{tabular}{lcp{6.0cm}c}
+\bfseries Name & \bfseries Enumeration & \bfseries Description & \bfseries Nullable \\
+\end{tabular}
+
+\subsubsection*{ Guest Request - Entity Relationships}
+
+\begin{tabular}{llllllp{2.0cm}}
+\bfseries Name & \bfseries Other Entity & \bfseries Relationship Type & \bfseries Join Column Name & \bfseries Owner & \bfseries Is Navigable & \bfseries Description\\
+\end{tabular}
+
+
+\subsubsection{ Host Request Entity }
+
+\subsubsection*{ Host Request - Entity Attributes }
+
+\begin{tabular}{lllcccl}
+\bfseries Name & \bfseries Data Type & \bfseries Column Name & \bfseries Nullable & \bfseries Is Primary Key & \bfseries Is Business Key & \bfseries Description\\
+Comments & String &  &  &  &  &  \\
+Confirmation Notes & String &  &  &  &  &  \\
+Confirmed & Boolean &  &  &  &  &  \\
+Confirmed By Username & String &  &  &  &  &  \\
+Event Date & Local Date &  &  &  &  &  \\
+Manually Confirmed & Boolean &  &  &  &  &  \\
+Submitted By Username & String &  &  &  &  &  \\
+\end{tabular}
+
+\subsubsection*{ Host Request - Enumeration Attributes}
+
+\begin{tabular}{lcp{6.0cm}c}
+\bfseries Name & \bfseries Enumeration & \bfseries Description & \bfseries Nullable \\
+\end{tabular}
+
+\subsubsection*{ Host Request - Entity Relationships}
+
+\begin{tabular}{llllllp{2.0cm}}
+\bfseries Name & \bfseries Other Entity & \bfseries Relationship Type & \bfseries Join Column Name & \bfseries Owner & \bfseries Is Navigable & \bfseries Description\\
+\end{tabular}
+
+
+\subsubsection{ Legal Guardian Entity }
+
+\subsubsection*{ Legal Guardian - Entity Attributes }
+
+\begin{tabular}{lllcccl}
+\bfseries Name & \bfseries Data Type & \bfseries Column Name & \bfseries Nullable & \bfseries Is Primary Key & \bfseries Is Business Key & \bfseries Description\\
+\end{tabular}
+
+\subsubsection*{ Legal Guardian - Enumeration Attributes}
+
+\begin{tabular}{lcp{6.0cm}c}
+\bfseries Name & \bfseries Enumeration & \bfseries Description & \bfseries Nullable \\
+\end{tabular}
+
+\subsubsection*{ Legal Guardian - Entity Relationships}
+
+\begin{tabular}{llllllp{2.0cm}}
+\bfseries Name & \bfseries Other Entity & \bfseries Relationship Type & \bfseries Join Column Name & \bfseries Owner & \bfseries Is Navigable & \bfseries Description\\
+\end{tabular}
+
+
+\subsubsection{ School Entity }
+
+\subsubsection*{ School - Entity Attributes }
+
+\begin{tabular}{lllcccl}
+\bfseries Name & \bfseries Data Type & \bfseries Column Name & \bfseries Nullable & \bfseries Is Primary Key & \bfseries Is Business Key & \bfseries Description\\
+Abbreviation & String &  & False &  &  &  \\
+Go Home Notes Daily Cutoff Time & Local Time &  &  &  &  &  \\
+Go Home Notes Start Date & Local Date &  &  &  &  &  \\
+Go Home Notes Stop Date & Local Date &  &  &  &  &  \\
+Name & String &  &  &  &  &  \\
+\end{tabular}
+
+\subsubsection*{ School - Enumeration Attributes}
+
+\begin{tabular}{lcp{6.0cm}c}
+\bfseries Name & \bfseries Enumeration & \bfseries Description & \bfseries Nullable \\
+\end{tabular}
+
+\subsubsection*{ School - Entity Relationships}
+
+\begin{tabular}{llllllp{2.0cm}}
+\bfseries Name & \bfseries Other Entity & \bfseries Relationship Type & \bfseries Join Column Name & \bfseries Owner & \bfseries Is Navigable & \bfseries Description\\
+Students & Student & One To Many &  &  & True & \\
+\end{tabular}
+
+
+\subsubsection{ School Grade Entity }
+
+\subsubsection*{ School Grade - Entity Attributes }
+
+\begin{tabular}{lllcccl}
+\bfseries Name & \bfseries Data Type & \bfseries Column Name & \bfseries Nullable & \bfseries Is Primary Key & \bfseries Is Business Key & \bfseries Description\\
+Abbreviation & String &  &  &  &  &  \\
+Name & String &  &  &  &  &  \\
+\end{tabular}
+
+\subsubsection*{ School Grade - Enumeration Attributes}
+
+\begin{tabular}{lcp{6.0cm}c}
+\bfseries Name & \bfseries Enumeration & \bfseries Description & \bfseries Nullable \\
+\end{tabular}
+
+\subsubsection*{ School Grade - Entity Relationships}
+
+\begin{tabular}{llllllp{2.0cm}}
+\bfseries Name & \bfseries Other Entity & \bfseries Relationship Type & \bfseries Join Column Name & \bfseries Owner & \bfseries Is Navigable & \bfseries Description\\
+\end{tabular}
+
+
+\subsubsection{ Student Entity }
+
+\subsubsection*{ Student - Entity Attributes }
+
+\begin{tabular}{lllcccl}
+\bfseries Name & \bfseries Data Type & \bfseries Column Name & \bfseries Nullable & \bfseries Is Primary Key & \bfseries Is Business Key & \bfseries Description\\
+Name & String &  &  &  &  &  \\
+\end{tabular}
+
+\subsubsection*{ Student - Enumeration Attributes}
+
+\begin{tabular}{lcp{6.0cm}c}
+\bfseries Name & \bfseries Enumeration & \bfseries Description & \bfseries Nullable \\
+\end{tabular}
+
+\subsubsection*{ Student - Entity Relationships}
+
+\begin{tabular}{llllllp{2.0cm}}
+\bfseries Name & \bfseries Other Entity & \bfseries Relationship Type & \bfseries Join Column Name & \bfseries Owner & \bfseries Is Navigable & \bfseries Description\\
+School & School & Many To One &  & True & True & \\
+\end{tabular}
+
+
+\subsubsection{ Teacher Entity }
+
+\subsubsection*{ Teacher - Entity Attributes }
+
+\begin{tabular}{lllcccl}
+\bfseries Name & \bfseries Data Type & \bfseries Column Name & \bfseries Nullable & \bfseries Is Primary Key & \bfseries Is Business Key & \bfseries Description\\
+\end{tabular}
+
+\subsubsection*{ Teacher - Enumeration Attributes}
+
+\begin{tabular}{lcp{6.0cm}c}
+\bfseries Name & \bfseries Enumeration & \bfseries Description & \bfseries Nullable \\
+\end{tabular}
+
+\subsubsection*{ Teacher - Entity Relationships}
+
+\begin{tabular}{llllllp{2.0cm}}
+\bfseries Name & \bfseries Other Entity & \bfseries Relationship Type & \bfseries Join Column Name & \bfseries Owner & \bfseries Is Navigable & \bfseries Description\\
+\end{tabular}
+
+
+\subsubsection{ Transportation Change Entity }
+
+\subsubsection*{ Transportation Change - Entity Attributes }
+
+\begin{tabular}{lllcccl}
+\bfseries Name & \bfseries Data Type & \bfseries Column Name & \bfseries Nullable & \bfseries Is Primary Key & \bfseries Is Business Key & \bfseries Description\\
+\end{tabular}
+
+\subsubsection*{ Transportation Change - Enumeration Attributes}
+
+\begin{tabular}{lcp{6.0cm}c}
+\bfseries Name & \bfseries Enumeration & \bfseries Description & \bfseries Nullable \\
+\end{tabular}
+
+\subsubsection*{ Transportation Change - Entity Relationships}
+
+\begin{tabular}{llllllp{2.0cm}}
+\bfseries Name & \bfseries Other Entity & \bfseries Relationship Type & \bfseries Join Column Name & \bfseries Owner & \bfseries Is Navigable & \bfseries Description\\
+\end{tabular}
+
+

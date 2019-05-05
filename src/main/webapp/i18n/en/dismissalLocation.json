@@ -1,0 +1,26 @@
+{
+    "app": {
+        "dismissalLocation" : {
+            "home": {
+                "title": "Dismissal Locations",
+                "createLabel": "Create a new Dismissal Location",
+                "createOrEditLabel": "Create or edit a Dismissal Location"
+            },
+            "created": "A new Dismissal Location is created with identifier {{ param }}",
+            "updated": "A Dismissal Location is updated with identifier {{ param }}",
+            "deleted": "A Dismissal Location is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Dismissal Location {{ id }}?"
+            },
+            "detail": {
+                "title": "Dismissal Location"
+            },
+            "abbreviation": "Abbreviation",
+            "assignedPassengers": "Assigned Passengers",
+            "maxGuestsPerStudent": "Max Guests Per Student",
+            "maxPassengers": "Max Passengers",
+            "name": "Name",
+            "transfersAllowed": "Transfers Allowed"
+        }
+    }
+}

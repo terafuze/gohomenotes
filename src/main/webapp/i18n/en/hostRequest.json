@@ -1,0 +1,27 @@
+{
+    "app": {
+        "hostRequest" : {
+            "home": {
+                "title": "Host Requests",
+                "createLabel": "Create a new Host Request",
+                "createOrEditLabel": "Create or edit a Host Request"
+            },
+            "created": "A new Host Request is created with identifier {{ param }}",
+            "updated": "A Host Request is updated with identifier {{ param }}",
+            "deleted": "A Host Request is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Host Request {{ id }}?"
+            },
+            "detail": {
+                "title": "Host Request"
+            },
+            "comments": "Comments",
+            "confirmationNotes": "Confirmation Notes",
+            "confirmed": "Confirmed",
+            "confirmedByUsername": "Confirmed By Username",
+            "eventDate": "Event Date",
+            "manuallyConfirmed": "Manually Confirmed",
+            "submittedByUsername": "Submitted By Username"
+        }
+    }
+}

@@ -1,0 +1,42 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="dismissalLocation">
+            <h2><span jhiTranslate="app.dismissalLocation.detail.title">Dismissal Location</span> {{dismissalLocation.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                
+                <dt><span jhiTranslate="app.dismissalLocation.abbreviation">Abbreviation</span></dt>
+                <dd>
+                    <span>{{dismissalLocation.abbreviation}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.dismissalLocation.assignedPassengers">Assigned Passengers</span></dt>
+                <dd>
+                    <span>{{dismissalLocation.assignedPassengers}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.dismissalLocation.maxGuestsPerStudent">Max Guests Per Student</span></dt>
+                <dd>
+                    <span>{{dismissalLocation.maxGuestsPerStudent}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.dismissalLocation.maxPassengers">Max Passengers</span></dt>
+                <dd>
+                    <span>{{dismissalLocation.maxPassengers}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.dismissalLocation.name">Name</span></dt>
+                <dd>
+                    <span>{{dismissalLocation.name}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.dismissalLocation.transfersAllowed">Transfers Allowed</span></dt>
+                <dd>
+                    <span>{{dismissalLocation.transfersAllowed}}</span>
+                </dd>
+            </dl>
+            <button type="submit" (click)="previousState()" class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+            <button type="button" [routerLink]="['/dismissal-location', dismissalLocation.id, 'edit']" class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

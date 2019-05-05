@@ -1,0 +1,20 @@
+{
+    "app": {
+        "guestRequest" : {
+            "home": {
+                "title": "Guest Requests",
+                "createLabel": "Create a new Guest Request",
+                "createOrEditLabel": "Create or edit a Guest Request"
+            },
+            "created": "A new Guest Request is created with identifier {{ param }}",
+            "updated": "A Guest Request is updated with identifier {{ param }}",
+            "deleted": "A Guest Request is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Guest Request {{ id }}?"
+            },
+            "detail": {
+                "title": "Guest Request"
+            }
+        }
+    }
+}

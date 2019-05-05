@@ -1,0 +1,135 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="nathanward (generated)" id="1556981606396-1">
+        <createTable tableName="after_school_program">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="after_school_programPK"/>
+            </column>
+            <column name="abbreviation" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1556981606396-2">
+        <createTable tableName="daily_verification_record">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="daily_verification_recordPK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1556981606396-3">
+        <createTable tableName="dismissal_location">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="dismissal_locationPK"/>
+            </column>
+            <column name="abbreviation" type="VARCHAR(255)"/>
+            <column name="assigned_passengers" type="INT"/>
+            <column name="max_guests_per_student" type="INT"/>
+            <column name="max_passengers" type="INT"/>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="transfers_allowed" type="BOOLEAN"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1556981606396-4">
+        <createTable tableName="early_pickup_request">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="early_pickup_requestPK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1556981606396-5">
+        <createTable tableName="guest_request">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="guest_requestPK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1556981606396-6">
+        <createTable tableName="host_request">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="host_requestPK"/>
+            </column>
+            <column name="comments" type="VARCHAR(255)"/>
+            <column name="confirmation_notes" type="VARCHAR(255)"/>
+            <column name="confirmed" type="BOOLEAN"/>
+            <column name="confirmed_by_username" type="VARCHAR(255)"/>
+            <column name="event_date" type="date"/>
+            <column name="manually_confirmed" type="BOOLEAN"/>
+            <column name="submitted_by_username" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1556981606396-7">
+        <createTable tableName="legal_guardian">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="legal_guardianPK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1556981606396-8">
+        <createTable tableName="school">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="schoolPK"/>
+            </column>
+            <column name="abbreviation" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="go_home_notes_daily_cutoff_time" type="date"/>
+            <column name="go_home_notes_start_date" type="date"/>
+            <column name="go_home_notes_stop_date" type="date"/>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1556981606396-9">
+        <createTable tableName="school_grade">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="school_gradePK"/>
+            </column>
+            <column name="abbreviation" type="VARCHAR(255)"/>
+            <column name="name" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1556981606396-10">
+        <createTable tableName="school_students">
+            <column name="school_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="students_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1556981606396-11">
+        <createTable tableName="student">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="studentPK"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="school_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1556981606396-12">
+        <createTable tableName="teacher">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="teacherPK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1556981606396-13">
+        <createTable tableName="transportation_change">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="transportation_changePK"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1556981606396-14">
+        <addUniqueConstraint columnNames="students_id" constraintName="UK_p11hf1x6wj5av7ond32abavvu" tableName="school_students"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1556981606396-15">
+        <addForeignKeyConstraint baseColumnNames="school_id" baseTableName="student" constraintName="FK1vm0oqhk9viil6eocn49rj1l9" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="school"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1556981606396-16">
+        <addForeignKeyConstraint baseColumnNames="students_id" baseTableName="school_students" constraintName="FKheyiovtjifhxohaiu2lfalovr" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="student"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1556981606396-17">
+        <addForeignKeyConstraint baseColumnNames="school_id" baseTableName="school_students" constraintName="FKjxjyeqhcbtapfdkf91fh8co15" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="school"/>
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,20 @@
+{
+    "app": {
+        "transportationChange" : {
+            "home": {
+                "title": "Transportation Changes",
+                "createLabel": "Create a new Transportation Change",
+                "createOrEditLabel": "Create or edit a Transportation Change"
+            },
+            "created": "A new Transportation Change is created with identifier {{ param }}",
+            "updated": "A Transportation Change is updated with identifier {{ param }}",
+            "deleted": "A Transportation Change is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Transportation Change {{ id }}?"
+            },
+            "detail": {
+                "title": "Transportation Change"
+            }
+        }
+    }
+}

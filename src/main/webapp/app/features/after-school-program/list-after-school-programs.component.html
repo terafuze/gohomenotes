@@ -1,0 +1,54 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="app.afterSchoolProgram.home.title">After School Programs</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-after-school-program" [routerLink]="['/after-school-program', 'new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="app.afterSchoolProgram.home.createLabel">Create new After School Program</span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="afterSchoolPrograms">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="app.afterSchoolProgram.abbreviation">Abbreviation</span></th>
+            <th><span jhiTranslate="app.afterSchoolProgram.name">Name</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let afterSchoolProgram of afterSchoolPrograms ;trackBy: trackId">
+                <td><a [routerLink]="['/after-school-program', afterSchoolProgram.id, 'view']">{{afterSchoolProgram.id}}</a></td>
+                <td>{{afterSchoolProgram.abbreviation}}</td>
+                <td>{{afterSchoolProgram.name}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/after-school-program', afterSchoolProgram.id, 'view']"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/after-school-program', afterSchoolProgram.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'after-school-program/'+ afterSchoolProgram.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+{
+    "app": {
+        "schoolGrade" : {
+            "home": {
+                "title": "School Grades",
+                "createLabel": "Create a new School Grade",
+                "createOrEditLabel": "Create or edit a School Grade"
+            },
+            "created": "A new School Grade is created with identifier {{ param }}",
+            "updated": "A School Grade is updated with identifier {{ param }}",
+            "deleted": "A School Grade is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete School Grade {{ id }}?"
+            },
+            "detail": {
+                "title": "School Grade"
+            },
+            "abbreviation": "Abbreviation",
+            "name": "Name"
+        }
+    }
+}

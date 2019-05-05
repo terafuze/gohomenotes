@@ -1,0 +1,88 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-school-heading" jhiTranslate="app.school.home.createOrEditLabel">Create or edit a School</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!school.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                           [(ngModel)]="school.id" readonly />
+                </div>
+                
+                
+                <!-- Abbreviation Form Field -->
+                
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.school.abbreviation" for="abbreviation">Abbreviation</label>
+                <input type="text" class="form-control" name="abbreviation" id="abbreviation"
+                    [(ngModel)]="school.abbreviation" required/>
+                <div [hidden]="!(editForm.controls.abbreviation?.dirty && editForm.controls.abbreviation?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.abbreviation?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+                </div>
+                
+                
+                <!-- Go Home Notes Daily Cutoff Time Form Field -->
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.school.goHomeNotesDailyCutoffTime" for="go_home_notes_daily_cutoff_time">Go Home Notes Daily Cutoff Time</label>
+                <div class="input-group">
+                    <ngb-timepicker name="goHomeNotesDailyCutoffTime" [(ngModel)]="school.goHomeNotesDailyCutoffTime" meridian="ON"></ngb-timepicker>
+                    </div>
+            </div>
+                
+                
+                <!-- Go Home Notes Start Date Form Field -->
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.school.goHomeNotesStartDate" for="go_home_notes_start_date">Go Home Notes Start Date</label>
+                <div class="input-group">
+                    <input id="go_home_notes_start_date" type="text" class="form-control" name="goHomeNotesStartDate" ngbDatepicker  #goHomeNotesStartDateDp="ngbDatepicker" [(ngModel)]="school.goHomeNotesStartDate"/>
+                    <span class="input-group-append">
+                        <button type="button" class="btn btn-secondary" (click)="goHomeNotesStartDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                    </span>
+                    </div>
+            </div>
+                
+                
+                <!-- Go Home Notes Stop Date Form Field -->
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.school.goHomeNotesStopDate" for="go_home_notes_stop_date">Go Home Notes Stop Date</label>
+                <div class="input-group">
+                    <input id="go_home_notes_stop_date" type="text" class="form-control" name="goHomeNotesStopDate" ngbDatepicker  #goHomeNotesStopDateDp="ngbDatepicker" [(ngModel)]="school.goHomeNotesStopDate"/>
+                    <span class="input-group-append">
+                        <button type="button" class="btn btn-secondary" (click)="goHomeNotesStopDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                    </span>
+                    </div>
+            </div>
+                
+                
+                <!-- Name Form Field -->
+                
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.school.name" for="name">Name</label>
+                <input type="text" class="form-control" name="name" id="name"
+                    [(ngModel)]="school.name" required/>
+                <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+                </div>
+                
+                
+                </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

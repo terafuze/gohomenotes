@@ -1,0 +1,34 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="student">
+            <h2><span jhiTranslate="app.student.detail.title">Student</span> {{student.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                
+                <dt><span jhiTranslate="app.student.firstName">First Name</span></dt>
+                <dd>
+                    <span>{{student.firstName}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.student.lastName">Last Name</span></dt>
+                <dd>
+                    <span>{{student.lastName}}</span>
+                </dd>
+                <!-- School Form Field based on MANY_TO_ONE relationship -->
+                <dt><span jhiTranslate="app.student.school">School</span></dt>
+                <dd>
+                    <div *ngIf="student.schoolId">
+                        <a [routerLink]="['/school', student.schoolId, 'view']">{{student.schoolIdentifier}}</a>
+                    </div>
+                </dd>
+                
+            </dl>
+            <button type="submit" (click)="previousState()" class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+            <button type="button" [routerLink]="['/schools', schoolId, 'students', student.id, 'edit']" class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="hostRequest">
+            <h2><span jhiTranslate="app.hostRequest.detail.title">Host Request</span> {{hostRequest.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                
+                <dt><span jhiTranslate="app.hostRequest.comments">Comments</span></dt>
+                <dd>
+                    <span>{{hostRequest.comments}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.hostRequest.confirmationNotes">Confirmation Notes</span></dt>
+                <dd>
+                    <span>{{hostRequest.confirmationNotes}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.hostRequest.confirmed">Confirmed</span></dt>
+                <dd>
+                    <span>{{hostRequest.confirmed}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.hostRequest.confirmedByUsername">Confirmed By Username</span></dt>
+                <dd>
+                    <span>{{hostRequest.confirmedByUsername}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.hostRequest.eventDate">Event Date</span></dt>
+                <dd>
+                    <span>{{hostRequest.eventDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.hostRequest.manuallyConfirmed">Manually Confirmed</span></dt>
+                <dd>
+                    <span>{{hostRequest.manuallyConfirmed}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.hostRequest.submittedByUsername">Submitted By Username</span></dt>
+                <dd>
+                    <span>{{hostRequest.submittedByUsername}}</span>
+                </dd>
+            </dl>
+            <button type="submit" (click)="previousState()" class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+            <button type="button" [routerLink]="['/host-request', hostRequest.id, 'edit']" class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

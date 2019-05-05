@@ -1,0 +1,15 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="nathanward (generated)" id="1557015213315-1">
+        <dropForeignKeyConstraint baseTableName="school_students" constraintName="FKheyiovtjifhxohaiu2lfalovr"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1557015213315-2">
+        <dropForeignKeyConstraint baseTableName="school_students" constraintName="FKjxjyeqhcbtapfdkf91fh8co15"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1557015213315-3">
+        <dropUniqueConstraint constraintName="UK_p11hf1x6wj5av7ond32abavvu" tableName="school_students"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1557015213315-4">
+        <dropTable tableName="school_students"/>
+    </changeSet>
+</databaseChangeLog>

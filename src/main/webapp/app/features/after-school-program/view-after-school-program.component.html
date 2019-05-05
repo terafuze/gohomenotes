@@ -1,0 +1,26 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="afterSchoolProgram">
+            <h2><span jhiTranslate="app.afterSchoolProgram.detail.title">After School Program</span> {{afterSchoolProgram.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                
+                <dt><span jhiTranslate="app.afterSchoolProgram.abbreviation">Abbreviation</span></dt>
+                <dd>
+                    <span>{{afterSchoolProgram.abbreviation}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.afterSchoolProgram.name">Name</span></dt>
+                <dd>
+                    <span>{{afterSchoolProgram.name}}</span>
+                </dd>
+            </dl>
+            <button type="submit" (click)="previousState()" class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+            <button type="button" [routerLink]="['/after-school-program', afterSchoolProgram.id, 'edit']" class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,107 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-dismissal-location-heading" jhiTranslate="app.dismissalLocation.home.createOrEditLabel">Create or edit a Dismissal Location</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!dismissalLocation.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                           [(ngModel)]="dismissalLocation.id" readonly />
+                </div>
+                
+                
+                <!-- Abbreviation Form Field -->
+                
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.dismissalLocation.abbreviation" for="abbreviation">Abbreviation</label>
+                <input type="text" class="form-control" name="abbreviation" id="abbreviation"
+                    [(ngModel)]="dismissalLocation.abbreviation" required/>
+                <div [hidden]="!(editForm.controls.abbreviation?.dirty && editForm.controls.abbreviation?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.abbreviation?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+                </div>
+                
+                
+                <!-- Assigned Passengers Form Field -->
+                
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.dismissalLocation.assignedPassengers" for="assigned_passengers">Assigned Passengers</label>
+                <input type="text" class="form-control" name="assignedPassengers" id="assigned_passengers"
+                    [(ngModel)]="dismissalLocation.assignedPassengers" required/>
+                <div [hidden]="!(editForm.controls.assignedPassengers?.dirty && editForm.controls.assignedPassengers?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.assignedPassengers?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+                </div>
+                
+                
+                <!-- Max Guests Per Student Form Field -->
+                
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.dismissalLocation.maxGuestsPerStudent" for="max_guests_per_student">Max Guests Per Student</label>
+                <input type="text" class="form-control" name="maxGuestsPerStudent" id="max_guests_per_student"
+                    [(ngModel)]="dismissalLocation.maxGuestsPerStudent" required/>
+                <div [hidden]="!(editForm.controls.maxGuestsPerStudent?.dirty && editForm.controls.maxGuestsPerStudent?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.maxGuestsPerStudent?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+                </div>
+                
+                
+                <!-- Max Passengers Form Field -->
+                
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.dismissalLocation.maxPassengers" for="max_passengers">Max Passengers</label>
+                <input type="text" class="form-control" name="maxPassengers" id="max_passengers"
+                    [(ngModel)]="dismissalLocation.maxPassengers" required/>
+                <div [hidden]="!(editForm.controls.maxPassengers?.dirty && editForm.controls.maxPassengers?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.maxPassengers?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+                </div>
+                
+                
+                <!-- Name Form Field -->
+                
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.dismissalLocation.name" for="name">Name</label>
+                <input type="text" class="form-control" name="name" id="name"
+                    [(ngModel)]="dismissalLocation.name" required/>
+                <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+                </div>
+                
+                
+                <!-- Transfers Allowed Form Field -->
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.dismissalLocation.transfersAllowed" for="transfers_allowed">Transfers Allowed</label>
+                <input type="checkbox" class="form-control" name="transfersAllowed" id="transfers_allowed"
+                    [(ngModel)]="dismissalLocation.transfersAllowed" />
+            </div>
+                
+                </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

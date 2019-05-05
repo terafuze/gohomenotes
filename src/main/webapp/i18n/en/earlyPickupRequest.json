@@ -1,0 +1,20 @@
+{
+    "app": {
+        "earlyPickupRequest" : {
+            "home": {
+                "title": "Early Pickup Requests",
+                "createLabel": "Create a new Early Pickup Request",
+                "createOrEditLabel": "Create or edit a Early Pickup Request"
+            },
+            "created": "A new Early Pickup Request is created with identifier {{ param }}",
+            "updated": "A Early Pickup Request is updated with identifier {{ param }}",
+            "deleted": "A Early Pickup Request is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Early Pickup Request {{ id }}?"
+            },
+            "detail": {
+                "title": "Early Pickup Request"
+            }
+        }
+    }
+}

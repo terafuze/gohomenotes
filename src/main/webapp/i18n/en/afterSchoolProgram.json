@@ -1,0 +1,22 @@
+{
+    "app": {
+        "afterSchoolProgram" : {
+            "home": {
+                "title": "After School Programs",
+                "createLabel": "Create a new After School Program",
+                "createOrEditLabel": "Create or edit a After School Program"
+            },
+            "created": "A new After School Program is created with identifier {{ param }}",
+            "updated": "A After School Program is updated with identifier {{ param }}",
+            "deleted": "A After School Program is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete After School Program {{ id }}?"
+            },
+            "detail": {
+                "title": "After School Program"
+            },
+            "abbreviation": "Abbreviation",
+            "name": "Name"
+        }
+    }
+}
