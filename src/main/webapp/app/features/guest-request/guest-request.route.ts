@@ -27,27 +27,6 @@ export class GuestRequestResolve implements Resolve<IGuestRequest> {
 
 export const guestRequestRoute: Routes = [
     {
-        path: 'guest-request',
-        component: ListGuestRequestsComponent,
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.guestRequest.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
-        path: 'guest-request/:id/view',
-        component: ViewGuestRequestComponent,
-        resolve: {
-            guestRequest: GuestRequestResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.guestRequest.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
         path: 'guest-request/new',
         component: EditGuestRequestComponent,
         resolve: {
@@ -60,7 +39,28 @@ export const guestRequestRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'guest-request/:id/edit',
+        path: 'guest-requests',
+        component: ListGuestRequestsComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'app.guestRequest.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'guest-requests/:id/view',
+        component: ViewGuestRequestComponent,
+        resolve: {
+            guestRequest: GuestRequestResolve
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'app.guestRequest.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'guest-requests/:id/edit',
         component: EditGuestRequestComponent,
         resolve: {
             guestRequest: GuestRequestResolve

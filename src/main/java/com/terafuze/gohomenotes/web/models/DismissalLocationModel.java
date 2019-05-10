@@ -35,11 +35,21 @@ public class DismissalLocationModel implements Serializable {
     @NotNull
     private String name;
     
+    
+    private Long schoolId;
+
+    private String schoolIdentifier;
+    
+    
     private Boolean transfersAllowed;
     
 
     public String getIdentifier() {
         return this.identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 
     public Long getId() {
@@ -93,6 +103,23 @@ public class DismissalLocationModel implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+    
+    
+    public Long getSchoolId() {
+        return this.schoolId;
+    }
+
+    public void setSchoolId(Long schoolId) {
+        this.schoolId = schoolId;
+    }
+
+    public String getSchoolIdentifier() {
+        return this.schoolIdentifier;
+    }
+
+    public void setSchoolIdentifier(String schoolIdentifier) {
+        this.schoolIdentifier = schoolIdentifier;
     }
     
     

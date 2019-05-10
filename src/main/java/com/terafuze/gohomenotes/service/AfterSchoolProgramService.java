@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.terafuze.gohomenotes.domain.AfterSchoolProgram;
 import com.terafuze.gohomenotes.repository.AfterSchoolProgramRepository;

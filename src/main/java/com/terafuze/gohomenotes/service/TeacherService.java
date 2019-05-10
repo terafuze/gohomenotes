@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.terafuze.gohomenotes.domain.Teacher;
 import com.terafuze.gohomenotes.repository.TeacherRepository;
@@ -60,7 +61,7 @@ public class TeacherService {
     @Transactional(readOnly = true)
     public List<TeacherModel> findAll() {
         log.debug("Request to get all Teachers");
-        return teacherRepository.findAll(new Sort(Sort.Direction.ASC, "name")).stream()
+        return teacherRepository.findAll(new Sort(Sort.Direction.ASC, "id")).stream()
             .map(teacherMapper::toModel)
             .collect(Collectors.toCollection(LinkedList::new));
     }

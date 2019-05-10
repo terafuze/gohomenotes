@@ -10,6 +10,16 @@
                 <dd>
                     <span>{{school.abbreviation}}</span>
                 </dd>
+                <!-- After School Programs Form Field based on ONE_TO_MANY relationship -->
+                <dd>
+                <a [routerLink]="['/after-school-programs']" [queryParams]="{ schoolId: school.id }"><span jhiTranslate="app.school.afterSchoolPrograms">After School Programs</span>
+                </dd>
+                
+                <!-- Dismissal Locations Form Field based on ONE_TO_MANY relationship -->
+                <dd>
+                <a [routerLink]="['/dismissal-locations']" [queryParams]="{ schoolId: school.id }"><span jhiTranslate="app.school.dismissalLocations">Dismissal Locations</span>
+                </dd>
+                
                 <dt><span jhiTranslate="app.school.goHomeNotesDailyCutoffTime">Go Home Notes Daily Cutoff Time</span></dt>
                 <dd>
                     <span>{{school.goHomeNotesDailyCutoffTime}}</span>
@@ -26,16 +36,26 @@
                 <dd>
                     <span>{{school.name}}</span>
                 </dd>
+                <!-- School Grades Form Field based on ONE_TO_MANY relationship -->
+                <dd>
+                <a [routerLink]="['/school-grades']" [queryParams]="{ schoolId: school.id }"><span jhiTranslate="app.school.schoolGrades">School Grades</span>
+                </dd>
+                
                 <!-- Students Form Field based on ONE_TO_MANY relationship -->
                 <dd>
-                <a [routerLink]="['/student']" [queryParams]="{ schoolId: school.id }"><span jhiTranslate="app.school.students">Students</span>
+                <a [routerLink]="['/students']" [queryParams]="{ schoolId: school.id }"><span jhiTranslate="app.school.students">Students</span>
+                </dd>
+                
+                <!-- Teachers Form Field based on ONE_TO_MANY relationship -->
+                <dd>
+                <a [routerLink]="['/teachers']" [queryParams]="{ schoolId: school.id }"><span jhiTranslate="app.school.teachers">Teachers</span>
                 </dd>
                 
             </dl>
             <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
-            <button type="button" [routerLink]="['/school', school.id, 'edit']" class="btn btn-primary">
+            <button type="button" [routerLink]="['/schools', school.id, 'edit']" class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>
         </div>

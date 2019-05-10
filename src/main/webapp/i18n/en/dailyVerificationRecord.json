@@ -14,7 +14,9 @@
             },
             "detail": {
                 "title": "Daily Verification Record"
-            }
+            },
+            "goHomeNotesReport": "Go Home Notes Report",
+            "timestamp": "Timestamp"
         }
     }
 }

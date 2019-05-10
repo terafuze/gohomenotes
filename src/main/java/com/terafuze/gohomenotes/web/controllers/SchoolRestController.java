@@ -27,7 +27,11 @@ import com.terafuze.gohomenotes.web.utils.HeaderUtil;
 
 import com.terafuze.gohomenotes.service.SchoolService;
 import com.terafuze.gohomenotes.web.models.SchoolModel;
+import com.terafuze.gohomenotes.web.models.AfterSchoolProgramModel;
+import com.terafuze.gohomenotes.web.models.DismissalLocationModel;
+import com.terafuze.gohomenotes.web.models.SchoolGradeModel;
 import com.terafuze.gohomenotes.web.models.StudentModel;
+import com.terafuze.gohomenotes.web.models.TeacherModel;
 
 
 /**
@@ -103,6 +107,39 @@ public class SchoolRestController {
     }
 
     /**
+     * GET  /schools/:id/after-school-programs : get all After School Program for a given School.
+     *
+     * @param id the id of an existing School
+     * @return a ResponseEntity with status 200 (OK) and with body of After School Programs for the School or with status 404 if the School does not exist for the given ID.
+     */
+    @GetMapping("/schools/{id}/after-school-programs")
+    @Timed
+    public List<AfterSchoolProgramModel> getAfterSchoolPrograms(@PathVariable Long id) {
+        log.debug("REST request to get all After School Programses for School : {}", id);
+        return schoolService.getAfterSchoolPrograms(id);
+    }/**
+     * GET  /schools/:id/dismissal-locations : get all Dismissal Location for a given School.
+     *
+     * @param id the id of an existing School
+     * @return a ResponseEntity with status 200 (OK) and with body of Dismissal Locations for the School or with status 404 if the School does not exist for the given ID.
+     */
+    @GetMapping("/schools/{id}/dismissal-locations")
+    @Timed
+    public List<DismissalLocationModel> getDismissalLocations(@PathVariable Long id) {
+        log.debug("REST request to get all Dismissal Locationses for School : {}", id);
+        return schoolService.getDismissalLocations(id);
+    }/**
+     * GET  /schools/:id/school-grades : get all School Grade for a given School.
+     *
+     * @param id the id of an existing School
+     * @return a ResponseEntity with status 200 (OK) and with body of School Grades for the School or with status 404 if the School does not exist for the given ID.
+     */
+    @GetMapping("/schools/{id}/school-grades")
+    @Timed
+    public List<SchoolGradeModel> getSchoolGrades(@PathVariable Long id) {
+        log.debug("REST request to get all School Gradeses for School : {}", id);
+        return schoolService.getSchoolGrades(id);
+    }/**
      * GET  /schools/:id/students : get all Student for a given School.
      *
      * @param id the id of an existing School
@@ -113,8 +150,18 @@ public class SchoolRestController {
     public List<StudentModel> getStudents(@PathVariable Long id) {
         log.debug("REST request to get all Studentses for School : {}", id);
         return schoolService.getStudents(id);
+    }/**
+     * GET  /schools/:id/teachers : get all Teacher for a given School.
+     *
+     * @param id the id of an existing School
+     * @return a ResponseEntity with status 200 (OK) and with body of Teachers for the School or with status 404 if the School does not exist for the given ID.
+     */
+    @GetMapping("/schools/{id}/teachers")
+    @Timed
+    public List<TeacherModel> getTeachers(@PathVariable Long id) {
+        log.debug("REST request to get all Teacherses for School : {}", id);
+        return schoolService.getTeachers(id);
     }
-
     /**
      * GET  /schools/:id : get the School for a given "id".
      *

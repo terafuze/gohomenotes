@@ -14,7 +14,10 @@
             },
             "detail": {
                 "title": "Teacher"
-            }
+            },
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "school": "School"
         }
     }
 }

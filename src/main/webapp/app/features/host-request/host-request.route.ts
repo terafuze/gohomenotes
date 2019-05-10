@@ -27,27 +27,6 @@ export class HostRequestResolve implements Resolve<IHostRequest> {
 
 export const hostRequestRoute: Routes = [
     {
-        path: 'host-request',
-        component: ListHostRequestsComponent,
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.hostRequest.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
-        path: 'host-request/:id/view',
-        component: ViewHostRequestComponent,
-        resolve: {
-            hostRequest: HostRequestResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.hostRequest.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
         path: 'host-request/new',
         component: EditHostRequestComponent,
         resolve: {
@@ -60,7 +39,28 @@ export const hostRequestRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'host-request/:id/edit',
+        path: 'host-requests',
+        component: ListHostRequestsComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'app.hostRequest.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'host-requests/:id/view',
+        component: ViewHostRequestComponent,
+        resolve: {
+            hostRequest: HostRequestResolve
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'app.hostRequest.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'host-requests/:id/edit',
         component: EditHostRequestComponent,
         resolve: {
             hostRequest: HostRequestResolve

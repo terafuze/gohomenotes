@@ -16,11 +16,15 @@
                 "title": "School"
             },
             "abbreviation": "Abbreviation",
+            "afterSchoolPrograms": "After School Programs",
+            "dismissalLocations": "Dismissal Locations",
             "goHomeNotesDailyCutoffTime": "Go Home Notes Daily Cutoff Time",
             "goHomeNotesStartDate": "Go Home Notes Start Date",
             "goHomeNotesStopDate": "Go Home Notes Stop Date",
             "name": "Name",
-            "students": "Students"
+            "schoolGrades": "School Grades",
+            "students": "Students",
+            "teachers": "Teachers"
         }
     }
 }

@@ -102,7 +102,6 @@ public class HostRequestRestController {
     }
 
     
-
     /**
      * GET  /host-requests/:id : get the Host Request for a given "id".
      *

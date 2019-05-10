@@ -15,7 +15,11 @@ public interface SchoolMapper extends IEntityMapper<SchoolModel, School> {
     @Mapping(source = "name", target = "identifier")
     SchoolModel toModel(School school);
 
+    @Mapping(target = "afterSchoolPrograms", ignore = true)
+    @Mapping(target = "dismissalLocations", ignore = true)
+    @Mapping(target = "schoolGrades", ignore = true)
     @Mapping(target = "students", ignore = true)
+    @Mapping(target = "teachers", ignore = true)
     School toEntity(SchoolModel schoolModel);
 
     default School fromId(Long id) {

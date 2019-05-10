@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.terafuze.gohomenotes.domain.DailyVerificationRecord;
 import com.terafuze.gohomenotes.repository.DailyVerificationRecordRepository;
@@ -60,7 +61,7 @@ public class DailyVerificationRecordService {
     @Transactional(readOnly = true)
     public List<DailyVerificationRecordModel> findAll() {
         log.debug("Request to get all DailyVerificationRecords");
-        return dailyVerificationRecordRepository.findAll(new Sort(Sort.Direction.ASC, "name")).stream()
+        return dailyVerificationRecordRepository.findAll(new Sort(Sort.Direction.ASC, "id")).stream()
             .map(dailyVerificationRecordMapper::toModel)
             .collect(Collectors.toCollection(LinkedList::new));
     }

@@ -16,7 +16,8 @@
                 "title": "After School Program"
             },
             "abbreviation": "Abbreviation",
-            "name": "Name"
+            "name": "Name",
+            "school": "School"
         }
     }
 }

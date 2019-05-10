@@ -14,11 +14,19 @@
                 <dd>
                     <span>{{afterSchoolProgram.name}}</span>
                 </dd>
+                <!-- School Form Field based on MANY_TO_ONE relationship -->
+                <dt><span jhiTranslate="app.afterSchoolProgram.school">School</span></dt>
+                <dd>
+                    <div *ngIf="afterSchoolProgram.schoolId">
+                        <a [routerLink]="['/schools', afterSchoolProgram.schoolId, 'view']">{{afterSchoolProgram.schoolIdentifier}}</a>
+                    </div>
+                </dd>
+                
             </dl>
             <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
-            <button type="button" [routerLink]="['/after-school-program', afterSchoolProgram.id, 'edit']" class="btn btn-primary">
+            <button type="button" [routerLink]="['/after-school-programs', afterSchoolProgram.id, 'edit']" class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>
         </div>

@@ -53,10 +53,10 @@ export class EditHostRequestComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        
         if (this.hostRequest.id !== undefined) {
             this.subscribeToSaveResponse(this.hostRequestService.update(this.hostRequest));
         } else {
+            
             this.subscribeToSaveResponse(this.hostRequestService.create(this.hostRequest));
         }
     }

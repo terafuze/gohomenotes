@@ -4,18 +4,19 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { ISchoolGrade } from 'app/shared/model/school-grade.model';
-
-
-
+import { IStudentRegistration } from 'app/shared/model/student-registration.model';
+import { IStudent } from 'app/shared/model/student.model';
+import { UserContext } from 'app/core';
 
 @Injectable({ providedIn: 'root' })
 export class SchoolGradeService {
 
     private resourceUrl =  SERVER_API_URL + 'api/school-grades';
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private userContext: UserContext) { }
 
     create(schoolGrade: ISchoolGrade): Observable<HttpResponse<ISchoolGrade>> {
+        schoolGrade = this.userContext.school.id;
         return this.http.post<ISchoolGrade>(this.resourceUrl, schoolGrade, { observe: 'response' });
     }
 
@@ -29,9 +30,16 @@ export class SchoolGradeService {
 
     query(req?: any): Observable<HttpResponse<ISchoolGrade[]>> {
         const options = createRequestOption(req);
-        return this.http.get<ISchoolGrade[]>(this.resourceUrl, { params: options, observe: 'response' });
+        var schoolId = this.userContext.school.id;
+        return this.http.get<ISchoolGrade[]>(`api/schools/${schoolId}/school-grades`, { params: options, observe: 'response' });
     }
 
+    getStudentRegistrations(id: number): Observable<HttpResponse<IStudentRegistration[]>> {
+        return this.http.get<IStudentRegistration[]>(`${this.resourceUrl}/${id}/student-registrations`, { observe: 'response' });
+    }
+    getStudents(id: number): Observable<HttpResponse<IStudent[]>> {
+        return this.http.get<IStudent[]>(`${this.resourceUrl}/${id}/students`, { observe: 'response' });
+    }
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }

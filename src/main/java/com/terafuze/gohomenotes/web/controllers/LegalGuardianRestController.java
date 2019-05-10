@@ -102,7 +102,6 @@ public class LegalGuardianRestController {
     }
 
     
-
     /**
      * GET  /legal-guardians/:id : get the Legal Guardian for a given "id".
      *

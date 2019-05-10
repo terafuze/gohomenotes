@@ -102,7 +102,6 @@ public class GuestRequestRestController {
     }
 
     
-
     /**
      * GET  /guest-requests/:id : get the Guest Request for a given "id".
      *

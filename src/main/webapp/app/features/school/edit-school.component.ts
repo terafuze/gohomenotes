@@ -53,7 +53,6 @@ export class EditSchoolComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        
         if (this.school.id !== undefined) {
             this.subscribeToSaveResponse(this.schoolService.update(this.school));
         } else {

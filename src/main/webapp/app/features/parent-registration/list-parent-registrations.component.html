@@ -1,0 +1,69 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="app.parentRegistration.home.title">Parent Registrations</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-parent-registration" [routerLink]="['/family-registrations', familyRegistrationId, 'create-parent-registration']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="app.parentRegistration.home.createLabel">Create new Parent Registration</span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="parentRegistrations">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="app.parentRegistration.address">Address</span></th>
+            <th><span jhiTranslate="app.parentRegistration.emailAddress">Email Address</span></th>
+            <th><span jhiTranslate="app.parentRegistration.familyRegistration">Family Registration</span></th>
+            
+            <th><span jhiTranslate="app.parentRegistration.firstName">First Name</span></th>
+            <th><span jhiTranslate="app.parentRegistration.lastName">Last Name</span></th>
+            <th><span jhiTranslate="app.parentRegistration.primaryPhoneNumber">Primary Phone Number</span></th>
+            <th><span jhiTranslate="app.parentRegistration.secondaryPhoneNumber">Secondary Phone Number</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let parentRegistration of parentRegistrations ;trackBy: trackId">
+                <td><a [routerLink]="['/parent-registrations', parentRegistration.id, 'view']">{{parentRegistration.id}}</a></td>
+                <td>{{parentRegistration.address}}</td>
+                <td>{{parentRegistration.emailAddress}}</td>
+                <td>
+                    <div *ngIf="parentRegistration.familyRegistrationId">
+                        <a [routerLink]="['/family-registrations', parentRegistration.familyRegistrationId , 'view' ]" >{{parentRegistration.familyRegistrationIdentifier}}</a>
+                    </div>
+                </td>
+                <td>{{parentRegistration.firstName}}</td>
+                <td>{{parentRegistration.lastName}}</td>
+                <td>{{parentRegistration.primaryPhoneNumber}}</td>
+                <td>{{parentRegistration.secondaryPhoneNumber}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/parent-registrations', parentRegistration.id, 'view']"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/parent-registrations', parentRegistration.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'parent-registration/'+ parentRegistration.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

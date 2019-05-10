@@ -27,28 +27,7 @@ export class DismissalLocationResolve implements Resolve<IDismissalLocation> {
 
 export const dismissalLocationRoute: Routes = [
     {
-        path: 'dismissal-location',
-        component: ListDismissalLocationsComponent,
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.dismissalLocation.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
-        path: 'dismissal-location/:id/view',
-        component: ViewDismissalLocationComponent,
-        resolve: {
-            dismissalLocation: DismissalLocationResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.dismissalLocation.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
-        path: 'dismissal-location/new',
+        path: 'schools/:schoolId/create-dismissal-location',
         component: EditDismissalLocationComponent,
         resolve: {
             dismissalLocation: DismissalLocationResolve
@@ -60,7 +39,28 @@ export const dismissalLocationRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'dismissal-location/:id/edit',
+        path: 'dismissal-locations',
+        component: ListDismissalLocationsComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'app.dismissalLocation.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'dismissal-locations/:id/view',
+        component: ViewDismissalLocationComponent,
+        resolve: {
+            dismissalLocation: DismissalLocationResolve
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'app.dismissalLocation.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'dismissal-locations/:id/edit',
         component: EditDismissalLocationComponent,
         resolve: {
             dismissalLocation: DismissalLocationResolve

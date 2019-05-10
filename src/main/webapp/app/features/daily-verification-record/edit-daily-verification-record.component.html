@@ -10,6 +10,37 @@
                            [(ngModel)]="dailyVerificationRecord.id" readonly />
                 </div>
                 
+                
+                <!-- Go Home Notes Report Form Field -->
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.dailyVerificationRecord.goHomeNotesReport" for="go_home_notes_report">Go Home Notes Report</label>
+                    <div>
+                        <div *ngIf="dailyVerificationRecord.goHomeNotesReport" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(dailyVerificationRecord.goHomeNotesReportContentType, dailyVerificationRecord.goHomeNotesReport)" jhiTranslate="entity.action.open">open</a><br>
+                            <span class="pull-left">{{dailyVerificationRecord.goHomeNotesReportContentType}}, {{byteSize(dailyVerificationRecord.goHomeNotesReport)}}</span>
+                            <button type="button" (click)="dailyVerificationRecord.goHomeNotesReport=null;dailyVerificationRecord.goHomeNotesReportContentType=null;"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon [icon]="'times'"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_goHomeNotesReport" (change)="setFileData($event, dailyVerificationRecord, 'goHomeNotesReport', false)" jhiTranslate="entity.action.addblob"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="finishCode" id="goHomeNotesReport [(ngModel)]="dailyVerificationRecord.goHomeNotesReport" />
+                    <input type="hidden" class="form-control" name="finishCodeContentType" id="goHomeNotesReportContentType"[(ngModel)]="dailyVerificationRecord.goHomeNotesReportContentType" />
+                </div>
+                <!-- Timestamp Form Field -->
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.dailyVerificationRecord.timestamp" for="timestamp">Timestamp</label>
+                <input type="text" class="form-control" name="timestamp" id="timestamp"
+                    [(ngModel)]="dailyVerificationRecord.timestamp" required/>
+                <div [hidden]="!(editForm.controls.timestamp?.dirty && editForm.controls.timestamp?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.timestamp?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+                </div>
+                
                 </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">

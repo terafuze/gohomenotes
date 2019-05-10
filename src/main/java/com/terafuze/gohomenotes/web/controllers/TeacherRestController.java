@@ -102,7 +102,6 @@ public class TeacherRestController {
     }
 
     
-
     /**
      * GET  /teachers/:id : get the Teacher for a given "id".
      *

@@ -26,6 +26,14 @@
                 <dd>
                     <span>{{dismissalLocation.name}}</span>
                 </dd>
+                <!-- School Form Field based on MANY_TO_ONE relationship -->
+                <dt><span jhiTranslate="app.dismissalLocation.school">School</span></dt>
+                <dd>
+                    <div *ngIf="dismissalLocation.schoolId">
+                        <a [routerLink]="['/schools', dismissalLocation.schoolId, 'view']">{{dismissalLocation.schoolIdentifier}}</a>
+                    </div>
+                </dd>
+                
                 <dt><span jhiTranslate="app.dismissalLocation.transfersAllowed">Transfers Allowed</span></dt>
                 <dd>
                     <span>{{dismissalLocation.transfersAllowed}}</span>
@@ -34,7 +42,7 @@
             <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
-            <button type="button" [routerLink]="['/dismissal-location', dismissalLocation.id, 'edit']" class="btn btn-primary">
+            <button type="button" [routerLink]="['/dismissal-locations', dismissalLocation.id, 'edit']" class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>
         </div>

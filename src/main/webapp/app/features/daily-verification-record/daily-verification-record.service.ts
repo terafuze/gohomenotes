@@ -6,6 +6,8 @@ import { createRequestOption } from 'app/shared';
 import { IDailyVerificationRecord } from 'app/shared/model/daily-verification-record.model';
 
 
+
+
 @Injectable({ providedIn: 'root' })
 export class DailyVerificationRecordService {
 

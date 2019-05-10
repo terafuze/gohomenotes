@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.terafuze.gohomenotes.domain.EarlyPickupRequest;
 import com.terafuze.gohomenotes.repository.EarlyPickupRequestRepository;
@@ -60,7 +61,7 @@ public class EarlyPickupRequestService {
     @Transactional(readOnly = true)
     public List<EarlyPickupRequestModel> findAll() {
         log.debug("Request to get all EarlyPickupRequests");
-        return earlyPickupRequestRepository.findAll(new Sort(Sort.Direction.ASC, "name")).stream()
+        return earlyPickupRequestRepository.findAll(new Sort(Sort.Direction.ASC, "id")).stream()
             .map(earlyPickupRequestMapper::toModel)
             .collect(Collectors.toCollection(LinkedList::new));
     }

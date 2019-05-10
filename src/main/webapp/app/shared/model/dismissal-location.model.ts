@@ -6,6 +6,8 @@ export interface IDismissalLocation {
     maxGuestsPerStudent?: number;
     maxPassengers?: number;
     name?: string;
+    schoolId?: number;
+    schoolIdentifier?: string;
     transfersAllowed?: boolean;
 }
 
@@ -18,6 +20,8 @@ export class DismissalLocation implements IDismissalLocation {
         public maxGuestsPerStudent?: number,
         public maxPassengers?: number,
         public name?: string,
+        public schoolId?: number,
+        public schoolIdentifier?: string,
         public transfersAllowed?: boolean
     ) { }
 }

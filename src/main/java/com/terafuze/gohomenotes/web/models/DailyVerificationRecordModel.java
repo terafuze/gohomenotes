@@ -1,13 +1,11 @@
 package com.terafuze.gohomenotes.web.models;
 
 
-import javax.validation.constraints.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDateTime;
 import java.util.Objects;
-import java.time.LocalDate;
-import java.time.LocalTime;
+
+import javax.persistence.Lob;
 
 
 
@@ -24,9 +22,22 @@ public class DailyVerificationRecordModel implements Serializable {
     public String identifier;
 
     
+    @Lob
+    private byte[] goHomeNotesReport;
+
+    private String goHomeNotesReportContentType;
+
+    private Long goHomeNotesReportContentLength;
+    
+    private LocalDateTime timestamp;
+    
 
     public String getIdentifier() {
         return this.identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 
     public Long getId() {
@@ -37,6 +48,40 @@ public class DailyVerificationRecordModel implements Serializable {
         this.id = id;
     }
 
+    
+    public void setGoHomeNotesReport(byte[] goHomeNotesReport) {
+        this.goHomeNotesReport = goHomeNotesReport;
+    }
+
+    public byte[] getGoHomeNotesReport() {
+        return goHomeNotesReport;
+    }
+
+    public String getGoHomeNotesReportContentType() {
+        return goHomeNotesReportContentType;
+    }
+
+    public void setGoHomeNotesReportContentType(String goHomeNotesReportContentType) {
+        this.goHomeNotesReportContentType = goHomeNotesReportContentType;
+    }
+
+    public Long getGoHomeNotesReportContentLength() {
+        return goHomeNotesReportContentLength;
+    }
+
+    public void setGoHomeNotesReportContentLength(Long goHomeNotesReportContentLength) {
+        this.goHomeNotesReportContentLength = goHomeNotesReportContentLength;
+    }
+    
+    
+    public LocalDateTime getTimestamp() {
+        return this.timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
+    
     
 
     @Override
@@ -64,6 +109,7 @@ public class DailyVerificationRecordModel implements Serializable {
     public String toString() {
         return "DailyVerificationRecordModel{" +
             "id=" + getId() +
+            ", timestamp='" + this.getTimestamp() + "'" +
             "}";
     }
 }

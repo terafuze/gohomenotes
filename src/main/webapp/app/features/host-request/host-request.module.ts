@@ -9,12 +9,12 @@ import {
     ListHostRequestsComponent,
     ViewHostRequestComponent,
     hostRequestRoute,
-    hostRequestPopupRoute,
+    hostRequestPopupRoute
 } from './';
 
 const ENTITY_STATES = [
     ...hostRequestRoute,
-    ...hostRequestPopupRoute,
+    ...hostRequestPopupRoute
 ];
 
 @NgModule({

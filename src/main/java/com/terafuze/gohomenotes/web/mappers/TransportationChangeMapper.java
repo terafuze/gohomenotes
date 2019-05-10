@@ -12,7 +12,7 @@ import com.terafuze.gohomenotes.web.models.TransportationChangeModel;
 @Mapper(componentModel = "spring", uses = {})
 public interface TransportationChangeMapper extends IEntityMapper<TransportationChangeModel, TransportationChange> {
 
-    @Mapping(source = "", target = "identifier")
+    @Mapping(source = "id", target = "identifier")
     TransportationChangeModel toModel(TransportationChange transportationChange);
 
     TransportationChange toEntity(TransportationChangeModel transportationChangeModel);

@@ -12,7 +12,7 @@ import com.terafuze.gohomenotes.web.models.LegalGuardianModel;
 @Mapper(componentModel = "spring", uses = {})
 public interface LegalGuardianMapper extends IEntityMapper<LegalGuardianModel, LegalGuardian> {
 
-    @Mapping(source = "", target = "identifier")
+    @Mapping(source = "id", target = "identifier")
     LegalGuardianModel toModel(LegalGuardian legalGuardian);
 
     LegalGuardian toEntity(LegalGuardianModel legalGuardianModel);

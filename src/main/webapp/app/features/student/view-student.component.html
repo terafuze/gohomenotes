@@ -6,6 +6,14 @@
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
                 
+                <!-- Family Form Field based on MANY_TO_ONE relationship -->
+                <dt><span jhiTranslate="app.student.family">Family</span></dt>
+                <dd>
+                    <div *ngIf="student.familyId">
+                        <a [routerLink]="['/families', student.familyId, 'view']">{{student.familyIdentifier}}</a>
+                    </div>
+                </dd>
+                
                 <dt><span jhiTranslate="app.student.firstName">First Name</span></dt>
                 <dd>
                     <span>{{student.firstName}}</span>
@@ -18,7 +26,15 @@
                 <dt><span jhiTranslate="app.student.school">School</span></dt>
                 <dd>
                     <div *ngIf="student.schoolId">
-                        <a [routerLink]="['/school', student.schoolId, 'view']">{{student.schoolIdentifier}}</a>
+                        <a [routerLink]="['/schools', student.schoolId, 'view']">{{student.schoolIdentifier}}</a>
+                    </div>
+                </dd>
+                
+                <!-- School Grade Form Field based on MANY_TO_ONE relationship -->
+                <dt><span jhiTranslate="app.student.schoolGrade">School Grade</span></dt>
+                <dd>
+                    <div *ngIf="student.schoolGradeId">
+                        <a [routerLink]="['/school-grades', student.schoolGradeId, 'view']">{{student.schoolGradeIdentifier}}</a>
                     </div>
                 </dd>
                 
@@ -26,7 +42,7 @@
             <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
-            <button type="button" [routerLink]="['/schools', schoolId, 'students', student.id, 'edit']" class="btn btn-primary">
+            <button type="button" [routerLink]="['/students', student.id, 'edit']" class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>
         </div>

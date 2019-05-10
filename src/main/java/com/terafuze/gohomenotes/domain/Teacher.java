@@ -35,6 +35,17 @@ public class Teacher implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
+    @NotNull
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+
+    @NotNull
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
+
+    
+    @ManyToOne
+    private School school;
     
     public Long getId() {
         return id;
@@ -43,6 +54,50 @@ public class Teacher implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+    
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    public Teacher firstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    
+    public String getLastName() {
+        return this.lastName;
+    }
+
+    public Teacher lastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    
+    
+    public School getSchool() {
+        return this.school;
+    }
+
+    public Teacher school(School school) {
+        this.school = school;
+        return this;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -68,6 +123,9 @@ public class Teacher implements Serializable {
     public String toString() {
         return "Teacher{" +
             "id=" + getId() +
+            ", firstName='" + getFirstName() + "'" +
+            ", lastName='" + getLastName() + "'" +
+            ", school='" + getSchool() + "'" +
             "}";
     }
 }

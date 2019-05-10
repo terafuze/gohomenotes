@@ -9,12 +9,12 @@ import {
     ListDailyVerificationRecordsComponent,
     ViewDailyVerificationRecordComponent,
     dailyVerificationRecordRoute,
-    dailyVerificationRecordPopupRoute,
+    dailyVerificationRecordPopupRoute
 } from './';
 
 const ENTITY_STATES = [
     ...dailyVerificationRecordRoute,
-    ...dailyVerificationRecordPopupRoute,
+    ...dailyVerificationRecordPopupRoute
 ];
 
 @NgModule({

@@ -38,6 +38,17 @@ public class School implements Serializable {
     @Column(name = "abbreviation", nullable = false)
     private String abbreviation;
 
+    
+    
+    @OneToMany(mappedBy = "school")
+    @OrderBy("name ASC")
+    private List<AfterSchoolProgram> afterSchoolPrograms = new ArrayList<>();
+    
+    
+    @OneToMany(mappedBy = "school")
+    @OrderBy("name ASC")
+    private List<DismissalLocation> dismissalLocations = new ArrayList<>();
+	
     @Column(name = "go_home_notes_daily_cutoff_time")
     private LocalTime goHomeNotesDailyCutoffTime;
 
@@ -47,14 +58,25 @@ public class School implements Serializable {
     @Column(name = "go_home_notes_stop_date")
     private LocalDate goHomeNotesStopDate;
 
-    @Column(name = "name")
+    @NotNull
+    @Column(name = "name", nullable = false)
     private String name;
 
     
     
     @OneToMany(mappedBy = "school")
+    @OrderBy("name ASC")
+    private List<SchoolGrade> schoolGrades = new ArrayList<>();
+    
+    
+    @OneToMany(mappedBy = "school")
     @OrderBy("lastName ASC")
     private List<Student> students = new ArrayList<>();
+    
+    
+    @OneToMany(mappedBy = "school")
+    @OrderBy("lastName ASC")
+    private List<Teacher> teachers = new ArrayList<>();
     
     public Long getId() {
         return id;
@@ -76,6 +98,62 @@ public class School implements Serializable {
     public void setAbbreviation(String abbreviation) {
         this.abbreviation = abbreviation;
     }
+
+    
+    
+    public List<AfterSchoolProgram> getAfterSchoolPrograms() {
+        return afterSchoolPrograms;
+    }
+
+    public School afterSchoolPrograms(List<AfterSchoolProgram> afterSchoolPrograms) {
+        this.afterSchoolPrograms = afterSchoolPrograms;
+        return this;
+    }
+
+    public School addAfterSchoolProgram(AfterSchoolProgram afterSchoolProgram) {
+        this.afterSchoolPrograms.add(afterSchoolProgram);
+        afterSchoolProgram.setSchool(this);
+        return this;
+    }
+
+    public School removeAfterSchoolProgram(AfterSchoolProgram afterSchoolProgram) {
+        this.afterSchoolPrograms.remove(afterSchoolProgram);
+        afterSchoolProgram.setSchool(null);
+        return this;
+    }
+
+    public void setAfterSchoolPrograms(List<AfterSchoolProgram> afterSchoolPrograms) {
+        this.afterSchoolPrograms = afterSchoolPrograms;
+    }
+
+
+    
+    
+    public List<DismissalLocation> getDismissalLocations() {
+        return dismissalLocations;
+    }
+
+    public School dismissalLocations(List<DismissalLocation> dismissalLocations) {
+        this.dismissalLocations = dismissalLocations;
+        return this;
+    }
+
+    public School addDismissalLocation(DismissalLocation dismissalLocation) {
+        this.dismissalLocations.add(dismissalLocation);
+        dismissalLocation.setSchool(this);
+        return this;
+    }
+
+    public School removeDismissalLocation(DismissalLocation dismissalLocation) {
+        this.dismissalLocations.remove(dismissalLocation);
+        dismissalLocation.setSchool(null);
+        return this;
+    }
+
+    public void setDismissalLocations(List<DismissalLocation> dismissalLocations) {
+        this.dismissalLocations = dismissalLocations;
+    }
+
 
     
     public LocalTime getGoHomeNotesDailyCutoffTime() {
@@ -135,6 +213,34 @@ public class School implements Serializable {
 
     
     
+    public List<SchoolGrade> getSchoolGrades() {
+        return schoolGrades;
+    }
+
+    public School schoolGrades(List<SchoolGrade> schoolGrades) {
+        this.schoolGrades = schoolGrades;
+        return this;
+    }
+
+    public School addSchoolGrade(SchoolGrade schoolGrade) {
+        this.schoolGrades.add(schoolGrade);
+        schoolGrade.setSchool(this);
+        return this;
+    }
+
+    public School removeSchoolGrade(SchoolGrade schoolGrade) {
+        this.schoolGrades.remove(schoolGrade);
+        schoolGrade.setSchool(null);
+        return this;
+    }
+
+    public void setSchoolGrades(List<SchoolGrade> schoolGrades) {
+        this.schoolGrades = schoolGrades;
+    }
+
+
+    
+    
     public List<Student> getStudents() {
         return students;
     }
@@ -158,6 +264,34 @@ public class School implements Serializable {
 
     public void setStudents(List<Student> students) {
         this.students = students;
+    }
+
+
+    
+    
+    public List<Teacher> getTeachers() {
+        return teachers;
+    }
+
+    public School teachers(List<Teacher> teachers) {
+        this.teachers = teachers;
+        return this;
+    }
+
+    public School addTeacher(Teacher teacher) {
+        this.teachers.add(teacher);
+        teacher.setSchool(this);
+        return this;
+    }
+
+    public School removeTeacher(Teacher teacher) {
+        this.teachers.remove(teacher);
+        teacher.setSchool(null);
+        return this;
+    }
+
+    public void setTeachers(List<Teacher> teachers) {
+        this.teachers = teachers;
     }
 
 
@@ -187,11 +321,15 @@ public class School implements Serializable {
         return "School{" +
             "id=" + getId() +
             ", abbreviation='" + getAbbreviation() + "'" +
+            ", afterSchoolPrograms='" + getAfterSchoolPrograms() + "'" +
+            ", dismissalLocations='" + getDismissalLocations() + "'" +
             ", goHomeNotesDailyCutoffTime='" + getGoHomeNotesDailyCutoffTime() + "'" +
             ", goHomeNotesStartDate='" + getGoHomeNotesStartDate() + "'" +
             ", goHomeNotesStopDate='" + getGoHomeNotesStopDate() + "'" +
             ", name='" + getName() + "'" +
+            ", schoolGrades='" + getSchoolGrades() + "'" +
             ", students='" + getStudents() + "'" +
+            ", teachers='" + getTeachers() + "'" +
             "}";
     }
 }

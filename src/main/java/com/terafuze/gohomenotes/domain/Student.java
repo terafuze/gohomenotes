@@ -34,6 +34,10 @@ public class Student implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
+    
+    @ManyToOne
+    private Family family;
+	
     @NotNull
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -46,6 +50,9 @@ public class Student implements Serializable {
     @ManyToOne
     private School school;
     
+    @ManyToOne
+    private SchoolGrade schoolGrade;
+    
     public Long getId() {
         return id;
     }
@@ -53,6 +60,22 @@ public class Student implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+    
+    
+    public Family getFamily() {
+        return this.family;
+    }
+
+    public Student family(Family family) {
+        this.family = family;
+        return this;
+    }
+
+    public void setFamily(Family family) {
+        this.family = family;
+    }
+
+
     
     public String getFirstName() {
         return this.firstName;
@@ -97,6 +120,22 @@ public class Student implements Serializable {
     }
 
 
+    
+    
+    public SchoolGrade getSchoolGrade() {
+        return this.schoolGrade;
+    }
+
+    public Student schoolGrade(SchoolGrade schoolGrade) {
+        this.schoolGrade = schoolGrade;
+        return this;
+    }
+
+    public void setSchoolGrade(SchoolGrade schoolGrade) {
+        this.schoolGrade = schoolGrade;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -122,9 +161,11 @@ public class Student implements Serializable {
     public String toString() {
         return "Student{" +
             "id=" + getId() +
+            ", family='" + getFamily() + "'" +
             ", firstName='" + getFirstName() + "'" +
             ", lastName='" + getLastName() + "'" +
             ", school='" + getSchool() + "'" +
+            ", schoolGrade='" + getSchoolGrade() + "'" +
             "}";
     }
 }

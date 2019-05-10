@@ -102,7 +102,6 @@ public class EarlyPickupRequestRestController {
     }
 
     
-
     /**
      * GET  /early-pickup-requests/:id : get the Early Pickup Request for a given "id".
      *

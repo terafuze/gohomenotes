@@ -1,0 +1,27 @@
+{
+    "app": {
+        "parent" : {
+            "home": {
+                "title": "Parents",
+                "createLabel": "Create a new Parent",
+                "createOrEditLabel": "Create or edit a Parent"
+            },
+            "created": "A new Parent is created with identifier {{ param }}",
+            "updated": "A Parent is updated with identifier {{ param }}",
+            "deleted": "A Parent is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Parent {{ id }}?"
+            },
+            "detail": {
+                "title": "Parent"
+            },
+            "address": "Address",
+            "emailAddress": "Email Address",
+            "family": "Family",
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "primaryPhoneNumber": "Primary Phone Number",
+            "secondaryPhoneNumber": "Secondary Phone Number"
+        }
+    }
+}

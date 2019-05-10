@@ -49,84 +49,112 @@
                 <ul class="dropdown-menu" ngbDropdownMenu>
                     <!-- After School Program menu item -->
                     <li>
-                        <a class="dropdown-item" routerLink="after-school-program" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="after-school-programs" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.afterSchoolProgram">After School Program</span>
                         </a>
                     </li>
                     <!-- Daily Verification Record menu item -->
                     <li>
-                        <a class="dropdown-item" routerLink="daily-verification-record" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="daily-verification-records" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.dailyVerificationRecord">Daily Verification Record</span>
                         </a>
                     </li>
                     <!-- Dismissal Location menu item -->
                     <li>
-                        <a class="dropdown-item" routerLink="dismissal-location" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="dismissal-locations" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.dismissalLocation">Dismissal Location</span>
                         </a>
                     </li>
                     <!-- Early Pickup Request menu item -->
                     <li>
-                        <a class="dropdown-item" routerLink="early-pickup-request" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="early-pickup-requests" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.earlyPickupRequest">Early Pickup Request</span>
                         </a>
                     </li>
+                    <!-- Family menu item -->
+                    <li>
+                        <a class="dropdown-item" routerLink="families" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.family">Family</span>
+                        </a>
+                    </li>
+                    <!-- Family Registration menu item -->
+                    <li>
+                        <a class="dropdown-item" routerLink="family-registrations" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.familyRegistration">Family Registration</span>
+                        </a>
+                    </li>
                     <!-- Guest Request menu item -->
                     <li>
-                        <a class="dropdown-item" routerLink="guest-request" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="guest-requests" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.guestRequest">Guest Request</span>
                         </a>
                     </li>
                     <!-- Host Request menu item -->
                     <li>
-                        <a class="dropdown-item" routerLink="host-request" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="host-requests" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.hostRequest">Host Request</span>
                         </a>
                     </li>
-                    <!-- Legal Guardian menu item -->
+                    <!-- Parent menu item -->
                     <li>
-                        <a class="dropdown-item" routerLink="legal-guardian" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="parents" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
-                            <span jhiTranslate="global.menu.entities.legalGuardian">Legal Guardian</span>
+                            <span jhiTranslate="global.menu.entities.parent">Parent</span>
+                        </a>
+                    </li>
+                    <!-- Parent Registration menu item -->
+                    <li>
+                        <a class="dropdown-item" routerLink="parent-registrations" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.parentRegistration">Parent Registration</span>
                         </a>
                     </li>
                     <!-- School menu item -->
                     <li>
-                        <a class="dropdown-item" routerLink="school" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="schools" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.school">School</span>
                         </a>
                     </li>
                     <!-- School Grade menu item -->
                     <li>
-                        <a class="dropdown-item" routerLink="school-grade" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="school-grades" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.schoolGrade">School Grade</span>
                         </a>
                     </li>
                     <!-- Student menu item -->
                     <li>
-                        <a class="dropdown-item" routerLink="student" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="students" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.student">Student</span>
                         </a>
                     </li>
+                    <!-- Student Registration menu item -->
+                    <li>
+                        <a class="dropdown-item" routerLink="student-registrations" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.studentRegistration">Student Registration</span>
+                        </a>
+                    </li>
                     <!-- Teacher menu item -->
                     <li>
-                        <a class="dropdown-item" routerLink="teacher" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="teachers" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.teacher">Teacher</span>
                         </a>
                     </li>
                     <!-- Transportation Change menu item -->
                     <li>
-                        <a class="dropdown-item" routerLink="transportation-change" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                        <a class="dropdown-item" routerLink="transportation-changes" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.transportationChange">Transportation Change</span>
                         </a>
@@ -182,7 +210,7 @@
                     <li *ngIf="swaggerEnabled">
                         <a class="dropdown-item" routerLink="admin/docs" routerLinkActive="active" (click)="collapseNavbar()">
                             <fa-icon [icon]="'book'" [fixedWidth]="true"></fa-icon>
-                            <span jhiTranslate="global.menu.admin.webdocs">API</span>
+                            <span jhiTranslate="global.menu.admin.apidocs">API</span>
                         </a>
                     </li>
                     <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->

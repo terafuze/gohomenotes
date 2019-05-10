@@ -1,25 +1,20 @@
 package com.terafuze.gohomenotes.domain;
 
 import java.io.Serializable;
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Objects;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.OrderBy;
-import javax.validation.constraints.NotNull;
-import javax.persistence.*;
-import javax.validation.constraints.*;
+
+import org.springframework.content.commons.annotations.ContentId;
+import org.springframework.content.commons.annotations.ContentLength;
 
 /**
  * Record that the Go Home Notes have been finalized for a specific day
@@ -36,6 +31,31 @@ public class DailyVerificationRecord implements Serializable {
     private Long id;
 
     
+    /**
+     * Used by Spring Content to associate a stream of binary data with the this entity.
+     *
+     * Automatically managed by Spring Content.
+     */
+    @ContentId
+    private String goHomeNotesReportContentId;
+
+    /**
+     * Used by Spring Content to record the length of a data stream for file content.
+     *
+     * Automatically managed by Spring Content.
+     */
+    @ContentLength
+    private long goHomeNotesReportContentLength;
+
+    /**
+     * Mime Type necessary to serving file content over the web
+     */
+    private String goHomeNotesReportMimeType = "application/pdf";
+
+    @Column(name = "timestamp")
+    private LocalDateTime timestamp;
+
+    
     public Long getId() {
         return id;
     }
@@ -43,6 +63,22 @@ public class DailyVerificationRecord implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+    
+
+    
+    public LocalDateTime getTimestamp() {
+        return this.timestamp;
+    }
+
+    public DailyVerificationRecord timestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+        return this;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -68,6 +104,7 @@ public class DailyVerificationRecord implements Serializable {
     public String toString() {
         return "DailyVerificationRecord{" +
             "id=" + getId() +
+            ", timestamp='" + getTimestamp() + "'" +
             "}";
     }
 }

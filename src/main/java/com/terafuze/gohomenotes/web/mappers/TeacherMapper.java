@@ -9,12 +9,15 @@ import com.terafuze.gohomenotes.web.models.TeacherModel;
 /**
  * Mapper for the Teacher domain model object to the Teacher Model.
  */
-@Mapper(componentModel = "spring", uses = {})
+@Mapper(componentModel = "spring", uses = {SchoolMapper.class})
 public interface TeacherMapper extends IEntityMapper<TeacherModel, Teacher> {
 
-    @Mapping(source = "", target = "identifier")
+    @Mapping(source = "id", target = "identifier")
+    @Mapping(source = "school.id", target = "schoolId")
+    @Mapping(source = "school.name", target = "schoolIdentifier")
     TeacherModel toModel(Teacher teacher);
 
+    @Mapping(source = "schoolId", target = "school")
     Teacher toEntity(TeacherModel teacherModel);
 
     default Teacher fromId(Long id) {

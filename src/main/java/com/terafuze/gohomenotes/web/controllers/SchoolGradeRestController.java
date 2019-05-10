@@ -27,6 +27,8 @@ import com.terafuze.gohomenotes.web.utils.HeaderUtil;
 
 import com.terafuze.gohomenotes.service.SchoolGradeService;
 import com.terafuze.gohomenotes.web.models.SchoolGradeModel;
+import com.terafuze.gohomenotes.web.models.StudentRegistrationModel;
+import com.terafuze.gohomenotes.web.models.StudentModel;
 
 
 /**
@@ -100,8 +102,6 @@ public class SchoolGradeRestController {
         log.debug("REST request to get all SchoolGrades");
         return schoolGradeService.findAll();
     }
-
-    
 
     /**
      * GET  /school-grades/:id : get the School Grade for a given "id".

@@ -29,6 +29,10 @@ public class TransportationChangeModel implements Serializable {
         return this.identifier;
     }
 
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
+
     public Long getId() {
         return id;
     }

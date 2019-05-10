@@ -46,9 +46,14 @@ public class DismissalLocation implements Serializable {
     @Column(name = "max_passengers")
     private Integer maxPassengers;
 
-    @Column(name = "name")
+    @NotNull
+    @Column(name = "name", nullable = false)
     private String name;
 
+    
+    @ManyToOne
+    private School school;
+	
     @Column(name = "transfers_allowed")
     private Boolean transfersAllowed;
 
@@ -131,6 +136,22 @@ public class DismissalLocation implements Serializable {
     }
 
     
+    
+    public School getSchool() {
+        return this.school;
+    }
+
+    public DismissalLocation school(School school) {
+        this.school = school;
+        return this;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
+    }
+
+
+    
     public Boolean getTransfersAllowed() {
         return this.transfersAllowed;
     }
@@ -174,6 +195,7 @@ public class DismissalLocation implements Serializable {
             ", maxGuestsPerStudent='" + getMaxGuestsPerStudent() + "'" +
             ", maxPassengers='" + getMaxPassengers() + "'" +
             ", name='" + getName() + "'" +
+            ", school='" + getSchool() + "'" +
             ", transfersAllowed='" + getTransfersAllowed() + "'" +
             "}";
     }

@@ -12,7 +12,7 @@ import com.terafuze.gohomenotes.web.models.EarlyPickupRequestModel;
 @Mapper(componentModel = "spring", uses = {})
 public interface EarlyPickupRequestMapper extends IEntityMapper<EarlyPickupRequestModel, EarlyPickupRequest> {
 
-    @Mapping(source = "", target = "identifier")
+    @Mapping(source = "id", target = "identifier")
     EarlyPickupRequestModel toModel(EarlyPickupRequest earlyPickupRequest);
 
     EarlyPickupRequest toEntity(EarlyPickupRequestModel earlyPickupRequestModel);

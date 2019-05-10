@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="parentRegistration">
+            <h2><span jhiTranslate="app.parentRegistration.detail.title">Parent Registration</span> {{parentRegistration.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                
+                <dt><span jhiTranslate="app.parentRegistration.address">Address</span></dt>
+                <dd>
+                    <span>{{parentRegistration.address}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.parentRegistration.emailAddress">Email Address</span></dt>
+                <dd>
+                    <span>{{parentRegistration.emailAddress}}</span>
+                </dd>
+                <!-- Family Registration Form Field based on MANY_TO_ONE relationship -->
+                <dt><span jhiTranslate="app.parentRegistration.familyRegistration">Family Registration</span></dt>
+                <dd>
+                    <div *ngIf="parentRegistration.familyRegistrationId">
+                        <a [routerLink]="['/family-registrations', parentRegistration.familyRegistrationId, 'view']">{{parentRegistration.familyRegistrationIdentifier}}</a>
+                    </div>
+                </dd>
+                
+                <dt><span jhiTranslate="app.parentRegistration.firstName">First Name</span></dt>
+                <dd>
+                    <span>{{parentRegistration.firstName}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.parentRegistration.lastName">Last Name</span></dt>
+                <dd>
+                    <span>{{parentRegistration.lastName}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.parentRegistration.primaryPhoneNumber">Primary Phone Number</span></dt>
+                <dd>
+                    <span>{{parentRegistration.primaryPhoneNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.parentRegistration.secondaryPhoneNumber">Secondary Phone Number</span></dt>
+                <dd>
+                    <span>{{parentRegistration.secondaryPhoneNumber}}</span>
+                </dd>
+            </dl>
+            <button type="submit" (click)="previousState()" class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+            <button type="button" [routerLink]="['/parent-registrations', parentRegistration.id, 'edit']" class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

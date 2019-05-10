@@ -1,8 +1,14 @@
+import { IStudentRegistration } from 'app/shared/model/student-registration.model';
+import { IStudent } from 'app/shared/model/student.model';
 export interface ISchoolGrade {
     id?: number;
     identifier?: string;
     abbreviation?: string;
     name?: string;
+    schoolId?: number;
+    schoolIdentifier?: string;
+    studentRegistrations?: IStudentRegistration[];
+    students?: IStudent[];
 }
 
 export class SchoolGrade implements ISchoolGrade {
@@ -10,6 +16,10 @@ export class SchoolGrade implements ISchoolGrade {
         public id?: number,
         public identifier?: string,
         public abbreviation?: string,
-        public name?: string
+        public name?: string,
+        public schoolId?: number,
+        public schoolIdentifier?: string,
+        public studentRegistrations?: IStudentRegistration[],
+        public students?: IStudent[]
     ) { }
 }

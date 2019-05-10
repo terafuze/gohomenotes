@@ -24,9 +24,25 @@ public class TeacherModel implements Serializable {
     public String identifier;
 
     
+    @NotNull
+    private String firstName;
+    
+    @NotNull
+    private String lastName;
+    
+    
+    private Long schoolId;
+
+    private String schoolIdentifier;
+    
+    
 
     public String getIdentifier() {
         return this.identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 
     public Long getId() {
@@ -37,6 +53,41 @@ public class TeacherModel implements Serializable {
         this.id = id;
     }
 
+    
+    public String getFirstName() {
+        return this.firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    
+    
+    public String getLastName() {
+        return this.lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+    
+    
+    public Long getSchoolId() {
+        return this.schoolId;
+    }
+
+    public void setSchoolId(Long schoolId) {
+        this.schoolId = schoolId;
+    }
+
+    public String getSchoolIdentifier() {
+        return this.schoolIdentifier;
+    }
+
+    public void setSchoolIdentifier(String schoolIdentifier) {
+        this.schoolIdentifier = schoolIdentifier;
+    }
+    
     
 
     @Override
@@ -64,6 +115,8 @@ public class TeacherModel implements Serializable {
     public String toString() {
         return "TeacherModel{" +
             "id=" + getId() +
+            ", firstName='" + this.getFirstName() + "'" +
+            ", lastName='" + this.getLastName() + "'" +
             "}";
     }
 }

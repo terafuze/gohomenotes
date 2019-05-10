@@ -53,10 +53,10 @@ export class EditEarlyPickupRequestComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        
         if (this.earlyPickupRequest.id !== undefined) {
             this.subscribeToSaveResponse(this.earlyPickupRequestService.update(this.earlyPickupRequest));
         } else {
+            
             this.subscribeToSaveResponse(this.earlyPickupRequestService.create(this.earlyPickupRequest));
         }
     }

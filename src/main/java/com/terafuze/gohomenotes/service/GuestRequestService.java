@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.terafuze.gohomenotes.domain.GuestRequest;
 import com.terafuze.gohomenotes.repository.GuestRequestRepository;
@@ -60,7 +61,7 @@ public class GuestRequestService {
     @Transactional(readOnly = true)
     public List<GuestRequestModel> findAll() {
         log.debug("Request to get all GuestRequests");
-        return guestRequestRepository.findAll(new Sort(Sort.Direction.ASC, "name")).stream()
+        return guestRequestRepository.findAll(new Sort(Sort.Direction.ASC, "id")).stream()
             .map(guestRequestMapper::toModel)
             .collect(Collectors.toCollection(LinkedList::new));
     }

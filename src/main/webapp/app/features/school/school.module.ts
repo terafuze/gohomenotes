@@ -9,12 +9,12 @@ import {
     ListSchoolsComponent,
     ViewSchoolComponent,
     schoolRoute,
-    schoolPopupRoute,
+    schoolPopupRoute
 } from './';
 
 const ENTITY_STATES = [
     ...schoolRoute,
-    ...schoolPopupRoute,
+    ...schoolPopupRoute
 ];
 
 @NgModule({

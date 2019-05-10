@@ -1,0 +1,27 @@
+{
+    "app": {
+        "parentRegistration" : {
+            "home": {
+                "title": "Parent Registrations",
+                "createLabel": "Create a new Parent Registration",
+                "createOrEditLabel": "Create or edit a Parent Registration"
+            },
+            "created": "A new Parent Registration is created with identifier {{ param }}",
+            "updated": "A Parent Registration is updated with identifier {{ param }}",
+            "deleted": "A Parent Registration is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Parent Registration {{ id }}?"
+            },
+            "detail": {
+                "title": "Parent Registration"
+            },
+            "address": "Address",
+            "emailAddress": "Email Address",
+            "familyRegistration": "Family Registration",
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "primaryPhoneNumber": "Primary Phone Number",
+            "secondaryPhoneNumber": "Secondary Phone Number"
+        }
+    }
+}

@@ -1,0 +1,111 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-parent-heading" jhiTranslate="app.parent.home.createOrEditLabel">Create or edit a Parent</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!parent.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                           [(ngModel)]="parent.id" readonly />
+                </div>
+                <div class="form-group" [hidden]="!parent.familyId">
+                    <label class="form-control-label" jhiTranslate="app.parent.family" for="family">Family</label>
+                    <input type="text" class="form-control" id="family" name="family" [(ngModel)]="parent.familyIdentifier" readonly />
+                </div>
+                
+                <!-- Address Form Field -->
+                
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.parent.address" for="address">Address</label>
+                <input type="text" class="form-control" name="address" id="address"
+                    [(ngModel)]="parent.address" required/>
+                <div [hidden]="!(editForm.controls.address?.dirty && editForm.controls.address?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.address?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+                </div>
+                
+                
+                <!-- Email Address Form Field -->
+                
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.parent.emailAddress" for="email_address">Email Address</label>
+                <input type="text" class="form-control" name="emailAddress" id="email_address"
+                    [(ngModel)]="parent.emailAddress" required/>
+                <div [hidden]="!(editForm.controls.emailAddress?.dirty && editForm.controls.emailAddress?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.emailAddress?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+                </div>
+                
+                
+                
+                <!-- First Name Form Field -->
+                
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.parent.firstName" for="first_name">First Name</label>
+                <input type="text" class="form-control" name="firstName" id="first_name"
+                    [(ngModel)]="parent.firstName" required/>
+                <div [hidden]="!(editForm.controls.firstName?.dirty && editForm.controls.firstName?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.firstName?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+                </div>
+                
+                
+                <!-- Last Name Form Field -->
+                
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.parent.lastName" for="last_name">Last Name</label>
+                <input type="text" class="form-control" name="lastName" id="last_name"
+                    [(ngModel)]="parent.lastName" required/>
+                <div [hidden]="!(editForm.controls.lastName?.dirty && editForm.controls.lastName?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.lastName?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+                </div>
+                
+                
+                <!-- Primary Phone Number Form Field -->
+                
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.parent.primaryPhoneNumber" for="primary_phone_number">Primary Phone Number</label>
+                <input type="text" class="form-control" name="primaryPhoneNumber" id="primary_phone_number"
+                    [(ngModel)]="parent.primaryPhoneNumber" required/>
+                <div [hidden]="!(editForm.controls.primaryPhoneNumber?.dirty && editForm.controls.primaryPhoneNumber?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.primaryPhoneNumber?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+                </div>
+                
+                
+                <!-- Secondary Phone Number Form Field -->
+                
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.parent.secondaryPhoneNumber" for="secondary_phone_number">Secondary Phone Number</label>
+                <input type="text" class="form-control" name="secondaryPhoneNumber" id="secondary_phone_number"
+                    [(ngModel)]="parent.secondaryPhoneNumber" /></div>
+                
+                </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

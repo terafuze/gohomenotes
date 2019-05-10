@@ -3,6 +3,8 @@ export interface IAfterSchoolProgram {
     identifier?: string;
     abbreviation?: string;
     name?: string;
+    schoolId?: number;
+    schoolIdentifier?: string;
 }
 
 export class AfterSchoolProgram implements IAfterSchoolProgram {
@@ -10,6 +12,8 @@ export class AfterSchoolProgram implements IAfterSchoolProgram {
         public id?: number,
         public identifier?: string,
         public abbreviation?: string,
-        public name?: string
+        public name?: string,
+        public schoolId?: number,
+        public schoolIdentifier?: string
     ) { }
 }

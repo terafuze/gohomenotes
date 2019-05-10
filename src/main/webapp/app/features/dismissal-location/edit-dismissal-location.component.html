@@ -9,7 +9,10 @@
                     <input type="text" class="form-control" id="id" name="id"
                            [(ngModel)]="dismissalLocation.id" readonly />
                 </div>
-                
+                <div class="form-group" [hidden]="!dismissalLocation.schoolId">
+                    <label class="form-control-label" jhiTranslate="app.dismissalLocation.school" for="school">School</label>
+                    <input type="text" class="form-control" id="school" name="school" [(ngModel)]="dismissalLocation.schoolIdentifier" readonly />
+                </div>
                 
                 <!-- Abbreviation Form Field -->
                 
@@ -84,6 +87,7 @@
                 </small>
             </div>
                 </div>
+                
                 
                 
                 <!-- Transfers Allowed Form Field -->

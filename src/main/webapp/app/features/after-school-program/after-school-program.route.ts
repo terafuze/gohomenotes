@@ -27,28 +27,7 @@ export class AfterSchoolProgramResolve implements Resolve<IAfterSchoolProgram> {
 
 export const afterSchoolProgramRoute: Routes = [
     {
-        path: 'after-school-program',
-        component: ListAfterSchoolProgramsComponent,
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.afterSchoolProgram.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
-        path: 'after-school-program/:id/view',
-        component: ViewAfterSchoolProgramComponent,
-        resolve: {
-            afterSchoolProgram: AfterSchoolProgramResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.afterSchoolProgram.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
-        path: 'after-school-program/new',
+        path: 'schools/:schoolId/create-after-school-program',
         component: EditAfterSchoolProgramComponent,
         resolve: {
             afterSchoolProgram: AfterSchoolProgramResolve
@@ -60,7 +39,28 @@ export const afterSchoolProgramRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'after-school-program/:id/edit',
+        path: 'after-school-programs',
+        component: ListAfterSchoolProgramsComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'app.afterSchoolProgram.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'after-school-programs/:id/view',
+        component: ViewAfterSchoolProgramComponent,
+        resolve: {
+            afterSchoolProgram: AfterSchoolProgramResolve
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'app.afterSchoolProgram.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'after-school-programs/:id/edit',
         component: EditAfterSchoolProgramComponent,
         resolve: {
             afterSchoolProgram: AfterSchoolProgramResolve

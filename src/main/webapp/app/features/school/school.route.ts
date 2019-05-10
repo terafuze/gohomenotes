@@ -27,27 +27,6 @@ export class SchoolResolve implements Resolve<ISchool> {
 
 export const schoolRoute: Routes = [
     {
-        path: 'school',
-        component: ListSchoolsComponent,
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.school.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
-        path: 'school/:id/view',
-        component: ViewSchoolComponent,
-        resolve: {
-            school: SchoolResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.school.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
         path: 'school/new',
         component: EditSchoolComponent,
         resolve: {
@@ -60,7 +39,28 @@ export const schoolRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'school/:id/edit',
+        path: 'schools',
+        component: ListSchoolsComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'app.school.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'schools/:id/view',
+        component: ViewSchoolComponent,
+        resolve: {
+            school: SchoolResolve
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'app.school.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'schools/:id/edit',
         component: EditSchoolComponent,
         resolve: {
             school: SchoolResolve

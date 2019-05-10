@@ -7,6 +7,8 @@ import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IAfterSchoolProgram } from 'app/shared/model/after-school-program.model';
 import { AfterSchoolProgramService } from './after-school-program.service';
 
+import { ISchool } from 'app/shared/model/school.model';
+import { SchoolService } from 'app/features/school';
 
 @Component({
     selector: 'app-edit-after-school-program',
@@ -18,6 +20,7 @@ export class EditAfterSchoolProgramComponent implements OnInit {
 
     isSaving: boolean;
     
+    schoolId: number;
     
     constructor(
         private dataUtils: JhiDataUtils,
@@ -28,7 +31,7 @@ export class EditAfterSchoolProgramComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
-        
+        this.schoolId = this.activatedRoute.snapshot.params['schoolId'];
         this.activatedRoute.data.subscribe(({ afterSchoolProgram }) => {
             this.afterSchoolProgram = afterSchoolProgram;
         });
@@ -53,10 +56,10 @@ export class EditAfterSchoolProgramComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        
         if (this.afterSchoolProgram.id !== undefined) {
             this.subscribeToSaveResponse(this.afterSchoolProgramService.update(this.afterSchoolProgram));
         } else {
+            this.afterSchoolProgram.schoolId = this.schoolId;
             this.subscribeToSaveResponse(this.afterSchoolProgramService.create(this.afterSchoolProgram));
         }
     }
@@ -78,6 +81,10 @@ export class EditAfterSchoolProgramComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
+    
+    trackSchoolById(index: number, item: ISchool) {
+        return item.id;
+    }
     
 
     // TODO if not needed, remove this function

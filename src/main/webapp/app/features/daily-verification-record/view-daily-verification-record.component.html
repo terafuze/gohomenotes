@@ -6,11 +6,19 @@
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
                 
+                <dd>
+                    <a href="/api/daily-verification-records/{{dailyVerificationRecord.id}}/go-home-notes-reports" jhiTranslate="entity.action.open">open</a>
+                </dd>
+                
+                <dt><span jhiTranslate="app.dailyVerificationRecord.timestamp">Timestamp</span></dt>
+                <dd>
+                    <span>{{dailyVerificationRecord.timestamp}}</span>
+                </dd>
             </dl>
             <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
-            <button type="button" [routerLink]="['/daily-verification-record', dailyVerificationRecord.id, 'edit']" class="btn btn-primary">
+            <button type="button" [routerLink]="['/daily-verification-records', dailyVerificationRecord.id, 'edit']" class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>
         </div>

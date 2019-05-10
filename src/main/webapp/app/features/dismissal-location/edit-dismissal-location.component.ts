@@ -7,6 +7,8 @@ import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IDismissalLocation } from 'app/shared/model/dismissal-location.model';
 import { DismissalLocationService } from './dismissal-location.service';
 
+import { ISchool } from 'app/shared/model/school.model';
+import { SchoolService } from 'app/features/school';
 
 @Component({
     selector: 'app-edit-dismissal-location',
@@ -18,6 +20,7 @@ export class EditDismissalLocationComponent implements OnInit {
 
     isSaving: boolean;
     
+    schoolId: number;
     
     constructor(
         private dataUtils: JhiDataUtils,
@@ -28,7 +31,7 @@ export class EditDismissalLocationComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
-        
+        this.schoolId = this.activatedRoute.snapshot.params['schoolId'];
         this.activatedRoute.data.subscribe(({ dismissalLocation }) => {
             this.dismissalLocation = dismissalLocation;
         });
@@ -53,10 +56,10 @@ export class EditDismissalLocationComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        
         if (this.dismissalLocation.id !== undefined) {
             this.subscribeToSaveResponse(this.dismissalLocationService.update(this.dismissalLocation));
         } else {
+            this.dismissalLocation.schoolId = this.schoolId;
             this.subscribeToSaveResponse(this.dismissalLocationService.create(this.dismissalLocation));
         }
     }
@@ -78,6 +81,10 @@ export class EditDismissalLocationComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
+    
+    trackSchoolById(index: number, item: ISchool) {
+        return item.id;
+    }
     
 
     // TODO if not needed, remove this function

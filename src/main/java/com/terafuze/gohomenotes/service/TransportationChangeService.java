@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.terafuze.gohomenotes.domain.TransportationChange;
 import com.terafuze.gohomenotes.repository.TransportationChangeRepository;
@@ -60,7 +61,7 @@ public class TransportationChangeService {
     @Transactional(readOnly = true)
     public List<TransportationChangeModel> findAll() {
         log.debug("Request to get all TransportationChanges");
-        return transportationChangeRepository.findAll(new Sort(Sort.Direction.ASC, "name")).stream()
+        return transportationChangeRepository.findAll(new Sort(Sort.Direction.ASC, "id")).stream()
             .map(transportationChangeMapper::toModel)
             .collect(Collectors.toCollection(LinkedList::new));
     }

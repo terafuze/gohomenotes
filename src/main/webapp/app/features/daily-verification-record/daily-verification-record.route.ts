@@ -27,27 +27,6 @@ export class DailyVerificationRecordResolve implements Resolve<IDailyVerificatio
 
 export const dailyVerificationRecordRoute: Routes = [
     {
-        path: 'daily-verification-record',
-        component: ListDailyVerificationRecordsComponent,
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.dailyVerificationRecord.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
-        path: 'daily-verification-record/:id/view',
-        component: ViewDailyVerificationRecordComponent,
-        resolve: {
-            dailyVerificationRecord: DailyVerificationRecordResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.dailyVerificationRecord.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
         path: 'daily-verification-record/new',
         component: EditDailyVerificationRecordComponent,
         resolve: {
@@ -60,7 +39,28 @@ export const dailyVerificationRecordRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'daily-verification-record/:id/edit',
+        path: 'daily-verification-records',
+        component: ListDailyVerificationRecordsComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'app.dailyVerificationRecord.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'daily-verification-records/:id/view',
+        component: ViewDailyVerificationRecordComponent,
+        resolve: {
+            dailyVerificationRecord: DailyVerificationRecordResolve
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'app.dailyVerificationRecord.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'daily-verification-records/:id/edit',
         component: EditDailyVerificationRecordComponent,
         resolve: {
             dailyVerificationRecord: DailyVerificationRecordResolve

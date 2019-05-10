@@ -14,12 +14,16 @@
                 "dailyVerificationRecord": "Daily Verification Record",
                 "dismissalLocation": "Dismissal Location",
                 "earlyPickupRequest": "Early Pickup Request",
+                "family": "Family",
+                "familyRegistration": "Family Registration",
                 "guestRequest": "Guest Request",
                 "hostRequest": "Host Request",
-                "legalGuardian": "Legal Guardian",
+                "parent": "Parent",
+                "parentRegistration": "Parent Registration",
                 "school": "School",
                 "schoolGrade": "School Grade",
                 "student": "Student",
+                "studentRegistration": "Student Registration",
                 "teacher": "Teacher",
                 "transportationChange": "Transportation Change"
                 

@@ -12,7 +12,7 @@ import com.terafuze.gohomenotes.web.models.HostRequestModel;
 @Mapper(componentModel = "spring", uses = {})
 public interface HostRequestMapper extends IEntityMapper<HostRequestModel, HostRequest> {
 
-    @Mapping(source = "", target = "identifier")
+    @Mapping(source = "id", target = "identifier")
     HostRequestModel toModel(HostRequest hostRequest);
 
     HostRequest toEntity(HostRequestModel hostRequestModel);

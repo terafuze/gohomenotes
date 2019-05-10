@@ -9,12 +9,12 @@ import {
     ListEarlyPickupRequestsComponent,
     ViewEarlyPickupRequestComponent,
     earlyPickupRequestRoute,
-    earlyPickupRequestPopupRoute,
+    earlyPickupRequestPopupRoute
 } from './';
 
 const ENTITY_STATES = [
     ...earlyPickupRequestRoute,
-    ...earlyPickupRequestPopupRoute,
+    ...earlyPickupRequestPopupRoute
 ];
 
 @NgModule({

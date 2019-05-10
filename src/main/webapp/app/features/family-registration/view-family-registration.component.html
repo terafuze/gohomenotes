@@ -1,0 +1,28 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="familyRegistration">
+            <h2><span jhiTranslate="app.familyRegistration.detail.title">Family Registration</span> {{familyRegistration.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                
+                <!-- Parent Registrations Form Field based on ONE_TO_MANY relationship -->
+                <dd>
+                <a [routerLink]="['/parent-registrations']" [queryParams]="{ familyRegistrationId: familyRegistration.id }"><span jhiTranslate="app.familyRegistration.parentRegistrations">Parent Registrations</span>
+                </dd>
+                
+                <!-- Student Registrations Form Field based on ONE_TO_MANY relationship -->
+                <dd>
+                <a [routerLink]="['/student-registrations']" [queryParams]="{ familyRegistrationId: familyRegistration.id }"><span jhiTranslate="app.familyRegistration.studentRegistrations">Student Registrations</span>
+                </dd>
+                
+            </dl>
+            <button type="submit" (click)="previousState()" class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+            <button type="button" [routerLink]="['/family-registrations', familyRegistration.id, 'edit']" class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

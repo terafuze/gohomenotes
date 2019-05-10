@@ -9,12 +9,12 @@ import {
     ListAfterSchoolProgramsComponent,
     ViewAfterSchoolProgramComponent,
     afterSchoolProgramRoute,
-    afterSchoolProgramPopupRoute,
+    afterSchoolProgramPopupRoute
 } from './';
 
 const ENTITY_STATES = [
     ...afterSchoolProgramRoute,
-    ...afterSchoolProgramPopupRoute,
+    ...afterSchoolProgramPopupRoute
 ];
 
 @NgModule({

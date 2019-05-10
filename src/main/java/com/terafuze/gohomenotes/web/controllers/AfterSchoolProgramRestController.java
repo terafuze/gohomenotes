@@ -102,7 +102,6 @@ public class AfterSchoolProgramRestController {
     }
 
     
-
     /**
      * GET  /after-school-programs/:id : get the After School Program for a given "id".
      *

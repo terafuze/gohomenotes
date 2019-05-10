@@ -1,0 +1,50 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="parent">
+            <h2><span jhiTranslate="app.parent.detail.title">Parent</span> {{parent.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                
+                <dt><span jhiTranslate="app.parent.address">Address</span></dt>
+                <dd>
+                    <span>{{parent.address}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.parent.emailAddress">Email Address</span></dt>
+                <dd>
+                    <span>{{parent.emailAddress}}</span>
+                </dd>
+                <!-- Family Form Field based on MANY_TO_ONE relationship -->
+                <dt><span jhiTranslate="app.parent.family">Family</span></dt>
+                <dd>
+                    <div *ngIf="parent.familyId">
+                        <a [routerLink]="['/families', parent.familyId, 'view']">{{parent.familyIdentifier}}</a>
+                    </div>
+                </dd>
+                
+                <dt><span jhiTranslate="app.parent.firstName">First Name</span></dt>
+                <dd>
+                    <span>{{parent.firstName}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.parent.lastName">Last Name</span></dt>
+                <dd>
+                    <span>{{parent.lastName}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.parent.primaryPhoneNumber">Primary Phone Number</span></dt>
+                <dd>
+                    <span>{{parent.primaryPhoneNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.parent.secondaryPhoneNumber">Secondary Phone Number</span></dt>
+                <dd>
+                    <span>{{parent.secondaryPhoneNumber}}</span>
+                </dd>
+            </dl>
+            <button type="submit" (click)="previousState()" class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+            <button type="button" [routerLink]="['/parents', parent.id, 'edit']" class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

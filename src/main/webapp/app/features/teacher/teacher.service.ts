@@ -4,16 +4,17 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { ITeacher } from 'app/shared/model/teacher.model';
-
+import { UserContext } from 'app/core';
 
 @Injectable({ providedIn: 'root' })
 export class TeacherService {
 
     private resourceUrl =  SERVER_API_URL + 'api/teachers';
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private userContext: UserContext) { }
 
     create(teacher: ITeacher): Observable<HttpResponse<ITeacher>> {
+        teacher = this.userContext.school.id;
         return this.http.post<ITeacher>(this.resourceUrl, teacher, { observe: 'response' });
     }
 
@@ -27,7 +28,8 @@ export class TeacherService {
 
     query(req?: any): Observable<HttpResponse<ITeacher[]>> {
         const options = createRequestOption(req);
-        return this.http.get<ITeacher[]>(this.resourceUrl, { params: options, observe: 'response' });
+        var schoolId = this.userContext.school.id;
+        return this.http.get<ITeacher[]>(`api/schools/${schoolId}/teachers`, { params: options, observe: 'response' });
     }
 
     delete(id: number): Observable<HttpResponse<any>> {

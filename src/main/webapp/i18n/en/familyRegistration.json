@@ -1,0 +1,22 @@
+{
+    "app": {
+        "familyRegistration" : {
+            "home": {
+                "title": "Family Registrations",
+                "createLabel": "Create a new Family Registration",
+                "createOrEditLabel": "Create or edit a Family Registration"
+            },
+            "created": "A new Family Registration is created with identifier {{ param }}",
+            "updated": "A Family Registration is updated with identifier {{ param }}",
+            "deleted": "A Family Registration is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Family Registration {{ id }}?"
+            },
+            "detail": {
+                "title": "Family Registration"
+            },
+            "parentRegistrations": "Parent Registrations",
+            "studentRegistrations": "Student Registrations"
+        }
+    }
+}

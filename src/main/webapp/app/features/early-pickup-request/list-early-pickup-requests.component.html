@@ -18,17 +18,17 @@
             </thead>
             <tbody>
             <tr *ngFor="let earlyPickupRequest of earlyPickupRequests ;trackBy: trackId">
-                <td><a [routerLink]="['/early-pickup-request', earlyPickupRequest.id, 'view']">{{earlyPickupRequest.id}}</a></td>
+                <td><a [routerLink]="['/early-pickup-requests', earlyPickupRequest.id, 'view']">{{earlyPickupRequest.id}}</a></td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
-                                [routerLink]="['/early-pickup-request', earlyPickupRequest.id, 'view']"
+                                [routerLink]="['/early-pickup-requests', earlyPickupRequest.id, 'view']"
                                 class="btn btn-info btn-sm">
                             <fa-icon [icon]="'eye'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                         </button>
                         <button type="submit"
-                                [routerLink]="['/early-pickup-request', earlyPickupRequest.id, 'edit']"
+                                [routerLink]="['/early-pickup-requests', earlyPickupRequest.id, 'edit']"
                                 class="btn btn-primary btn-sm">
                             <fa-icon [icon]="'pencil-alt'"></fa-icon>
                             <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>

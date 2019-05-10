@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Principal } from 'app/core';
 import { IDismissalLocation } from 'app/shared/model/dismissal-location.model';
 import { DismissalLocationService } from './dismissal-location.service';
+import { SchoolService } from '../school/school.service';
 @Component({
     selector: 'app-list-dismissal-locations',
     templateUrl: './list-dismissal-locations.component.html'
@@ -15,10 +16,12 @@ export class ListDismissalLocationsComponent implements OnInit, OnDestroy {
     dismissalLocations: IDismissalLocation[];
     currentAccount: any;
     eventSubscriber: Subscription;
+    schoolId: number;
     
 
     constructor(
         private dismissalLocationService: DismissalLocationService,
+        private schoolService: SchoolService,
         private activatedRoute: ActivatedRoute,
         private jhiAlertService: JhiAlertService,
         private dataUtils: JhiDataUtils,
@@ -28,6 +31,15 @@ export class ListDismissalLocationsComponent implements OnInit, OnDestroy {
 
     loadAll() {
         let dataLoaded: boolean = false;
+        if (this.schoolId) {
+            this.schoolService.getDismissalLocations(this.schoolId).subscribe(
+                (res: HttpResponse<IDismissalLocation[]>) => {
+                    this.dismissalLocations = res.body;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+            dataLoaded = true;
+        }
         // If no items loaded so far, then load all of them
         if (!dataLoaded) {
             this.dismissalLocationService.query().subscribe(
@@ -40,6 +52,7 @@ export class ListDismissalLocationsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.schoolId = this.activatedRoute.snapshot.queryParams['schoolId'];
         this.loadAll();
         this.principal.identity().then(account => {
             this.currentAccount = account;

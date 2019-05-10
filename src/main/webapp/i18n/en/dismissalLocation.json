@@ -20,6 +20,7 @@
             "maxGuestsPerStudent": "Max Guests Per Student",
             "maxPassengers": "Max Passengers",
             "name": "Name",
+            "school": "School",
             "transfersAllowed": "Transfers Allowed"
         }
     }

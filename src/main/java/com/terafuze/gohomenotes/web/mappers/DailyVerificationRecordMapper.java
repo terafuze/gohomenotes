@@ -12,7 +12,7 @@ import com.terafuze.gohomenotes.web.models.DailyVerificationRecordModel;
 @Mapper(componentModel = "spring", uses = {})
 public interface DailyVerificationRecordMapper extends IEntityMapper<DailyVerificationRecordModel, DailyVerificationRecord> {
 
-    @Mapping(source = "", target = "identifier")
+    @Mapping(source = "id", target = "identifier")
     DailyVerificationRecordModel toModel(DailyVerificationRecord dailyVerificationRecord);
 
     DailyVerificationRecord toEntity(DailyVerificationRecordModel dailyVerificationRecordModel);

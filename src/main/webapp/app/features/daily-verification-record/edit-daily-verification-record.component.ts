@@ -53,10 +53,10 @@ export class EditDailyVerificationRecordComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        
         if (this.dailyVerificationRecord.id !== undefined) {
             this.subscribeToSaveResponse(this.dailyVerificationRecordService.update(this.dailyVerificationRecord));
         } else {
+            
             this.subscribeToSaveResponse(this.dailyVerificationRecordService.create(this.dailyVerificationRecord));
         }
     }

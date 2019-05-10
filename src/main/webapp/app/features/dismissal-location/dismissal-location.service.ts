@@ -12,6 +12,7 @@ import { IDismissalLocation } from 'app/shared/model/dismissal-location.model';
 
 
 
+
 @Injectable({ providedIn: 'root' })
 export class DismissalLocationService {
 

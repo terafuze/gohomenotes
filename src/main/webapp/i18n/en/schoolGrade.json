@@ -16,7 +16,10 @@
                 "title": "School Grade"
             },
             "abbreviation": "Abbreviation",
-            "name": "Name"
+            "name": "Name",
+            "school": "School",
+            "studentRegistrations": "Student Registrations",
+            "students": "Students"
         }
     }
 }

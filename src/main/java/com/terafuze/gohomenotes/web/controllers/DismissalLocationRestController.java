@@ -102,7 +102,6 @@ public class DismissalLocationRestController {
     }
 
     
-
     /**
      * GET  /dismissal-locations/:id : get the Dismissal Location for a given "id".
      *

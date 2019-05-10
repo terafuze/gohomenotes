@@ -9,12 +9,12 @@ import {
     ListDismissalLocationsComponent,
     ViewDismissalLocationComponent,
     dismissalLocationRoute,
-    dismissalLocationPopupRoute,
+    dismissalLocationPopupRoute
 } from './';
 
 const ENTITY_STATES = [
     ...dismissalLocationRoute,
-    ...dismissalLocationPopupRoute,
+    ...dismissalLocationPopupRoute
 ];
 
 @NgModule({

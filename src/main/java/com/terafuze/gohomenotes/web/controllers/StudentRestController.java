@@ -102,7 +102,6 @@ public class StudentRestController {
     }
 
     
-
     /**
      * GET  /students/:id : get the Student for a given "id".
      *

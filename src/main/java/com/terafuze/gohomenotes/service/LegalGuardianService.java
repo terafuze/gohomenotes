@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.terafuze.gohomenotes.domain.LegalGuardian;
 import com.terafuze.gohomenotes.repository.LegalGuardianRepository;
@@ -60,7 +61,7 @@ public class LegalGuardianService {
     @Transactional(readOnly = true)
     public List<LegalGuardianModel> findAll() {
         log.debug("Request to get all LegalGuardians");
-        return legalGuardianRepository.findAll(new Sort(Sort.Direction.ASC, "name")).stream()
+        return legalGuardianRepository.findAll(new Sort(Sort.Direction.ASC, "id")).stream()
             .map(legalGuardianMapper::toModel)
             .collect(Collectors.toCollection(LinkedList::new));
     }

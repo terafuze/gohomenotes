@@ -37,9 +37,13 @@ public class AfterSchoolProgram implements Serializable {
     @Column(name = "abbreviation")
     private String abbreviation;
 
-    @Column(name = "name")
+    @NotNull
+    @Column(name = "name", nullable = false)
     private String name;
 
+    
+    @ManyToOne
+    private School school;
     
     public Long getId() {
         return id;
@@ -76,6 +80,22 @@ public class AfterSchoolProgram implements Serializable {
         this.name = name;
     }
 
+    
+    
+    public School getSchool() {
+        return this.school;
+    }
+
+    public AfterSchoolProgram school(School school) {
+        this.school = school;
+        return this;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -103,6 +123,7 @@ public class AfterSchoolProgram implements Serializable {
             "id=" + getId() +
             ", abbreviation='" + getAbbreviation() + "'" +
             ", name='" + getName() + "'" +
+            ", school='" + getSchool() + "'" +
             "}";
     }
 }

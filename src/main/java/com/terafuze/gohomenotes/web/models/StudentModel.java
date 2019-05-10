@@ -24,6 +24,12 @@ public class StudentModel implements Serializable {
     public String identifier;
 
     
+    
+    private Long familyId;
+
+    private String familyIdentifier;
+    
+    
     @NotNull
     private String firstName;
     
@@ -36,9 +42,19 @@ public class StudentModel implements Serializable {
     private String schoolIdentifier;
     
     
+    
+    private Long schoolGradeId;
+
+    private String schoolGradeIdentifier;
+    
+    
 
     public String getIdentifier() {
         return this.identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 
     public Long getId() {
@@ -49,6 +65,23 @@ public class StudentModel implements Serializable {
         this.id = id;
     }
 
+    
+    public Long getFamilyId() {
+        return this.familyId;
+    }
+
+    public void setFamilyId(Long familyId) {
+        this.familyId = familyId;
+    }
+
+    public String getFamilyIdentifier() {
+        return this.familyIdentifier;
+    }
+
+    public void setFamilyIdentifier(String familyIdentifier) {
+        this.familyIdentifier = familyIdentifier;
+    }
+    
     
     public String getFirstName() {
         return this.firstName;
@@ -82,6 +115,23 @@ public class StudentModel implements Serializable {
 
     public void setSchoolIdentifier(String schoolIdentifier) {
         this.schoolIdentifier = schoolIdentifier;
+    }
+    
+    
+    public Long getSchoolGradeId() {
+        return this.schoolGradeId;
+    }
+
+    public void setSchoolGradeId(Long schoolGradeId) {
+        this.schoolGradeId = schoolGradeId;
+    }
+
+    public String getSchoolGradeIdentifier() {
+        return this.schoolGradeIdentifier;
+    }
+
+    public void setSchoolGradeIdentifier(String schoolGradeIdentifier) {
+        this.schoolGradeIdentifier = schoolGradeIdentifier;
     }
     
     

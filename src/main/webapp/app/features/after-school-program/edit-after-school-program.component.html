@@ -9,7 +9,10 @@
                     <input type="text" class="form-control" id="id" name="id"
                            [(ngModel)]="afterSchoolProgram.id" readonly />
                 </div>
-                
+                <div class="form-group" [hidden]="!afterSchoolProgram.schoolId">
+                    <label class="form-control-label" jhiTranslate="app.afterSchoolProgram.school" for="school">School</label>
+                    <input type="text" class="form-control" id="school" name="school" [(ngModel)]="afterSchoolProgram.schoolIdentifier" readonly />
+                </div>
                 
                 <!-- Abbreviation Form Field -->
                 

@@ -53,10 +53,10 @@ export class EditGuestRequestComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        
         if (this.guestRequest.id !== undefined) {
             this.subscribeToSaveResponse(this.guestRequestService.update(this.guestRequest));
         } else {
+            
             this.subscribeToSaveResponse(this.guestRequestService.create(this.guestRequest));
         }
     }

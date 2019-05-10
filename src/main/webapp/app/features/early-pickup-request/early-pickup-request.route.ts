@@ -27,27 +27,6 @@ export class EarlyPickupRequestResolve implements Resolve<IEarlyPickupRequest> {
 
 export const earlyPickupRequestRoute: Routes = [
     {
-        path: 'early-pickup-request',
-        component: ListEarlyPickupRequestsComponent,
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.earlyPickupRequest.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
-        path: 'early-pickup-request/:id/view',
-        component: ViewEarlyPickupRequestComponent,
-        resolve: {
-            earlyPickupRequest: EarlyPickupRequestResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.earlyPickupRequest.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
         path: 'early-pickup-request/new',
         component: EditEarlyPickupRequestComponent,
         resolve: {
@@ -60,7 +39,28 @@ export const earlyPickupRequestRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'early-pickup-request/:id/edit',
+        path: 'early-pickup-requests',
+        component: ListEarlyPickupRequestsComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'app.earlyPickupRequest.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'early-pickup-requests/:id/view',
+        component: ViewEarlyPickupRequestComponent,
+        resolve: {
+            earlyPickupRequest: EarlyPickupRequestResolve
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'app.earlyPickupRequest.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'early-pickup-requests/:id/edit',
         component: EditEarlyPickupRequestComponent,
         resolve: {
             earlyPickupRequest: EarlyPickupRequestResolve

@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Principal } from 'app/core';
 import { IAfterSchoolProgram } from 'app/shared/model/after-school-program.model';
 import { AfterSchoolProgramService } from './after-school-program.service';
+import { SchoolService } from '../school/school.service';
 @Component({
     selector: 'app-list-after-school-programs',
     templateUrl: './list-after-school-programs.component.html'
@@ -15,10 +16,12 @@ export class ListAfterSchoolProgramsComponent implements OnInit, OnDestroy {
     afterSchoolPrograms: IAfterSchoolProgram[];
     currentAccount: any;
     eventSubscriber: Subscription;
+    schoolId: number;
     
 
     constructor(
         private afterSchoolProgramService: AfterSchoolProgramService,
+        private schoolService: SchoolService,
         private activatedRoute: ActivatedRoute,
         private jhiAlertService: JhiAlertService,
         private dataUtils: JhiDataUtils,
@@ -28,6 +31,15 @@ export class ListAfterSchoolProgramsComponent implements OnInit, OnDestroy {
 
     loadAll() {
         let dataLoaded: boolean = false;
+        if (this.schoolId) {
+            this.schoolService.getAfterSchoolPrograms(this.schoolId).subscribe(
+                (res: HttpResponse<IAfterSchoolProgram[]>) => {
+                    this.afterSchoolPrograms = res.body;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+            dataLoaded = true;
+        }
         // If no items loaded so far, then load all of them
         if (!dataLoaded) {
             this.afterSchoolProgramService.query().subscribe(
@@ -40,6 +52,7 @@ export class ListAfterSchoolProgramsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.schoolId = this.activatedRoute.snapshot.queryParams['schoolId'];
         this.loadAll();
         this.principal.identity().then(account => {
             this.currentAccount = account;
