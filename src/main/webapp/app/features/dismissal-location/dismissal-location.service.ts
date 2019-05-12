@@ -4,23 +4,17 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IDismissalLocation } from 'app/shared/model/dismissal-location.model';
-
-
-
-
-
-
-
-
+import { UserContext } from 'app/core';
 
 @Injectable({ providedIn: 'root' })
 export class DismissalLocationService {
 
     private resourceUrl =  SERVER_API_URL + 'api/dismissal-locations';
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private userContext: UserContext) { }
 
     create(dismissalLocation: IDismissalLocation): Observable<HttpResponse<IDismissalLocation>> {
+        dismissalLocation.schoolId = this.userContext.school.id;
         return this.http.post<IDismissalLocation>(this.resourceUrl, dismissalLocation, { observe: 'response' });
     }
 
@@ -34,7 +28,8 @@ export class DismissalLocationService {
 
     query(req?: any): Observable<HttpResponse<IDismissalLocation[]>> {
         const options = createRequestOption(req);
-        return this.http.get<IDismissalLocation[]>(this.resourceUrl, { params: options, observe: 'response' });
+        var schoolId = this.userContext.school.id;
+        return this.http.get<IDismissalLocation[]>(`api/schools/${schoolId}/dismissal-locations`, { params: options, observe: 'response' });
     }
 
     delete(id: number): Observable<HttpResponse<any>> {

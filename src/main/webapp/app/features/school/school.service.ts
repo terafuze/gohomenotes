@@ -4,21 +4,11 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { ISchool } from 'app/shared/model/school.model';
-
 import { IAfterSchoolProgram } from 'app/shared/model/after-school-program.model';
-
 import { IDismissalLocation } from 'app/shared/model/dismissal-location.model';
-
-
-
-
-
 import { ISchoolGrade } from 'app/shared/model/school-grade.model';
-
 import { IStudent } from 'app/shared/model/student.model';
-
 import { ITeacher } from 'app/shared/model/teacher.model';
-
 
 
 @Injectable({ providedIn: 'root' })

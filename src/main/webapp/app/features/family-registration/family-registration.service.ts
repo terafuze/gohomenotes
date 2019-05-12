@@ -5,9 +5,7 @@ import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IFamilyRegistration } from 'app/shared/model/family-registration.model';
 import { IParentRegistration } from 'app/shared/model/parent-registration.model';
-
 import { IStudentRegistration } from 'app/shared/model/student-registration.model';
-
 
 
 @Injectable({ providedIn: 'root' })

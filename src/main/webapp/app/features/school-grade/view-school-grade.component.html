@@ -14,11 +14,28 @@
                 <dd>
                     <span>{{schoolGrade.name}}</span>
                 </dd>
+                <!-- School Form Field based on MANY_TO_ONE relationship -->
+                
+                <!-- Student Registrations Form Field based on ONE_TO_MANY relationship -->
+                <dd>
+                <a [routerLink]="['/student-registrations']" [queryParams]="{ schoolGradeId: schoolGrade.id }"><span jhiTranslate="app.schoolGrade.studentRegistrations">Student Registrations</span>
+                </dd>
+                
+                <!-- Students Form Field based on ONE_TO_MANY relationship -->
+                <dd>
+                <a [routerLink]="['/students']" [queryParams]="{ schoolGradeId: schoolGrade.id }"><span jhiTranslate="app.schoolGrade.students">Students</span>
+                </dd>
+                
+                <!-- Teachers Form Field based on ONE_TO_MANY relationship -->
+                <dd>
+                <a [routerLink]="['/teachers']" [queryParams]="{ schoolGradeId: schoolGrade.id }"><span jhiTranslate="app.schoolGrade.teachers">Teachers</span>
+                </dd>
+                
             </dl>
             <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
-            <button type="button" [routerLink]="['/school-grade', schoolGrade.id, 'edit']" class="btn btn-primary">
+            <button type="button" [routerLink]="['/school-grades', schoolGrade.id, 'edit']" class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>
         </div>

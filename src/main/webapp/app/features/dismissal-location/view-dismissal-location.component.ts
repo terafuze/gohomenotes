@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { IDismissalLocation } from 'app/shared/model/dismissal-location.model';
 
+
 @Component({
     selector: 'app-view-dismissal-location',
     templateUrl: './view-dismissal-location.component.html'

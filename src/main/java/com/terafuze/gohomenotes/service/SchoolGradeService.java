@@ -18,12 +18,15 @@ import com.terafuze.gohomenotes.web.models.SchoolGradeModel;
 import com.terafuze.gohomenotes.web.mappers.SchoolGradeMapper;
 import com.terafuze.gohomenotes.web.mappers.StudentRegistrationMapper;
 import com.terafuze.gohomenotes.web.mappers.StudentMapper;
+import com.terafuze.gohomenotes.web.mappers.TeacherMapper;
 
 import com.terafuze.gohomenotes.web.models.StudentRegistrationModel;
 import com.terafuze.gohomenotes.web.models.StudentModel;
+import com.terafuze.gohomenotes.web.models.TeacherModel;
 
 import com.terafuze.gohomenotes.domain.StudentRegistration;
 import com.terafuze.gohomenotes.domain.Student;
+import com.terafuze.gohomenotes.domain.Teacher;
 
 
 /**
@@ -43,6 +46,8 @@ public class SchoolGradeService {
     private final StudentRegistrationMapper studentRegistrationMapper = null;
     @Autowired
     private final StudentMapper studentMapper = null;
+    @Autowired
+    private final TeacherMapper teacherMapper = null;
     
 
     public SchoolGradeService(SchoolGradeRepository schoolGradeRepository, SchoolGradeMapper schoolGradeMapper) {

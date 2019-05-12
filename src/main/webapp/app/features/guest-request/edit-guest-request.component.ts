@@ -17,8 +17,10 @@ export class EditGuestRequestComponent implements OnInit {
     private _guestRequest: IGuestRequest;
 
     isSaving: boolean;
+
     
     
+
     constructor(
         private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,

@@ -15,11 +15,12 @@
             "detail": {
                 "title": "Student"
             },
-            "family": "Family",
             "firstName": "First Name",
             "lastName": "Last Name",
+            "parents": "Parents",
             "school": "School",
-            "schoolGrade": "School Grade"
+            "schoolGrade": "School Grade",
+            "teacher": "Teacher"
         }
     }
 }

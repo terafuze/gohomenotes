@@ -75,7 +75,6 @@ public class School implements Serializable {
     
     
     @OneToMany(mappedBy = "school")
-    @OrderBy("lastName ASC")
     private List<Teacher> teachers = new ArrayList<>();
     
     public Long getId() {
@@ -122,12 +121,6 @@ public class School implements Serializable {
         return this;
     }
 
-    public void setAfterSchoolPrograms(List<AfterSchoolProgram> afterSchoolPrograms) {
-        this.afterSchoolPrograms = afterSchoolPrograms;
-    }
-
-
-    
     
     public List<DismissalLocation> getDismissalLocations() {
         return dismissalLocations;
@@ -149,11 +142,6 @@ public class School implements Serializable {
         dismissalLocation.setSchool(null);
         return this;
     }
-
-    public void setDismissalLocations(List<DismissalLocation> dismissalLocations) {
-        this.dismissalLocations = dismissalLocations;
-    }
-
 
     
     public LocalTime getGoHomeNotesDailyCutoffTime() {
@@ -234,12 +222,6 @@ public class School implements Serializable {
         return this;
     }
 
-    public void setSchoolGrades(List<SchoolGrade> schoolGrades) {
-        this.schoolGrades = schoolGrades;
-    }
-
-
-    
     
     public List<Student> getStudents() {
         return students;
@@ -262,12 +244,6 @@ public class School implements Serializable {
         return this;
     }
 
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
-
-
-    
     
     public List<Teacher> getTeachers() {
         return teachers;
@@ -289,11 +265,6 @@ public class School implements Serializable {
         teacher.setSchool(null);
         return this;
     }
-
-    public void setTeachers(List<Teacher> teachers) {
-        this.teachers = teachers;
-    }
-
 
 
     @Override
@@ -321,15 +292,10 @@ public class School implements Serializable {
         return "School{" +
             "id=" + getId() +
             ", abbreviation='" + getAbbreviation() + "'" +
-            ", afterSchoolPrograms='" + getAfterSchoolPrograms() + "'" +
-            ", dismissalLocations='" + getDismissalLocations() + "'" +
             ", goHomeNotesDailyCutoffTime='" + getGoHomeNotesDailyCutoffTime() + "'" +
             ", goHomeNotesStartDate='" + getGoHomeNotesStartDate() + "'" +
             ", goHomeNotesStopDate='" + getGoHomeNotesStopDate() + "'" +
             ", name='" + getName() + "'" +
-            ", schoolGrades='" + getSchoolGrades() + "'" +
-            ", students='" + getStudents() + "'" +
-            ", teachers='" + getTeachers() + "'" +
-            "}";
+        "}";
     }
 }

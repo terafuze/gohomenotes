@@ -7,8 +7,6 @@ import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IParentRegistration } from 'app/shared/model/parent-registration.model';
 import { ParentRegistrationService } from './parent-registration.service';
 
-import { IFamilyRegistration } from 'app/shared/model/family-registration.model';
-import { FamilyRegistrationService } from 'app/features/family-registration';
 
 @Component({
     selector: 'app-edit-parent-registration',
@@ -19,9 +17,10 @@ export class EditParentRegistrationComponent implements OnInit {
     private _parentRegistration: IParentRegistration;
 
     isSaving: boolean;
+
     
     familyRegistrationId: number;
-    
+
     constructor(
         private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
@@ -79,11 +78,6 @@ export class EditParentRegistrationComponent implements OnInit {
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
-    }
-
-    
-    trackFamilyRegistrationById(index: number, item: IFamilyRegistration) {
-        return item.id;
     }
     
 

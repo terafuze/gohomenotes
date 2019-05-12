@@ -17,8 +17,10 @@ export class EditSchoolComponent implements OnInit {
     private _school: ISchool;
 
     isSaving: boolean;
+
     
     
+
     constructor(
         private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
@@ -56,6 +58,7 @@ export class EditSchoolComponent implements OnInit {
         if (this.school.id !== undefined) {
             this.subscribeToSaveResponse(this.schoolService.update(this.school));
         } else {
+            
             this.subscribeToSaveResponse(this.schoolService.create(this.school));
         }
     }

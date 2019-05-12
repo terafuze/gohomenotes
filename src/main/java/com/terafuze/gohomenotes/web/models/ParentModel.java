@@ -30,12 +30,6 @@ public class ParentModel implements Serializable {
     @NotNull
     private String emailAddress;
     
-    
-    private Long familyId;
-
-    private String familyIdentifier;
-    
-    
     @NotNull
     private String firstName;
     
@@ -80,23 +74,6 @@ public class ParentModel implements Serializable {
 
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
-    }
-    
-    
-    public Long getFamilyId() {
-        return this.familyId;
-    }
-
-    public void setFamilyId(Long familyId) {
-        this.familyId = familyId;
-    }
-
-    public String getFamilyIdentifier() {
-        return this.familyIdentifier;
-    }
-
-    public void setFamilyIdentifier(String familyIdentifier) {
-        this.familyIdentifier = familyIdentifier;
     }
     
     

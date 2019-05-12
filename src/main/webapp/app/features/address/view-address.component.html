@@ -1,0 +1,43 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="address">
+            <h2><span jhiTranslate="app.address.detail.title">Address</span> {{address.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                
+                <dt><span jhiTranslate="app.address.city">City</span></dt>
+                <dd>
+                    <span>{{address.city}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.address.line1">Line 1</span></dt>
+                <dd>
+                    <span>{{address.line1}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.address.line2">Line 2</span></dt>
+                <dd>
+                    <span>{{address.line2}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.address.state">State</span></dt>
+                <dd>
+                    <span jhiTranslate="{{'app.state.' + address.state}}">{{address.state}}</span>
+                </dd>
+                <!-- User Profiles Form Field based on ONE_TO_MANY relationship -->
+                <dd>
+                <a [routerLink]="['/user-profiles']" [queryParams]="{ addressId: address.id }"><span jhiTranslate="app.address.userProfiles">User Profiles</span>
+                </dd>
+                
+                <dt><span jhiTranslate="app.address.zipCode">Zip Code</span></dt>
+                <dd>
+                    <span>{{address.zipCode}}</span>
+                </dd>
+            </dl>
+            <button type="submit" (click)="previousState()" class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+            <button type="button" [routerLink]="['/addresses', address.id, 'edit']" class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

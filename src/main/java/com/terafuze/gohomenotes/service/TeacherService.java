@@ -7,17 +7,19 @@ import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.terafuze.gohomenotes.domain.Teacher;
+import com.terafuze.gohomenotes.domain.UserProfile;
 import com.terafuze.gohomenotes.repository.TeacherRepository;
-import com.terafuze.gohomenotes.web.models.TeacherModel;
+import com.terafuze.gohomenotes.repository.UserProfileRepository;
+import com.terafuze.gohomenotes.web.mappers.StudentMapper;
 import com.terafuze.gohomenotes.web.mappers.TeacherMapper;
-
-
+import com.terafuze.gohomenotes.web.models.StudentModel;
+import com.terafuze.gohomenotes.web.models.TeacherModel;
 
 
 /**
@@ -33,6 +35,8 @@ public class TeacherService {
 
     private final TeacherMapper teacherMapper;
 
+    @Autowired
+    private final StudentMapper studentMapper = null;
     
 
     public TeacherService(TeacherRepository teacherRepository, TeacherMapper teacherMapper) {
@@ -66,6 +70,20 @@ public class TeacherService {
             .collect(Collectors.toCollection(LinkedList::new));
     }
 
+    /**
+     * Get all Students for a given Teacher
+     *
+     * @param id the id of an Teacher
+     * @return list of Students that are owned by the Teacher
+     */
+    @Transactional(readOnly = true)
+    public List<StudentModel> getStudents(Long id) {
+        log.debug("Get Students for Teacher : {}", id);
+        Optional<Teacher> teacher = teacherRepository.findById(id);
+        return teacher.get().getStudents().stream()
+        	.map(studentMapper::toModel)
+        	.collect(Collectors.toCollection(LinkedList::new));
+    }
     
 
     /**

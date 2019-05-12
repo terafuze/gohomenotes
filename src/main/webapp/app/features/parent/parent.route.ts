@@ -27,7 +27,7 @@ export class ParentResolve implements Resolve<IParent> {
 
 export const parentRoute: Routes = [
     {
-        path: 'families/:familyId/create-parent',
+        path: 'parent/new',
         component: EditParentComponent,
         resolve: {
             parent: ParentResolve

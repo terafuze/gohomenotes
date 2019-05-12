@@ -17,8 +17,10 @@ export class EditFamilyRegistrationComponent implements OnInit {
     private _familyRegistration: IFamilyRegistration;
 
     isSaving: boolean;
+
     
     
+
     constructor(
         private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,

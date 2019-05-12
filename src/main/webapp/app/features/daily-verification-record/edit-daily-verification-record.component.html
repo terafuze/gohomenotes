@@ -6,8 +6,7 @@
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!dailyVerificationRecord.id">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                           [(ngModel)]="dailyVerificationRecord.id" readonly />
+                    <input type="text" class="form-control" id="id" name="id" [ngModel]="dailyVerificationRecord.id" readonly />
                 </div>
                 
                 
@@ -25,8 +24,8 @@
                         </div>
                         <input type="file" id="file_goHomeNotesReport" (change)="setFileData($event, dailyVerificationRecord, 'goHomeNotesReport', false)" jhiTranslate="entity.action.addblob"/>
                     </div>
-                    <input type="hidden" class="form-control" name="finishCode" id="goHomeNotesReport [(ngModel)]="dailyVerificationRecord.goHomeNotesReport" />
-                    <input type="hidden" class="form-control" name="finishCodeContentType" id="goHomeNotesReportContentType"[(ngModel)]="dailyVerificationRecord.goHomeNotesReportContentType" />
+                    <input type="hidden" class="form-control" name="finishCode" id="goHomeNotesReport" [(ngModel)]="dailyVerificationRecord.goHomeNotesReport" />
+                    <input type="hidden" class="form-control" name="finishCodeContentType" id="goHomeNotesReportContentType" [(ngModel)]="dailyVerificationRecord.goHomeNotesReportContentType" />
                 </div>
                 <!-- Timestamp Form Field -->
                 <div class="form-group">

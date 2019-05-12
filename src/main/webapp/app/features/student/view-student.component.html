@@ -6,14 +6,6 @@
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
                 
-                <!-- Family Form Field based on MANY_TO_ONE relationship -->
-                <dt><span jhiTranslate="app.student.family">Family</span></dt>
-                <dd>
-                    <div *ngIf="student.familyId">
-                        <a [routerLink]="['/families', student.familyId, 'view']">{{student.familyIdentifier}}</a>
-                    </div>
-                </dd>
-                
                 <dt><span jhiTranslate="app.student.firstName">First Name</span></dt>
                 <dd>
                     <span>{{student.firstName}}</span>
@@ -22,6 +14,11 @@
                 <dd>
                     <span>{{student.lastName}}</span>
                 </dd>
+                <!-- Parents Form Field based on MANY_TO_MANY relationship -->
+                <dd>
+                <a [routerLink]="['/parents']" [queryParams]="{ studentId: student.id }"><span jhiTranslate="app.student.parents">Parents</span>
+                </dd>
+                
                 <!-- School Form Field based on MANY_TO_ONE relationship -->
                 <dt><span jhiTranslate="app.student.school">School</span></dt>
                 <dd>
@@ -35,6 +32,14 @@
                 <dd>
                     <div *ngIf="student.schoolGradeId">
                         <a [routerLink]="['/school-grades', student.schoolGradeId, 'view']">{{student.schoolGradeIdentifier}}</a>
+                    </div>
+                </dd>
+                
+                <!-- Teacher Form Field based on MANY_TO_ONE relationship -->
+                <dt><span jhiTranslate="app.student.teacher">Teacher</span></dt>
+                <dd>
+                    <div *ngIf="student.teacherId">
+                        <a [routerLink]="['/teachers', student.teacherId, 'view']">{{student.teacherIdentifier}}</a>
                     </div>
                 </dd>
                 

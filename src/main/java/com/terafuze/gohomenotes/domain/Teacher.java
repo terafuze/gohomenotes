@@ -34,19 +34,23 @@ public class Teacher implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
-
-    @NotNull
-    @Column(name = "first_name", nullable = false)
-    private String firstName;
-
-    @NotNull
-    @Column(name = "last_name", nullable = false)
-    private String lastName;
-
     
     @ManyToOne
     private School school;
     
+    @ManyToOne
+    private SchoolGrade schoolGrade;
+    
+    @OneToMany(mappedBy = "teacher")
+    // TODO confirm that "name" is a valid field in Student
+    @OrderBy("lastName ASC")
+    private List<Student> students = new ArrayList<>();
+    
+    @OneToOne(mappedBy = "teacher")
+    @JoinColumn(unique = true)
+    private UserProfile userProfile;
+    
+
     public Long getId() {
         return id;
     }
@@ -54,35 +58,6 @@ public class Teacher implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    
-    public String getFirstName() {
-        return this.firstName;
-    }
-
-    public Teacher firstName(String firstName) {
-        this.firstName = firstName;
-        return this;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    
-    public String getLastName() {
-        return this.lastName;
-    }
-
-    public Teacher lastName(String lastName) {
-        this.lastName = lastName;
-        return this;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    
     
     public School getSchool() {
         return this.school;
@@ -97,6 +72,55 @@ public class Teacher implements Serializable {
         this.school = school;
     }
 
+    
+    public SchoolGrade getSchoolGrade() {
+        return this.schoolGrade;
+    }
+
+    public Teacher schoolGrade(SchoolGrade schoolGrade) {
+        this.schoolGrade = schoolGrade;
+        return this;
+    }
+
+    public void setSchoolGrade(SchoolGrade schoolGrade) {
+        this.schoolGrade = schoolGrade;
+    }
+
+    
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public Teacher students(List<Student> students) {
+        this.students = students;
+        return this;
+    }
+
+    public Teacher addStudent(Student student) {
+        this.students.add(student);
+        student.setTeacher(this);
+        return this;
+    }
+
+    public Teacher removeStudent(Student student) {
+        this.students.remove(student);
+        student.setTeacher(null);
+        return this;
+    }
+
+    
+    public UserProfile getUserProfile() {
+        return this.userProfile;
+    }
+
+    public Teacher userProfile(UserProfile userProfile) {
+        this.userProfile = userProfile;
+        return this;
+    }
+
+    public void setUserProfile(UserProfile userProfile) {
+        this.userProfile = userProfile;
+    }
 
 
     @Override
@@ -123,9 +147,6 @@ public class Teacher implements Serializable {
     public String toString() {
         return "Teacher{" +
             "id=" + getId() +
-            ", firstName='" + getFirstName() + "'" +
-            ", lastName='" + getLastName() + "'" +
-            ", school='" + getSchool() + "'" +
-            "}";
+        "}";
     }
 }

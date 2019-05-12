@@ -17,8 +17,10 @@ export class EditHostRequestComponent implements OnInit {
     private _hostRequest: IHostRequest;
 
     isSaving: boolean;
+
     
     
+
     constructor(
         private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,

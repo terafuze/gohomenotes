@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { IParentRegistration } from 'app/shared/model/parent-registration.model';
 
+
 @Component({
     selector: 'app-view-parent-registration',
     templateUrl: './view-parent-registration.component.html'

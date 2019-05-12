@@ -27,28 +27,7 @@ export class SchoolGradeResolve implements Resolve<ISchoolGrade> {
 
 export const schoolGradeRoute: Routes = [
     {
-        path: 'school-grade',
-        component: ListSchoolGradesComponent,
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.schoolGrade.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
-        path: 'school-grade/:id/view',
-        component: ViewSchoolGradeComponent,
-        resolve: {
-            schoolGrade: SchoolGradeResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.schoolGrade.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
-        path: 'school-grade/new',
+        path: 'schools/:schoolId/create-school-grade',
         component: EditSchoolGradeComponent,
         resolve: {
             schoolGrade: SchoolGradeResolve
@@ -60,7 +39,28 @@ export const schoolGradeRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'school-grade/:id/edit',
+        path: 'school-grades',
+        component: ListSchoolGradesComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'app.schoolGrade.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'school-grades/:id/view',
+        component: ViewSchoolGradeComponent,
+        resolve: {
+            schoolGrade: SchoolGradeResolve
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'app.schoolGrade.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'school-grades/:id/edit',
         component: EditSchoolGradeComponent,
         resolve: {
             schoolGrade: SchoolGradeResolve

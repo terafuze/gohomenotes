@@ -6,12 +6,11 @@
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!student.id">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                           [(ngModel)]="student.id" readonly />
+                    <input type="text" class="form-control" id="id" name="id" [ngModel]="student.id" readonly />
                 </div>
-                <div class="form-group" *ngIf="student.schoolId">
-                    <label class="form-control-label" jhiTranslate="app.student.school" for="field_school">School</label>
-                    <input type="text" class="form-control" id="field_school" name="school" [(ngModel)]="student.schoolIdentifier" readonly />
+                <div class="form-group" [hidden]="!student.schoolId">
+                    <label class="form-control-label" jhiTranslate="app.student.school" for="school">School</label>
+                    <input type="text" class="form-control" id="school" name="school" [(ngModel)]="student.schoolIdentifier" readonly />
                 </div>
                 
                 <!-- First Name Form Field -->
@@ -43,6 +42,27 @@
             </div>
                 </div>
                 
+                
+                
+                
+                <!-- School Grade Form Field -->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="app.student.schoolGrade" for="school_grade">School Grade</label>
+                    <select class="form-control" id="school_grade" name="schoolGrade" [(ngModel)]="student.schoolGradeId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="schoolGradeOption.id" *ngFor="let schoolGradeOption of schoolGrades; trackBy: trackSchoolGradeById">{{schoolGradeOption.identifier}}</option>
+                    </select>
+                </div>
+                
+                <!-- Teacher Form Field -->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="app.student.teacher" for="teacher">Teacher</label>
+                    <select class="form-control" id="teacher" name="teacher" [(ngModel)]="student.teacherId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="teacherOption.id" *ngFor="let teacherOption of teachers; trackBy: trackTeacherById">{{teacherOption.identifier}}</option>
+                    </select>
+                </div>
+                </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>

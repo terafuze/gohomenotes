@@ -17,8 +17,10 @@ export class EditDailyVerificationRecordComponent implements OnInit {
     private _dailyVerificationRecord: IDailyVerificationRecord;
 
     isSaving: boolean;
+
     
     
+
     constructor(
         private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,

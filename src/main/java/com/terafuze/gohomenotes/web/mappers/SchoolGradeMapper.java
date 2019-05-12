@@ -18,8 +18,6 @@ public interface SchoolGradeMapper extends IEntityMapper<SchoolGradeModel, Schoo
     SchoolGradeModel toModel(SchoolGrade schoolGrade);
 
     @Mapping(source = "schoolId", target = "school")
-    @Mapping(target = "studentRegistrations", ignore = true)
-    @Mapping(target = "students", ignore = true)
     SchoolGrade toEntity(SchoolGradeModel schoolGradeModel);
 
     default SchoolGrade fromId(Long id) {

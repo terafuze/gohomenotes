@@ -17,7 +17,10 @@
             },
             "firstName": "First Name",
             "lastName": "Last Name",
-            "school": "School"
+            "school": "School",
+            "schoolGrade": "School Grade",
+            "students": "Students",
+            "userProfile": "User Profile"
         }
     }
 }

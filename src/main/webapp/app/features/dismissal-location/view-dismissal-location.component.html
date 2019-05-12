@@ -27,12 +27,6 @@
                     <span>{{dismissalLocation.name}}</span>
                 </dd>
                 <!-- School Form Field based on MANY_TO_ONE relationship -->
-                <dt><span jhiTranslate="app.dismissalLocation.school">School</span></dt>
-                <dd>
-                    <div *ngIf="dismissalLocation.schoolId">
-                        <a [routerLink]="['/schools', dismissalLocation.schoolId, 'view']">{{dismissalLocation.schoolIdentifier}}</a>
-                    </div>
-                </dd>
                 
                 <dt><span jhiTranslate="app.dismissalLocation.transfersAllowed">Transfers Allowed</span></dt>
                 <dd>

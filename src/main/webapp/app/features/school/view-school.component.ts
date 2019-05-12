@@ -12,8 +12,8 @@ export class ViewSchoolComponent implements OnInit {
 
     school: ISchool;
 
-    constructor(private userContext: UserContext,
-        private activatedRoute: ActivatedRoute) {}
+    constructor(private activatedRoute: ActivatedRoute,
+        private userContext: UserContext) {}
 
     ngOnInit() {
         this.activatedRoute.data.subscribe(({ school }) => {

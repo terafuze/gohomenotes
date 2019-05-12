@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IStudent } from 'app/shared/model/student.model';
-import { schoolGradePopupRoute } from '../school-grade';
 import { UserContext } from 'app/core';
 
 @Injectable({ providedIn: 'root' })
@@ -12,10 +11,7 @@ export class StudentService {
 
     private resourceUrl =  SERVER_API_URL + 'api/students';
 
-    constructor(private http: HttpClient, 
-        private userContext: UserContext) { 
-
-    }
+    constructor(private http: HttpClient, private userContext: UserContext) { }
 
     create(student: IStudent): Observable<HttpResponse<IStudent>> {
         student.schoolId = this.userContext.school.id;

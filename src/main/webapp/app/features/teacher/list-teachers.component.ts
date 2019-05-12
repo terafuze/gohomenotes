@@ -7,6 +7,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Principal } from 'app/core';
 import { ITeacher } from 'app/shared/model/teacher.model';
 import { TeacherService } from './teacher.service';
+import { SchoolGradeService } from '../school-grade/school-grade.service';
+import { UserProfileService } from '../user-profile/user-profile.service';
 @Component({
     selector: 'app-list-teachers',
     templateUrl: './list-teachers.component.html'
@@ -15,10 +17,15 @@ export class ListTeachersComponent implements OnInit, OnDestroy {
     teachers: ITeacher[];
     currentAccount: any;
     eventSubscriber: Subscription;
+    schoolId: number;
+    schoolGradeId: number;
+    userProfileId: number;
     
 
     constructor(
         private teacherService: TeacherService,
+        private schoolGradeService: SchoolGradeService,
+        private userProfileService: UserProfileService,
         private activatedRoute: ActivatedRoute,
         private jhiAlertService: JhiAlertService,
         private dataUtils: JhiDataUtils,
@@ -28,6 +35,16 @@ export class ListTeachersComponent implements OnInit, OnDestroy {
 
     loadAll() {
         let dataLoaded: boolean = false;
+        if (this.schoolGradeId) {
+            this.schoolGradeService.getTeachers(this.schoolGradeId).subscribe(
+                (res: HttpResponse<ITeacher[]>) => {
+                    this.teachers = res.body;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+            dataLoaded = true;
+        }
+
         // If no items loaded so far, then load all of them
         if (!dataLoaded) {
             this.teacherService.query().subscribe(
@@ -40,6 +57,8 @@ export class ListTeachersComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.schoolGradeId = this.activatedRoute.snapshot.queryParams['schoolGradeId'];
+        this.userProfileId = this.activatedRoute.snapshot.queryParams['userProfileId'];
         this.loadAll();
         this.principal.identity().then(account => {
             this.currentAccount = account;

@@ -9,6 +9,10 @@ import { StudentService } from './student.service';
 
 import { ISchool } from 'app/shared/model/school.model';
 import { SchoolService } from 'app/features/school';
+import { ISchoolGrade } from 'app/shared/model/school-grade.model';
+import { SchoolGradeService } from 'app/features/school-grade';
+import { ITeacher } from 'app/shared/model/teacher.model';
+import { TeacherService } from 'app/features/teacher';
 
 @Component({
     selector: 'app-edit-student',
@@ -19,16 +23,22 @@ export class EditStudentComponent implements OnInit {
     private _student: IStudent;
 
     isSaving: boolean;
-    
+
     // The list of School from which to select
     schools: ISchool[];
+    // The list of School Grade from which to select
+    schoolGrades: ISchoolGrade[];
+    // The list of Teacher from which to select
+    teachers: ITeacher[];
     
     schoolId: number;
-    
+
     constructor(
         private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
         private schoolService: SchoolService,
+        private schoolGradeService: SchoolGradeService,
+        private teacherService: TeacherService,
         private studentService: StudentService,
         private activatedRoute: ActivatedRoute
     ) {}
@@ -42,6 +52,18 @@ export class EditStudentComponent implements OnInit {
         this.schoolService.query().subscribe(
             (res: HttpResponse<ISchool[]>) => {
                 this.schools = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.schoolGradeService.query().subscribe(
+            (res: HttpResponse<ISchoolGrade[]>) => {
+                this.schoolGrades = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.teacherService.query().subscribe(
+            (res: HttpResponse<ITeacher[]>) => {
+                this.teachers = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -69,6 +91,7 @@ export class EditStudentComponent implements OnInit {
         if (this.student.id !== undefined) {
             this.subscribeToSaveResponse(this.studentService.update(this.student));
         } else {
+            this.student.schoolId = this.schoolId;
             this.subscribeToSaveResponse(this.studentService.create(this.student));
         }
     }
@@ -89,9 +112,16 @@ export class EditStudentComponent implements OnInit {
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }
-
     
     trackSchoolById(index: number, item: ISchool) {
+        return item.id;
+    }
+    
+    trackSchoolGradeById(index: number, item: ISchoolGrade) {
+        return item.id;
+    }
+    
+    trackTeacherById(index: number, item: ITeacher) {
         return item.id;
     }
     

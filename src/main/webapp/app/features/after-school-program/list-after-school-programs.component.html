@@ -24,12 +24,15 @@
             <tr *ngFor="let afterSchoolProgram of afterSchoolPrograms ;trackBy: trackId">
                 <td><a [routerLink]="['/after-school-programs', afterSchoolProgram.id, 'view']">{{afterSchoolProgram.id}}</a></td>
                 <td>{{afterSchoolProgram.abbreviation}}</td>
+                
                 <td>{{afterSchoolProgram.name}}</td>
+                
                 <td>
                     <div *ngIf="afterSchoolProgram.schoolId">
                         <a [routerLink]="['/schools', afterSchoolProgram.schoolId , 'view' ]" >{{afterSchoolProgram.schoolIdentifier}}</a>
                     </div>
                 </td>
+                
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

@@ -6,13 +6,6 @@ import { createRequestOption } from 'app/shared';
 import { IParentRegistration } from 'app/shared/model/parent-registration.model';
 
 
-
-
-
-
-
-
-
 @Injectable({ providedIn: 'root' })
 export class ParentRegistrationService {
 

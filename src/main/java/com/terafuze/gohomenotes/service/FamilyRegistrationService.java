@@ -90,8 +90,6 @@ public class FamilyRegistrationService {
         	.map(parentRegistrationMapper::toModel)
         	.collect(Collectors.toCollection(LinkedList::new));
     }
-    
-
     /**
      * Get all Student Registrations for a given Family Registration
      *

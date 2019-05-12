@@ -9,12 +9,12 @@ import {
     ListTransportationChangesComponent,
     ViewTransportationChangeComponent,
     transportationChangeRoute,
-    transportationChangePopupRoute,
+    transportationChangePopupRoute
 } from './';
 
 const ENTITY_STATES = [
     ...transportationChangeRoute,
-    ...transportationChangePopupRoute,
+    ...transportationChangePopupRoute
 ];
 
 @NgModule({

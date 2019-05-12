@@ -1,0 +1,10 @@
+{
+    "app": {
+        "state" : {
+            "null": "",
+            "MARYLAND": "Maryland",
+            "VIRGINIA": "Virginia"
+            
+        }
+    }
+}

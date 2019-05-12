@@ -28,16 +28,23 @@
             <tr *ngFor="let parentRegistration of parentRegistrations ;trackBy: trackId">
                 <td><a [routerLink]="['/parent-registrations', parentRegistration.id, 'view']">{{parentRegistration.id}}</a></td>
                 <td>{{parentRegistration.address}}</td>
+                
                 <td>{{parentRegistration.emailAddress}}</td>
+                
                 <td>
                     <div *ngIf="parentRegistration.familyRegistrationId">
                         <a [routerLink]="['/family-registrations', parentRegistration.familyRegistrationId , 'view' ]" >{{parentRegistration.familyRegistrationIdentifier}}</a>
                     </div>
                 </td>
+                
                 <td>{{parentRegistration.firstName}}</td>
+                
                 <td>{{parentRegistration.lastName}}</td>
+                
                 <td>{{parentRegistration.primaryPhoneNumber}}</td>
+                
                 <td>{{parentRegistration.secondaryPhoneNumber}}</td>
+                
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

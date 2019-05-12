@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { ITransportationChange } from 'app/shared/model/transportation-change.model';
 
+
 @Component({
     selector: 'app-view-transportation-change',
     templateUrl: './view-transportation-change.component.html'

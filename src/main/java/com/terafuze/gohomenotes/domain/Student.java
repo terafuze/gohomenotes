@@ -34,10 +34,6 @@ public class Student implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    
-    @ManyToOne
-    private Family family;
-	
     @NotNull
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -46,12 +42,21 @@ public class Student implements Serializable {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
+    // Student owns the relationship because there is no mappedBy annotation used here.
+    @ManyToMany
+    @JoinTable(name = "student_parent",
+        joinColumns = @JoinColumn(name = "student_id", referencedColumnName = "id"),
+        inverseJoinColumns = @JoinColumn(name = "parent_id", referencedColumnName = "id"))
+    private List<Parent> parents = new ArrayList<>();
     
     @ManyToOne
     private School school;
     
     @ManyToOne
     private SchoolGrade schoolGrade;
+    
+    @ManyToOne
+    private Teacher teacher;
     
     public Long getId() {
         return id;
@@ -60,22 +65,6 @@ public class Student implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
-    
-    
-    public Family getFamily() {
-        return this.family;
-    }
-
-    public Student family(Family family) {
-        this.family = family;
-        return this;
-    }
-
-    public void setFamily(Family family) {
-        this.family = family;
-    }
-
-
     
     public String getFirstName() {
         return this.firstName;
@@ -105,6 +94,28 @@ public class Student implements Serializable {
     }
 
     
+    
+    
+    public List<Parent> getParents() {
+        return parents;
+    }
+
+    public Student parents(List<Parent> parents) {
+        this.parents = parents;
+        return this;
+    }
+
+    public Student addParent(Parent parent) {
+        this.parents.add(parent);
+        parent.addStudent(this);
+        return this;
+    }
+
+    public Student removeParent(Parent parent) {
+        this.parents.remove(parent);
+        parent.removeStudent(this);
+        return this;
+    }
     
     public School getSchool() {
         return this.school;
@@ -136,6 +147,22 @@ public class Student implements Serializable {
     }
 
 
+    
+    
+    public Teacher getTeacher() {
+        return this.teacher;
+    }
+
+    public Student teacher(Teacher teacher) {
+        this.teacher = teacher;
+        return this;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
+
 
     @Override
     public boolean equals(Object o) {
@@ -161,11 +188,8 @@ public class Student implements Serializable {
     public String toString() {
         return "Student{" +
             "id=" + getId() +
-            ", family='" + getFamily() + "'" +
             ", firstName='" + getFirstName() + "'" +
             ", lastName='" + getLastName() + "'" +
-            ", school='" + getSchool() + "'" +
-            ", schoolGrade='" + getSchoolGrade() + "'" +
-            "}";
+        "}";
     }
 }

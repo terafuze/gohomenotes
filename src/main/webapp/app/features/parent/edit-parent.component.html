@@ -6,13 +6,9 @@
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!parent.id">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                           [(ngModel)]="parent.id" readonly />
+                    <input type="text" class="form-control" id="id" name="id" [ngModel]="parent.id" readonly />
                 </div>
-                <div class="form-group" [hidden]="!parent.familyId">
-                    <label class="form-control-label" jhiTranslate="app.parent.family" for="family">Family</label>
-                    <input type="text" class="form-control" id="family" name="family" [(ngModel)]="parent.familyIdentifier" readonly />
-                </div>
+                
                 
                 <!-- Address Form Field -->
                 
@@ -42,7 +38,6 @@
                 </small>
             </div>
                 </div>
-                
                 
                 
                 <!-- First Name Form Field -->
@@ -96,6 +91,7 @@
                 <label class="form-control-label" jhiTranslate="app.parent.secondaryPhoneNumber" for="secondary_phone_number">Secondary Phone Number</label>
                 <input type="text" class="form-control" name="secondaryPhoneNumber" id="secondary_phone_number"
                     [(ngModel)]="parent.secondaryPhoneNumber" /></div>
+                
                 
                 </div>
             <div>

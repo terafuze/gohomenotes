@@ -47,6 +47,13 @@
                 </a>
                 <!-- Entity Menu -->
                 <ul class="dropdown-menu" ngbDropdownMenu>
+                    <!-- Address menu item -->
+                    <li>
+                        <a class="dropdown-item" routerLink="addresses" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.address">Address</span>
+                        </a>
+                    </li>
                     <!-- After School Program menu item -->
                     <li>
                         <a class="dropdown-item" routerLink="after-school-programs" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
@@ -73,13 +80,6 @@
                         <a class="dropdown-item" routerLink="early-pickup-requests" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.earlyPickupRequest">Early Pickup Request</span>
-                        </a>
-                    </li>
-                    <!-- Family menu item -->
-                    <li>
-                        <a class="dropdown-item" routerLink="families" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
-                            <span jhiTranslate="global.menu.entities.family">Family</span>
                         </a>
                     </li>
                     <!-- Family Registration menu item -->
@@ -157,6 +157,13 @@
                         <a class="dropdown-item" routerLink="transportation-changes" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.transportationChange">Transportation Change</span>
+                        </a>
+                    </li>
+                    <!-- User Profile menu item -->
+                    <li>
+                        <a class="dropdown-item" routerLink="user-profiles" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
+                            <span jhiTranslate="global.menu.entities.userProfile">User Profile</span>
                         </a>
                     </li>
                     

@@ -27,28 +27,7 @@ export class TeacherResolve implements Resolve<ITeacher> {
 
 export const teacherRoute: Routes = [
     {
-        path: 'teacher',
-        component: ListTeachersComponent,
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.teacher.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
-        path: 'teacher/:id/view',
-        component: ViewTeacherComponent,
-        resolve: {
-            teacher: TeacherResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.teacher.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
-        path: 'teacher/new',
+        path: 'schools/:schoolId/create-teacher',
         component: EditTeacherComponent,
         resolve: {
             teacher: TeacherResolve
@@ -60,7 +39,28 @@ export const teacherRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'teacher/:id/edit',
+        path: 'teachers',
+        component: ListTeachersComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'app.teacher.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'teachers/:id/view',
+        component: ViewTeacherComponent,
+        resolve: {
+            teacher: TeacherResolve
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'app.teacher.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'teachers/:id/edit',
         component: EditTeacherComponent,
         resolve: {
             teacher: TeacherResolve

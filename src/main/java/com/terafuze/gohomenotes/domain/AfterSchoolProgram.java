@@ -81,6 +81,7 @@ public class AfterSchoolProgram implements Serializable {
     }
 
     
+
     
     public School getSchool() {
         return this.school;
@@ -94,7 +95,6 @@ public class AfterSchoolProgram implements Serializable {
     public void setSchool(School school) {
         this.school = school;
     }
-
 
 
     @Override
@@ -123,7 +123,6 @@ public class AfterSchoolProgram implements Serializable {
             "id=" + getId() +
             ", abbreviation='" + getAbbreviation() + "'" +
             ", name='" + getName() + "'" +
-            ", school='" + getSchool() + "'" +
-            "}";
+        "}";
     }
 }

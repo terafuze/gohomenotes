@@ -7,8 +7,6 @@ import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IAfterSchoolProgram } from 'app/shared/model/after-school-program.model';
 import { AfterSchoolProgramService } from './after-school-program.service';
 
-import { ISchool } from 'app/shared/model/school.model';
-import { SchoolService } from 'app/features/school';
 
 @Component({
     selector: 'app-edit-after-school-program',
@@ -19,9 +17,10 @@ export class EditAfterSchoolProgramComponent implements OnInit {
     private _afterSchoolProgram: IAfterSchoolProgram;
 
     isSaving: boolean;
+
     
     schoolId: number;
-    
+
     constructor(
         private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
@@ -79,11 +78,6 @@ export class EditAfterSchoolProgramComponent implements OnInit {
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
-    }
-
-    
-    trackSchoolById(index: number, item: ISchool) {
-        return item.id;
     }
     
 

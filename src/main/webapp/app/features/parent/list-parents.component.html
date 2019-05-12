@@ -1,7 +1,7 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="app.parent.home.title">Parents</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-parent" [routerLink]="['/families', familyId, 'create-parent']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-parent" [routerLink]="['/parent', 'new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span  jhiTranslate="app.parent.home.createLabel">Create new Parent</span>
         </button>
@@ -15,8 +15,6 @@
             <th><span jhiTranslate="global.field.id">ID</span></th>
             <th><span jhiTranslate="app.parent.address">Address</span></th>
             <th><span jhiTranslate="app.parent.emailAddress">Email Address</span></th>
-            <th><span jhiTranslate="app.parent.family">Family</span></th>
-            
             <th><span jhiTranslate="app.parent.firstName">First Name</span></th>
             <th><span jhiTranslate="app.parent.lastName">Last Name</span></th>
             <th><span jhiTranslate="app.parent.primaryPhoneNumber">Primary Phone Number</span></th>
@@ -28,16 +26,17 @@
             <tr *ngFor="let parent of parents ;trackBy: trackId">
                 <td><a [routerLink]="['/parents', parent.id, 'view']">{{parent.id}}</a></td>
                 <td>{{parent.address}}</td>
+                
                 <td>{{parent.emailAddress}}</td>
-                <td>
-                    <div *ngIf="parent.familyId">
-                        <a [routerLink]="['/families', parent.familyId , 'view' ]" >{{parent.familyIdentifier}}</a>
-                    </div>
-                </td>
+                
                 <td>{{parent.firstName}}</td>
+                
                 <td>{{parent.lastName}}</td>
+                
                 <td>{{parent.primaryPhoneNumber}}</td>
+                
                 <td>{{parent.secondaryPhoneNumber}}</td>
+                
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

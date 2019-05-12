@@ -42,9 +42,6 @@ public class Parent implements Serializable {
     @Column(name = "email_address", nullable = false)
     private String emailAddress;
 
-    
-    @ManyToOne
-    private Family family;
     @NotNull
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -60,6 +57,11 @@ public class Parent implements Serializable {
     @Column(name = "secondary_phone_number")
     private String secondaryPhoneNumber;
 
+    
+    
+    @ManyToMany(mappedBy = "parents")
+    private List<Student> students = new ArrayList<>();
+    
     
     public Long getId() {
         return id;
@@ -95,22 +97,6 @@ public class Parent implements Serializable {
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
     }
-
-    
-    
-    public Family getFamily() {
-        return this.family;
-    }
-
-    public Parent family(Family family) {
-        this.family = family;
-        return this;
-    }
-
-    public void setFamily(Family family) {
-        this.family = family;
-    }
-
 
     
     public String getFirstName() {
@@ -168,6 +154,33 @@ public class Parent implements Serializable {
         this.secondaryPhoneNumber = secondaryPhoneNumber;
     }
 
+    
+    
+    
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public Parent students(List<Student> students) {
+        this.students = students;
+        return this;
+    }
+
+    public Parent addStudent(Student student) {
+        this.students.add(student);
+        student.addParent(this);
+        return this;
+    }
+
+    public Parent removeStudent(Student student) {
+        this.students.remove(student);
+        student.removeParent(this);
+        return this;
+    }
+
+
+    
+
 
     @Override
     public boolean equals(Object o) {
@@ -195,7 +208,6 @@ public class Parent implements Serializable {
             "id=" + getId() +
             ", address='" + getAddress() + "'" +
             ", emailAddress='" + getEmailAddress() + "'" +
-            ", family='" + getFamily() + "'" +
             ", firstName='" + getFirstName() + "'" +
             ", lastName='" + getLastName() + "'" +
             ", primaryPhoneNumber='" + getPrimaryPhoneNumber() + "'" +

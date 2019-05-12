@@ -7,7 +7,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Principal } from 'app/core';
 import { IParentRegistration } from 'app/shared/model/parent-registration.model';
 import { ParentRegistrationService } from './parent-registration.service';
-import { FamilyRegistrationService } from '../family-registration/family-registration.service';
 @Component({
     selector: 'app-list-parent-registrations',
     templateUrl: './list-parent-registrations.component.html'
@@ -21,7 +20,6 @@ export class ListParentRegistrationsComponent implements OnInit, OnDestroy {
 
     constructor(
         private parentRegistrationService: ParentRegistrationService,
-        private familyRegistrationService: FamilyRegistrationService,
         private activatedRoute: ActivatedRoute,
         private jhiAlertService: JhiAlertService,
         private dataUtils: JhiDataUtils,
@@ -31,15 +29,6 @@ export class ListParentRegistrationsComponent implements OnInit, OnDestroy {
 
     loadAll() {
         let dataLoaded: boolean = false;
-        if (this.familyRegistrationId) {
-            this.familyRegistrationService.getParentRegistrations(this.familyRegistrationId).subscribe(
-                (res: HttpResponse<IParentRegistration[]>) => {
-                    this.parentRegistrations = res.body;
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
-            dataLoaded = true;
-        }
         // If no items loaded so far, then load all of them
         if (!dataLoaded) {
             this.parentRegistrationService.query().subscribe(
@@ -52,7 +41,6 @@ export class ListParentRegistrationsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.familyRegistrationId = this.activatedRoute.snapshot.queryParams['familyRegistrationId'];
         this.loadAll();
         this.principal.identity().then(account => {
             this.currentAccount = account;

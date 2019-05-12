@@ -6,17 +6,26 @@
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!schoolGrade.id">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                           [(ngModel)]="schoolGrade.id" readonly />
+                    <input type="text" class="form-control" id="id" name="id" [ngModel]="schoolGrade.id" readonly />
                 </div>
-                
+                <div class="form-group" [hidden]="!schoolGrade.schoolId">
+                    <label class="form-control-label" jhiTranslate="app.schoolGrade.school" for="school">School</label>
+                    <input type="text" class="form-control" id="school" name="school" [(ngModel)]="schoolGrade.schoolIdentifier" readonly />
+                </div>
                 
                 <!-- Abbreviation Form Field -->
                 
                 <div class="form-group">
                 <label class="form-control-label" jhiTranslate="app.schoolGrade.abbreviation" for="abbreviation">Abbreviation</label>
                 <input type="text" class="form-control" name="abbreviation" id="abbreviation"
-                    [(ngModel)]="schoolGrade.abbreviation" /></div>
+                    [(ngModel)]="schoolGrade.abbreviation" required/>
+                <div [hidden]="!(editForm.controls.abbreviation?.dirty && editForm.controls.abbreviation?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.abbreviation?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+                </div>
                 
                 
                 <!-- Name Form Field -->
@@ -32,6 +41,10 @@
                 </small>
             </div>
                 </div>
+                
+                
+                
+                
                 
                 </div>
             <div>

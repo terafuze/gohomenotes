@@ -17,11 +17,11 @@
             },
             "address": "Address",
             "emailAddress": "Email Address",
-            "family": "Family",
             "firstName": "First Name",
             "lastName": "Last Name",
             "primaryPhoneNumber": "Primary Phone Number",
-            "secondaryPhoneNumber": "Secondary Phone Number"
+            "secondaryPhoneNumber": "Secondary Phone Number",
+            "students": "Students"
         }
     }
 }

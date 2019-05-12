@@ -27,27 +27,6 @@ export class TransportationChangeResolve implements Resolve<ITransportationChang
 
 export const transportationChangeRoute: Routes = [
     {
-        path: 'transportation-change',
-        component: ListTransportationChangesComponent,
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.transportationChange.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
-        path: 'transportation-change/:id/view',
-        component: ViewTransportationChangeComponent,
-        resolve: {
-            transportationChange: TransportationChangeResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.transportationChange.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
         path: 'transportation-change/new',
         component: EditTransportationChangeComponent,
         resolve: {
@@ -60,7 +39,28 @@ export const transportationChangeRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'transportation-change/:id/edit',
+        path: 'transportation-changes',
+        component: ListTransportationChangesComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'app.transportationChange.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'transportation-changes/:id/view',
+        component: ViewTransportationChangeComponent,
+        resolve: {
+            transportationChange: TransportationChangeResolve
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'app.transportationChange.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'transportation-changes/:id/edit',
         component: EditTransportationChangeComponent,
         resolve: {
             transportationChange: TransportationChangeResolve

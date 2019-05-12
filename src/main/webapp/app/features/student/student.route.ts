@@ -27,27 +27,6 @@ export class StudentResolve implements Resolve<IStudent> {
 
 export const studentRoute: Routes = [
     {
-        path: 'student',
-        component: ListStudentsComponent,
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.student.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
-        path: 'schools/:schoolId/students/:id/view',
-        component: ViewStudentComponent,
-        resolve: {
-            student: StudentResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.student.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
         path: 'schools/:schoolId/create-student',
         component: EditStudentComponent,
         resolve: {
@@ -60,7 +39,28 @@ export const studentRoute: Routes = [
         canActivate: [UserRouteAccessService]
     },
     {
-        path: 'schools/:schoolId/students/:id/edit',
+        path: 'students',
+        component: ListStudentsComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'app.student.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'students/:id/view',
+        component: ViewStudentComponent,
+        resolve: {
+            student: StudentResolve
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'app.student.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'students/:id/edit',
         component: EditStudentComponent,
         resolve: {
             student: StudentResolve

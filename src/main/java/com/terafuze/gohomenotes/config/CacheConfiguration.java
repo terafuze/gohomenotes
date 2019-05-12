@@ -38,20 +38,19 @@ public class CacheConfiguration {
             cm.createCache(com.terafuze.gohomenotes.domain.User.class.getName(), jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.User.class.getName() + ".authorities", jcacheConfiguration);
+            cm.createCache(com.terafuze.gohomenotes.domain.Address.class.getName(), jcacheConfiguration);
+            cm.createCache(com.terafuze.gohomenotes.domain.Address.class.getName() + ".userProfile", jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.AfterSchoolProgram.class.getName(), jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.DailyVerificationRecord.class.getName(), jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.DismissalLocation.class.getName(), jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.EarlyPickupRequest.class.getName(), jcacheConfiguration);
-            cm.createCache(com.terafuze.gohomenotes.domain.Family.class.getName(), jcacheConfiguration);
-            cm.createCache(com.terafuze.gohomenotes.domain.Family.class.getName() + ".children", jcacheConfiguration);
-            cm.createCache(com.terafuze.gohomenotes.domain.Family.class.getName() + ".parent", jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.FamilyRegistration.class.getName(), jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.FamilyRegistration.class.getName() + ".parentRegistrations", jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.FamilyRegistration.class.getName() + ".studentRegistrations", jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.GuestRequest.class.getName(), jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.HostRequest.class.getName(), jcacheConfiguration);
-            cm.createCache(com.terafuze.gohomenotes.domain.LegalGuardian.class.getName(), jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.Parent.class.getName(), jcacheConfiguration);
+            cm.createCache(com.terafuze.gohomenotes.domain.Parent.class.getName() + ".students", jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.ParentRegistration.class.getName(), jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.School.class.getName(), jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.School.class.getName() + ".afterSchoolPrograms", jcacheConfiguration);
@@ -62,10 +61,14 @@ public class CacheConfiguration {
             cm.createCache(com.terafuze.gohomenotes.domain.SchoolGrade.class.getName(), jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.SchoolGrade.class.getName() + ".studentRegistrations", jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.SchoolGrade.class.getName() + ".students", jcacheConfiguration);
+            cm.createCache(com.terafuze.gohomenotes.domain.SchoolGrade.class.getName() + ".teachers", jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.Student.class.getName(), jcacheConfiguration);
+            cm.createCache(com.terafuze.gohomenotes.domain.Student.class.getName() + ".parents", jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.StudentRegistration.class.getName(), jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.Teacher.class.getName(), jcacheConfiguration);
+            cm.createCache(com.terafuze.gohomenotes.domain.Teacher.class.getName() + ".students", jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.TransportationChange.class.getName(), jcacheConfiguration);
+            cm.createCache(com.terafuze.gohomenotes.domain.UserProfile.class.getName(), jcacheConfiguration);
             };
     }
 }

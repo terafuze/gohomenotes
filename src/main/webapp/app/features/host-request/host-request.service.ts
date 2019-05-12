@@ -6,13 +6,6 @@ import { createRequestOption } from 'app/shared';
 import { IHostRequest } from 'app/shared/model/host-request.model';
 
 
-
-
-
-
-
-
-
 @Injectable({ providedIn: 'root' })
 export class HostRequestService {
 

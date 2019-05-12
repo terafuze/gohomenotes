@@ -6,6 +6,7 @@ import { createRequestOption } from 'app/shared';
 import { ISchoolGrade } from 'app/shared/model/school-grade.model';
 import { IStudentRegistration } from 'app/shared/model/student-registration.model';
 import { IStudent } from 'app/shared/model/student.model';
+import { ITeacher } from 'app/shared/model/teacher.model';
 import { UserContext } from 'app/core';
 
 @Injectable({ providedIn: 'root' })
@@ -16,7 +17,7 @@ export class SchoolGradeService {
     constructor(private http: HttpClient, private userContext: UserContext) { }
 
     create(schoolGrade: ISchoolGrade): Observable<HttpResponse<ISchoolGrade>> {
-        schoolGrade = this.userContext.school.id;
+        schoolGrade.schoolId = this.userContext.school.id;
         return this.http.post<ISchoolGrade>(this.resourceUrl, schoolGrade, { observe: 'response' });
     }
 
@@ -39,6 +40,9 @@ export class SchoolGradeService {
     }
     getStudents(id: number): Observable<HttpResponse<IStudent[]>> {
         return this.http.get<IStudent[]>(`${this.resourceUrl}/${id}/students`, { observe: 'response' });
+    }
+    getTeachers(id: number): Observable<HttpResponse<ITeacher[]>> {
+        return this.http.get<ITeacher[]>(`${this.resourceUrl}/${id}/teachers`, { observe: 'response' });
     }
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });

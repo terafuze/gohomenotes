@@ -15,6 +15,7 @@ export class ListSchoolGradesComponent implements OnInit, OnDestroy {
     schoolGrades: ISchoolGrade[];
     currentAccount: any;
     eventSubscriber: Subscription;
+    schoolId: number;
     
 
     constructor(

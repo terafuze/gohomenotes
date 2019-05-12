@@ -150,7 +150,6 @@ public class DismissalLocation implements Serializable {
         this.school = school;
     }
 
-
     
     public Boolean getTransfersAllowed() {
         return this.transfersAllowed;
@@ -195,7 +194,6 @@ public class DismissalLocation implements Serializable {
             ", maxGuestsPerStudent='" + getMaxGuestsPerStudent() + "'" +
             ", maxPassengers='" + getMaxPassengers() + "'" +
             ", name='" + getName() + "'" +
-            ", school='" + getSchool() + "'" +
             ", transfersAllowed='" + getTransfersAllowed() + "'" +
             "}";
     }

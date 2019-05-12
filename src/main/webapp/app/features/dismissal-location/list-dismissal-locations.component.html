@@ -28,16 +28,23 @@
             <tr *ngFor="let dismissalLocation of dismissalLocations ;trackBy: trackId">
                 <td><a [routerLink]="['/dismissal-locations', dismissalLocation.id, 'view']">{{dismissalLocation.id}}</a></td>
                 <td>{{dismissalLocation.abbreviation}}</td>
+                
                 <td>{{dismissalLocation.assignedPassengers}}</td>
+                
                 <td>{{dismissalLocation.maxGuestsPerStudent}}</td>
+                
                 <td>{{dismissalLocation.maxPassengers}}</td>
+                
                 <td>{{dismissalLocation.name}}</td>
+                
                 <td>
                     <div *ngIf="dismissalLocation.schoolId">
                         <a [routerLink]="['/schools', dismissalLocation.schoolId , 'view' ]" >{{dismissalLocation.schoolIdentifier}}</a>
                     </div>
                 </td>
+                
                 <td>{{dismissalLocation.transfersAllowed}}</td>
+                
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

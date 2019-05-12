@@ -4,8 +4,7 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IAfterSchoolProgram } from 'app/shared/model/after-school-program.model';
-
-
+import { UserContext } from 'app/core';
 
 
 @Injectable({ providedIn: 'root' })
@@ -13,9 +12,10 @@ export class AfterSchoolProgramService {
 
     private resourceUrl =  SERVER_API_URL + 'api/after-school-programs';
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private userContext: UserContext) { }
 
     create(afterSchoolProgram: IAfterSchoolProgram): Observable<HttpResponse<IAfterSchoolProgram>> {
+        afterSchoolProgram.schoolId = this.userContext.school.id;
         return this.http.post<IAfterSchoolProgram>(this.resourceUrl, afterSchoolProgram, { observe: 'response' });
     }
 
@@ -29,7 +29,8 @@ export class AfterSchoolProgramService {
 
     query(req?: any): Observable<HttpResponse<IAfterSchoolProgram[]>> {
         const options = createRequestOption(req);
-        return this.http.get<IAfterSchoolProgram[]>(this.resourceUrl, { params: options, observe: 'response' });
+        var schoolId = this.userContext.school.id;
+        return this.http.get<IAfterSchoolProgram[]>(`api/schools/${schoolId}/after-school-programs`, { params: options, observe: 'response' });
     }
 
     delete(id: number): Observable<HttpResponse<any>> {

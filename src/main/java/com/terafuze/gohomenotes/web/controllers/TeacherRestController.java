@@ -27,6 +27,7 @@ import com.terafuze.gohomenotes.web.utils.HeaderUtil;
 
 import com.terafuze.gohomenotes.service.TeacherService;
 import com.terafuze.gohomenotes.web.models.TeacherModel;
+import com.terafuze.gohomenotes.web.models.StudentModel;
 
 
 /**
@@ -101,7 +102,18 @@ public class TeacherRestController {
         return teacherService.findAll();
     }
 
-    
+    /**
+     * GET  /teachers/:id/students : get all Student for a given Teacher.
+     *
+     * @param id the id of an existing Teacher
+     * @return a ResponseEntity with status 200 (OK) and with body of Students for the Teacher or with status 404 if the Teacher does not exist for the given ID.
+     */
+    @GetMapping("/teachers/{id}/students")
+    @Timed
+    public List<StudentModel> getStudents(@PathVariable Long id) {
+        log.debug("REST request to get all Studentses for Teacher : {}", id);
+        return teacherService.getStudents(id);
+    }
     /**
      * GET  /teachers/:id : get the Teacher for a given "id".
      *

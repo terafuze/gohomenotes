@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { ISchoolGrade } from 'app/shared/model/school-grade.model';
 
+
 @Component({
     selector: 'app-view-school-grade',
     templateUrl: './view-school-grade.component.html'

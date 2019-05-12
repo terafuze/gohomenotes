@@ -14,14 +14,6 @@
                 <dd>
                     <span>{{parent.emailAddress}}</span>
                 </dd>
-                <!-- Family Form Field based on MANY_TO_ONE relationship -->
-                <dt><span jhiTranslate="app.parent.family">Family</span></dt>
-                <dd>
-                    <div *ngIf="parent.familyId">
-                        <a [routerLink]="['/families', parent.familyId, 'view']">{{parent.familyIdentifier}}</a>
-                    </div>
-                </dd>
-                
                 <dt><span jhiTranslate="app.parent.firstName">First Name</span></dt>
                 <dd>
                     <span>{{parent.firstName}}</span>
@@ -38,6 +30,11 @@
                 <dd>
                     <span>{{parent.secondaryPhoneNumber}}</span>
                 </dd>
+                <!-- Students Form Field based on MANY_TO_MANY relationship -->
+                <dd>
+                <a [routerLink]="['/students']" [queryParams]="{ parentId: parent.id }"><span jhiTranslate="app.parent.students">Students</span>
+                </dd>
+                
             </dl>
             <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>

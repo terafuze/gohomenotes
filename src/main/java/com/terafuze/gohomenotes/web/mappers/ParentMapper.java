@@ -9,15 +9,12 @@ import com.terafuze.gohomenotes.web.models.ParentModel;
 /**
  * Mapper for the Parent domain model object to the Parent Model.
  */
-@Mapper(componentModel = "spring", uses = {FamilyMapper.class})
+@Mapper(componentModel = "spring", uses = {})
 public interface ParentMapper extends IEntityMapper<ParentModel, Parent> {
 
     @Mapping(source = "firstName", target = "identifier")
-    @Mapping(source = "family.id", target = "familyId")
-    @Mapping(source = "family.id", target = "familyIdentifier")
     ParentModel toModel(Parent parent);
 
-    @Mapping(source = "familyId", target = "family")
     Parent toEntity(ParentModel parentModel);
 
     default Parent fromId(Long id) {

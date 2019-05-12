@@ -19,7 +19,8 @@
             "name": "Name",
             "school": "School",
             "studentRegistrations": "Student Registrations",
-            "students": "Students"
+            "students": "Students",
+            "teachers": "Teachers"
         }
     }
 }

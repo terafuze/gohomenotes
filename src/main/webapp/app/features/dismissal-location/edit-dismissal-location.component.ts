@@ -7,8 +7,6 @@ import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IDismissalLocation } from 'app/shared/model/dismissal-location.model';
 import { DismissalLocationService } from './dismissal-location.service';
 
-import { ISchool } from 'app/shared/model/school.model';
-import { SchoolService } from 'app/features/school';
 
 @Component({
     selector: 'app-edit-dismissal-location',
@@ -19,9 +17,10 @@ export class EditDismissalLocationComponent implements OnInit {
     private _dismissalLocation: IDismissalLocation;
 
     isSaving: boolean;
+
     
     schoolId: number;
-    
+
     constructor(
         private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
@@ -79,11 +78,6 @@ export class EditDismissalLocationComponent implements OnInit {
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
-    }
-
-    
-    trackSchoolById(index: number, item: ISchool) {
-        return item.id;
     }
     
 

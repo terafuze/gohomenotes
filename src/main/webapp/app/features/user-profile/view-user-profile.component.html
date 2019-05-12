@@ -1,0 +1,54 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="userProfile">
+            <h2><span jhiTranslate="app.userProfile.detail.title">User Profile</span> {{userProfile.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                
+                <dt><span jhiTranslate="app.userProfile.emailAddress">Email Address</span></dt>
+                <dd>
+                    <span>{{userProfile.emailAddress}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.userProfile.firstName">First Name</span></dt>
+                <dd>
+                    <span>{{userProfile.firstName}}</span>
+                </dd>
+                <!-- Home Address Form Field based on MANY_TO_ONE relationship -->
+                <dt><span jhiTranslate="app.userProfile.homeAddress">Home Address</span></dt>
+                <dd>
+                    <div *ngIf="userProfile.homeAddressId">
+                        <a [routerLink]="['/addresses', userProfile.homeAddressId, 'view']">{{userProfile.homeAddressIdentifier}}</a>
+                    </div>
+                </dd>
+                
+                <dt><span jhiTranslate="app.userProfile.lastName">Last Name</span></dt>
+                <dd>
+                    <span>{{userProfile.lastName}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.userProfile.primaryPhoneNumber">Primary Phone Number</span></dt>
+                <dd>
+                    <span>{{userProfile.primaryPhoneNumber}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.userProfile.secondaryPhoneNumber">Secondary Phone Number</span></dt>
+                <dd>
+                    <span>{{userProfile.secondaryPhoneNumber}}</span>
+                </dd>
+                <!-- Teacher Form Field based on ONE_TO_ONE relationship -->
+                <dt><span jhiTranslate="app.userProfile.teacher">Teacher</span></dt>
+                <dd>
+                    <div *ngIf="userProfile.teacherId">
+                        <a [routerLink]="['/teachers', userProfile.teacherId, 'view']">{{userProfile.teacherIdentifier}}</a>
+                    </div>
+                </dd>
+                
+            </dl>
+            <button type="submit" (click)="previousState()" class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+            <button type="button" [routerLink]="['/user-profiles', userProfile.id, 'edit']" class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

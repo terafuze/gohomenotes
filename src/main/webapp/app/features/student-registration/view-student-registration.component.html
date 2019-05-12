@@ -1,0 +1,30 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="studentRegistration">
+            <h2><span jhiTranslate="app.studentRegistration.detail.title">Student Registration</span> {{studentRegistration.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                
+                <!-- Family Registration Form Field based on MANY_TO_ONE relationship -->
+                
+                <dt><span jhiTranslate="app.studentRegistration.firstName">First Name</span></dt>
+                <dd>
+                    <span>{{studentRegistration.firstName}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.studentRegistration.lastName">Last Name</span></dt>
+                <dd>
+                    <span>{{studentRegistration.lastName}}</span>
+                </dd>
+                <!-- School Grade Form Field based on MANY_TO_ONE relationship -->
+                
+            </dl>
+            <button type="submit" (click)="previousState()" class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+            <button type="button" [routerLink]="['/student-registrations', studentRegistration.id, 'edit']" class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

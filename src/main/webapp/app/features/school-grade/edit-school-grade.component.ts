@@ -17,8 +17,10 @@ export class EditSchoolGradeComponent implements OnInit {
     private _schoolGrade: ISchoolGrade;
 
     isSaving: boolean;
+
     
-    
+    schoolId: number;
+
     constructor(
         private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
@@ -28,7 +30,7 @@ export class EditSchoolGradeComponent implements OnInit {
 
     ngOnInit() {
         this.isSaving = false;
-        
+        this.schoolId = this.activatedRoute.snapshot.params['schoolId'];
         this.activatedRoute.data.subscribe(({ schoolGrade }) => {
             this.schoolGrade = schoolGrade;
         });
@@ -53,10 +55,10 @@ export class EditSchoolGradeComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        
         if (this.schoolGrade.id !== undefined) {
             this.subscribeToSaveResponse(this.schoolGradeService.update(this.schoolGrade));
         } else {
+            this.schoolGrade.schoolId = this.schoolId;
             this.subscribeToSaveResponse(this.schoolGradeService.create(this.schoolGrade));
         }
     }
@@ -77,7 +79,6 @@ export class EditSchoolGradeComponent implements OnInit {
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }
-
     
 
     // TODO if not needed, remove this function

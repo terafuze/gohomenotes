@@ -1,0 +1,58 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-student-registration-heading" jhiTranslate="app.studentRegistration.home.createOrEditLabel">Create or edit a Student Registration</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!studentRegistration.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" [ngModel]="studentRegistration.id" readonly />
+                </div>
+                <div class="form-group" [hidden]="!studentRegistration.familyRegistrationId">
+                    <label class="form-control-label" jhiTranslate="app.studentRegistration.familyRegistration" for="family_registration">Family Registration</label>
+                    <input type="text" class="form-control" id="family_registration" name="familyRegistration" [(ngModel)]="studentRegistration.familyRegistrationIdentifier" readonly />
+                </div>
+                
+                
+                <!-- First Name Form Field -->
+                
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.studentRegistration.firstName" for="first_name">First Name</label>
+                <input type="text" class="form-control" name="firstName" id="first_name"
+                    [(ngModel)]="studentRegistration.firstName" required/>
+                <div [hidden]="!(editForm.controls.firstName?.dirty && editForm.controls.firstName?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.firstName?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+                </div>
+                
+                
+                <!-- Last Name Form Field -->
+                
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.studentRegistration.lastName" for="last_name">Last Name</label>
+                <input type="text" class="form-control" name="lastName" id="last_name"
+                    [(ngModel)]="studentRegistration.lastName" required/>
+                <div [hidden]="!(editForm.controls.lastName?.dirty && editForm.controls.lastName?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.lastName?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+                </div>
+                
+                
+                </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

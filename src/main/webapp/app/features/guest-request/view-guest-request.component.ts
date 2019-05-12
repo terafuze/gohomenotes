@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { IGuestRequest } from 'app/shared/model/guest-request.model';
 
+
 @Component({
     selector: 'app-view-guest-request',
     templateUrl: './view-guest-request.component.html'

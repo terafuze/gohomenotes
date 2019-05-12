@@ -1,0 +1,103 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="nathanward (generated)" id="1557627776747-1">
+        <createTable tableName="address">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="addressPK"/>
+            </column>
+            <column name="city" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="line_1" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="line_2" type="VARCHAR(255)"/>
+            <column name="state" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="zip_code" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1557627776747-2">
+        <createTable tableName="student_parent">
+            <column name="student_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="parent_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1557627776747-3">
+        <createTable tableName="user_profile">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="user_profilePK"/>
+            </column>
+            <column name="email_address" type="VARCHAR(255)"/>
+            <column name="first_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="primary_phone_number" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="secondary_phone_number" type="VARCHAR(255)"/>
+            <column name="home_address_id" type="BIGINT"/>
+            <column name="teacher_id" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1557627776747-4">
+        <addColumn tableName="teacher">
+            <column name="school_grade_id" type="int8"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1557627776747-5">
+        <addColumn tableName="student">
+            <column name="teacher_id" type="int8"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1557627776747-6">
+        <addUniqueConstraint columnNames="teacher_id" constraintName="UC_USER_PROFILETEACHER_ID_COL" tableName="user_profile"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1557627776747-7">
+        <addForeignKeyConstraint baseColumnNames="teacher_id" baseTableName="user_profile" constraintName="FK1pltjkyh4kueqx7wekyqm5wqr" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="teacher"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1557627776747-8">
+        <addForeignKeyConstraint baseColumnNames="parent_id" baseTableName="student_parent" constraintName="FK1uqsk99lie7damnsh9osouodd" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="parent"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1557627776747-9">
+        <addForeignKeyConstraint baseColumnNames="teacher_id" baseTableName="student" constraintName="FK3mphcmldvs29jl1w40ssg300j" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="teacher"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1557627776747-10">
+        <addForeignKeyConstraint baseColumnNames="student_id" baseTableName="student_parent" constraintName="FK3nulmrwg4cubngtp7nq5lud86" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="student"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1557627776747-11">
+        <addForeignKeyConstraint baseColumnNames="home_address_id" baseTableName="user_profile" constraintName="FKbiquqsne387o5irpldxct6syi" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="address"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1557627776747-12">
+        <addForeignKeyConstraint baseColumnNames="school_grade_id" baseTableName="teacher" constraintName="FKcaf54w6oenuhw3vm9pvrxvsst" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="school_grade"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1557627776747-13">
+        <dropForeignKeyConstraint baseTableName="student" constraintName="FKkchp754xn88tpo6egxf0eu7cq"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1557627776747-14">
+        <dropForeignKeyConstraint baseTableName="parent" constraintName="FKo6mylnt5havt5gd1bti0e75mm"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1557627776747-15">
+        <dropTable tableName="family"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1557627776747-16">
+        <dropTable tableName="legal_guardian"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1557627776747-17">
+        <dropColumn columnName="family_id" tableName="parent"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1557627776747-18">
+        <dropColumn columnName="family_id" tableName="student"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1557627776747-19">
+        <addNotNullConstraint columnDataType="varchar(255)" columnName="abbreviation" tableName="school_grade"/>
+    </changeSet>
+</databaseChangeLog>

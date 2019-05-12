@@ -34,7 +34,9 @@ public class SchoolGrade implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @Column(name = "abbreviation")
+    
+    @NotNull
+    @Column(name = "abbreviation", nullable = false)
     private String abbreviation;
 
     @NotNull
@@ -46,14 +48,10 @@ public class SchoolGrade implements Serializable {
     private School school;
     
     
-    @OneToMany(mappedBy = "schoolGrade")
-    @OrderBy("name ASC")
-    private List<StudentRegistration> studentRegistrations = new ArrayList<>();
     
     
-    @OneToMany(mappedBy = "schoolGrade")
-    @OrderBy("lastName ASC")
-    private List<Student> students = new ArrayList<>();
+    
+    
     
     public Long getId() {
         return id;
@@ -108,59 +106,8 @@ public class SchoolGrade implements Serializable {
 
     
     
-    public List<StudentRegistration> getStudentRegistrations() {
-        return studentRegistrations;
-    }
-
-    public SchoolGrade studentRegistrations(List<StudentRegistration> studentRegistrations) {
-        this.studentRegistrations = studentRegistrations;
-        return this;
-    }
-
-    public SchoolGrade addStudentRegistration(StudentRegistration studentRegistration) {
-        this.studentRegistrations.add(studentRegistration);
-        studentRegistration.setSchoolGrade(this);
-        return this;
-    }
-
-    public SchoolGrade removeStudentRegistration(StudentRegistration studentRegistration) {
-        this.studentRegistrations.remove(studentRegistration);
-        studentRegistration.setSchoolGrade(null);
-        return this;
-    }
-
-    public void setStudentRegistrations(List<StudentRegistration> studentRegistrations) {
-        this.studentRegistrations = studentRegistrations;
-    }
-
 
     
-    
-    public List<Student> getStudents() {
-        return students;
-    }
-
-    public SchoolGrade students(List<Student> students) {
-        this.students = students;
-        return this;
-    }
-
-    public SchoolGrade addStudent(Student student) {
-        this.students.add(student);
-        student.setSchoolGrade(this);
-        return this;
-    }
-
-    public SchoolGrade removeStudent(Student student) {
-        this.students.remove(student);
-        student.setSchoolGrade(null);
-        return this;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
-
 
 
     @Override
@@ -189,9 +136,6 @@ public class SchoolGrade implements Serializable {
             "id=" + getId() +
             ", abbreviation='" + getAbbreviation() + "'" +
             ", name='" + getName() + "'" +
-            ", school='" + getSchool() + "'" +
-            ", studentRegistrations='" + getStudentRegistrations() + "'" +
-            ", students='" + getStudents() + "'" +
-            "}";
+        "}";
     }
 }

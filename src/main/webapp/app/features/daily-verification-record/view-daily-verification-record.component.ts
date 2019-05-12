@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { IDailyVerificationRecord } from 'app/shared/model/daily-verification-record.model';
 
+
 @Component({
     selector: 'app-view-daily-verification-record',
     templateUrl: './view-daily-verification-record.component.html'

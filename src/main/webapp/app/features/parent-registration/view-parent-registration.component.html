@@ -15,12 +15,6 @@
                     <span>{{parentRegistration.emailAddress}}</span>
                 </dd>
                 <!-- Family Registration Form Field based on MANY_TO_ONE relationship -->
-                <dt><span jhiTranslate="app.parentRegistration.familyRegistration">Family Registration</span></dt>
-                <dd>
-                    <div *ngIf="parentRegistration.familyRegistrationId">
-                        <a [routerLink]="['/family-registrations', parentRegistration.familyRegistrationId, 'view']">{{parentRegistration.familyRegistrationIdentifier}}</a>
-                    </div>
-                </dd>
                 
                 <dt><span jhiTranslate="app.parentRegistration.firstName">First Name</span></dt>
                 <dd>

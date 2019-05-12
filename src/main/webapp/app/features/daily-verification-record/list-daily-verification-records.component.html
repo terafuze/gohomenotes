@@ -21,6 +21,7 @@
             <tr *ngFor="let dailyVerificationRecord of dailyVerificationRecords ;trackBy: trackId">
                 <td><a [routerLink]="['/daily-verification-records', dailyVerificationRecord.id, 'view']">{{dailyVerificationRecord.id}}</a></td>
                 <td>{{dailyVerificationRecord.timestamp}}</td>
+                
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

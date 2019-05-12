@@ -36,6 +36,20 @@ public class TeacherModel implements Serializable {
     private String schoolIdentifier;
     
     
+    
+    private Long schoolGradeId;
+
+    private String schoolGradeIdentifier;
+    
+    
+    
+    
+    
+    private Long userProfileId;
+
+    private String userProfileIdentifier;
+    
+    
 
     public String getIdentifier() {
         return this.identifier;
@@ -86,6 +100,41 @@ public class TeacherModel implements Serializable {
 
     public void setSchoolIdentifier(String schoolIdentifier) {
         this.schoolIdentifier = schoolIdentifier;
+    }
+    
+    
+    public Long getSchoolGradeId() {
+        return this.schoolGradeId;
+    }
+
+    public void setSchoolGradeId(Long schoolGradeId) {
+        this.schoolGradeId = schoolGradeId;
+    }
+
+    public String getSchoolGradeIdentifier() {
+        return this.schoolGradeIdentifier;
+    }
+
+    public void setSchoolGradeIdentifier(String schoolGradeIdentifier) {
+        this.schoolGradeIdentifier = schoolGradeIdentifier;
+    }
+    
+    
+    
+    public Long getUserProfileId() {
+        return this.userProfileId;
+    }
+
+    public void setUserProfileId(Long userProfileId) {
+        this.userProfileId = userProfileId;
+    }
+
+    public String getUserProfileIdentifier() {
+        return this.userProfileIdentifier;
+    }
+
+    public void setUserProfileIdentifier(String userProfileIdentifier) {
+        this.userProfileIdentifier = userProfileIdentifier;
     }
     
     

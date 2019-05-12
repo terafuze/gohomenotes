@@ -17,8 +17,10 @@ export class EditTransportationChangeComponent implements OnInit {
     private _transportationChange: ITransportationChange;
 
     isSaving: boolean;
+
     
     
+
     constructor(
         private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
@@ -53,10 +55,10 @@ export class EditTransportationChangeComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        
         if (this.transportationChange.id !== undefined) {
             this.subscribeToSaveResponse(this.transportationChangeService.update(this.transportationChange));
         } else {
+            
             this.subscribeToSaveResponse(this.transportationChangeService.create(this.transportationChange));
         }
     }

@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { IStudent } from 'app/shared/model/student.model';
 
+
 @Component({
     selector: 'app-view-student',
     templateUrl: './view-student.component.html'

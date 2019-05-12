@@ -6,13 +6,6 @@ import { createRequestOption } from 'app/shared';
 import { IParent } from 'app/shared/model/parent.model';
 
 
-
-
-
-
-
-
-
 @Injectable({ providedIn: 'root' })
 export class ParentService {
 

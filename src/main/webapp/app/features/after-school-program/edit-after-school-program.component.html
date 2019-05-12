@@ -6,8 +6,7 @@
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!afterSchoolProgram.id">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                           [(ngModel)]="afterSchoolProgram.id" readonly />
+                    <input type="text" class="form-control" id="id" name="id" [ngModel]="afterSchoolProgram.id" readonly />
                 </div>
                 <div class="form-group" [hidden]="!afterSchoolProgram.schoolId">
                     <label class="form-control-label" jhiTranslate="app.afterSchoolProgram.school" for="school">School</label>
@@ -42,6 +41,7 @@
                 </small>
             </div>
                 </div>
+                
                 
                 </div>
             <div>

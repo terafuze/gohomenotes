@@ -27,12 +27,19 @@
             <tr *ngFor="let hostRequest of hostRequests ;trackBy: trackId">
                 <td><a [routerLink]="['/host-requests', hostRequest.id, 'view']">{{hostRequest.id}}</a></td>
                 <td>{{hostRequest.comments}}</td>
+                
                 <td>{{hostRequest.confirmationNotes}}</td>
+                
                 <td>{{hostRequest.confirmed}}</td>
+                
                 <td>{{hostRequest.confirmedByUsername}}</td>
+                
                 <td>{{hostRequest.eventDate}}</td>
+                
                 <td>{{hostRequest.manuallyConfirmed}}</td>
+                
                 <td>{{hostRequest.submittedByUsername}}</td>
+                
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

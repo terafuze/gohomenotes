@@ -193,7 +193,6 @@ public class ParentRegistration implements Serializable {
             "id=" + getId() +
             ", address='" + getAddress() + "'" +
             ", emailAddress='" + getEmailAddress() + "'" +
-            ", familyRegistration='" + getFamilyRegistration() + "'" +
             ", firstName='" + getFirstName() + "'" +
             ", lastName='" + getLastName() + "'" +
             ", primaryPhoneNumber='" + getPrimaryPhoneNumber() + "'" +

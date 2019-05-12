@@ -6,11 +6,42 @@
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
                 
+                <dt><span jhiTranslate="app.teacher.firstName">First Name</span></dt>
+                <dd>
+                    <span>{{teacher.firstName}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.teacher.lastName">Last Name</span></dt>
+                <dd>
+                    <span>{{teacher.lastName}}</span>
+                </dd>
+                <!-- School Form Field based on MANY_TO_ONE relationship -->
+                
+                <!-- School Grade Form Field based on MANY_TO_ONE relationship -->
+                <dt><span jhiTranslate="app.teacher.schoolGrade">School Grade</span></dt>
+                <dd>
+                    <div *ngIf="teacher.schoolGradeId">
+                        <a [routerLink]="['/school-grades', teacher.schoolGradeId, 'view']">{{teacher.schoolGradeIdentifier}}</a>
+                    </div>
+                </dd>
+                
+                <!-- Students Form Field based on ONE_TO_MANY relationship -->
+                <dd>
+                <a [routerLink]="['/students']" [queryParams]="{ teacherId: teacher.id }"><span jhiTranslate="app.teacher.students">Students</span>
+                </dd>
+                
+                <!-- User Profile Form Field based on ONE_TO_ONE relationship -->
+                <dt><span jhiTranslate="app.teacher.userProfile">User Profile</span></dt>
+                <dd>
+                    <div *ngIf="teacher.userProfileId">
+                        <a [routerLink]="['/user-profiles', teacher.userProfileId, 'view']">{{teacher.userProfileIdentifier}}</a>
+                    </div>
+                </dd>
+                
             </dl>
             <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
             </button>
-            <button type="button" [routerLink]="['/teacher', teacher.id, 'edit']" class="btn btn-primary">
+            <button type="button" [routerLink]="['/teachers', teacher.id, 'edit']" class="btn btn-primary">
                 <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
             </button>
         </div>

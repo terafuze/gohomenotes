@@ -15,14 +15,10 @@ export class ListFamilyRegistrationsComponent implements OnInit, OnDestroy {
     familyRegistrations: IFamilyRegistration[];
     currentAccount: any;
     eventSubscriber: Subscription;
-    parentRegistrationId: number;
-    studentRegistrationId: number;
     
 
     constructor(
         private familyRegistrationService: FamilyRegistrationService,
-        private parentRegistrationService: ParentRegistrationService,
-        private studentRegistrationService: StudentRegistrationService,
         private activatedRoute: ActivatedRoute,
         private jhiAlertService: JhiAlertService,
         private dataUtils: JhiDataUtils,
@@ -32,24 +28,6 @@ export class ListFamilyRegistrationsComponent implements OnInit, OnDestroy {
 
     loadAll() {
         let dataLoaded: boolean = false;
-        if (this.parentRegistrationId) {
-            this.parentRegistrationService.getFamilyRegistrations(this.parentRegistrationId).subscribe(
-                (res: HttpResponse<IFamilyRegistration[]>) => {
-                    this.familyRegistrations = res.body;
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
-            dataLoaded = true;
-        }
-        if (this.studentRegistrationId) {
-            this.studentRegistrationService.getFamilyRegistrations(this.studentRegistrationId).subscribe(
-                (res: HttpResponse<IFamilyRegistration[]>) => {
-                    this.familyRegistrations = res.body;
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
-            dataLoaded = true;
-        }
         // If no items loaded so far, then load all of them
         if (!dataLoaded) {
             this.familyRegistrationService.query().subscribe(
@@ -62,8 +40,6 @@ export class ListFamilyRegistrationsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.parentRegistrationId = this.activatedRoute.snapshot.queryParams['parentRegistrationId'];
-        this.studentRegistrationId = this.activatedRoute.snapshot.queryParams['studentRegistrationId'];
         this.loadAll();
         this.principal.identity().then(account => {
             this.currentAccount = account;

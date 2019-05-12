@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { IParent } from 'app/shared/model/parent.model';
 
+
 @Component({
     selector: 'app-view-parent',
     templateUrl: './view-parent.component.html'

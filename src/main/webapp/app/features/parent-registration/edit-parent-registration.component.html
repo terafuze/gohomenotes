@@ -6,8 +6,7 @@
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!parentRegistration.id">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id"
-                           [(ngModel)]="parentRegistration.id" readonly />
+                    <input type="text" class="form-control" id="id" name="id" [ngModel]="parentRegistration.id" readonly />
                 </div>
                 <div class="form-group" [hidden]="!parentRegistration.familyRegistrationId">
                     <label class="form-control-label" jhiTranslate="app.parentRegistration.familyRegistration" for="family_registration">Family Registration</label>
