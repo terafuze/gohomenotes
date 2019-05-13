@@ -17,10 +17,13 @@ public interface UserProfileMapper extends IEntityMapper<UserProfileModel, UserP
     @Mapping(source = "homeAddress.id", target = "homeAddressIdentifier")
     @Mapping(source = "teacher.id", target = "teacherId")
     @Mapping(source = "teacher.id", target = "teacherIdentifier")
+    @Mapping(source = "user.id", target = "userId")
+    @Mapping(source = "user.login", target = "userIdentifier")
     UserProfileModel toModel(UserProfile userProfile);
 
     @Mapping(source = "homeAddressId", target = "homeAddress")
     @Mapping(source = "teacherId", target = "teacher")
+    @Mapping(target = "user", ignore = true)
     UserProfile toEntity(UserProfileModel userProfileModel);
 
     default UserProfile fromId(Long id) {

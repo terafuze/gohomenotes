@@ -11,6 +11,7 @@ import { IAddress } from 'app/shared/model/address.model';
 import { AddressService } from 'app/features/address';
 import { ITeacher } from 'app/shared/model/teacher.model';
 import { TeacherService } from 'app/features/teacher';
+import { UserService, IUser } from 'app/core';
 
 @Component({
     selector: 'app-edit-user-profile',
@@ -26,7 +27,9 @@ export class EditUserProfileComponent implements OnInit {
     addresses: IAddress[];
     // The list of Teacher from which to select
     teachers: ITeacher[];
-    
+    // The list of User from which to select
+    users: IUser[];
+
     addressId: number;
 
     constructor(
@@ -35,7 +38,8 @@ export class EditUserProfileComponent implements OnInit {
         private addressService: AddressService,
         private teacherService: TeacherService,
         private userProfileService: UserProfileService,
-        private activatedRoute: ActivatedRoute
+        private activatedRoute: ActivatedRoute,
+        private userService: UserService
     ) {}
 
     ngOnInit() {
@@ -50,22 +54,33 @@ export class EditUserProfileComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        this.teacherService.query({ filter: 'user-profile-is-null' }).subscribe(
-            (res: HttpResponse<ITeacher[]>) => {
-                if (!this.userProfile.teacherId) {
-                    this.teachers = res.body;
-                } else {
-                    this.teacherService.find(this.userProfile.teacherId).subscribe(
-                        (subRes: HttpResponse<ITeacher>) => {
-                            this.teachers = [subRes.body].concat(res.body);
-                        },
-                        (subRes: HttpErrorResponse) => this.onError(subRes.message)
-                    );
-                }
+        this.userService.query().subscribe(
+            (res: HttpResponse<IUser[]>) => {
+                this.users = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        
+        this.teacherService.query().subscribe(
+            (res: HttpResponse<ITeacher[]>) => {
+                this.teachers = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        // this.teacherService.query({ filter: 'user-profile-is-null' }).subscribe(
+        //     (res: HttpResponse<ITeacher[]>) => {
+        //         if (!this.userProfile.teacherId) {
+        //             this.teachers = res.body;
+        //         } else {
+        //             this.teacherService.find(this.userProfile.teacherId).subscribe(
+        //                 (subRes: HttpResponse<ITeacher>) => {
+        //                     this.teachers = [subRes.body].concat(res.body);
+        //                 },
+        //                 (subRes: HttpErrorResponse) => this.onError(subRes.message)
+        //             );
+        //         }
+        //     },
+        //     (res: HttpErrorResponse) => this.onError(res.message)
+        // );
     }
 
     byteSize(field) {
@@ -111,7 +126,6 @@ export class EditUserProfileComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    
     trackAddressById(index: number, item: IAddress) {
         return item.id;
     }
@@ -120,17 +134,8 @@ export class EditUserProfileComponent implements OnInit {
         return item.id;
     }
     
-
-    // TODO if not needed, remove this function
-    getSelected(selectedVals: Array<any>, option: any) {
-        if (selectedVals) {
-            for (let i = 0; i < selectedVals.length; i++) {
-                if (option.id === selectedVals[i].id) {
-                    return selectedVals[i];
-                }
-            }
-        }
-        return option;
+    trackUserById(index: number, item: IUser) {
+        return item.id;
     }
 
     get userProfile() {

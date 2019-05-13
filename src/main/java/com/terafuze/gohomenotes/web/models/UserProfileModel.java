@@ -48,7 +48,9 @@ public class UserProfileModel implements Serializable {
 
     private String teacherIdentifier;
     
-    
+    private Long userId;
+
+    private String userIdentifier;
 
     public String getIdentifier() {
         return this.identifier;
@@ -147,7 +149,23 @@ public class UserProfileModel implements Serializable {
     
     
 
-    @Override
+    public Long getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Long userId) {
+		this.userId = userId;
+	}
+
+	public String getUserIdentifier() {
+		return userIdentifier;
+	}
+
+	public void setUserIdentifier(String userIdentifier) {
+		this.userIdentifier = userIdentifier;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

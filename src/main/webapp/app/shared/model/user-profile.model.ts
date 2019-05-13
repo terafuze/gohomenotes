@@ -10,6 +10,8 @@ export interface IUserProfile {
     secondaryPhoneNumber?: string;
     teacherId?: number;
     teacherIdentifier?: string;
+    userId?: number;
+    userIdentifier?: string;
 }
 
 export class UserProfile implements IUserProfile {
@@ -24,6 +26,8 @@ export class UserProfile implements IUserProfile {
         public primaryPhoneNumber?: string,
         public secondaryPhoneNumber?: string,
         public teacherId?: number,
-        public teacherIdentifier?: string
+        public teacherIdentifier?: string,
+        public userId?: number,
+        public userIdentifier?: string
     ) { }
 }

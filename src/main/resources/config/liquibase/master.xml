@@ -10,4 +10,5 @@
 	<include file="config/liquibase/changelog/20190505001324_changelog.xml"/>
 	<include file="config/liquibase/changelog/20190508110835_changelog.xml"/>
 	<include file="config/liquibase/changelog/20190512022247_changelog.xml"/>
+	<include file="config/liquibase/changelog/20190513110628_changelog.xml"/>
 </databaseChangeLog>

@@ -12,7 +12,17 @@
                     <label class="form-control-label" jhiTranslate="app.userProfile.address" for="address">Address</label>
                     <input type="text" class="form-control" id="address" name="address" [(ngModel)]="userProfile.addressIdentifier" readonly />
                 </div>
-                
+
+                <!-- User Form Field -->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="app.userProfile.user" for="user">User</label>
+                    <select class="form-control" id="user" name="iser" [(ngModel)]="userProfile.userId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="userOption.id" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+                    </select>
+                </div>
+                </div>
+
                 <!-- Email Address Form Field -->
                 
                 <div class="form-group">

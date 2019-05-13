@@ -13,6 +13,7 @@
             <thead>
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="app.userProfile.user">User</span></th>
             <th><span jhiTranslate="app.userProfile.emailAddress">Email Address</span></th>
             <th><span jhiTranslate="app.userProfile.firstName">First Name</span></th>
             <th><span jhiTranslate="app.userProfile.homeAddress">Home Address</span></th>
@@ -28,6 +29,7 @@
             <tbody>
             <tr *ngFor="let userProfile of userProfiles ;trackBy: trackId">
                 <td><a [routerLink]="['/user-profiles', userProfile.id, 'view']">{{userProfile.id}}</a></td>
+                <td>{{userProfile.userIdentifier}}</td>
                 <td>{{userProfile.emailAddress}}</td>
                 
                 <td>{{userProfile.firstName}}</td>

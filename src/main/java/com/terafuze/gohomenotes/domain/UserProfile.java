@@ -56,7 +56,9 @@ public class UserProfile implements Serializable {
     @Column(name = "secondary_phone_number")
     private String secondaryPhoneNumber;
 
-    
+    @OneToOne
+    @JoinColumn(unique = true)
+    private User user;
     
     @OneToOne
     @JoinColumn(unique = true)
@@ -174,7 +176,15 @@ public class UserProfile implements Serializable {
 
 
 
-    @Override
+    public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

@@ -21,7 +21,8 @@
             "lastName": "Last Name",
             "primaryPhoneNumber": "Primary Phone Number",
             "secondaryPhoneNumber": "Secondary Phone Number",
-            "teacher": "Teacher"
+            "teacher": "Teacher",
+            "user": "User"
         }
     }
 }
