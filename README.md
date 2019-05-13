@@ -24,15 +24,15 @@ The following are optional initial setup steps specific to Mac OSX systems. You 
 
 #### Windows Operating System specific initial setup
 
-1. Download and install [Node.js][]
-2. Install [Yarn][https://yarnpkg.com/en/].
+1. Download and install [Node.js](https://nodejs.org/en/download/).
+2. Install [Yarn](https://yarnpkg.com/en/).
 3. Install the Java JDK 1.8 (i.e. Java 8).
     1. If you know that you already have JDK 1.8 already installed, then you are good and don't need to install it again. You can check if it is installed and configured correctly on your machine by the following commnad in a command line window: `java -version`
     2. Use [SDK Man](https://sdkman.io/install) to install the Java JDK 1.8 (i.e. Java 8) Be sure to open a new terminal window after installing the JDK.
 
 The following are optional initial setup steps specific to Windows systems. You will likely want to perform most of these at some point, but you don't necessarily need them to get started...
 
-1. Download and install [nodepad++][]
+1. Download and install [nodepad++](https://notepad-plus-plus.org/download/v7.6.6.html).
 
 #### Common Initial Setup Steps
 
