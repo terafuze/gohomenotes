@@ -14,7 +14,7 @@ Here's a summary of the main things that are required in order to build and run 
 #### Mac OSX operating system (i.e. Mackbook Pro or Mac Air) specific Initial Setup
 
 1. Install [Homebrew](https://brew.sh/). Just execute the command shown on the Homebrew web page from a command line, i.e. terminal window.
-2. Install [Yarn][] using [Homebrew](https://brew.sh/).
+2. Install [Yarn](https://yarnpkg.com/en/docs/install#windows-stable) using [Homebrew](https://brew.sh/).
    * Execute the following command `brew install yarn`. This will also install Node.js if it is not already installed as well as install yarn.
 3. Use [SDK Man](https://sdkman.io/install) to install the Java JDK 1.8 (i.e. Java 8) Be sure to open a new terminal window after installing the JDK.
 
