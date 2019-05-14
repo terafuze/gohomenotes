@@ -46,7 +46,7 @@ public class Teacher implements Serializable {
     @OrderBy("lastName ASC")
     private List<Student> students = new ArrayList<>();
     
-    @OneToOne(mappedBy = "teacher", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(mappedBy = "teacher")
     @JoinColumn(unique = true)
     private UserProfile userProfile;
     
