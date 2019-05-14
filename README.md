@@ -17,6 +17,7 @@ Here's a summary of the main things that are required in order to build and run 
 2. Install [Yarn](https://yarnpkg.com/en/docs/install#windows-stable) using [Homebrew](https://brew.sh/).
    * Execute the following command `brew install yarn`. This will also install Node.js if it is not already installed as well as install yarn.
 3. Use [SDK Man](https://sdkman.io/install) to install the Java JDK 1.8 (i.e. Java 8) Be sure to open a new terminal window after installing the JDK.
+   * If you know that you already have JDK 1.8 already installed, then you are good and don't need to install it again. You can check if it is installed and configured correctly on your machine by the following commnad in a command line window: `java -version`
 
 The following are optional initial setup steps specific to Mac OSX systems. You will likely want to perform most of these at some point, but you don't necessarily need them to get started...
 
