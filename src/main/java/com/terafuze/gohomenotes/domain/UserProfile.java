@@ -49,8 +49,7 @@ public class UserProfile implements Serializable {
     @Column(name = "last_name", nullable = false)
     private String lastName;
 
-    @NotNull
-    @Column(name = "primary_phone_number", nullable = false)
+    @Column(name = "primary_phone_number")
     private String primaryPhoneNumber;
 
     @Column(name = "secondary_phone_number")

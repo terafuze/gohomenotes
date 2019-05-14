@@ -38,6 +38,8 @@ public class TeacherService {
     @Autowired
     private final StudentMapper studentMapper = null;
     
+    @Autowired
+    private final UserProfileRepository userProfileRepository = null;
 
     public TeacherService(TeacherRepository teacherRepository, TeacherMapper teacherMapper) {
         this.teacherRepository = teacherRepository;
@@ -53,10 +55,31 @@ public class TeacherService {
     public TeacherModel save(TeacherModel teacherModel) {
         log.debug("Request to save Teacher : {}", teacherModel);
         Teacher teacher = teacherMapper.toEntity(teacherModel);
+        teacher.getUserProfile().setPrimaryPhoneNumber("1234");
+        UserProfile userProfile = userProfileRepository.save(teacher.getUserProfile());
+        userProfile.setTeacher(teacher);
         teacher = teacherRepository.save(teacher);
         return teacherMapper.toModel(teacher);
     }
 
+    /**
+     * Save a teacher.
+     *
+     * @param teacherModel the entity to save
+     * @return the persisted entity
+     */
+    public TeacherModel updateTeacher(TeacherModel teacherModel) {
+        log.debug("Request to save Teacher : {}", teacherModel);
+        Teacher teacher = teacherMapper.toEntity(teacherModel);
+        teacher = teacherRepository.save(teacher);
+        Optional<UserProfile> optional = userProfileRepository.findById(teacherModel.getUserProfileId());
+        UserProfile userProfile = optional.get();
+        userProfile.setFirstName(teacherModel.getFirstName());
+        userProfile.setLastName(teacherModel.getLastName());
+        userProfile.setEmailAddress(teacherModel.getEmailAddress());
+        return teacherMapper.toModel(teacher);
+    }
+    
     /**
      * Get all teachers.
      *

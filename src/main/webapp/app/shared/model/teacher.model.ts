@@ -2,6 +2,7 @@ import { IStudent } from 'app/shared/model/student.model';
 export interface ITeacher {
     id?: number;
     identifier?: string;
+    emailAddress?: string;
     firstName?: string;
     lastName?: string;
     schoolId?: number;
@@ -17,6 +18,7 @@ export class Teacher implements ITeacher {
     constructor(
         public id?: number,
         public identifier?: string,
+        public emailAddress?: string,
         public firstName?: string,
         public lastName?: string,
         public schoolId?: number,

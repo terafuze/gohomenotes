@@ -50,22 +50,6 @@ export class EditTeacherComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        this.userProfileService.query({ filter: 'teacher-is-null' }).subscribe(
-            (res: HttpResponse<IUserProfile[]>) => {
-                if (!this.teacher.userProfileId) {
-                    this.userProfiles = res.body;
-                } else {
-                    this.userProfileService.find(this.teacher.userProfileId).subscribe(
-                        (subRes: HttpResponse<IUserProfile>) => {
-                            this.userProfiles = [subRes.body].concat(res.body);
-                        },
-                        (subRes: HttpErrorResponse) => this.onError(subRes.message)
-                    );
-                }
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
-        
     }
 
     byteSize(field) {

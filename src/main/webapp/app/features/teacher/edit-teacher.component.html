@@ -18,7 +18,7 @@
                 <div class="form-group">
                 <label class="form-control-label" jhiTranslate="app.teacher.firstName" for="first_name">First Name</label>
                 <input type="text" class="form-control" name="firstName" id="first_name"
-                    [(ngModel)]="teacher.firstName" readonly/>
+                    [(ngModel)]="teacher.firstName" />
                 </div>
                 
                 
@@ -27,7 +27,7 @@
                 <div class="form-group">
                 <label class="form-control-label" jhiTranslate="app.teacher.lastName" for="last_name">Last Name</label>
                 <input type="text" class="form-control" name="lastName" id="last_name"
-                    [(ngModel)]="teacher.lastName" readonly/>
+                    [(ngModel)]="teacher.lastName" />
                 </div>
                 
                 
@@ -41,16 +41,20 @@
                     </select>
                 </div>
                 
+                <!-- Email Address Form Field -->
                 
-                <!-- User Profile Form Field -->
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="app.teacher.userProfile" for="user_profile">User Profile</label>
-                    <select class="form-control" id="user_profile" name="userProfile" [(ngModel)]="teacher.userProfileId">
-                        <option [ngValue]="null"></option>
-                        <option [ngValue]="userProfileOption.id" *ngFor="let userProfileOption of userProfiles; trackBy: trackUserProfileById">{{userProfileOption.identifier}}</option>
-                    </select>
+                    <label class="form-control-label" jhiTranslate="app.teacher.emailAddress" for="email_address">Email Address</label>
+                    <input type="text" class="form-control" name="emailAddress" id="email_address"
+                        [(ngModel)]="teacher.emailAddress" required/>
+                    <div [hidden]="!(editForm.controls.emailAddress?.dirty && editForm.controls.emailAddress?.invalid)">
+                    <small class="form-text text-danger"
+                       [hidden]="!editForm.controls.emailAddress?.errors?.required" jhiTranslate="entity.validation.required">
+                       This field is required.
+                    </small>
                 </div>
-                </div>
+                    </div>
+
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>

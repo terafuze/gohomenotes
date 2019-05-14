@@ -23,27 +23,22 @@ public class TeacherModel implements Serializable {
 
     public String identifier;
 
-    
     @NotNull
     private String firstName;
     
     @NotNull
     private String lastName;
     
+    @NotNull
+    private String emailAddress;
     
     private Long schoolId;
 
     private String schoolIdentifier;
     
-    
-    
     private Long schoolGradeId;
 
     private String schoolGradeIdentifier;
-    
-    
-    
-    
     
     private Long userProfileId;
 
@@ -67,6 +62,13 @@ public class TeacherModel implements Serializable {
         this.id = id;
     }
 
+    public String getEmailAddress() {
+        return this.emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
     
     public String getFirstName() {
         return this.firstName;
@@ -84,7 +86,6 @@ public class TeacherModel implements Serializable {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-    
     
     public Long getSchoolId() {
         return this.schoolId;

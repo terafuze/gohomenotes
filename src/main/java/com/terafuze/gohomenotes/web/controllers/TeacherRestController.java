@@ -84,7 +84,7 @@ public class TeacherRestController {
         if (teacherModel.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        TeacherModel result = teacherService.save(teacherModel);
+        TeacherModel result = teacherService.updateTeacher(teacherModel);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, teacherModel.getId().toString()))
             .body(result);
