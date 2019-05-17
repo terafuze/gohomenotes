@@ -7,16 +7,6 @@ import java.util.Objects;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.Table;
-import javax.persistence.OrderBy;
 import javax.validation.constraints.NotNull;
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -46,7 +36,7 @@ public class Teacher implements Serializable {
     @OrderBy("lastName ASC")
     private List<Student> students = new ArrayList<>();
     
-    @OneToOne(mappedBy = "teacher")
+    @OneToOne(mappedBy = "teacher", fetch = FetchType.EAGER)
     @JoinColumn(unique = true)
     private UserProfile userProfile;
     

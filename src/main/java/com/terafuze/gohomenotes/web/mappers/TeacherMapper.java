@@ -29,7 +29,7 @@ public interface TeacherMapper extends IEntityMapper<TeacherModel, Teacher> {
     @Mapping(source = "schoolId", target = "school")
     @Mapping(source = "schoolGradeId", target = "schoolGrade")
     @Mapping(target = "students", ignore = true)
-    @Mapping(target = "userProfile", ignore = true)
+    @Mapping(source = "userProfileId", target = "userProfile")
     Teacher toEntity(TeacherModel teacherModel);
     
     default Teacher fromId(Long id) {

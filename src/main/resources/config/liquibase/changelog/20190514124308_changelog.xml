@@ -1,0 +1,29 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="nathanward (generated)" id="1557837796326-1">
+        <addColumn tableName="user_profile">
+            <column name="parent_id" type="int8"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1557837796326-2">
+        <addUniqueConstraint columnNames="parent_id" constraintName="UC_USER_PROFILEPARENT_ID_COL" tableName="user_profile"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1557837796326-3">
+        <addForeignKeyConstraint baseColumnNames="parent_id" baseTableName="user_profile" constraintName="FKkwqrf79yd8hgo5sviq7opkn3j" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="parent"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1557837796326-4">
+        <dropColumn columnName="email_address" tableName="parent"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1557837796326-5">
+        <dropColumn columnName="first_name" tableName="parent"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1557837796326-6">
+        <dropColumn columnName="last_name" tableName="parent"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1557837796326-7">
+        <dropColumn columnName="primary_phone_number" tableName="parent"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1557837796326-8">
+        <dropColumn columnName="secondary_phone_number" tableName="parent"/>
+    </changeSet>
+</databaseChangeLog>

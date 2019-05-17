@@ -8,6 +8,7 @@ import { IStudent } from 'app/shared/model/student.model';export interface IPare
     primaryPhoneNumber?: string;
     secondaryPhoneNumber?: string;
     students?: IStudent[];
+    userProfileId?: number;
     
 }
 
@@ -21,7 +22,7 @@ export class Parent implements IParent {
         public lastName?: string,
         public primaryPhoneNumber?: string,
         public secondaryPhoneNumber?: string,
-        public students?: IStudent[]
-        
+        public students?: IStudent[],
+        public userProfileId?: number
     ) { }
 }

@@ -19,6 +19,7 @@
             "firstName": "First Name",
             "homeAddress": "Home Address",
             "lastName": "Last Name",
+            "parent": "Parent",
             "primaryPhoneNumber": "Primary Phone Number",
             "secondaryPhoneNumber": "Secondary Phone Number",
             "teacher": "Teacher",

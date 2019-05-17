@@ -12,6 +12,8 @@ import { AddressService } from 'app/features/address';
 import { ITeacher } from 'app/shared/model/teacher.model';
 import { TeacherService } from 'app/features/teacher';
 import { UserService, IUser } from 'app/core';
+import { ParentService } from '../parent';
+import { IParent } from 'app/shared/model/parent.model';
 
 @Component({
     selector: 'app-edit-user-profile',
@@ -25,6 +27,8 @@ export class EditUserProfileComponent implements OnInit {
 
     // The list of Address from which to select
     addresses: IAddress[];
+    // The list of Parents from which to select
+    parents: IParent[];
     // The list of Teacher from which to select
     teachers: ITeacher[];
     // The list of User from which to select
@@ -36,6 +40,7 @@ export class EditUserProfileComponent implements OnInit {
         private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
         private addressService: AddressService,
+        private parentService: ParentService,
         private teacherService: TeacherService,
         private userProfileService: UserProfileService,
         private activatedRoute: ActivatedRoute,
@@ -66,21 +71,12 @@ export class EditUserProfileComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        // this.teacherService.query({ filter: 'user-profile-is-null' }).subscribe(
-        //     (res: HttpResponse<ITeacher[]>) => {
-        //         if (!this.userProfile.teacherId) {
-        //             this.teachers = res.body;
-        //         } else {
-        //             this.teacherService.find(this.userProfile.teacherId).subscribe(
-        //                 (subRes: HttpResponse<ITeacher>) => {
-        //                     this.teachers = [subRes.body].concat(res.body);
-        //                 },
-        //                 (subRes: HttpErrorResponse) => this.onError(subRes.message)
-        //             );
-        //         }
-        //     },
-        //     (res: HttpErrorResponse) => this.onError(res.message)
-        // );
+        this.parentService.query().subscribe(
+            (res: HttpResponse<ITeacher[]>) => {
+                this.parents = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     byteSize(field) {
@@ -130,6 +126,10 @@ export class EditUserProfileComponent implements OnInit {
         return item.id;
     }
     
+    trackParentById(index: number, item: IParent) {
+        return item.id;
+    }
+
     trackTeacherById(index: number, item: ITeacher) {
         return item.id;
     }

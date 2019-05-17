@@ -43,6 +43,9 @@ public class UserProfileModel implements Serializable {
     
     private String secondaryPhoneNumber;
     
+    private Long parentId;
+
+    private String parentIdentifier;
     
     private Long teacherId;
 
@@ -163,6 +166,22 @@ public class UserProfileModel implements Serializable {
 
 	public void setUserIdentifier(String userIdentifier) {
 		this.userIdentifier = userIdentifier;
+	}
+
+	public String getParentIdentifier() {
+		return parentIdentifier;
+	}
+
+	public void setParentIdentifier(String parentIdentifier) {
+		this.parentIdentifier = parentIdentifier;
+	}
+
+	public Long getParentId() {
+		return parentId;
+	}
+
+	public void setParentId(Long parentId) {
+		this.parentId = parentId;
 	}
 
 	@Override

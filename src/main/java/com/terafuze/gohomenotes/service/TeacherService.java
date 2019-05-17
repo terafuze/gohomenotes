@@ -18,6 +18,7 @@ import com.terafuze.gohomenotes.repository.TeacherRepository;
 import com.terafuze.gohomenotes.repository.UserProfileRepository;
 import com.terafuze.gohomenotes.web.mappers.StudentMapper;
 import com.terafuze.gohomenotes.web.mappers.TeacherMapper;
+import com.terafuze.gohomenotes.web.mappers.UserProfileMapper;
 import com.terafuze.gohomenotes.web.models.StudentModel;
 import com.terafuze.gohomenotes.web.models.TeacherModel;
 
@@ -35,6 +36,9 @@ public class TeacherService {
 
     private final TeacherMapper teacherMapper;
 
+    @Autowired
+    private final UserProfileMapper userProfileMapper = null;
+    
     @Autowired
     private final StudentMapper studentMapper = null;
     
@@ -55,15 +59,15 @@ public class TeacherService {
     public TeacherModel save(TeacherModel teacherModel) {
         log.debug("Request to save Teacher : {}", teacherModel);
         Teacher teacher = teacherMapper.toEntity(teacherModel);
-        teacher.getUserProfile().setPrimaryPhoneNumber("1234");
-        UserProfile userProfile = userProfileRepository.save(teacher.getUserProfile());
+        UserProfile userProfile = userProfileMapper.userProfileFromTeacherModel(teacherModel);
+        userProfile = userProfileRepository.save(userProfile);
         userProfile.setTeacher(teacher);
         teacher = teacherRepository.save(teacher);
         return teacherMapper.toModel(teacher);
     }
 
     /**
-     * Save a teacher.
+     * Update a teacher.
      *
      * @param teacherModel the entity to save
      * @return the persisted entity
@@ -71,12 +75,11 @@ public class TeacherService {
     public TeacherModel updateTeacher(TeacherModel teacherModel) {
         log.debug("Request to save Teacher : {}", teacherModel);
         Teacher teacher = teacherMapper.toEntity(teacherModel);
-        teacher = teacherRepository.save(teacher);
         Optional<UserProfile> optional = userProfileRepository.findById(teacherModel.getUserProfileId());
         UserProfile userProfile = optional.get();
-        userProfile.setFirstName(teacherModel.getFirstName());
-        userProfile.setLastName(teacherModel.getLastName());
-        userProfile.setEmailAddress(teacherModel.getEmailAddress());
+        userProfile = userProfileMapper.updateUserProfileFromTeacherModel(teacherModel, userProfile);
+        teacher.setUserProfile(userProfile);
+        teacher = teacherRepository.save(teacher);
         return teacherMapper.toModel(teacher);
     }
     

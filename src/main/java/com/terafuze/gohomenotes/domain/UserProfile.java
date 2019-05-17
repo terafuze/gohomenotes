@@ -54,14 +54,19 @@ public class UserProfile implements Serializable {
 
     @Column(name = "secondary_phone_number")
     private String secondaryPhoneNumber;
-
+    
     @OneToOne
     @JoinColumn(unique = true)
-    private User user;
+    private Parent parent;
     
     @OneToOne
     @JoinColumn(unique = true)
     private Teacher teacher;
+    
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private User user;
     
     public Long getId() {
         return id;
@@ -143,7 +148,15 @@ public class UserProfile implements Serializable {
     }
 
     
-    public String getSecondaryPhoneNumber() {
+    public Parent getParent() {
+		return parent;
+	}
+
+	public void setParent(Parent parent) {
+		this.parent = parent;
+	}
+
+	public String getSecondaryPhoneNumber() {
         return this.secondaryPhoneNumber;
     }
 

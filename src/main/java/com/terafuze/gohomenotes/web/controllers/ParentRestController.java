@@ -83,7 +83,7 @@ public class ParentRestController {
         if (parentModel.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        ParentModel result = parentService.save(parentModel);
+        ParentModel result = parentService.updateParent(parentModel);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, parentModel.getId().toString()))
             .body(result);

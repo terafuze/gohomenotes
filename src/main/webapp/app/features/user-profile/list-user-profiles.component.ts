@@ -19,6 +19,7 @@ export class ListUserProfilesComponent implements OnInit, OnDestroy {
     eventSubscriber: Subscription;
     addressId: number;
     teacherId: number;
+    parentId: number;
     
 
     constructor(
@@ -58,6 +59,7 @@ export class ListUserProfilesComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.addressId = this.activatedRoute.snapshot.queryParams['addressId'];
         this.teacherId = this.activatedRoute.snapshot.queryParams['teacherId'];
+        this.parentId = this.activatedRoute.snapshot.queryParams['parentId'];
         this.loadAll();
         this.principal.identity().then(account => {
             this.currentAccount = account;

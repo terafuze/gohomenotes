@@ -6,6 +6,8 @@ export interface IUserProfile {
     homeAddressId?: number;
     homeAddressIdentifier?: string;
     lastName?: string;
+    parentId?: number;
+    parentIdentifier?: string;
     primaryPhoneNumber?: string;
     secondaryPhoneNumber?: string;
     teacherId?: number;
@@ -23,6 +25,8 @@ export class UserProfile implements IUserProfile {
         public homeAddressId?: number,
         public homeAddressIdentifier?: string,
         public lastName?: string,
+        public parentId?: number,
+        public parentIdentifier?: string,
         public primaryPhoneNumber?: string,
         public secondaryPhoneNumber?: string,
         public teacherId?: number,

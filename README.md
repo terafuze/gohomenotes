@@ -54,6 +54,13 @@ The following are optional initial setup steps that are not operating system spe
 2. Download and install Spring Tools Suite (STS).
 3. Download and install [SourceTree](https://www.sourcetreeapp.com/)
 
+#### Install Posgres Database
+
+Install Postgres database and also PQ Admin (PQ Admin is a GUI to manage Posgres). These should be pretty easy installations. Just download and install them. 
+
+https://www.postgresql.org/
+
+https://www.pgadmin.org/
 
 
 ## Running the code locally on your computer

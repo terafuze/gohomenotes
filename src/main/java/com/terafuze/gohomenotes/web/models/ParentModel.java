@@ -41,7 +41,8 @@ public class ParentModel implements Serializable {
     
     private String secondaryPhoneNumber;
     
-
+    private Long userProfileId;
+    
     public String getIdentifier() {
         return this.identifier;
     }
@@ -114,7 +115,15 @@ public class ParentModel implements Serializable {
     
     
 
-    @Override
+    public Long getUserProfileId() {
+		return userProfileId;
+	}
+
+	public void setUserProfileId(Long userProfileId) {
+		this.userProfileId = userProfileId;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

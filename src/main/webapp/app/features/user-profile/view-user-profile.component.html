@@ -34,6 +34,13 @@
                 <dd>
                     <span>{{userProfile.secondaryPhoneNumber}}</span>
                 </dd>
+                <!-- Parent Form Field based on ONE_TO_ONE relationship -->
+                <dt><span jhiTranslate="app.userProfile.parent">Parent</span></dt>
+                <dd>
+                    <div *ngIf="userProfile.parentId">
+                        <a [routerLink]="['/parents', userProfile.parentId, 'view']">{{userProfile.parentIdentifier}}</a>
+                    </div>
+                </dd>
                 <!-- Teacher Form Field based on ONE_TO_ONE relationship -->
                 <dt><span jhiTranslate="app.userProfile.teacher">Teacher</span></dt>
                 <dd>

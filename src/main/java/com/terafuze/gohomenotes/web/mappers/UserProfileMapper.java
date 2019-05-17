@@ -2,14 +2,17 @@ package com.terafuze.gohomenotes.web.mappers;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
+import org.mapstruct.MappingTarget;
 
 import com.terafuze.gohomenotes.domain.UserProfile;
+import com.terafuze.gohomenotes.web.models.ParentModel;
+import com.terafuze.gohomenotes.web.models.TeacherModel;
 import com.terafuze.gohomenotes.web.models.UserProfileModel;
 
 /**
  * Mapper for the User Profile domain model object to the User Profile Model.
  */
-@Mapper(componentModel = "spring", uses = {AddressMapper.class, TeacherMapper.class})
+@Mapper(componentModel = "spring", uses = {AddressMapper.class, ParentMapper.class, TeacherMapper.class})
 public interface UserProfileMapper extends IEntityMapper<UserProfileModel, UserProfile> {
 
     @Mapping(source = "lastName", target = "identifier")
@@ -24,8 +27,40 @@ public interface UserProfileMapper extends IEntityMapper<UserProfileModel, UserP
     @Mapping(source = "homeAddressId", target = "homeAddress")
     @Mapping(source = "teacherId", target = "teacher")
     @Mapping(target = "user", ignore = true)
+    @Mapping(source = "parentId", target = "parent")
     UserProfile toEntity(UserProfileModel userProfileModel);
 
+    @Mapping(target = "homeAddress", ignore = true)
+    @Mapping(target = "user", ignore = true)
+    @Mapping(target = "teacher", ignore = true)
+    @Mapping(target = "parent", ignore = true)
+    UserProfile userProfileFromParentModel(ParentModel parentModel);
+    
+    @Mapping(target = "homeAddress", ignore = true)
+    @Mapping(target = "user", ignore = true)
+    @Mapping(target = "teacher", ignore = true)
+    @Mapping(target = "parent", ignore = true)
+    @Mapping(target = "id", ignore = true)
+    UserProfile updateUserProfileFromParentModel(ParentModel parentModel, @MappingTarget UserProfile userProfile);
+
+    
+    @Mapping(target = "homeAddress", ignore = true)
+    @Mapping(target = "user", ignore = true)
+    @Mapping(target = "teacher", ignore = true)
+    @Mapping(target = "primaryPhoneNumber", ignore = true)
+    @Mapping(target = "secondaryPhoneNumber", ignore = true)
+    @Mapping(target = "parent", ignore = true)
+    UserProfile userProfileFromTeacherModel(TeacherModel teacherModel);
+    
+    @Mapping(target = "homeAddress", ignore = true)
+    @Mapping(target = "user", ignore = true)
+    @Mapping(target = "teacher", ignore = true)
+    @Mapping(target = "primaryPhoneNumber", ignore = true)
+    @Mapping(target = "secondaryPhoneNumber", ignore = true)
+    @Mapping(target = "parent", ignore = true)
+    @Mapping(target = "id", ignore = true)
+    UserProfile updateUserProfileFromTeacherModel(TeacherModel teacherModel, @MappingTarget UserProfile userProfile);
+    
     default UserProfile fromId(Long id) {
         if (id == null) {
             return null;

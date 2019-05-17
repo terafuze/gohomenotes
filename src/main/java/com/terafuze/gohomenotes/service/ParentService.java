@@ -7,15 +7,19 @@ import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.domain.Sort;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.terafuze.gohomenotes.domain.Parent;
+import com.terafuze.gohomenotes.domain.Teacher;
+import com.terafuze.gohomenotes.domain.UserProfile;
 import com.terafuze.gohomenotes.repository.ParentRepository;
-import com.terafuze.gohomenotes.web.models.ParentModel;
+import com.terafuze.gohomenotes.repository.UserProfileRepository;
 import com.terafuze.gohomenotes.web.mappers.ParentMapper;
+import com.terafuze.gohomenotes.web.mappers.UserProfileMapper;
+import com.terafuze.gohomenotes.web.models.ParentModel;
+import com.terafuze.gohomenotes.web.models.TeacherModel;
 
 
 
@@ -33,8 +37,12 @@ public class ParentService {
 
     private final ParentMapper parentMapper;
 
-    
+    @Autowired
+    private final UserProfileRepository userProfileRepository = null;
 
+    @Autowired
+    private final UserProfileMapper userProfileMapper = null;
+    
     public ParentService(ParentRepository parentRepository, ParentMapper parentMapper) {
         this.parentRepository = parentRepository;
         this.parentMapper = parentMapper;
@@ -49,10 +57,30 @@ public class ParentService {
     public ParentModel save(ParentModel parentModel) {
         log.debug("Request to save Parent : {}", parentModel);
         Parent parent = parentMapper.toEntity(parentModel);
+        UserProfile userProfile = userProfileMapper.userProfileFromParentModel(parentModel);
+        userProfile = userProfileRepository.save(userProfile);
+        userProfile.setParent(parent);
         parent = parentRepository.save(parent);
         return parentMapper.toModel(parent);
     }
-
+    
+    /**
+     * Save a Parent.
+     *
+     * @param parentModel the entity to be updated
+     * @return the persisted entity
+     */
+    public ParentModel updateParent(ParentModel parentModel) {
+        log.debug("Request to update Parent : {}", parentModel);
+        Parent parent = parentMapper.toEntity(parentModel);
+        Optional<UserProfile> optional = userProfileRepository.findById(parentModel.getUserProfileId());
+        UserProfile userProfile = optional.get();
+        userProfile = userProfileMapper.updateUserProfileFromParentModel(parentModel, userProfile);
+        parent.setUserProfile(userProfile);
+        parent = parentRepository.save(parent);
+        return parentMapper.toModel(parent);
+    }
+    
     /**
      * Get all parents.
      *
@@ -61,7 +89,7 @@ public class ParentService {
     @Transactional(readOnly = true)
     public List<ParentModel> findAll() {
         log.debug("Request to get all Parents");
-        return parentRepository.findAll(new Sort(Sort.Direction.ASC, "firstName")).stream()
+        return parentRepository.findAll().stream()
             .map(parentMapper::toModel)
             .collect(Collectors.toCollection(LinkedList::new));
     }
