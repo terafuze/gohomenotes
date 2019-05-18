@@ -14,7 +14,7 @@ export class DismissalLocationService {
     constructor(private http: HttpClient, private userContext: UserContext) { }
 
     create(dismissalLocation: IDismissalLocation): Observable<HttpResponse<IDismissalLocation>> {
-        dismissalLocation.schoolId = this.userContext.school.id;
+        dismissalLocation.schoolId = this.userContext.schoolId;
         return this.http.post<IDismissalLocation>(this.resourceUrl, dismissalLocation, { observe: 'response' });
     }
 
@@ -28,7 +28,7 @@ export class DismissalLocationService {
 
     query(req?: any): Observable<HttpResponse<IDismissalLocation[]>> {
         const options = createRequestOption(req);
-        var schoolId = this.userContext.school.id;
+        const schoolId = this.userContext.schoolId;
         return this.http.get<IDismissalLocation[]>(`api/schools/${schoolId}/dismissal-locations`, { params: options, observe: 'response' });
     }
 

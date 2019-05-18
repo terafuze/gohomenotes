@@ -14,7 +14,7 @@ export class StudentService {
     constructor(private http: HttpClient, private userContext: UserContext) { }
 
     create(student: IStudent): Observable<HttpResponse<IStudent>> {
-        student.schoolId = this.userContext.school.id;
+        student.schoolId = this.userContext.schoolId;
         return this.http.post<IStudent>(this.resourceUrl, student, { observe: 'response' });
     }
 
@@ -28,7 +28,7 @@ export class StudentService {
 
     query(req?: any): Observable<HttpResponse<IStudent[]>> {
         const options = createRequestOption(req);
-        var schoolId = this.userContext.school.id;
+        const schoolId = this.userContext.schoolId;
         return this.http.get<IStudent[]>(`api/schools/${schoolId}/students`, { params: options, observe: 'response' });
     }
 

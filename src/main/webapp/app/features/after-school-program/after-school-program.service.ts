@@ -15,7 +15,7 @@ export class AfterSchoolProgramService {
     constructor(private http: HttpClient, private userContext: UserContext) { }
 
     create(afterSchoolProgram: IAfterSchoolProgram): Observable<HttpResponse<IAfterSchoolProgram>> {
-        afterSchoolProgram.schoolId = this.userContext.school.id;
+        afterSchoolProgram.schoolId = this.userContext.schoolId;
         return this.http.post<IAfterSchoolProgram>(this.resourceUrl, afterSchoolProgram, { observe: 'response' });
     }
 
@@ -29,7 +29,7 @@ export class AfterSchoolProgramService {
 
     query(req?: any): Observable<HttpResponse<IAfterSchoolProgram[]>> {
         const options = createRequestOption(req);
-        var schoolId = this.userContext.school.id;
+        const schoolId = this.userContext.schoolId;
         return this.http.get<IAfterSchoolProgram[]>(`api/schools/${schoolId}/after-school-programs`, { params: options, observe: 'response' });
     }
 

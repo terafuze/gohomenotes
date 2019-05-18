@@ -18,7 +18,9 @@ export class ViewSchoolComponent implements OnInit {
     ngOnInit() {
         this.activatedRoute.data.subscribe(({ school }) => {
             this.school = school;
-            this.userContext.school = school;
+            // Set selected school in user context so that it can be used to retrieve related objects
+            // without prompting the user again to select a school
+            this.userContext.schoolId = school.id;
         });
     }
 
