@@ -6,7 +6,6 @@ import { createRequestOption } from 'app/shared';
 import { IAfterSchoolProgram } from 'app/shared/model/after-school-program.model';
 import { UserContext } from 'app/core';
 
-
 @Injectable({ providedIn: 'root' })
 export class AfterSchoolProgramService {
 

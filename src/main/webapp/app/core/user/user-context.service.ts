@@ -9,22 +9,9 @@ import { routerNgProbeToken } from '@angular/router/src/router_module';
 @Injectable({ providedIn: 'root' })
 export class UserContext {
 
-    constructor(private $sessionStorage: SessionStorageService, 
+    constructor(private $sessionStorage: SessionStorageService,
         private router: Router) { }
-    
-    public get school(): ISchool {
-        const school = this.$sessionStorage.retrieve('school');
-        if (school) {
-            return school;
-        } else {
-            this.router.navigateByUrl("/schools")
-        }
-    }
 
-    public set school(value: ISchool) {
-        this.$sessionStorage.store('school', value);
-    }
-    
     /**
      * If no school is currently selected, then route the user to the School page
      * to select a school.
@@ -34,7 +21,7 @@ export class UserContext {
         if (schoolId) {
             return schoolId;
         } else {
-            this.router.navigateByUrl("/schools")
+            this.router.navigateByUrl('/schools');
         }
     }
 
@@ -43,11 +30,10 @@ export class UserContext {
     }
 
     public get userProfile(): IUserProfile {
-        return this.$sessionStorage.retrieve('school');
+        return this.$sessionStorage.retrieve('userProfile');
     }
 
     public set userProfile(value: IUserProfile) {
         this.$sessionStorage.store('userProfile', value);
     }
-    
 }
