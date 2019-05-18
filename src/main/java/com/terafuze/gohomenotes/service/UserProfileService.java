@@ -10,12 +10,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import com.terafuze.gohomenotes.domain.User;
 import com.terafuze.gohomenotes.domain.UserProfile;
 import com.terafuze.gohomenotes.repository.UserProfileRepository;
-import com.terafuze.gohomenotes.web.models.UserProfileModel;
+import com.terafuze.gohomenotes.repository.UserRepository;
 import com.terafuze.gohomenotes.web.mappers.UserProfileMapper;
+import com.terafuze.gohomenotes.web.models.UserProfileModel;
 
 
 
@@ -29,13 +30,17 @@ public class UserProfileService {
 
     private final Logger log = LoggerFactory.getLogger(UserProfileService.class);
 
+    private final UserRepository userRepository;
+    
     private final UserProfileRepository userProfileRepository;
 
     private final UserProfileMapper userProfileMapper;
 
-    
-
-    public UserProfileService(UserProfileRepository userProfileRepository, UserProfileMapper userProfileMapper) {
+    public UserProfileService(
+    		UserRepository userRepository,
+    		UserProfileRepository userProfileRepository, 
+    		UserProfileMapper userProfileMapper) {
+    	this.userRepository = userRepository;
         this.userProfileRepository = userProfileRepository;
         this.userProfileMapper = userProfileMapper;
     }
@@ -49,6 +54,10 @@ public class UserProfileService {
     public UserProfileModel save(UserProfileModel userProfileModel) {
         log.debug("Request to save UserProfile : {}", userProfileModel);
         UserProfile userProfile = userProfileMapper.toEntity(userProfileModel);
+        if (userProfileModel.getUserId() != null) {
+        	Optional<User> user = this.userRepository.findById(userProfileModel.getUserId());
+        	userProfile.setUser(user.get());
+        }
         userProfile = userProfileRepository.save(userProfile);
         return userProfileMapper.toModel(userProfile);
     }
