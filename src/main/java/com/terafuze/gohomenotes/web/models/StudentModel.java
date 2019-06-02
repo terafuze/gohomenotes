@@ -10,8 +10,6 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 
-
-
 /**
  * A Model based on the Student entity.
  */
@@ -22,7 +20,6 @@ public class StudentModel implements Serializable {
     private Long id;
 
     public String identifier;
-
     
     @NotNull
     private String firstName;
@@ -30,25 +27,20 @@ public class StudentModel implements Serializable {
     @NotNull
     private String lastName;
     
+    private Long parentId;
     
     private Long schoolId;
 
     private String schoolIdentifier;
     
-    
-    
     private Long schoolGradeId;
 
     private String schoolGradeIdentifier;
-    
-    
     
     private Long teacherId;
 
     private String teacherIdentifier;
     
-    
-
     public String getIdentifier() {
         return this.identifier;
     }
@@ -65,7 +57,6 @@ public class StudentModel implements Serializable {
         this.id = id;
     }
 
-    
     public String getFirstName() {
         return this.firstName;
     }
@@ -73,7 +64,6 @@ public class StudentModel implements Serializable {
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-    
     
     public String getLastName() {
         return this.lastName;
@@ -83,6 +73,13 @@ public class StudentModel implements Serializable {
         this.lastName = lastName;
     }
     
+    public Long getParentId() {
+        return this.parentId;
+    }
+
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
+    }
     
     public Long getSchoolId() {
         return this.schoolId;
@@ -117,7 +114,6 @@ public class StudentModel implements Serializable {
         this.schoolGradeIdentifier = schoolGradeIdentifier;
     }
     
-    
     public Long getTeacherId() {
         return this.teacherId;
     }
@@ -134,8 +130,6 @@ public class StudentModel implements Serializable {
         this.teacherIdentifier = teacherIdentifier;
     }
     
-    
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -165,4 +159,5 @@ public class StudentModel implements Serializable {
             ", lastName='" + this.getLastName() + "'" +
             "}";
     }
+
 }

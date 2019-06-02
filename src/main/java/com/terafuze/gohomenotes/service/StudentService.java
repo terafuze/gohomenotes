@@ -7,15 +7,19 @@ import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 
+import com.terafuze.gohomenotes.domain.Parent;
 import com.terafuze.gohomenotes.domain.Student;
+import com.terafuze.gohomenotes.repository.ParentRepository;
 import com.terafuze.gohomenotes.repository.StudentRepository;
-import com.terafuze.gohomenotes.web.models.StudentModel;
+import com.terafuze.gohomenotes.web.mappers.ParentMapper;
 import com.terafuze.gohomenotes.web.mappers.StudentMapper;
+import com.terafuze.gohomenotes.web.models.ParentModel;
+import com.terafuze.gohomenotes.web.models.StudentModel;
 
 
 
@@ -29,13 +33,20 @@ public class StudentService {
 
     private final Logger log = LoggerFactory.getLogger(StudentService.class);
 
+    private final ParentRepository parentRepository;
+    
     private final StudentRepository studentRepository;
 
     private final StudentMapper studentMapper;
 
-    
-
-    public StudentService(StudentRepository studentRepository, StudentMapper studentMapper) {
+    @Autowired
+    private final ParentMapper parentMapper = null;
+	
+    public StudentService(
+    		ParentRepository parentRepository,
+    		StudentRepository studentRepository, 
+    		StudentMapper studentMapper) {
+    	this.parentRepository = parentRepository;
         this.studentRepository = studentRepository;
         this.studentMapper = studentMapper;
     }
@@ -50,6 +61,9 @@ public class StudentService {
         log.debug("Request to save Student : {}", studentModel);
         Student student = studentMapper.toEntity(studentModel);
         student = studentRepository.save(student);
+        Optional<Parent> optional = parentRepository.findById(studentModel.getParentId());
+        Parent parent = optional.get();
+        parent.addStudent(student);
         return studentMapper.toModel(student);
     }
 
@@ -66,6 +80,20 @@ public class StudentService {
             .collect(Collectors.toCollection(LinkedList::new));
     }
 
+    /**
+     * Get all Parents for a given Student
+     *
+     * @param id the id of an Student
+     * @return list of Parents that are owned by the Student
+     */
+    @Transactional(readOnly = true)
+    public List<ParentModel> getParents(Long id) {
+        log.debug("Get Parents for Student : {}", id);
+        Optional<Student> student = studentRepository.findById(id);
+        return student.get().getParents().stream()
+            .map(parentMapper::toModel)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
     
 
     /**
@@ -78,7 +106,7 @@ public class StudentService {
     public Optional<StudentModel> findOne(Long id) {
         log.debug("Request to get Student : {}", id);
         return studentRepository.findById(id)
-        	.map(studentMapper::toModel);
+            .map(studentMapper::toModel);
     }
 
     /**

@@ -27,6 +27,7 @@ import com.terafuze.gohomenotes.web.utils.HeaderUtil;
 
 import com.terafuze.gohomenotes.service.ParentService;
 import com.terafuze.gohomenotes.web.models.ParentModel;
+import com.terafuze.gohomenotes.web.models.StudentModel;
 
 
 /**
@@ -102,6 +103,18 @@ public class ParentRestController {
     }
 
     
+    /**
+     * GET  /parents/:id/students : get all Student for a given Parent.
+     *
+     * @param id the id of an existing Parent
+     * @return a ResponseEntity with status 200 (OK) and with body of Students for the Parent or with status 404 if the Parent does not exist for the given ID.
+     */
+    @GetMapping("/parents/{id}/students")
+    @Timed
+    public List<StudentModel> getStudents(@PathVariable Long id) {
+        log.debug("REST request to get all Studentses for Parent : {}", id);
+        return parentService.getStudents(id);
+    }
     /**
      * GET  /parents/:id : get the Parent for a given "id".
      *

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IParent } from 'app/shared/model/parent.model';
+import { IStudent } from 'app/shared/model/student.model';
 
 
 @Injectable({ providedIn: 'root' })
@@ -30,6 +31,9 @@ export class ParentService {
         return this.http.get<IParent[]>(this.resourceUrl, { params: options, observe: 'response' });
     }
 
+    getStudents(id: number): Observable<HttpResponse<IStudent[]>> {
+        return this.http.get<IStudent[]>(`${this.resourceUrl}/${id}/students`, { observe: 'response' });
+    }
     delete(id: number): Observable<HttpResponse<any>> {
         return this.http.delete<any>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }

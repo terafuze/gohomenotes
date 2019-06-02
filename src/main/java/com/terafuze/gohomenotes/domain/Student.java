@@ -92,9 +92,6 @@ public class Student implements Serializable {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
-    
-    
     
     public List<Parent> getParents() {
         return parents;
@@ -107,7 +104,6 @@ public class Student implements Serializable {
 
     public Student addParent(Parent parent) {
         this.parents.add(parent);
-        parent.addStudent(this);
         return this;
     }
 

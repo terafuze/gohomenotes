@@ -44,7 +44,13 @@
                 
                 
                 
-                
+                <!-- Parents Form Field -->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="app.student.parents" for="parents">Parents</label>
+                    <select class="form-control" id="parents" name="parents" multiple [(ngModel)]="student.parents">
+                        <option [ngValue]="getSelected(student.parents, parentOption)" *ngFor="let parentOption of parents; trackBy: trackParentById">{{parentOption.id}}</option>
+                    </select>
+                </div>
                 <!-- School Grade Form Field -->
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="app.student.schoolGrade" for="school_grade">School Grade</label>
@@ -62,7 +68,7 @@
                         <option [ngValue]="teacherOption.id" *ngFor="let teacherOption of teachers; trackBy: trackTeacherById">{{teacherOption.identifier}}</option>
                     </select>
                 </div>
-                </div>
+            </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>

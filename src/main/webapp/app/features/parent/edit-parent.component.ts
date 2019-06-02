@@ -7,6 +7,8 @@ import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IParent } from 'app/shared/model/parent.model';
 import { ParentService } from './parent.service';
 
+import { IStudent } from 'app/shared/model/student.model';
+import { StudentService } from 'app/features/student';
 
 @Component({
     selector: 'app-edit-parent',
@@ -18,12 +20,15 @@ export class EditParentComponent implements OnInit {
 
     isSaving: boolean;
 
+    // The list of Students from which to select
+    students: IStudent[];
     
     
 
     constructor(
         private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
+        private studentService: StudentService,
         private parentService: ParentService,
         private activatedRoute: ActivatedRoute
     ) {}
@@ -34,6 +39,12 @@ export class EditParentComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ parent }) => {
             this.parent = parent;
         });
+        this.studentService.query().subscribe(
+            (res: HttpResponse<IStudent[]>) => {
+                this.students = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
         
     }
 
@@ -78,6 +89,11 @@ export class EditParentComponent implements OnInit {
 
     private onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
+    }
+
+    
+    trackStudentById(index: number, item: IStudent) {
+        return item.id;
     }
     
 

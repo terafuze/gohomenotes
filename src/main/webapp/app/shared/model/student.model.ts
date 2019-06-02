@@ -1,10 +1,11 @@
-import { IParent } from 'app/shared/model/parent.model';export interface IStudent {
+import { IParent } from 'app/shared/model/parent.model';
+export interface IStudent {
     id?: number;
     identifier?: string;
     firstName?: string;
     lastName?: string;
+    parentId?: number;
     parents?: IParent[];
-    
     schoolId?: number;
     schoolIdentifier?: string;
     schoolGradeId?: number;
@@ -19,8 +20,8 @@ export class Student implements IStudent {
         public identifier?: string,
         public firstName?: string,
         public lastName?: string,
+        public parentId?: number,
         public parents?: IParent[],
-        
         public schoolId?: number,
         public schoolIdentifier?: string,
         public schoolGradeId?: number,

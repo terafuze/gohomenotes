@@ -93,7 +93,15 @@
                     [(ngModel)]="parent.secondaryPhoneNumber" /></div>
                 
                 
+                
+                <!-- Students Form Field -->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="app.parent.students" for="students">Students</label>
+                    <select class="form-control" id="students" name="students" multiple [(ngModel)]="parent.students">
+                        <option [ngValue]="getSelected(parent.students, studentOption)" *ngFor="let studentOption of students; trackBy: trackStudentById">{{studentOption.id}}</option>
+                    </select>
                 </div>
+			</div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>

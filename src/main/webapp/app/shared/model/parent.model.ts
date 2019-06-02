@@ -1,4 +1,5 @@
-import { IStudent } from 'app/shared/model/student.model';export interface IParent {
+import { IStudent } from 'app/shared/model/student.model';
+export interface IParent {
     id?: number;
     identifier?: string;
     address?: string;
@@ -22,7 +23,7 @@ export class Parent implements IParent {
         public lastName?: string,
         public primaryPhoneNumber?: string,
         public secondaryPhoneNumber?: string,
-        public students?: IStudent[],
-        public userProfileId?: number
+        public students?: IStudent[]
+        
     ) { }
 }

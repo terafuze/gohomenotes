@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Principal } from 'app/core';
 import { IParent } from 'app/shared/model/parent.model';
 import { ParentService } from './parent.service';
+import { StudentService } from '../student/student.service';
 @Component({
     selector: 'app-list-parents',
     templateUrl: './list-parents.component.html'
@@ -15,10 +16,12 @@ export class ListParentsComponent implements OnInit, OnDestroy {
     parents: IParent[];
     currentAccount: any;
     eventSubscriber: Subscription;
+    studentId: number;
     
 
     constructor(
         private parentService: ParentService,
+        private studentService: StudentService,
         private activatedRoute: ActivatedRoute,
         private jhiAlertService: JhiAlertService,
         private dataUtils: JhiDataUtils,
@@ -28,6 +31,15 @@ export class ListParentsComponent implements OnInit, OnDestroy {
 
     loadAll() {
         let dataLoaded: boolean = false;
+        if (this.studentId) {
+            this.studentService.getParents(this.studentId).subscribe(
+                (res: HttpResponse<IParent[]>) => {
+                    this.parents = res.body;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+            dataLoaded = true;
+        }
         // If no items loaded so far, then load all of them
         if (!dataLoaded) {
             this.parentService.query().subscribe(
@@ -40,6 +52,7 @@ export class ListParentsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.studentId = this.activatedRoute.snapshot.queryParams['studentId'];
         this.loadAll();
         this.principal.identity().then(account => {
             this.currentAccount = account;

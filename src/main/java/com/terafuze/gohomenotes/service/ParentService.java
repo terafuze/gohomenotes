@@ -12,14 +12,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.terafuze.gohomenotes.domain.Parent;
-import com.terafuze.gohomenotes.domain.Teacher;
 import com.terafuze.gohomenotes.domain.UserProfile;
 import com.terafuze.gohomenotes.repository.ParentRepository;
 import com.terafuze.gohomenotes.repository.UserProfileRepository;
 import com.terafuze.gohomenotes.web.mappers.ParentMapper;
+import com.terafuze.gohomenotes.web.mappers.StudentMapper;
 import com.terafuze.gohomenotes.web.mappers.UserProfileMapper;
 import com.terafuze.gohomenotes.web.models.ParentModel;
-import com.terafuze.gohomenotes.web.models.TeacherModel;
+import com.terafuze.gohomenotes.web.models.StudentModel;
 
 
 
@@ -37,6 +37,9 @@ public class ParentService {
 
     private final ParentMapper parentMapper;
 
+    @Autowired
+    private final StudentMapper studentMapper = null;
+	
     @Autowired
     private final UserProfileRepository userProfileRepository = null;
 
@@ -94,6 +97,20 @@ public class ParentService {
             .collect(Collectors.toCollection(LinkedList::new));
     }
 
+    /**
+     * Get all Students for a given Parent
+     *
+     * @param id the id of an Parent
+     * @return list of Students that are owned by the Parent
+     */
+    @Transactional(readOnly = true)
+    public List<StudentModel> getStudents(Long id) {
+        log.debug("Get Students for Parent : {}", id);
+        Optional<Parent> parent = parentRepository.findById(id);
+        return parent.get().getStudents().stream()
+            .map(studentMapper::toModel)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
     
 
     /**
@@ -106,7 +123,7 @@ public class ParentService {
     public Optional<ParentModel> findOne(Long id) {
         log.debug("Request to get Parent : {}", id);
         return parentRepository.findById(id)
-        	.map(parentMapper::toModel);
+            .map(parentMapper::toModel);
     }
 
     /**

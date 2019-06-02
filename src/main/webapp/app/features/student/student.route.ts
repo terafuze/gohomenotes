@@ -27,7 +27,7 @@ export class StudentResolve implements Resolve<IStudent> {
 
 export const studentRoute: Routes = [
     {
-        path: 'schools/:schoolId/create-student',
+        path: 'parents/:parentId/create-student',
         component: EditStudentComponent,
         resolve: {
             student: StudentResolve

@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Principal } from 'app/core';
 import { IStudent } from 'app/shared/model/student.model';
 import { StudentService } from './student.service';
+import { ParentService } from '../parent/parent.service';
 import { SchoolService } from '../school/school.service';
 import { SchoolGradeService } from '../school-grade/school-grade.service';
 import { TeacherService } from '../teacher/teacher.service';
@@ -18,6 +19,7 @@ export class ListStudentsComponent implements OnInit, OnDestroy {
     students: IStudent[];
     currentAccount: any;
     eventSubscriber: Subscription;
+    parentId: number;
     schoolId: number;
     schoolGradeId: number;
     teacherId: number;
@@ -25,6 +27,7 @@ export class ListStudentsComponent implements OnInit, OnDestroy {
 
     constructor(
         private studentService: StudentService,
+        private parentService: ParentService,
         private schoolService: SchoolService,
         private schoolGradeService: SchoolGradeService,
         private teacherService: TeacherService,
@@ -37,6 +40,15 @@ export class ListStudentsComponent implements OnInit, OnDestroy {
 
     loadAll() {
         let dataLoaded: boolean = false;
+        if (this.parentId) {
+            this.parentService.getStudents(this.parentId).subscribe(
+                (res: HttpResponse<IStudent[]>) => {
+                    this.students = res.body;
+                },
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+            dataLoaded = true;
+        }
         if (this.schoolId) {
             this.schoolService.getStudents(this.schoolId).subscribe(
                 (res: HttpResponse<IStudent[]>) => {
@@ -76,6 +88,7 @@ export class ListStudentsComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.parentId = this.activatedRoute.snapshot.queryParams['parentId'];
         this.schoolId = this.activatedRoute.snapshot.queryParams['schoolId'];
         this.schoolGradeId = this.activatedRoute.snapshot.queryParams['schoolGradeId'];
         this.teacherId = this.activatedRoute.snapshot.queryParams['teacherId'];
