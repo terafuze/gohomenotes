@@ -18,25 +18,7 @@
                     </span>
                 </a>
             </li>
-            <!-- This is the "Views" menu - I did not want to delete the code and opted to comment instead -->
-            <!-- <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="views-menu">
-                    <span>
-                        <fa-icon [icon]="'th-list'"></fa-icon>
-                        <span jhiTranslate="global.menu.views.main">
-                            Views
-                        </span>
-                    </span>
-                </a>
-                <ul class="dropdown-menu" ngbDropdownMenu>
-                    <li>
-                        <a class="dropdown-item" routerLink="customer" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
-                            <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
-                            <span jhiTranslate="global.menu.views.customer">Customer</span>
-                        </a>
-                    </li>
-                </ul>
-            </li> -->
+            <app-features-menu></app-features-menu>
             <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
                     <span>

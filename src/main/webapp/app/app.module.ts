@@ -16,7 +16,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HomeModule } from './home/home.module';
 import { AccountModule } from './account/account.module';
 import { FeaturesModule } from './features/features.module';
-import { MainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
+import { MainComponent, NavbarComponent, FeaturesMenuComponent, FooterComponent, PageRibbonComponent, ActiveMenuDirective, ErrorComponent } from './layouts';
 
 
 @NgModule({
@@ -31,7 +31,7 @@ import { MainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, A
         FeaturesModule
         
 ],
-    declarations: [MainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
+    declarations: [MainComponent, NavbarComponent, FeaturesMenuComponent, ErrorComponent, PageRibbonComponent, ActiveMenuDirective, FooterComponent],
     providers: [
         {
             provide: HTTP_INTERCEPTORS,
