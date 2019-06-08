@@ -18,7 +18,7 @@
                     </span>
                 </a>
             </li>
-            <app-features-menu></app-features-menu>
+            <app-features-menu *ngSwitchCase="true"></app-features-menu>
             <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
                     <span>

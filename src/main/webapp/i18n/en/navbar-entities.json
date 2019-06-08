@@ -1,0 +1,28 @@
+{
+    "global": {
+        "menu": {
+            "entities": {
+                "main": "Entities",
+                "address": "Address",
+                "afterSchoolProgram": "After School Program",
+                "dailyVerificationRecord": "Daily Verification Record",
+                "dismissalLocation": "Dismissal Location",
+                "earlyPickupRequest": "Early Pickup Request",
+                "familyRegistration": "Family Registration",
+                "guestRequest": "Guest Request",
+                "hostRequest": "Host Request",
+                "parent": "Parent",
+                "parentRegistration": "Parent Registration",
+                "school": "School",
+                "schoolGrade": "School Grade",
+                "student": "Student",
+                "studentRegistration": "Student Registration",
+                "teacher": "Teacher",
+                "transportationChange": "Transportation Change",
+                "userProfile": "User Profile"
+                
+            }
+        }
+    }
+}
+
