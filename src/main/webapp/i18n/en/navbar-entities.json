@@ -2,7 +2,7 @@
     "global": {
         "menu": {
             "entities": {
-                "main": "Entities",
+                "main": "Main Menu",
                 "address": "Address",
                 "afterSchoolProgram": "After School Program",
                 "dailyVerificationRecord": "Daily Verification Record",

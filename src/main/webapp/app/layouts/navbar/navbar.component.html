@@ -18,13 +18,23 @@
                     </span>
                 </a>
             </li>
+            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <a class="nav-link" [routerLink]="['/user-profiles', userProfileId, 'view']" (click)="collapseNavbar()">
+                    <span>
+                        <fa-icon [icon]="'user'"></fa-icon>
+                        <span jhiTranslate="global.menu.myProfile">My Profile</span>
+                    </span>
+                </a>
+            </li>
+            <!-- Features Menu -->
             <app-features-menu *ngSwitchCase="true"></app-features-menu>
+
             <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
                     <span>
                         <fa-icon [icon]="'th-list'"></fa-icon>
                         <span jhiTranslate="global.menu.entities.main">
-                            Entities
+                            Main Menu
                         </span>
                     </span>
                 </a>
@@ -197,7 +207,7 @@
                             <span jhiTranslate="global.menu.admin.logs">Logs</span>
                         </a>
                     </li>
-                    <li *ngIf="swaggerEnabled">
+                    <li>
                         <a class="dropdown-item" routerLink="admin/docs" routerLinkActive="active" (click)="collapseNavbar()">
                             <fa-icon [icon]="'book'" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.admin.apidocs">API</span>

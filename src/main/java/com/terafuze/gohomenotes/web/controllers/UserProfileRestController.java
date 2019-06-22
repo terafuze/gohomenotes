@@ -116,6 +116,15 @@ public class UserProfileRestController {
         return ResponseUtil.wrapOrNotFound(userProfileModel);
     }
 
+    // TODO should use URL query parameter rather than path parameter
+    @GetMapping("/user-profiles/current-user")
+    @Timed
+    public ResponseEntity<UserProfileModel> getUserProfile() {
+        log.debug("REST request to get UserProfile for current user");
+        Optional<UserProfileModel> userProfileModel = userProfileService.getUserProfileForCurrentUser();
+        return ResponseUtil.wrapOrNotFound(userProfileModel);
+    }
+    
     /**
      * DELETE  /user-profiles/:id : delete the "id" userProfile.
      *

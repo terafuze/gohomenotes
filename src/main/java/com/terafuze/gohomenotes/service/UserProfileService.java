@@ -15,6 +15,7 @@ import com.terafuze.gohomenotes.domain.User;
 import com.terafuze.gohomenotes.domain.UserProfile;
 import com.terafuze.gohomenotes.repository.UserProfileRepository;
 import com.terafuze.gohomenotes.repository.UserRepository;
+import com.terafuze.gohomenotes.security.SecurityUtils;
 import com.terafuze.gohomenotes.web.mappers.UserProfileMapper;
 import com.terafuze.gohomenotes.web.models.UserProfileModel;
 
@@ -29,7 +30,7 @@ import com.terafuze.gohomenotes.web.models.UserProfileModel;
 public class UserProfileService {
 
     private final Logger log = LoggerFactory.getLogger(UserProfileService.class);
-
+    
     private final UserRepository userRepository;
     
     private final UserProfileRepository userProfileRepository;
@@ -75,8 +76,6 @@ public class UserProfileService {
             .collect(Collectors.toCollection(LinkedList::new));
     }
 
-    
-
     /**
      * Get one userProfile by id.
      *
@@ -90,6 +89,14 @@ public class UserProfileService {
         	.map(userProfileMapper::toModel);
     }
 
+    @Transactional(readOnly = true)
+    public Optional<UserProfileModel> getUserProfileForCurrentUser() {
+        log.debug("Request to get UserProfile for the currently logged in user");
+        List<UserProfile> userProfileList = this.userProfileRepository.findByUserIsCurrentUser();
+        Optional<UserProfile> userProfile = Optional.of(userProfileList.get(0));
+        return userProfile.map(userProfileMapper::toModel);
+    }
+    
     /**
      * Delete the userProfile by id.
      *

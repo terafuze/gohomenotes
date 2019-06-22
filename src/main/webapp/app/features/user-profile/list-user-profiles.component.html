@@ -1,7 +1,7 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="app.userProfile.home.title">User Profiles</span>
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-user-profile" [routerLink]="['/user-profiles', 'new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-user-profile" [routerLink]="['/user-profile', 'new']">
             <fa-icon [icon]="'plus'"></fa-icon>
             <span  jhiTranslate="app.userProfile.home.createLabel">Create new User Profile</span>
         </button>
@@ -19,10 +19,11 @@
             <th><span jhiTranslate="app.userProfile.homeAddress">Home Address</span></th>
             
             <th><span jhiTranslate="app.userProfile.lastName">Last Name</span></th>
+            <th><span jhiTranslate="app.userProfile.parent">Parent</span></th>
+            
             <th><span jhiTranslate="app.userProfile.primaryPhoneNumber">Primary Phone Number</span></th>
             <th><span jhiTranslate="app.userProfile.secondaryPhoneNumber">Secondary Phone Number</span></th>
             <th><span jhiTranslate="app.userProfile.teacher">Teacher</span></th>
-            <th><span jhiTranslate="app.userProfile.parent">Parent</span></th>
             
             <th></th>
             </tr>
@@ -32,9 +33,7 @@
                 <td><a [routerLink]="['/user-profiles', userProfile.id, 'view']">{{userProfile.id}}</a></td>
                 <td>{{userProfile.userIdentifier}}</td>
                 <td>{{userProfile.emailAddress}}</td>
-                
                 <td>{{userProfile.firstName}}</td>
-                
                 <td>
                     <div *ngIf="userProfile.homeAddressId">
                         <a [routerLink]="['/addresses', userProfile.homeAddressId , 'view' ]" >{{userProfile.homeAddressIdentifier}}</a>
@@ -42,17 +41,14 @@
                 </td>
                 
                 <td>{{userProfile.lastName}}</td>
-                
-                <td>{{userProfile.primaryPhoneNumber}}</td>
-                
-                <td>{{userProfile.secondaryPhoneNumber}}</td>
-                
                 <td>
                     <div *ngIf="userProfile.parentId">
                         <a [routerLink]="['/parents', userProfile.parentId , 'view' ]" >{{userProfile.parentIdentifier}}</a>
                     </div>
                 </td>
-
+                
+                <td>{{userProfile.primaryPhoneNumber}}</td>
+                <td>{{userProfile.secondaryPhoneNumber}}</td>
                 <td>
                     <div *ngIf="userProfile.teacherId">
                         <a [routerLink]="['/teachers', userProfile.teacherId , 'view' ]" >{{userProfile.teacherIdentifier}}</a>

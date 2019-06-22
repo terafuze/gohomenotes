@@ -27,7 +27,7 @@ export class UserProfileResolve implements Resolve<IUserProfile> {
 
 export const userProfileRoute: Routes = [
     {
-        path: 'user-profiles/new',
+        path: 'user-profile/new',
         component: EditUserProfileComponent,
         resolve: {
             userProfile: UserProfileResolve

@@ -42,13 +42,12 @@
                     </div>
                 </dd>
                 <!-- Teacher Form Field based on ONE_TO_ONE relationship -->
-                <dt><span jhiTranslate="app.userProfile.teacher">Teacher</span></dt>
-                <dd>
-                    <div *ngIf="userProfile.teacherId">
+                <div *ngIf="userProfile.teacherId">
+                    <dt><span jhiTranslate="app.userProfile.teacher">Teacher</span></dt>
+                    <dd>
                         <a [routerLink]="['/teachers', userProfile.teacherId, 'view']">{{userProfile.teacherIdentifier}}</a>
-                    </div>
-                </dd>
-                
+                    </dd>
+                </div>
             </dl>
             <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>

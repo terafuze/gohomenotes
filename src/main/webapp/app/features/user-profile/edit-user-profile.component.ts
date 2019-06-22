@@ -9,11 +9,11 @@ import { UserProfileService } from './user-profile.service';
 
 import { IAddress } from 'app/shared/model/address.model';
 import { AddressService } from 'app/features/address';
+import { IParent } from 'app/shared/model/parent.model';
+import { ParentService } from 'app/features/parent';
 import { ITeacher } from 'app/shared/model/teacher.model';
 import { TeacherService } from 'app/features/teacher';
 import { UserService, IUser } from 'app/core';
-import { ParentService } from '../parent';
-import { IParent } from 'app/shared/model/parent.model';
 
 @Component({
     selector: 'app-edit-user-profile',
@@ -25,11 +25,11 @@ export class EditUserProfileComponent implements OnInit {
 
     isSaving: boolean;
 
-    // The list of Address from which to select
+    // The list of Addresses from which to select
     addresses: IAddress[];
     // The list of Parents from which to select
     parents: IParent[];
-    // The list of Teacher from which to select
+    // The list of Teachers from which to select
     teachers: ITeacher[];
     // The list of User from which to select
     users: IUser[];
@@ -59,9 +59,9 @@ export class EditUserProfileComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        this.userService.query().subscribe(
-            (res: HttpResponse<IUser[]>) => {
-                this.users = res.body;
+        this.parentService.query().subscribe(
+            (res: HttpResponse<IParent[]>) => {
+                this.parents = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
@@ -71,9 +71,9 @@ export class EditUserProfileComponent implements OnInit {
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );
-        this.parentService.query().subscribe(
-            (res: HttpResponse<ITeacher[]>) => {
-                this.parents = res.body;
+        this.userService.query().subscribe(
+            (res: HttpResponse<IUser[]>) => {
+                this.users = res.body;
             },
             (res: HttpErrorResponse) => this.onError(res.message)
         );

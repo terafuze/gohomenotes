@@ -25,6 +25,10 @@ export class UserProfileService {
         return this.http.get<IUserProfile>(`${this.resourceUrl}/${id}`, { observe: 'response' });
     }
 
+    forCurrentUser(): Observable<HttpResponse<IUserProfile>> {
+        return this.http.get<IUserProfile>(`${this.resourceUrl}/current-user`, { observe: 'response' });
+    }
+
     query(req?: any): Observable<HttpResponse<IUserProfile[]>> {
         const options = createRequestOption(req);
         return this.http.get<IUserProfile[]>(this.resourceUrl, { params: options, observe: 'response' });

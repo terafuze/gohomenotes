@@ -18,6 +18,8 @@ public interface UserProfileMapper extends IEntityMapper<UserProfileModel, UserP
     @Mapping(source = "lastName", target = "identifier")
     @Mapping(source = "homeAddress.id", target = "homeAddressId")
     @Mapping(source = "homeAddress.id", target = "homeAddressIdentifier")
+    @Mapping(source = "parent.id", target = "parentId")
+    @Mapping(source = "parent.id", target = "parentIdentifier")
     @Mapping(source = "teacher.id", target = "teacherId")
     @Mapping(source = "teacher.id", target = "teacherIdentifier")
     @Mapping(source = "user.id", target = "userId")
@@ -25,9 +27,9 @@ public interface UserProfileMapper extends IEntityMapper<UserProfileModel, UserP
     UserProfileModel toModel(UserProfile userProfile);
 
     @Mapping(source = "homeAddressId", target = "homeAddress")
+    @Mapping(source = "parentId", target = "parent")
     @Mapping(source = "teacherId", target = "teacher")
     @Mapping(target = "user", ignore = true)
-    @Mapping(source = "parentId", target = "parent")
     UserProfile toEntity(UserProfileModel userProfileModel);
 
     @Mapping(target = "homeAddress", ignore = true)
