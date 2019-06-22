@@ -27,7 +27,7 @@
                 </a>
             </li>
             <!-- Features Menu -->
-            <app-features-menu *ngSwitchCase="true"></app-features-menu>
+            <app-features-menu *jhiHasAnyAuthority="'ROLE_ADMIN'"></app-features-menu>
 
             <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
@@ -41,28 +41,28 @@
                 <!-- Entity Menu -->
                 <ul class="dropdown-menu" ngbDropdownMenu>
                     <!-- Address menu item -->
-                    <li>
+                    <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
                         <a class="dropdown-item" routerLink="addresses" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.address">Address</span>
                         </a>
                     </li>
                     <!-- After School Program menu item -->
-                    <li>
+                    <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
                         <a class="dropdown-item" routerLink="after-school-programs" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.afterSchoolProgram">After School Program</span>
                         </a>
                     </li>
                     <!-- Daily Verification Record menu item -->
-                    <li>
+                    <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
                         <a class="dropdown-item" routerLink="daily-verification-records" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.dailyVerificationRecord">Daily Verification Record</span>
                         </a>
                     </li>
                     <!-- Dismissal Location menu item -->
-                    <li>
+                    <li *jhiHasAnyAuthority="'ROLE_ADMIN'"> 
                         <a class="dropdown-item" routerLink="dismissal-locations" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.dismissalLocation">Dismissal Location</span>
@@ -76,7 +76,7 @@
                         </a>
                     </li>
                     <!-- Family Registration menu item -->
-                    <li>
+                    <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
                         <a class="dropdown-item" routerLink="family-registrations" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.familyRegistration">Family Registration</span>
@@ -97,49 +97,49 @@
                         </a>
                     </li>
                     <!-- Parent menu item -->
-                    <li>
+                    <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
                         <a class="dropdown-item" routerLink="parents" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.parent">Parent</span>
                         </a>
                     </li>
                     <!-- Parent Registration menu item -->
-                    <li>
+                    <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
                         <a class="dropdown-item" routerLink="parent-registrations" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.parentRegistration">Parent Registration</span>
                         </a>
                     </li>
                     <!-- School menu item -->
-                    <li>
+                    <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
                         <a class="dropdown-item" routerLink="schools" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.school">School</span>
                         </a>
                     </li>
                     <!-- School Grade menu item -->
-                    <li>
+                    <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
                         <a class="dropdown-item" routerLink="school-grades" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.schoolGrade">School Grade</span>
                         </a>
                     </li>
                     <!-- Student menu item -->
-                    <li>
+                    <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
                         <a class="dropdown-item" routerLink="students" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.student">Student</span>
                         </a>
                     </li>
                     <!-- Student Registration menu item -->
-                    <li>
+                    <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
                         <a class="dropdown-item" routerLink="student-registrations" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.studentRegistration">Student Registration</span>
                         </a>
                     </li>
                     <!-- Teacher menu item -->
-                    <li>
+                    <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
                         <a class="dropdown-item" routerLink="teachers" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.teacher">Teacher</span>
@@ -153,7 +153,7 @@
                         </a>
                     </li>
                     <!-- User Profile menu item -->
-                    <li>
+                    <li *jhiHasAnyAuthority="'ROLE_ADMIN'">
                         <a class="dropdown-item" routerLink="user-profiles" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <fa-icon [icon]="'asterisk'" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.entities.userProfile">User Profile</span>
