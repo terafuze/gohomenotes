@@ -1,21 +1,13 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
-            <h2 id="jhi-user-profile-heading" jhiTranslate="app.userProfile.home.createOrEditLabel">Create or edit a
-                User Profile</h2>
+            <h2 id="jhi-user-profile-heading" jhiTranslate="app.userProfile.home.createOrEditLabel">Create or edit a User Profile</h2>
             <div>
                 <jhi-alert-error></jhi-alert-error>
                 <div class="form-group" [hidden]="!userProfile.id">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id" [ngModel]="userProfile.id" readonly />
                 </div>
-                <div class="form-group" [hidden]="!userProfile.addressId">
-                    <label class="form-control-label" jhiTranslate="app.userProfile.address"
-                        for="address">Address</label>
-                    <input type="text" class="form-control" id="address" name="address"
-                        [(ngModel)]="userProfile.addressIdentifier" readonly />
-                </div>
-
                 <!-- User Form Field -->
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="app.userProfile.user" for="user">User</label>
@@ -27,111 +19,93 @@
                 </div>
             </div>
 
-            <!-- Email Address Form Field -->
-
-            <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.userProfile.emailAddress" for="email_address">Email
-                    Address</label>
-                <input type="text" class="form-control" name="emailAddress" id="email_address"
-                    [(ngModel)]="userProfile.emailAddress" required />
-                <div [hidden]="!(editForm.controls.emailAddress?.dirty && editForm.controls.emailAddress?.invalid)">
-                    <small class="form-text text-danger" [hidden]="!editForm.controls.emailAddress?.errors?.required"
-                        jhiTranslate="entity.validation.required">
-                        This field is required.
-                    </small>
+                <!-- Email Address Form Field -->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="app.userProfile.emailAddress" for="email_address">Email Address</label>
+                    <input type="text" class="form-control" name="emailAddress" id="email_address"
+                        [(ngModel)]="userProfile.emailAddress" required/>
+                    <div [hidden]="!(editForm.controls.emailAddress?.dirty && editForm.controls.emailAddress?.invalid)">
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.emailAddress?.errors?.required" jhiTranslate="entity.validation.required">
+                           This field is required.
+                        </small>
+                    </div>
+                </div>
+                <!-- First Name Form Field -->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="app.userProfile.firstName" for="first_name">First Name</label>
+                    <input type="text" class="form-control" name="firstName" id="first_name"
+                        [(ngModel)]="userProfile.firstName" required/>
+                    <div [hidden]="!(editForm.controls.firstName?.dirty && editForm.controls.firstName?.invalid)">
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.firstName?.errors?.required" jhiTranslate="entity.validation.required">
+                           This field is required.
+                        </small>
+                    </div>
+                </div>
+                <!-- Home Address Form Field -->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="app.userProfile.homeAddress" for="home_address">Home Address</label>
+                    <select class="form-control" id="home_address" name="homeAddress" [(ngModel)]="userProfile.homeAddressId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="addressOption.id" *ngFor="let addressOption of addresses; trackBy: trackAddressById">{{addressOption.identifier}}</option>
+                    </select>
+                </div>
+                <!-- Last Name Form Field -->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="app.userProfile.lastName" for="last_name">Last Name</label>
+                    <input type="text" class="form-control" name="lastName" id="last_name"
+                        [(ngModel)]="userProfile.lastName" required/>
+                    <div [hidden]="!(editForm.controls.lastName?.dirty && editForm.controls.lastName?.invalid)">
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.lastName?.errors?.required" jhiTranslate="entity.validation.required">
+                           This field is required.
+                        </small>
+                    </div>
+                </div>
+                <!-- Parent Form Field -->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="app.userProfile.parent" for="parent">Parent</label>
+                    <select class="form-control" id="parent" name="parent" [(ngModel)]="userProfile.parentId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="parentOption.id" *ngFor="let parentOption of parents; trackBy: trackParentById">{{parentOption.identifier}}</option>
+                    </select>
+                </div>
+                <!-- Primary Phone Number Form Field -->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="app.userProfile.primaryPhoneNumber" for="primary_phone_number">Primary Phone Number</label>
+                    <input type="text" class="form-control" name="primaryPhoneNumber" id="primary_phone_number"
+                        [(ngModel)]="userProfile.primaryPhoneNumber" required/>
+                    <div [hidden]="!(editForm.controls.primaryPhoneNumber?.dirty && editForm.controls.primaryPhoneNumber?.invalid)">
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.primaryPhoneNumber?.errors?.required" jhiTranslate="entity.validation.required">
+                           This field is required.
+                        </small>
+                    </div>
+                </div>
+                <!-- Secondary Phone Number Form Field -->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="app.userProfile.secondaryPhoneNumber" for="secondary_phone_number">Secondary Phone Number</label>
+                    <input type="text" class="form-control" name="secondaryPhoneNumber" id="secondary_phone_number"
+                        [(ngModel)]="userProfile.secondaryPhoneNumber" />
+                </div>
+                <!-- Teacher Form Field -->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="app.userProfile.teacher" for="teacher">Teacher</label>
+                    <select class="form-control" id="teacher" name="teacher" [(ngModel)]="userProfile.teacherId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="teacherOption.id" *ngFor="let teacherOption of teachers; trackBy: trackTeacherById">{{teacherOption.identifier}}</option>
+                    </select>
                 </div>
             </div>
-
-
-            <!-- First Name Form Field -->
-
-            <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.userProfile.firstName" for="first_name">First
-                    Name</label>
-                <input type="text" class="form-control" name="firstName" id="first_name"
-                    [(ngModel)]="userProfile.firstName" required />
-                <div [hidden]="!(editForm.controls.firstName?.dirty && editForm.controls.firstName?.invalid)">
-                    <small class="form-text text-danger" [hidden]="!editForm.controls.firstName?.errors?.required"
-                        jhiTranslate="entity.validation.required">
-                        This field is required.
-                    </small>
-                </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
             </div>
-
-
-
-            <!-- Last Name Form Field -->
-
-            <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.userProfile.lastName" for="last_name">Last
-                    Name</label>
-                <input type="text" class="form-control" name="lastName" id="last_name"
-                    [(ngModel)]="userProfile.lastName" required />
-                <div [hidden]="!(editForm.controls.lastName?.dirty && editForm.controls.lastName?.invalid)">
-                    <small class="form-text text-danger" [hidden]="!editForm.controls.lastName?.errors?.required"
-                        jhiTranslate="entity.validation.required">
-                        This field is required.
-                    </small>
-                </div>
-            </div>
-
-
-            <!-- Primary Phone Number Form Field -->
-
-            <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.userProfile.primaryPhoneNumber"
-                    for="primary_phone_number">Primary Phone Number</label>
-                <input type="text" class="form-control" name="primaryPhoneNumber" id="primary_phone_number"
-                    [(ngModel)]="userProfile.primaryPhoneNumber" required />
-                <div
-                    [hidden]="!(editForm.controls.primaryPhoneNumber?.dirty && editForm.controls.primaryPhoneNumber?.invalid)">
-                    <small class="form-text text-danger"
-                        [hidden]="!editForm.controls.primaryPhoneNumber?.errors?.required"
-                        jhiTranslate="entity.validation.required">
-                        This field is required.
-                    </small>
-                </div>
-            </div>
-
-
-            <!-- Secondary Phone Number Form Field -->
-
-            <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.userProfile.secondaryPhoneNumber"
-                    for="secondary_phone_number">Secondary Phone Number</label>
-                <input type="text" class="form-control" name="secondaryPhoneNumber" id="secondary_phone_number"
-                    [(ngModel)]="userProfile.secondaryPhoneNumber" /></div>
-
-            <!-- Parent Form Field -->
-            <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.userProfile.parent" for="parent">Parent</label>
-                <select class="form-control" id="parent" name="parent" [(ngModel)]="userProfile.parentId">
-                    <option [ngValue]="null"></option>
-                    <option [ngValue]="parentOption.id"
-                        *ngFor="let parentOption of parents; trackBy: trackParentById">{{parentOption.identifier}}
-                    </option>
-                </select>
-            </div> 
-
-            <!-- Teacher Form Field -->
-            <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.userProfile.teacher" for="teacher">Teacher</label>
-                <select class="form-control" id="teacher" name="teacher" [(ngModel)]="userProfile.teacherId">
-                    <option [ngValue]="null"></option>
-                    <option [ngValue]="teacherOption.id"
-                        *ngFor="let teacherOption of teachers; trackBy: trackTeacherById">{{teacherOption.identifier}}
-                    </option>
-                </select>
-            </div>
-
-    <div>
-        <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
-            <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
-        </button>
-        <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary" (click)="save()">
-            <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
-        </button>
+        </form>
     </div>
-    </form>
-</div>
 </div>
