@@ -67,7 +67,7 @@ spring:
 # Also, change the liquibase-hibernate settings in the pom.xml file so that you can use ./mvnw liquibase:diff
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:postgresql://localhost:5444/gohomenotes3
+        url: jdbc:postgresql://localhost:5432/gohomenotes3
         username: postgres
         password: password
     jpa:
