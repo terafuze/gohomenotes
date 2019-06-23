@@ -28,7 +28,6 @@ public class HostRequestModel implements Serializable {
     
     private String confirmationNotes;
     
-    @NotNull
     private Boolean confirmed;
     
     private String confirmedByUsername;
@@ -36,10 +35,20 @@ public class HostRequestModel implements Serializable {
     @NotNull
     private LocalDate eventDate;
     
-    @NotNull
+    
+    private Long guestStudentId;
+
+    private String guestStudentIdentifier;
+    
+    
+    
+    private Long hostStudentId;
+
+    private String hostStudentIdentifier;
+    
+    
     private Boolean manuallyConfirmed;
     
-    @NotNull
     private String submittedByUsername;
     
 
@@ -102,6 +111,40 @@ public class HostRequestModel implements Serializable {
 
     public void setEventDate(LocalDate eventDate) {
         this.eventDate = eventDate;
+    }
+    
+    
+    public Long getGuestStudentId() {
+        return this.guestStudentId;
+    }
+
+    public void setGuestStudentId(Long guestStudentId) {
+        this.guestStudentId = guestStudentId;
+    }
+
+    public String getGuestStudentIdentifier() {
+        return this.guestStudentIdentifier;
+    }
+
+    public void setGuestStudentIdentifier(String guestStudentIdentifier) {
+        this.guestStudentIdentifier = guestStudentIdentifier;
+    }
+    
+    
+    public Long getHostStudentId() {
+        return this.hostStudentId;
+    }
+
+    public void setHostStudentId(Long hostStudentId) {
+        this.hostStudentId = hostStudentId;
+    }
+
+    public String getHostStudentIdentifier() {
+        return this.hostStudentIdentifier;
+    }
+
+    public void setHostStudentIdentifier(String hostStudentIdentifier) {
+        this.hostStudentIdentifier = hostStudentIdentifier;
     }
     
     

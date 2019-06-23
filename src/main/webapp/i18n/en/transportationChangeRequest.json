@@ -1,0 +1,25 @@
+{
+    "app": {
+        "transportationChangeRequest" : {
+            "home": {
+                "title": "Transportation Change Requests",
+                "createLabel": "Create a new Transportation Change Request",
+                "createOrEditLabel": "Create or edit a Transportation Change Request"
+            },
+            "created": "A new Transportation Change Request is created with identifier {{ param }}",
+            "updated": "A Transportation Change Request is updated with identifier {{ param }}",
+            "deleted": "A Transportation Change Request is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Transportation Change Request {{ id }}?"
+            },
+            "detail": {
+                "title": "Transportation Change Request"
+            },
+            "comments": "Comments",
+            "dismissalLocation": "Dismissal Location",
+            "eventDate": "Event Date",
+            "student": "Student",
+            "submittedByUsername": "Submitted By Username"
+        }
+    }
+}

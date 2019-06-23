@@ -13,12 +13,30 @@
             <thead>
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
+            
+            <th><span jhiTranslate="app.earlyPickupRequest.comments">Comments</span></th>
+            <th><span jhiTranslate="app.earlyPickupRequest.eventDate">Event Date</span></th>
+            <th><span jhiTranslate="app.earlyPickupRequest.pickupPerson">Pickup Person</span></th>
+            <th><span jhiTranslate="app.earlyPickupRequest.pickupPersonPhone">Pickup Person Phone</span></th>
+            <th><span jhiTranslate="app.earlyPickupRequest.pickupTime">Pickup Time</span></th>
+            <th><span jhiTranslate="app.earlyPickupRequest.returning">Returning</span></th>
+            <th><span jhiTranslate="app.earlyPickupRequest.returnTime">Return Time</span></th>
+            <th><span jhiTranslate="app.earlyPickupRequest.submittedByUsername">Submitted By Username</span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let earlyPickupRequest of earlyPickupRequests ;trackBy: trackId">
                 <td><a [routerLink]="['/early-pickup-requests', earlyPickupRequest.id, 'view']">{{earlyPickupRequest.id}}</a></td>
+                
+                <td>{{earlyPickupRequest.comments}}</td>
+                <td>{{earlyPickupRequest.eventDate}}</td>
+                <td>{{earlyPickupRequest.pickupPerson}}</td>
+                <td>{{earlyPickupRequest.pickupPersonPhone}}</td>
+                <td>{{earlyPickupRequest.pickupTime}}</td>
+                <td>{{earlyPickupRequest.returning}}</td>
+                <td>{{earlyPickupRequest.returnTime}}</td>
+                <td>{{earlyPickupRequest.submittedByUsername}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

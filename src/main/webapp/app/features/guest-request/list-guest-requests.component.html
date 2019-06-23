@@ -13,12 +13,44 @@
             <thead>
             <tr>
             <th><span jhiTranslate="global.field.id">ID</span></th>
+            
+            <th><span jhiTranslate="app.guestRequest.comments">Comments</span></th>
+            <th><span jhiTranslate="app.guestRequest.confirmationNotes">Confirmation Notes</span></th>
+            <th><span jhiTranslate="app.guestRequest.confirmed">Confirmed</span></th>
+            <th><span jhiTranslate="app.guestRequest.confirmedByUsername">Confirmed By Username</span></th>
+            <th><span jhiTranslate="app.guestRequest.eventDate">Event Date</span></th>
+            <th><span jhiTranslate="app.guestRequest.guestStudent">Guest Student</span></th>
+            
+            <th><span jhiTranslate="app.guestRequest.hostStudent">Host Student</span></th>
+            
+            <th><span jhiTranslate="app.guestRequest.manuallyConfirmed">Manually Confirmed</span></th>
+            <th><span jhiTranslate="app.guestRequest.submittedByUsername">Submitted By Username</span></th>
             <th></th>
             </tr>
             </thead>
             <tbody>
             <tr *ngFor="let guestRequest of guestRequests ;trackBy: trackId">
                 <td><a [routerLink]="['/guest-requests', guestRequest.id, 'view']">{{guestRequest.id}}</a></td>
+                
+                <td>{{guestRequest.comments}}</td>
+                <td>{{guestRequest.confirmationNotes}}</td>
+                <td>{{guestRequest.confirmed}}</td>
+                <td>{{guestRequest.confirmedByUsername}}</td>
+                <td>{{guestRequest.eventDate}}</td>
+                <td>
+                    <div *ngIf="guestRequest.guestStudentId">
+                        <a [routerLink]="['/students', guestRequest.guestStudentId , 'view' ]" >{{guestRequest.guestStudentIdentifier}}</a>
+                    </div>
+                </td>
+                
+                <td>
+                    <div *ngIf="guestRequest.hostStudentId">
+                        <a [routerLink]="['/students', guestRequest.hostStudentId , 'view' ]" >{{guestRequest.hostStudentIdentifier}}</a>
+                    </div>
+                </td>
+                
+                <td>{{guestRequest.manuallyConfirmed}}</td>
+                <td>{{guestRequest.submittedByUsername}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

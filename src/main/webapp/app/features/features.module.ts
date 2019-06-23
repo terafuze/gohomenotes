@@ -15,7 +15,7 @@ import { SchoolGradeModule } from './school-grade/school-grade.module';
 import { StudentModule } from './student/student.module';
 import { StudentRegistrationModule } from './student-registration/student-registration.module';
 import { TeacherModule } from './teacher/teacher.module';
-import { TransportationChangeModule } from './transportation-change/transportation-change.module';
+import { TransportationChangeRequestModule } from './transportation-change-request/transportation-change-request.module';
 import { UserProfileModule } from './user-profile/user-profile.module';
 
 
@@ -37,7 +37,7 @@ import { UserProfileModule } from './user-profile/user-profile.module';
         StudentModule,
         StudentRegistrationModule,
         TeacherModule,
-        TransportationChangeModule,
+        TransportationChangeRequestModule,
         UserProfileModule,
         
     ],

@@ -18,8 +18,6 @@ import com.terafuze.gohomenotes.web.models.HostRequestModel;
 import com.terafuze.gohomenotes.web.mappers.HostRequestMapper;
 
 
-
-
 /**
  * Service Implementation for managing Host Requests.
  */
@@ -77,8 +75,11 @@ public class HostRequestService {
     @Transactional(readOnly = true)
     public Optional<HostRequestModel> findOne(Long id) {
         log.debug("Request to get HostRequest : {}", id);
-        return hostRequestRepository.findById(id)
-        	.map(hostRequestMapper::toModel);
+        Optional<HostRequest> hostRequest = this.hostRequestRepository.findById(id);
+        Optional<HostRequestModel> model = hostRequest.map(this.hostRequestMapper::toModel);
+        
+
+        return model;
     }
 
     /**

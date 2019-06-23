@@ -4,33 +4,31 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbActiveModal, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
-import { ITransportationChange } from 'app/shared/model/transportation-change.model';
-import { TransportationChangeService } from './transportation-change.service';
+import { ITransportationChangeRequest } from 'app/shared/model/transportation-change-request.model';
+import { TransportationChangeRequestService } from './transportation-change-request.service';
 
 @Component({
-    selector: 'app-delete-transportation-change',
-    templateUrl: './delete-transportation-change.component.html'
+    selector: 'app-delete-transportation-change-request',
+    templateUrl: './delete-transportation-change-request.component.html'
 })
-export class DeleteTransportationChangeComponent {
-
-    transportationChange: ITransportationChange;
+export class DeleteTransportationChangeRequestComponent {
+    transportationChangeRequest: ITransportationChangeRequest;
 
     constructor(
-        private transportationChangeService: TransportationChangeService,
+        private transportationChangeRequestService: TransportationChangeRequestService,
         public activeModal: NgbActiveModal,
         private eventManager: JhiEventManager
-    ) {
-    }
+    ) {}
 
     clear() {
         this.activeModal.dismiss('cancel');
     }
 
     confirmDelete(id: number) {
-        this.transportationChangeService.delete(id).subscribe(response => {
+        this.transportationChangeRequestService.delete(id).subscribe(response => {
             this.eventManager.broadcast({
-                name: 'transportationChangeListModification',
-                content: 'Deleted a transportationChange'
+                name: 'transportationChangeRequestListModification',
+                content: 'Deleted a transportationChangeRequest'
             });
             this.activeModal.dismiss(true);
         });
@@ -38,22 +36,22 @@ export class DeleteTransportationChangeComponent {
 }
 
 @Component({
-    selector: 'app-delete-transportation-change-popup',
+    selector: 'app-delete-transportation-change-request-popup',
     template: ''
 })
-export class DeleteTransportationChangePopupComponent implements OnInit, OnDestroy {
+export class DeleteTransportationChangeRequestPopupComponent implements OnInit, OnDestroy {
     private ngbModalRef: NgbModalRef;
 
     constructor(private activatedRoute: ActivatedRoute, private router: Router, private modalService: NgbModal) {}
 
     ngOnInit() {
-        this.activatedRoute.data.subscribe(({ transportationChange }) => {
+        this.activatedRoute.data.subscribe(({ transportationChangeRequest }) => {
             setTimeout(() => {
-                this.ngbModalRef = this.modalService.open(DeleteTransportationChangeComponent as Component, {
+                this.ngbModalRef = this.modalService.open(DeleteTransportationChangeRequestComponent as Component, {
                     size: 'lg',
                     backdrop: 'static'
                 });
-                this.ngbModalRef.componentInstance.transportationChange = transportationChange;
+                this.ngbModalRef.componentInstance.transportationChangeRequest = transportationChangeRequest;
                 this.ngbModalRef.result.then(
                     result => {
                         this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });

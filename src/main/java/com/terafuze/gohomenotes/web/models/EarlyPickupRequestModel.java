@@ -24,6 +24,25 @@ public class EarlyPickupRequestModel implements Serializable {
     public String identifier;
 
     
+    private String comments;
+    
+    @NotNull
+    private LocalDate eventDate;
+    
+    private String pickupPerson;
+    
+    private String pickupPersonPhone;
+    
+    private LocalTime pickupTime;
+    
+    private Boolean returning;
+    
+    private LocalTime returnTime;
+    
+    
+    
+    private String submittedByUsername;
+    
 
     public String getIdentifier() {
         return this.identifier;
@@ -41,6 +60,79 @@ public class EarlyPickupRequestModel implements Serializable {
         this.id = id;
     }
 
+    
+    public String getComments() {
+        return this.comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+    
+    
+    public LocalDate getEventDate() {
+        return this.eventDate;
+    }
+
+    public void setEventDate(LocalDate eventDate) {
+        this.eventDate = eventDate;
+    }
+    
+    
+    public String getPickupPerson() {
+        return this.pickupPerson;
+    }
+
+    public void setPickupPerson(String pickupPerson) {
+        this.pickupPerson = pickupPerson;
+    }
+    
+    
+    public String getPickupPersonPhone() {
+        return this.pickupPersonPhone;
+    }
+
+    public void setPickupPersonPhone(String pickupPersonPhone) {
+        this.pickupPersonPhone = pickupPersonPhone;
+    }
+    
+    
+    public LocalTime getPickupTime() {
+        return this.pickupTime;
+    }
+
+    public void setPickupTime(LocalTime pickupTime) {
+        this.pickupTime = pickupTime;
+    }
+    
+    
+    public Boolean getReturning() {
+        return this.returning;
+    }
+
+    public void setReturning(Boolean returning) {
+        this.returning = returning;
+    }
+    
+    
+    public LocalTime getReturnTime() {
+        return this.returnTime;
+    }
+
+    public void setReturnTime(LocalTime returnTime) {
+        this.returnTime = returnTime;
+    }
+    
+    
+    
+    public String getSubmittedByUsername() {
+        return this.submittedByUsername;
+    }
+
+    public void setSubmittedByUsername(String submittedByUsername) {
+        this.submittedByUsername = submittedByUsername;
+    }
+    
     
 
     @Override
@@ -68,6 +160,14 @@ public class EarlyPickupRequestModel implements Serializable {
     public String toString() {
         return "EarlyPickupRequestModel{" +
             "id=" + getId() +
+            ", comments='" + this.getComments() + "'" +
+            ", eventDate='" + this.getEventDate() + "'" +
+            ", pickupPerson='" + this.getPickupPerson() + "'" +
+            ", pickupPersonPhone='" + this.getPickupPersonPhone() + "'" +
+            ", pickupTime='" + this.getPickupTime() + "'" +
+            ", returning='" + this.getReturning() + "'" +
+            ", returnTime='" + this.getReturnTime() + "'" +
+            ", submittedByUsername='" + this.getSubmittedByUsername() + "'" +
             "}";
     }
 }

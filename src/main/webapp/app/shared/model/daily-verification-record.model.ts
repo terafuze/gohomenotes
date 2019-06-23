@@ -3,7 +3,7 @@ export interface IDailyVerificationRecord {
     id?: number;
     identifier?: string;
     goHomeNotesReport?: any;
-    goHomeNotesReportContentType?: string;
+    goHomeNotesReportMimeType?: string;
     timestamp?: any;
 }
 
@@ -12,7 +12,7 @@ export class DailyVerificationRecord implements IDailyVerificationRecord {
         public id?: number,
         public identifier?: string,
         goHomeNotesReport?: any,
-        goHomeNotesReportContentType?: string,
+        goHomeNotesReportMimeType?: string,
         public timestamp?: any
     ) { }
 }

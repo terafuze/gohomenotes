@@ -10,10 +10,10 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,15 +22,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.codahale.metrics.annotation.Timed;
-import com.terafuze.gohomenotes.service.DailyVerificationRecordService;
+import io.swagger.annotations.Api;
+import io.github.jhipster.web.util.ResponseUtil;
+
 import com.terafuze.gohomenotes.web.errors.BadRequestAlertException;
-import com.terafuze.gohomenotes.web.models.DailyVerificationRecordModel;
 import com.terafuze.gohomenotes.web.utils.HeaderUtil;
 
-import io.github.jhipster.web.util.ResponseUtil;
-import io.swagger.annotations.Api;
+import com.terafuze.gohomenotes.service.DailyVerificationRecordService;
+import com.terafuze.gohomenotes.web.models.DailyVerificationRecordModel;
 
 
 /**
@@ -111,16 +111,16 @@ public class DailyVerificationRecordRestController {
      * @param id the id of an existing Daily Verification Record
      * @return a ResponseEntity with status 200 (OK) and with body containing the file content or with status 404 if not found
      */
-    @GetMapping("/daily-verification-records/{id}/go-home-notes-reports")
+    @GetMapping("/daily-verification-records/{id}/content")
     @Timed
-    public ResponseEntity<?> getGoHomeNotesReport(@PathVariable Long id) {
+    public ResponseEntity<?> getGoHomeNotesReportContent(@PathVariable Long id) {
         log.debug("REST request to the Go Home Notes Reports file content for DailyVerificationRecord : {}", id);
         Optional<DailyVerificationRecordModel> dailyVerificationRecordModel = dailyVerificationRecordService.findOne(id);
         if (dailyVerificationRecordModel.isPresent()) {
             InputStreamResource inputStreamResource = new InputStreamResource(new ByteArrayInputStream(dailyVerificationRecordModel.get().getGoHomeNotesReport()));
             HttpHeaders headers = new HttpHeaders();
             headers.setContentLength(dailyVerificationRecordModel.get().getGoHomeNotesReportContentLength());
-            headers.set("Content-Type", dailyVerificationRecordModel.get().getGoHomeNotesReportContentType());
+            headers.set("Content-Type", dailyVerificationRecordModel.get().getGoHomeNotesReportMimeType());
             return new ResponseEntity<Object>(inputStreamResource, headers, HttpStatus.OK);
         }
         return ResponseUtil.wrapOrNotFound(dailyVerificationRecordModel);

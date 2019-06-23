@@ -15,17 +15,17 @@
                 <label class="form-control-label" jhiTranslate="app.dailyVerificationRecord.goHomeNotesReport" for="go_home_notes_report">Go Home Notes Report</label>
                     <div>
                         <div *ngIf="dailyVerificationRecord.goHomeNotesReport" class="form-text text-danger clearfix">
-                            <a class="pull-left" (click)="openFile(dailyVerificationRecord.goHomeNotesReportContentType, dailyVerificationRecord.goHomeNotesReport)" jhiTranslate="entity.action.open">open</a><br>
-                            <span class="pull-left">{{dailyVerificationRecord.goHomeNotesReportContentType}}, {{byteSize(dailyVerificationRecord.goHomeNotesReport)}}</span>
-                            <button type="button" (click)="dailyVerificationRecord.goHomeNotesReport=null;dailyVerificationRecord.goHomeNotesReportContentType=null;"
+                            <a class="pull-left" (click)="openFile(dailyVerificationRecord.goHomeNotesReportMimeType, dailyVerificationRecord.goHomeNotesReport)" jhiTranslate="entity.action.open">open</a><br>
+                            <span class="pull-left">{{dailyVerificationRecord.goHomeNotesReportMimeType}}, {{byteSize(dailyVerificationRecord.goHomeNotesReport)}}</span>
+                            <button type="button" (click)="dailyVerificationRecord.goHomeNotesReport=null;dailyVerificationRecord.goHomeNotesReportMimeType=null;"
                                     class="btn btn-secondary btn-xs pull-right">
                                 <fa-icon [icon]="'times'"></fa-icon>
                             </button>
                         </div>
                         <input type="file" id="file_goHomeNotesReport" (change)="setFileData($event, dailyVerificationRecord, 'goHomeNotesReport', false)" jhiTranslate="entity.action.addblob"/>
                     </div>
-                    <input type="hidden" class="form-control" name="finishCode" id="goHomeNotesReport" [(ngModel)]="dailyVerificationRecord.goHomeNotesReport" />
-                    <input type="hidden" class="form-control" name="finishCodeContentType" id="goHomeNotesReportContentType" [(ngModel)]="dailyVerificationRecord.goHomeNotesReportContentType" />
+                    <input type="hidden" class="form-control" name="go_home_notes_report" id="goHomeNotesReport" [(ngModel)]="dailyVerificationRecord.goHomeNotesReport" />
+                    <input type="hidden" class="form-control" name="go_home_notes_reportMimeType" id="goHomeNotesReportMimeType" [(ngModel)]="dailyVerificationRecord.goHomeNotesReportMimeType" />
                 </div>
                 <!-- Timestamp Form Field -->
                 <div class="form-group">
@@ -40,7 +40,8 @@
             </div>
                 </div>
                 
-                </div>
+                
+            </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>

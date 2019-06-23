@@ -18,8 +18,6 @@ import com.terafuze.gohomenotes.web.models.GuestRequestModel;
 import com.terafuze.gohomenotes.web.mappers.GuestRequestMapper;
 
 
-
-
 /**
  * Service Implementation for managing Guest Requests.
  */
@@ -77,8 +75,11 @@ public class GuestRequestService {
     @Transactional(readOnly = true)
     public Optional<GuestRequestModel> findOne(Long id) {
         log.debug("Request to get GuestRequest : {}", id);
-        return guestRequestRepository.findById(id)
-        	.map(guestRequestMapper::toModel);
+        Optional<GuestRequest> guestRequest = this.guestRequestRepository.findById(id);
+        Optional<GuestRequestModel> model = guestRequest.map(this.guestRequestMapper::toModel);
+        
+
+        return model;
     }
 
     /**

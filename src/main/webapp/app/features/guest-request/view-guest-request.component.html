@@ -6,6 +6,50 @@
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
                 
+                <dt><span jhiTranslate="app.guestRequest.comments">Comments</span></dt>
+                <dd>
+                    <span>{{guestRequest.comments}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.guestRequest.confirmationNotes">Confirmation Notes</span></dt>
+                <dd>
+                    <span>{{guestRequest.confirmationNotes}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.guestRequest.confirmed">Confirmed</span></dt>
+                <dd>
+                    <span>{{guestRequest.confirmed}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.guestRequest.confirmedByUsername">Confirmed By Username</span></dt>
+                <dd>
+                    <span>{{guestRequest.confirmedByUsername}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.guestRequest.eventDate">Event Date</span></dt>
+                <dd>
+                    <span>{{guestRequest.eventDate}}</span>
+                </dd>
+                <!-- Guest Student Form Field based on ONE_TO_ONE relationship -->
+                <dt><span jhiTranslate="app.guestRequest.guestStudent">Guest Student</span></dt>
+                <dd>
+                    <div *ngIf="guestRequest.guestStudentId">
+                        <a [routerLink]="['/students', guestRequest.guestStudentId, 'view']">{{guestRequest.guestStudentIdentifier}}</a>
+                    </div>
+                </dd>
+                
+                <!-- Host Student Form Field based on ONE_TO_ONE relationship -->
+                <dt><span jhiTranslate="app.guestRequest.hostStudent">Host Student</span></dt>
+                <dd>
+                    <div *ngIf="guestRequest.hostStudentId">
+                        <a [routerLink]="['/students', guestRequest.hostStudentId, 'view']">{{guestRequest.hostStudentIdentifier}}</a>
+                    </div>
+                </dd>
+                
+                <dt><span jhiTranslate="app.guestRequest.manuallyConfirmed">Manually Confirmed</span></dt>
+                <dd>
+                    <span>{{guestRequest.manuallyConfirmed}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.guestRequest.submittedByUsername">Submitted By Username</span></dt>
+                <dd>
+                    <span>{{guestRequest.submittedByUsername}}</span>
+                </dd>
             </dl>
             <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>

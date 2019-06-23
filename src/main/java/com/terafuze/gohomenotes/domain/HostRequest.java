@@ -46,10 +46,19 @@ public class HostRequest implements Serializable {
 
     @Column(name = "confirmed_by_username")
     private String confirmedByUsername;
-
-    @Column(name = "event_date")
+    
+    @NotNull
+    @Column(name = "event_date", nullable = false)
     private LocalDate eventDate;
-
+    
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Student guestStudent;
+    
+    @OneToOne
+    @JoinColumn(unique = true)
+    private Student hostStudent;
+    
     @Column(name = "manually_confirmed")
     private Boolean manuallyConfirmed;
 
@@ -133,6 +142,35 @@ public class HostRequest implements Serializable {
     public void setEventDate(LocalDate eventDate) {
         this.eventDate = eventDate;
     }
+    
+
+    
+    public Student getGuestStudent() {
+        return this.guestStudent;
+    }
+
+    public HostRequest guestStudent(Student guestStudent) {
+        this.guestStudent = guestStudent;
+        return this;
+    }
+
+    public void setGuestStudent(Student guestStudent) {
+        this.guestStudent = guestStudent;
+    }
+
+    
+    public Student getHostStudent() {
+        return this.hostStudent;
+    }
+
+    public HostRequest hostStudent(Student hostStudent) {
+        this.hostStudent = hostStudent;
+        return this;
+    }
+
+    public void setHostStudent(Student hostStudent) {
+        this.hostStudent = hostStudent;
+    }
 
     
     public Boolean getManuallyConfirmed() {
@@ -194,6 +232,6 @@ public class HostRequest implements Serializable {
             ", eventDate='" + getEventDate() + "'" +
             ", manuallyConfirmed='" + getManuallyConfirmed() + "'" +
             ", submittedByUsername='" + getSubmittedByUsername() + "'" +
-            "}";
+        "}";
     }
 }

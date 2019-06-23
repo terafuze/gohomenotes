@@ -9,7 +9,91 @@
                     <input type="text" class="form-control" id="id" name="id" [ngModel]="guestRequest.id" readonly />
                 </div>
                 
+                
+                <!-- Comments Form Field -->
+                
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.guestRequest.comments" for="comments">Comments</label>
+                <input type="text" class="form-control" name="comments" id="comments"
+                    [(ngModel)]="guestRequest.comments" /></div>
+                
+                
+                <!-- Confirmation Notes Form Field -->
+                
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.guestRequest.confirmationNotes" for="confirmation_notes">Confirmation Notes</label>
+                <input type="text" class="form-control" name="confirmationNotes" id="confirmation_notes"
+                    [(ngModel)]="guestRequest.confirmationNotes" /></div>
+                
+                
+                <!-- Confirmed Form Field -->
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.guestRequest.confirmed" for="confirmed">Confirmed</label>
+                <input type="checkbox" class="form-control" name="confirmed" id="confirmed"
+                    [(ngModel)]="guestRequest.confirmed" />
+            </div>
+                
+                
+                <!-- Confirmed By Username Form Field -->
+                
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.guestRequest.confirmedByUsername" for="confirmed_by_username">Confirmed By Username</label>
+                <input type="text" class="form-control" name="confirmedByUsername" id="confirmed_by_username"
+                    [(ngModel)]="guestRequest.confirmedByUsername" /></div>
+                
+                
+                <!-- Event Date Form Field -->
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.guestRequest.eventDate" for="event_date">Event Date</label>
+                <div class="input-group">
+                    <input id="event_date" type="text" class="form-control" name="eventDate" ngbDatepicker  #eventDateDp="ngbDatepicker" [(ngModel)]="guestRequest.eventDate"
+                    required/>
+                    <span class="input-group-append">
+                        <button type="button" class="btn btn-secondary" (click)="eventDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                    </span>
+                    <div [hidden]="!(editForm.controls.eventDate?.dirty && editForm.controls.eventDate?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.eventDate?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+                    </div>
+            </div>
+                
+                
+                <!-- Guest Student Form Field -->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="app.guestRequest.guestStudent" for="guest_student">Guest Student</label>
+                    <select class="form-control" id="guest_student" name="guestStudent" [(ngModel)]="guestRequest.guestStudentId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="studentOption.id" *ngFor="let studentOption of students; trackBy: trackStudentById">{{studentOption.identifier}}</option>
+                    </select>
                 </div>
+                <!-- Host Student Form Field -->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="app.guestRequest.hostStudent" for="host_student">Host Student</label>
+                    <select class="form-control" id="host_student" name="hostStudent" [(ngModel)]="guestRequest.hostStudentId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="studentOption.id" *ngFor="let studentOption of students; trackBy: trackStudentById">{{studentOption.identifier}}</option>
+                    </select>
+                </div>
+                <!-- Manually Confirmed Form Field -->
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.guestRequest.manuallyConfirmed" for="manually_confirmed">Manually Confirmed</label>
+                <input type="checkbox" class="form-control" name="manuallyConfirmed" id="manually_confirmed"
+                    [(ngModel)]="guestRequest.manuallyConfirmed" />
+            </div>
+                
+                
+                <!-- Submitted By Username Form Field -->
+                
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.guestRequest.submittedByUsername" for="submitted_by_username">Submitted By Username</label>
+                <input type="text" class="form-control" name="submittedByUsername" id="submitted_by_username"
+                    [(ngModel)]="guestRequest.submittedByUsername" /></div>
+                
+                
+            </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>

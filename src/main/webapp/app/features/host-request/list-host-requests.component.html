@@ -18,6 +18,10 @@
             <th><span jhiTranslate="app.hostRequest.confirmed">Confirmed</span></th>
             <th><span jhiTranslate="app.hostRequest.confirmedByUsername">Confirmed By Username</span></th>
             <th><span jhiTranslate="app.hostRequest.eventDate">Event Date</span></th>
+            <th><span jhiTranslate="app.hostRequest.guestStudent">Guest Student</span></th>
+            
+            <th><span jhiTranslate="app.hostRequest.hostStudent">Host Student</span></th>
+            
             <th><span jhiTranslate="app.hostRequest.manuallyConfirmed">Manually Confirmed</span></th>
             <th><span jhiTranslate="app.hostRequest.submittedByUsername">Submitted By Username</span></th>
             <th></th>
@@ -26,20 +30,26 @@
             <tbody>
             <tr *ngFor="let hostRequest of hostRequests ;trackBy: trackId">
                 <td><a [routerLink]="['/host-requests', hostRequest.id, 'view']">{{hostRequest.id}}</a></td>
+                
                 <td>{{hostRequest.comments}}</td>
-                
                 <td>{{hostRequest.confirmationNotes}}</td>
-                
                 <td>{{hostRequest.confirmed}}</td>
-                
                 <td>{{hostRequest.confirmedByUsername}}</td>
-                
                 <td>{{hostRequest.eventDate}}</td>
+                <td>
+                    <div *ngIf="hostRequest.guestStudentId">
+                        <a [routerLink]="['/students', hostRequest.guestStudentId , 'view' ]" >{{hostRequest.guestStudentIdentifier}}</a>
+                    </div>
+                </td>
+                
+                <td>
+                    <div *ngIf="hostRequest.hostStudentId">
+                        <a [routerLink]="['/students', hostRequest.hostStudentId , 'view' ]" >{{hostRequest.hostStudentIdentifier}}</a>
+                    </div>
+                </td>
                 
                 <td>{{hostRequest.manuallyConfirmed}}</td>
-                
                 <td>{{hostRequest.submittedByUsername}}</td>
-                
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

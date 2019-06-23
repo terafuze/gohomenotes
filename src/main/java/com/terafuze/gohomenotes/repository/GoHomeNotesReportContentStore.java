@@ -9,6 +9,6 @@ import com.terafuze.gohomenotes.domain.DailyVerificationRecord;
  *
  * ContentStore provides several methods for handling content: setContent, getContent, and unsetContent.
  */
-public interface GoHomeNotesReportStore extends ContentStore<DailyVerificationRecord, String> {
+public interface GoHomeNotesReportContentStore extends ContentStore<DailyVerificationRecord, String> {
 
 }

@@ -5,20 +5,22 @@ import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { ActivatedRoute } from '@angular/router';
 
 import { Principal } from 'app/core';
-import { ITransportationChange } from 'app/shared/model/transportation-change.model';
-import { TransportationChangeService } from './transportation-change.service';
+import { ITransportationChangeRequest } from 'app/shared/model/transportation-change-request.model';
+import { TransportationChangeRequestService } from './transportation-change-request.service';
+
+
 @Component({
-    selector: 'app-list-transportation-changes',
-    templateUrl: './list-transportation-changes.component.html'
+    selector: 'app-list-transportation-change-requests',
+    templateUrl: './list-transportation-change-requests.component.html'
 })
-export class ListTransportationChangesComponent implements OnInit, OnDestroy {
-    transportationChanges: ITransportationChange[];
+export class ListTransportationChangeRequestsComponent implements OnInit, OnDestroy {
+    transportationChangeRequests: ITransportationChangeRequest[];
     currentAccount: any;
     eventSubscriber: Subscription;
     
 
     constructor(
-        private transportationChangeService: TransportationChangeService,
+        private transportationChangeRequestService: TransportationChangeRequestService,
         private activatedRoute: ActivatedRoute,
         private jhiAlertService: JhiAlertService,
         private dataUtils: JhiDataUtils,
@@ -30,9 +32,9 @@ export class ListTransportationChangesComponent implements OnInit, OnDestroy {
         let dataLoaded: boolean = false;
         // If no items loaded so far, then load all of them
         if (!dataLoaded) {
-            this.transportationChangeService.query().subscribe(
-                (res: HttpResponse<ITransportationChange[]>) => {
-                    this.transportationChanges = res.body;
+            this.transportationChangeRequestService.query().subscribe(
+                (res: HttpResponse<ITransportationChangeRequest[]>) => {
+                    this.transportationChangeRequests = res.body;
                 },
                 (res: HttpErrorResponse) => this.onError(res.message)
             );
@@ -44,19 +46,19 @@ export class ListTransportationChangesComponent implements OnInit, OnDestroy {
         this.principal.identity().then(account => {
             this.currentAccount = account;
         });
-        this.registerChangeInTransportationChanges();
+        this.registerChangeInTransportationChangeRequests();
     }
 
     ngOnDestroy() {
         this.eventManager.destroy(this.eventSubscriber);
     }
 
-    trackId(index: number, item: ITransportationChange) {
+    trackId(index: number, item: ITransportationChangeRequest) {
         return item.id;
     }
 
-    registerChangeInTransportationChanges() {
-        this.eventSubscriber = this.eventManager.subscribe('transportationChangeListModification', response => this.loadAll());
+    registerChangeInTransportationChangeRequests() {
+        this.eventSubscriber = this.eventManager.subscribe('transportationChangeRequestListModification', response => this.loadAll());
     }
 
     private onError(errorMessage: string) {

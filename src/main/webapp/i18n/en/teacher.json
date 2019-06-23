@@ -15,7 +15,6 @@
             "detail": {
                 "title": "Teacher"
             },
-            "emailAddress": "Email Address",
             "firstName": "First Name",
             "lastName": "Last Name",
             "school": "School",

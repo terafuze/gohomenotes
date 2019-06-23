@@ -1,0 +1,144 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="nathanward (generated)" id="1561251047136-1">
+        <createTable tableName="transportation_change_request">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="transportation_change_requestPK"/>
+            </column>
+            <column name="comments" type="VARCHAR(255)"/>
+            <column name="event_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="submitted_by_username" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561251047136-2">
+        <addColumn tableName="early_pickup_request">
+            <column name="comments" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561251047136-3">
+        <addColumn tableName="guest_request">
+            <column name="comments" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561251047136-4">
+        <addColumn tableName="guest_request">
+            <column name="confirmation_notes" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561251047136-5">
+        <addColumn tableName="guest_request">
+            <column name="confirmed" type="boolean"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561251047136-6">
+        <addColumn tableName="guest_request">
+            <column name="confirmed_by_username" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561251047136-7">
+        <addColumn tableName="early_pickup_request">
+            <column name="event_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561251047136-8">
+        <addColumn tableName="guest_request">
+            <column name="event_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561251047136-9">
+        <addColumn tableName="guest_request">
+            <column name="guest_student_id" type="int8"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561251047136-10">
+        <addColumn tableName="host_request">
+            <column name="guest_student_id" type="int8"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561251047136-11">
+        <addColumn tableName="guest_request">
+            <column name="host_student_id" type="int8"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561251047136-12">
+        <addColumn tableName="host_request">
+            <column name="host_student_id" type="int8"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561251047136-13">
+        <addColumn tableName="guest_request">
+            <column name="manually_confirmed" type="boolean"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561251047136-14">
+        <addColumn tableName="early_pickup_request">
+            <column name="pickup_person" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561251047136-15">
+        <addColumn tableName="early_pickup_request">
+            <column name="pickup_person_phone" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561251047136-16">
+        <addColumn tableName="early_pickup_request">
+            <column name="pickup_time" type="date"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561251047136-17">
+        <addColumn tableName="early_pickup_request">
+            <column name="return_time" type="date"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561251047136-18">
+        <addColumn tableName="early_pickup_request">
+            <column name="returning" type="boolean"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561251047136-19">
+        <addColumn tableName="early_pickup_request">
+            <column name="submitted_by_username" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561251047136-20">
+        <addColumn tableName="guest_request">
+            <column name="submitted_by_username" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561251047136-21">
+        <addUniqueConstraint columnNames="guest_student_id" constraintName="UC_GUEST_REQUESTGUEST_STUDENT_ID_COL" tableName="guest_request"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561251047136-22">
+        <addUniqueConstraint columnNames="host_student_id" constraintName="UC_GUEST_REQUESTHOST_STUDENT_ID_COL" tableName="guest_request"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561251047136-23">
+        <addUniqueConstraint columnNames="guest_student_id" constraintName="UC_HOST_REQUESTGUEST_STUDENT_ID_COL" tableName="host_request"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561251047136-24">
+        <addUniqueConstraint columnNames="host_student_id" constraintName="UC_HOST_REQUESTHOST_STUDENT_ID_COL" tableName="host_request"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561251047136-25">
+        <addForeignKeyConstraint baseColumnNames="host_student_id" baseTableName="guest_request" constraintName="FK84s3urd543f9l6cgfxsbla3md" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="student"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561251047136-26">
+        <addForeignKeyConstraint baseColumnNames="host_student_id" baseTableName="host_request" constraintName="FKacq4rupp82knb1e93eh1lr2gy" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="student"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561251047136-27">
+        <addForeignKeyConstraint baseColumnNames="guest_student_id" baseTableName="host_request" constraintName="FKg1ns1msxc4hoh2my9j9u6fyrw" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="student"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561251047136-28">
+        <addForeignKeyConstraint baseColumnNames="guest_student_id" baseTableName="guest_request" constraintName="FKkijilvj2wah0ldhwb1mfe21vr" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="student"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561251047136-29">
+        <dropTable tableName="transportation_change"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561251047136-30">
+        <addNotNullConstraint columnDataType="date" columnName="event_date" tableName="host_request"/>
+    </changeSet>
+</databaseChangeLog>

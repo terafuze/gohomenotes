@@ -14,4 +14,5 @@
 	<include file="config/liquibase/changelog/20190514083306_changelog.xml"/>
 	<include file="config/liquibase/changelog/20190514124308_changelog.xml"/>
 	<include file="config/liquibase/changelog/gohomenotes_authorities_changelog.xml"/>
+	<include file="config/liquibase/changelog/20190623005040_changelog.xml"/>
 </databaseChangeLog>

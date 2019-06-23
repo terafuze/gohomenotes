@@ -44,12 +44,7 @@ export class JhiLoginModalComponent implements AfterViewInit {
     }
 
     login() {
-        this.loginService
-            .login({
-                username: this.username,
-                password: this.password,
-                rememberMe: this.rememberMe
-            })
+        this.loginService.login({username: this.username, password: this.password,rememberMe: this.rememberMe})
             .then(() => {
                 this.authenticationError = false;
                 this.activeModal.dismiss('login success');

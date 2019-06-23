@@ -9,7 +9,94 @@
                     <input type="text" class="form-control" id="id" name="id" [ngModel]="earlyPickupRequest.id" readonly />
                 </div>
                 
-                </div>
+                
+                <!-- Comments Form Field -->
+                
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.earlyPickupRequest.comments" for="comments">Comments</label>
+                <input type="text" class="form-control" name="comments" id="comments"
+                    [(ngModel)]="earlyPickupRequest.comments" /></div>
+                
+                
+                <!-- Event Date Form Field -->
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.earlyPickupRequest.eventDate" for="event_date">Event Date</label>
+                <div class="input-group">
+                    <input id="event_date" type="text" class="form-control" name="eventDate" ngbDatepicker  #eventDateDp="ngbDatepicker" [(ngModel)]="earlyPickupRequest.eventDate"
+                    required/>
+                    <span class="input-group-append">
+                        <button type="button" class="btn btn-secondary" (click)="eventDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                    </span>
+                    <div [hidden]="!(editForm.controls.eventDate?.dirty && editForm.controls.eventDate?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.eventDate?.errors?.required" jhiTranslate="entity.validation.required">
+                   This field is required.
+                </small>
+            </div>
+                    </div>
+            </div>
+                
+                
+                <!-- Pickup Person Form Field -->
+                
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.earlyPickupRequest.pickupPerson" for="pickup_person">Pickup Person</label>
+                <input type="text" class="form-control" name="pickupPerson" id="pickup_person"
+                    [(ngModel)]="earlyPickupRequest.pickupPerson" /></div>
+                
+                
+                <!-- Pickup Person Phone Form Field -->
+                
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.earlyPickupRequest.pickupPersonPhone" for="pickup_person_phone">Pickup Person Phone</label>
+                <input type="text" class="form-control" name="pickupPersonPhone" id="pickup_person_phone"
+                    [(ngModel)]="earlyPickupRequest.pickupPersonPhone" /></div>
+                
+                
+                <!-- Pickup Time Form Field -->
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.earlyPickupRequest.pickupTime" for="pickup_time">Pickup Time</label>
+                <div class="input-group">
+                    <input id="pickup_time" type="text" class="form-control" name="pickupTime" ngbDatepicker  #pickupTimeDp="ngbDatepicker" [(ngModel)]="earlyPickupRequest.pickupTime"
+                    required/>
+                    <span class="input-group-append">
+                        <button type="button" class="btn btn-secondary" (click)="pickupTimeDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                    </span>
+                    </div>
+            </div>
+                
+                
+                <!-- Returning Form Field -->
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.earlyPickupRequest.returning" for="returning">Returning</label>
+                <input type="checkbox" class="form-control" name="returning" id="returning"
+                    [(ngModel)]="earlyPickupRequest.returning" />
+            </div>
+                
+                
+                <!-- Return Time Form Field -->
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.earlyPickupRequest.returnTime" for="return_time">Return Time</label>
+                <div class="input-group">
+                    <input id="return_time" type="text" class="form-control" name="returnTime" ngbDatepicker  #returnTimeDp="ngbDatepicker" [(ngModel)]="earlyPickupRequest.returnTime"
+                    required/>
+                    <span class="input-group-append">
+                        <button type="button" class="btn btn-secondary" (click)="returnTimeDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                    </span>
+                    </div>
+            </div>
+                
+                
+                
+                <!-- Submitted By Username Form Field -->
+                
+                <div class="form-group">
+                <label class="form-control-label" jhiTranslate="app.earlyPickupRequest.submittedByUsername" for="submitted_by_username">Submitted By Username</label>
+                <input type="text" class="form-control" name="submittedByUsername" id="submitted_by_username"
+                    [(ngModel)]="earlyPickupRequest.submittedByUsername" /></div>
+                
+                
+            </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>

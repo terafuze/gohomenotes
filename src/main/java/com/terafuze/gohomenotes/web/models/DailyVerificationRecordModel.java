@@ -25,7 +25,7 @@ public class DailyVerificationRecordModel implements Serializable {
     @Lob
     private byte[] goHomeNotesReport;
 
-    private String goHomeNotesReportContentType;
+    private String goHomeNotesReportMimeType;
 
     private Long goHomeNotesReportContentLength;
     
@@ -57,12 +57,12 @@ public class DailyVerificationRecordModel implements Serializable {
         return goHomeNotesReport;
     }
 
-    public String getGoHomeNotesReportContentType() {
-        return goHomeNotesReportContentType;
+    public String getGoHomeNotesReportMimeType() {
+        return goHomeNotesReportMimeType;
     }
 
-    public void setGoHomeNotesReportContentType(String goHomeNotesReportContentType) {
-        this.goHomeNotesReportContentType = goHomeNotesReportContentType;
+    public void setGoHomeNotesReportMimeType(String goHomeNotesReportMimeType) {
+        this.goHomeNotesReportMimeType = goHomeNotesReportMimeType;
     }
 
     public Long getGoHomeNotesReportContentLength() {

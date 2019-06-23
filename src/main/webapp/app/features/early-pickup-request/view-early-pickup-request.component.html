@@ -6,6 +6,39 @@
             <jhi-alert-error></jhi-alert-error>
             <dl class="row-md jh-entity-details">
                 
+                <dt><span jhiTranslate="app.earlyPickupRequest.comments">Comments</span></dt>
+                <dd>
+                    <span>{{earlyPickupRequest.comments}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.earlyPickupRequest.eventDate">Event Date</span></dt>
+                <dd>
+                    <span>{{earlyPickupRequest.eventDate}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.earlyPickupRequest.pickupPerson">Pickup Person</span></dt>
+                <dd>
+                    <span>{{earlyPickupRequest.pickupPerson}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.earlyPickupRequest.pickupPersonPhone">Pickup Person Phone</span></dt>
+                <dd>
+                    <span>{{earlyPickupRequest.pickupPersonPhone}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.earlyPickupRequest.pickupTime">Pickup Time</span></dt>
+                <dd>
+                    <span>{{earlyPickupRequest.pickupTime}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.earlyPickupRequest.returning">Returning</span></dt>
+                <dd>
+                    <span>{{earlyPickupRequest.returning}}</span>
+                </dd>
+                <dt><span jhiTranslate="app.earlyPickupRequest.returnTime">Return Time</span></dt>
+                <dd>
+                    <span>{{earlyPickupRequest.returnTime}}</span>
+                </dd>
+                
+                <dt><span jhiTranslate="app.earlyPickupRequest.submittedByUsername">Submitted By Username</span></dt>
+                <dd>
+                    <span>{{earlyPickupRequest.submittedByUsername}}</span>
+                </dd>
             </dl>
             <button type="submit" (click)="previousState()" class="btn btn-info">
                 <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>

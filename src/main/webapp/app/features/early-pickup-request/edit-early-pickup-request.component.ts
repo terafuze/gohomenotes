@@ -7,6 +7,8 @@ import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IEarlyPickupRequest } from 'app/shared/model/early-pickup-request.model';
 import { EarlyPickupRequestService } from './early-pickup-request.service';
 
+import { IStudent } from 'app/shared/model/student.model';
+import { StudentService } from 'app/features/student';
 
 @Component({
     selector: 'app-edit-early-pickup-request',
@@ -18,12 +20,15 @@ export class EditEarlyPickupRequestComponent implements OnInit {
 
     isSaving: boolean;
 
+    // The list of Students from which to select
+    students: IStudent[];
     
     
 
     constructor(
         private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
+        private studentService: StudentService,
         private earlyPickupRequestService: EarlyPickupRequestService,
         private activatedRoute: ActivatedRoute
     ) {}
@@ -34,6 +39,12 @@ export class EditEarlyPickupRequestComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ earlyPickupRequest }) => {
             this.earlyPickupRequest = earlyPickupRequest;
         });
+        this.studentService.query().subscribe(
+            (res: HttpResponse<IStudent[]>) => {
+                this.students = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
         
     }
 
@@ -80,6 +91,10 @@ export class EditEarlyPickupRequestComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
+    
+    trackStudentById(index: number, item: IStudent) {
+        return item.id;
+    }
     
 
     // TODO if not needed, remove this function

@@ -18,8 +18,6 @@ import com.terafuze.gohomenotes.web.models.EarlyPickupRequestModel;
 import com.terafuze.gohomenotes.web.mappers.EarlyPickupRequestMapper;
 
 
-
-
 /**
  * Service Implementation for managing Early Pickup Requests.
  */
@@ -77,8 +75,11 @@ public class EarlyPickupRequestService {
     @Transactional(readOnly = true)
     public Optional<EarlyPickupRequestModel> findOne(Long id) {
         log.debug("Request to get EarlyPickupRequest : {}", id);
-        return earlyPickupRequestRepository.findById(id)
-        	.map(earlyPickupRequestMapper::toModel);
+        Optional<EarlyPickupRequest> earlyPickupRequest = this.earlyPickupRequestRepository.findById(id);
+        Optional<EarlyPickupRequestModel> model = earlyPickupRequest.map(this.earlyPickupRequestMapper::toModel);
+        
+
+        return model;
     }
 
     /**

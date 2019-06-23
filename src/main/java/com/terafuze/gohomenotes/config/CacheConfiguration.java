@@ -39,7 +39,7 @@ public class CacheConfiguration {
             cm.createCache(com.terafuze.gohomenotes.domain.Authority.class.getName(), jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.User.class.getName() + ".authorities", jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.Address.class.getName(), jcacheConfiguration);
-            cm.createCache(com.terafuze.gohomenotes.domain.Address.class.getName() + ".userProfile", jcacheConfiguration);
+            cm.createCache(com.terafuze.gohomenotes.domain.Address.class.getName() + ".userProfiles", jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.AfterSchoolProgram.class.getName(), jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.DailyVerificationRecord.class.getName(), jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.DismissalLocation.class.getName(), jcacheConfiguration);
@@ -67,7 +67,7 @@ public class CacheConfiguration {
             cm.createCache(com.terafuze.gohomenotes.domain.StudentRegistration.class.getName(), jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.Teacher.class.getName(), jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.Teacher.class.getName() + ".students", jcacheConfiguration);
-            cm.createCache(com.terafuze.gohomenotes.domain.TransportationChange.class.getName(), jcacheConfiguration);
+            cm.createCache(com.terafuze.gohomenotes.domain.TransportationChangeRequest.class.getName(), jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.UserProfile.class.getName(), jcacheConfiguration);
             };
     }

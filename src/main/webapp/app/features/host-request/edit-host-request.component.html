@@ -82,6 +82,22 @@
             </div>
                 
                 
+                <!-- Guest Student Form Field -->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="app.hostRequest.guestStudent" for="guest_student">Guest Student</label>
+                    <select class="form-control" id="guest_student" name="guestStudent" [(ngModel)]="hostRequest.guestStudentId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="studentOption.id" *ngFor="let studentOption of students; trackBy: trackStudentById">{{studentOption.identifier}}</option>
+                    </select>
+                </div>
+                <!-- Host Student Form Field -->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="app.hostRequest.hostStudent" for="host_student">Host Student</label>
+                    <select class="form-control" id="host_student" name="hostStudent" [(ngModel)]="hostRequest.hostStudentId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="studentOption.id" *ngFor="let studentOption of students; trackBy: trackStudentById">{{studentOption.identifier}}</option>
+                    </select>
+                </div>
                 <!-- Manually Confirmed Form Field -->
                 <div class="form-group">
                 <label class="form-control-label" jhiTranslate="app.hostRequest.manuallyConfirmed" for="manually_confirmed">Manually Confirmed</label>

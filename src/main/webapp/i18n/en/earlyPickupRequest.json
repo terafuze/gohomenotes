@@ -14,7 +14,16 @@
             },
             "detail": {
                 "title": "Early Pickup Request"
-            }
+            },
+            "comments": "Comments",
+            "eventDate": "Event Date",
+            "pickupPerson": "Pickup Person",
+            "pickupPersonPhone": "Pickup Person Phone",
+            "pickupTime": "Pickup Time",
+            "returning": "Returning",
+            "returnTime": "Return Time",
+            "student": "Student",
+            "submittedByUsername": "Submitted By Username"
         }
     }
 }

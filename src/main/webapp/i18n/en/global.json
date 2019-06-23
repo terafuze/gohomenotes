@@ -9,6 +9,27 @@
                 "main": "Views",
                 "customer": "Customer"
             },
+            "entities": {
+                "main": "Main Menu",
+                "address": "Address",
+                "afterSchoolProgram": "After School Program",
+                "dailyVerificationRecord": "Daily Verification Record",
+                "dismissalLocation": "Dismissal Location",
+                "earlyPickupRequest": "Early Pickup Request",
+                "familyRegistration": "Family Registration",
+                "guestRequest": "Guest Request",
+                "hostRequest": "Host Request",
+                "parent": "Parent",
+                "parentRegistration": "Parent Registration",
+                "school": "School",
+                "schoolGrade": "School Grade",
+                "student": "Student",
+                "studentRegistration": "Student Registration",
+                "teacher": "Teacher",
+                "transportationChangeRequest": "Transportation Change Request",
+                "userProfile": "User Profile"
+                
+            },
             "account": {
                 "main": "Account",
                 "settings": "Settings",

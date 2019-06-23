@@ -14,7 +14,16 @@
             },
             "detail": {
                 "title": "Guest Request"
-            }
+            },
+            "comments": "Comments",
+            "confirmationNotes": "Confirmation Notes",
+            "confirmed": "Confirmed",
+            "confirmedByUsername": "Confirmed By Username",
+            "eventDate": "Event Date",
+            "guestStudent": "Guest Student",
+            "hostStudent": "Host Student",
+            "manuallyConfirmed": "Manually Confirmed",
+            "submittedByUsername": "Submitted By Username"
         }
     }
 }

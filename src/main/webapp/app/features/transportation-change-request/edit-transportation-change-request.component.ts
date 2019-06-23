@@ -4,17 +4,17 @@ import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 
-import { ITransportationChange } from 'app/shared/model/transportation-change.model';
-import { TransportationChangeService } from './transportation-change.service';
+import { ITransportationChangeRequest } from 'app/shared/model/transportation-change-request.model';
+import { TransportationChangeRequestService } from './transportation-change-request.service';
 
 
 @Component({
-    selector: 'app-edit-transportation-change',
-    templateUrl: './edit-transportation-change.component.html'
+    selector: 'app-edit-transportation-change-request',
+    templateUrl: './edit-transportation-change-request.component.html'
 })
-export class EditTransportationChangeComponent implements OnInit {
+export class EditTransportationChangeRequestComponent implements OnInit {
 
-    private _transportationChange: ITransportationChange;
+    private _transportationChangeRequest: ITransportationChangeRequest;
 
     isSaving: boolean;
 
@@ -24,15 +24,15 @@ export class EditTransportationChangeComponent implements OnInit {
     constructor(
         private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
-        private transportationChangeService: TransportationChangeService,
+        private transportationChangeRequestService: TransportationChangeRequestService,
         private activatedRoute: ActivatedRoute
     ) {}
 
     ngOnInit() {
         this.isSaving = false;
         
-        this.activatedRoute.data.subscribe(({ transportationChange }) => {
-            this.transportationChange = transportationChange;
+        this.activatedRoute.data.subscribe(({ transportationChangeRequest }) => {
+            this.transportationChangeRequest = transportationChangeRequest;
         });
         
     }
@@ -55,16 +55,16 @@ export class EditTransportationChangeComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        if (this.transportationChange.id !== undefined) {
-            this.subscribeToSaveResponse(this.transportationChangeService.update(this.transportationChange));
+        if (this.transportationChangeRequest.id !== undefined) {
+            this.subscribeToSaveResponse(this.transportationChangeRequestService.update(this.transportationChangeRequest));
         } else {
             
-            this.subscribeToSaveResponse(this.transportationChangeService.create(this.transportationChange));
+            this.subscribeToSaveResponse(this.transportationChangeRequestService.create(this.transportationChangeRequest));
         }
     }
 
-    private subscribeToSaveResponse(result: Observable<HttpResponse<ITransportationChange>>) {
-        result.subscribe((res: HttpResponse<ITransportationChange>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+    private subscribeToSaveResponse(result: Observable<HttpResponse<ITransportationChangeRequest>>) {
+        result.subscribe((res: HttpResponse<ITransportationChangeRequest>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
     }
 
     private onSaveSuccess() {
@@ -94,11 +94,11 @@ export class EditTransportationChangeComponent implements OnInit {
         return option;
     }
 
-    get transportationChange() {
-        return this._transportationChange;
+    get transportationChangeRequest() {
+        return this._transportationChangeRequest;
     }
 
-    set transportationChange(transportationChange: ITransportationChange) {
-        this._transportationChange = transportationChange;
+    set transportationChangeRequest(transportationChangeRequest: ITransportationChangeRequest) {
+        this._transportationChangeRequest = transportationChangeRequest;
     }
 }

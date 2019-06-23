@@ -7,6 +7,8 @@ import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IGuestRequest } from 'app/shared/model/guest-request.model';
 import { GuestRequestService } from './guest-request.service';
 
+import { IStudent } from 'app/shared/model/student.model';
+import { StudentService } from 'app/features/student';
 
 @Component({
     selector: 'app-edit-guest-request',
@@ -18,12 +20,15 @@ export class EditGuestRequestComponent implements OnInit {
 
     isSaving: boolean;
 
+    // The list of Students from which to select
+    students: IStudent[];
     
     
 
     constructor(
         private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
+        private studentService: StudentService,
         private guestRequestService: GuestRequestService,
         private activatedRoute: ActivatedRoute
     ) {}
@@ -34,6 +39,12 @@ export class EditGuestRequestComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ guestRequest }) => {
             this.guestRequest = guestRequest;
         });
+        this.studentService.query().subscribe(
+            (res: HttpResponse<IStudent[]>) => {
+                this.students = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
         
     }
 
@@ -80,6 +91,10 @@ export class EditGuestRequestComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
+    
+    trackStudentById(index: number, item: IStudent) {
+        return item.id;
+    }
     
 
     // TODO if not needed, remove this function

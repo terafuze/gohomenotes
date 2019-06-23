@@ -63,6 +63,44 @@ public class DailyVerificationRecord implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+    public String getGoHomeNotesReportContentId() {
+        return this.goHomeNotesReportContentId;
+    }
+
+    public DailyVerificationRecord goHomeNotesReportContentId(String contentId) {
+        this.goHomeNotesReportContentId = contentId;
+        return this;
+    }
+
+    public void setGoHomeNotesReportContentId(String contentId) {
+        this.goHomeNotesReportContentId = contentId;
+    }
+
+    public long getGoHomeNotesReportContentLength() {
+        return this.goHomeNotesReportContentLength;
+    }
+
+    public DailyVerificationRecord goHomeNotesReportContentLength(long contentLength) {
+        this.goHomeNotesReportContentLength = contentLength;
+        return this;
+    }
+
+    public void setGoHomeNotesReportContentLength(long contentLength) {
+        this.goHomeNotesReportContentLength = contentLength;
+    }
+
+    public String getGoHomeNotesReportMimeType() {
+        return this.goHomeNotesReportMimeType;
+    }
+
+    public DailyVerificationRecord goHomeNotesReportMimeType(String mimeType) {
+        this.goHomeNotesReportMimeType = mimeType;
+        return this;
+    }
+
+    public void setGoHomeNotesReportMimeType(String mimeType) {
+        this.goHomeNotesReportMimeType = mimeType;
+    }
     
 
     
@@ -105,6 +143,6 @@ public class DailyVerificationRecord implements Serializable {
         return "DailyVerificationRecord{" +
             "id=" + getId() +
             ", timestamp='" + getTimestamp() + "'" +
-            "}";
+        "}";
     }
 }

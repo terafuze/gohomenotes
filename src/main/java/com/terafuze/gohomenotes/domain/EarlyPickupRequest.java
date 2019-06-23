@@ -36,6 +36,34 @@ public class EarlyPickupRequest implements Serializable {
     private Long id;
 
     
+    @Column(name = "comments")
+    private String comments;
+    
+    @NotNull
+    @Column(name = "event_date", nullable = false)
+    private LocalDate eventDate;
+    
+    @Column(name = "pickup_person")
+    private String pickupPerson;
+    
+    @Column(name = "pickup_person_phone")
+    private String pickupPersonPhone;
+    
+    @Column(name = "pickup_time")
+    private LocalTime pickupTime;
+    
+    @Column(name = "returning")
+    private Boolean returning;
+    
+    @Column(name = "return_time")
+    private LocalTime returnTime;
+    
+    
+    
+    @Column(name = "submitted_by_username")
+    private String submittedByUsername;
+    
+
     public Long getId() {
         return id;
     }
@@ -43,6 +71,128 @@ public class EarlyPickupRequest implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+    
+    public String getComments() {
+        return this.comments;
+    }
+
+    public EarlyPickupRequest comments(String comments) {
+        this.comments = comments;
+        return this;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+    
+
+    
+    public LocalDate getEventDate() {
+        return this.eventDate;
+    }
+
+    public EarlyPickupRequest eventDate(LocalDate eventDate) {
+        this.eventDate = eventDate;
+        return this;
+    }
+
+    public void setEventDate(LocalDate eventDate) {
+        this.eventDate = eventDate;
+    }
+    
+
+    
+    public String getPickupPerson() {
+        return this.pickupPerson;
+    }
+
+    public EarlyPickupRequest pickupPerson(String pickupPerson) {
+        this.pickupPerson = pickupPerson;
+        return this;
+    }
+
+    public void setPickupPerson(String pickupPerson) {
+        this.pickupPerson = pickupPerson;
+    }
+    
+
+    
+    public String getPickupPersonPhone() {
+        return this.pickupPersonPhone;
+    }
+
+    public EarlyPickupRequest pickupPersonPhone(String pickupPersonPhone) {
+        this.pickupPersonPhone = pickupPersonPhone;
+        return this;
+    }
+
+    public void setPickupPersonPhone(String pickupPersonPhone) {
+        this.pickupPersonPhone = pickupPersonPhone;
+    }
+    
+
+    
+    public LocalTime getPickupTime() {
+        return this.pickupTime;
+    }
+
+    public EarlyPickupRequest pickupTime(LocalTime pickupTime) {
+        this.pickupTime = pickupTime;
+        return this;
+    }
+
+    public void setPickupTime(LocalTime pickupTime) {
+        this.pickupTime = pickupTime;
+    }
+    
+
+    
+    public Boolean getReturning() {
+        return this.returning;
+    }
+
+    public EarlyPickupRequest returning(Boolean returning) {
+        this.returning = returning;
+        return this;
+    }
+
+    public void setReturning(Boolean returning) {
+        this.returning = returning;
+    }
+    
+
+    
+    public LocalTime getReturnTime() {
+        return this.returnTime;
+    }
+
+    public EarlyPickupRequest returnTime(LocalTime returnTime) {
+        this.returnTime = returnTime;
+        return this;
+    }
+
+    public void setReturnTime(LocalTime returnTime) {
+        this.returnTime = returnTime;
+    }
+    
+
+    
+
+    
+    public String getSubmittedByUsername() {
+        return this.submittedByUsername;
+    }
+
+    public EarlyPickupRequest submittedByUsername(String submittedByUsername) {
+        this.submittedByUsername = submittedByUsername;
+        return this;
+    }
+
+    public void setSubmittedByUsername(String submittedByUsername) {
+        this.submittedByUsername = submittedByUsername;
+    }
+    
+
 
     @Override
     public boolean equals(Object o) {
@@ -68,6 +218,14 @@ public class EarlyPickupRequest implements Serializable {
     public String toString() {
         return "EarlyPickupRequest{" +
             "id=" + getId() +
-            "}";
+            ", comments='" + getComments() + "'" +
+            ", eventDate='" + getEventDate() + "'" +
+            ", pickupPerson='" + getPickupPerson() + "'" +
+            ", pickupPersonPhone='" + getPickupPersonPhone() + "'" +
+            ", pickupTime='" + getPickupTime() + "'" +
+            ", returning='" + getReturning() + "'" +
+            ", returnTime='" + getReturnTime() + "'" +
+            ", submittedByUsername='" + getSubmittedByUsername() + "'" +
+        "}";
     }
 }
