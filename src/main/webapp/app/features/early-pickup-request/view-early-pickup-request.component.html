@@ -34,6 +34,13 @@
                 <dd>
                     <span>{{earlyPickupRequest.returnTime}}</span>
                 </dd>
+                <!-- Student Form Field based on MANY_TO_ONE relationship -->
+                <dt><span jhiTranslate="app.earlyPickupRequest.student">Student</span></dt>
+                <dd>
+                    <div *ngIf="earlyPickupRequest.studentId">
+                        <a [routerLink]="['/students', earlyPickupRequest.studentId, 'view']">{{earlyPickupRequest.studentIdentifier}}</a>
+                    </div>
+                </dd>
                 
                 <dt><span jhiTranslate="app.earlyPickupRequest.submittedByUsername">Submitted By Username</span></dt>
                 <dd>

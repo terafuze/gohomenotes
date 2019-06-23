@@ -21,6 +21,8 @@
             <th><span jhiTranslate="app.earlyPickupRequest.pickupTime">Pickup Time</span></th>
             <th><span jhiTranslate="app.earlyPickupRequest.returning">Returning</span></th>
             <th><span jhiTranslate="app.earlyPickupRequest.returnTime">Return Time</span></th>
+            <th><span jhiTranslate="app.earlyPickupRequest.student">Student</span></th>
+            
             <th><span jhiTranslate="app.earlyPickupRequest.submittedByUsername">Submitted By Username</span></th>
             <th></th>
             </tr>
@@ -36,6 +38,12 @@
                 <td>{{earlyPickupRequest.pickupTime}}</td>
                 <td>{{earlyPickupRequest.returning}}</td>
                 <td>{{earlyPickupRequest.returnTime}}</td>
+                <td>
+                    <div *ngIf="earlyPickupRequest.studentId">
+                        <a [routerLink]="['/students', earlyPickupRequest.studentId , 'view' ]" >{{earlyPickupRequest.studentIdentifier}}</a>
+                    </div>
+                </td>
+                
                 <td>{{earlyPickupRequest.submittedByUsername}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

@@ -7,6 +7,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Principal } from 'app/core';
 import { IGuestRequest } from 'app/shared/model/guest-request.model';
 import { GuestRequestService } from './guest-request.service';
+
+
 @Component({
     selector: 'app-list-guest-requests',
     templateUrl: './list-guest-requests.component.html'
