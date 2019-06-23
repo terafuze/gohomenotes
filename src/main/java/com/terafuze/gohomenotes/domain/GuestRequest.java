@@ -52,12 +52,10 @@ public class GuestRequest implements Serializable {
     @Column(name = "event_date", nullable = false)
     private LocalDate eventDate;
     
-    @OneToOne
-    @JoinColumn(unique = true)
+    @ManyToOne
     private Student guestStudent;
     
-    @OneToOne
-    @JoinColumn(unique = true)
+    @ManyToOne
     private Student hostStudent;
     
     @Column(name = "manually_confirmed")

@@ -15,7 +15,11 @@
             <th><span jhiTranslate="global.field.id">ID</span></th>
             
             <th><span jhiTranslate="app.transportationChangeRequest.comments">Comments</span></th>
+            <th><span jhiTranslate="app.transportationChangeRequest.dismissalLocation">Dismissal Location</span></th>
+            
             <th><span jhiTranslate="app.transportationChangeRequest.eventDate">Event Date</span></th>
+            <th><span jhiTranslate="app.transportationChangeRequest.student">Student</span></th>
+            
             <th><span jhiTranslate="app.transportationChangeRequest.submittedByUsername">Submitted By Username</span></th>
             <th></th>
             </tr>
@@ -25,7 +29,19 @@
                 <td><a [routerLink]="['/transportation-change-requests', transportationChangeRequest.id, 'view']">{{transportationChangeRequest.id}}</a></td>
                 
                 <td>{{transportationChangeRequest.comments}}</td>
+                <td>
+                    <div *ngIf="transportationChangeRequest.dismissalLocationId">
+                        <a [routerLink]="['/dismissal-locations', transportationChangeRequest.dismissalLocationId , 'view' ]" >{{transportationChangeRequest.dismissalLocationIdentifier}}</a>
+                    </div>
+                </td>
+                
                 <td>{{transportationChangeRequest.eventDate}}</td>
+                <td>
+                    <div *ngIf="transportationChangeRequest.studentId">
+                        <a [routerLink]="['/students', transportationChangeRequest.studentId , 'view' ]" >{{transportationChangeRequest.studentIdentifier}}</a>
+                    </div>
+                </td>
+                
                 <td>{{transportationChangeRequest.submittedByUsername}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

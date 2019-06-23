@@ -18,8 +18,6 @@ import com.terafuze.gohomenotes.web.models.AfterSchoolProgramModel;
 import com.terafuze.gohomenotes.web.mappers.AfterSchoolProgramMapper;
 
 
-
-
 /**
  * Service Implementation for managing After School Programs.
  */
@@ -77,8 +75,9 @@ public class AfterSchoolProgramService {
     @Transactional(readOnly = true)
     public Optional<AfterSchoolProgramModel> findOne(Long id) {
         log.debug("Request to get AfterSchoolProgram : {}", id);
-        return afterSchoolProgramRepository.findById(id)
-        	.map(afterSchoolProgramMapper::toModel);
+        Optional<AfterSchoolProgram> afterSchoolProgram = this.afterSchoolProgramRepository.findById(id);
+        Optional<AfterSchoolProgramModel> model = afterSchoolProgram.map(this.afterSchoolProgramMapper::toModel);
+        return model;
     }
 
     /**

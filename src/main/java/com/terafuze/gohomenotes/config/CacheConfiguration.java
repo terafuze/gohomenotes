@@ -63,6 +63,7 @@ public class CacheConfiguration {
             cm.createCache(com.terafuze.gohomenotes.domain.SchoolGrade.class.getName() + ".students", jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.SchoolGrade.class.getName() + ".teachers", jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.Student.class.getName(), jcacheConfiguration);
+            cm.createCache(com.terafuze.gohomenotes.domain.Student.class.getName() + ".earlyPickupRequests", jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.Student.class.getName() + ".parents", jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.StudentRegistration.class.getName(), jcacheConfiguration);
             cm.createCache(com.terafuze.gohomenotes.domain.Teacher.class.getName(), jcacheConfiguration);

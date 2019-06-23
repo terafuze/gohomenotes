@@ -77,8 +77,6 @@ public class GuestRequestService {
         log.debug("Request to get GuestRequest : {}", id);
         Optional<GuestRequest> guestRequest = this.guestRequestRepository.findById(id);
         Optional<GuestRequestModel> model = guestRequest.map(this.guestRequestMapper::toModel);
-        
-
         return model;
     }
 

@@ -77,8 +77,6 @@ public class HostRequestService {
         log.debug("Request to get HostRequest : {}", id);
         Optional<HostRequest> hostRequest = this.hostRequestRepository.findById(id);
         Optional<HostRequestModel> model = hostRequest.map(this.hostRequestMapper::toModel);
-        
-
         return model;
     }
 

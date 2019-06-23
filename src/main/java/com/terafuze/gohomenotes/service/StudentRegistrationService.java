@@ -18,8 +18,6 @@ import com.terafuze.gohomenotes.web.models.StudentRegistrationModel;
 import com.terafuze.gohomenotes.web.mappers.StudentRegistrationMapper;
 
 
-
-
 /**
  * Service Implementation for managing Student Registrations.
  */
@@ -77,8 +75,9 @@ public class StudentRegistrationService {
     @Transactional(readOnly = true)
     public Optional<StudentRegistrationModel> findOne(Long id) {
         log.debug("Request to get StudentRegistration : {}", id);
-        return studentRegistrationRepository.findById(id)
-        	.map(studentRegistrationMapper::toModel);
+        Optional<StudentRegistration> studentRegistration = this.studentRegistrationRepository.findById(id);
+        Optional<StudentRegistrationModel> model = studentRegistration.map(this.studentRegistrationMapper::toModel);
+        return model;
     }
 
     /**

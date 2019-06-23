@@ -18,9 +18,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.terafuze.gohomenotes.domain.DailyVerificationRecord;
 import com.terafuze.gohomenotes.repository.DailyVerificationRecordRepository;
-import com.terafuze.gohomenotes.repository.GoHomeNotesReportContentStore;
-import com.terafuze.gohomenotes.web.mappers.DailyVerificationRecordMapper;
 import com.terafuze.gohomenotes.web.models.DailyVerificationRecordModel;
+import com.terafuze.gohomenotes.web.mappers.DailyVerificationRecordMapper;
+import com.terafuze.gohomenotes.repository.GoHomeNotesReportContentStore;
 
 
 /**
@@ -55,7 +55,6 @@ public class DailyVerificationRecordService {
     public DailyVerificationRecordModel save(DailyVerificationRecordModel dailyVerificationRecordModel) {
         log.debug("Request to save DailyVerificationRecord : {}", dailyVerificationRecordModel);
         DailyVerificationRecord dailyVerificationRecord = dailyVerificationRecordMapper.toEntity(dailyVerificationRecordModel);
-        
         if (dailyVerificationRecordModel.getGoHomeNotesReport() != null) {
             this.goHomeNotesReportContentStore.unsetContent(dailyVerificationRecord);
             ByteArrayInputStream inputStream = new ByteArrayInputStream(dailyVerificationRecordModel.getGoHomeNotesReport());
@@ -92,7 +91,6 @@ public class DailyVerificationRecordService {
         log.debug("Request to get DailyVerificationRecord : {}", id);
         Optional<DailyVerificationRecord> dailyVerificationRecord = this.dailyVerificationRecordRepository.findById(id);
         Optional<DailyVerificationRecordModel> model = dailyVerificationRecord.map(this.dailyVerificationRecordMapper::toModel);
-        
         InputStream inputStream = this.goHomeNotesReportContentStore.getContent(dailyVerificationRecord.get());
         if (inputStream != null) {
             byte[] content = null;
@@ -104,7 +102,6 @@ public class DailyVerificationRecordService {
             model.get().setGoHomeNotesReport(content);
         }
         
-
         return model;
     }
 

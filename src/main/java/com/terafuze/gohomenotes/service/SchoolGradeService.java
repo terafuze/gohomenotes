@@ -16,17 +16,6 @@ import com.terafuze.gohomenotes.domain.SchoolGrade;
 import com.terafuze.gohomenotes.repository.SchoolGradeRepository;
 import com.terafuze.gohomenotes.web.models.SchoolGradeModel;
 import com.terafuze.gohomenotes.web.mappers.SchoolGradeMapper;
-import com.terafuze.gohomenotes.web.mappers.StudentRegistrationMapper;
-import com.terafuze.gohomenotes.web.mappers.StudentMapper;
-import com.terafuze.gohomenotes.web.mappers.TeacherMapper;
-
-import com.terafuze.gohomenotes.web.models.StudentRegistrationModel;
-import com.terafuze.gohomenotes.web.models.StudentModel;
-import com.terafuze.gohomenotes.web.models.TeacherModel;
-
-import com.terafuze.gohomenotes.domain.StudentRegistration;
-import com.terafuze.gohomenotes.domain.Student;
-import com.terafuze.gohomenotes.domain.Teacher;
 
 
 /**
@@ -42,12 +31,6 @@ public class SchoolGradeService {
 
     private final SchoolGradeMapper schoolGradeMapper;
 
-    @Autowired
-    private final StudentRegistrationMapper studentRegistrationMapper = null;
-    @Autowired
-    private final StudentMapper studentMapper = null;
-    @Autowired
-    private final TeacherMapper teacherMapper = null;
     
 
     public SchoolGradeService(SchoolGradeRepository schoolGradeRepository, SchoolGradeMapper schoolGradeMapper) {
@@ -92,8 +75,9 @@ public class SchoolGradeService {
     @Transactional(readOnly = true)
     public Optional<SchoolGradeModel> findOne(Long id) {
         log.debug("Request to get SchoolGrade : {}", id);
-        return schoolGradeRepository.findById(id)
-        	.map(schoolGradeMapper::toModel);
+        Optional<SchoolGrade> schoolGrade = this.schoolGradeRepository.findById(id);
+        Optional<SchoolGradeModel> model = schoolGrade.map(this.schoolGradeMapper::toModel);
+        return model;
     }
 
     /**

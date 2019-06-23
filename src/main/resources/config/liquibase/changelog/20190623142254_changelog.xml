@@ -1,0 +1,39 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="nathanward (generated)" id="1561299781595-1">
+        <addColumn tableName="transportation_change_request">
+            <column name="dismissal_location_id" type="int8"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561299781595-2">
+        <addColumn tableName="early_pickup_request">
+            <column name="student_id" type="int8"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561299781595-3">
+        <addColumn tableName="transportation_change_request">
+            <column name="student_id" type="int8"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561299781595-4">
+        <addForeignKeyConstraint baseColumnNames="student_id" baseTableName="transportation_change_request" constraintName="FKaivujgyp6mngtd7ehlahkgnv8" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="student"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561299781595-5">
+        <addForeignKeyConstraint baseColumnNames="dismissal_location_id" baseTableName="transportation_change_request" constraintName="FKb00qpci82sn2u94k4py1ns934" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="dismissal_location"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561299781595-6">
+        <addForeignKeyConstraint baseColumnNames="student_id" baseTableName="early_pickup_request" constraintName="FKq4sar7vp9f01mjyqujj6ky808" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="student"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561299781595-7">
+        <dropUniqueConstraint constraintName="uc_guest_requestguest_student_id_col" tableName="guest_request"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561299781595-8">
+        <dropUniqueConstraint constraintName="uc_guest_requesthost_student_id_col" tableName="guest_request"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561299781595-9">
+        <dropUniqueConstraint constraintName="uc_host_requestguest_student_id_col" tableName="host_request"/>
+    </changeSet>
+    <changeSet author="nathanward (generated)" id="1561299781595-10">
+        <dropUniqueConstraint constraintName="uc_host_requesthost_student_id_col" tableName="host_request"/>
+    </changeSet>
+</databaseChangeLog>

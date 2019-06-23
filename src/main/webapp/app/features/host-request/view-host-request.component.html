@@ -26,7 +26,7 @@
                 <dd>
                     <span>{{hostRequest.eventDate}}</span>
                 </dd>
-                <!-- Guest Student Form Field based on ONE_TO_ONE relationship -->
+                <!-- Guest Student Form Field based on MANY_TO_ONE relationship -->
                 <dt><span jhiTranslate="app.hostRequest.guestStudent">Guest Student</span></dt>
                 <dd>
                     <div *ngIf="hostRequest.guestStudentId">
@@ -34,7 +34,7 @@
                     </div>
                 </dd>
                 
-                <!-- Host Student Form Field based on ONE_TO_ONE relationship -->
+                <!-- Host Student Form Field based on MANY_TO_ONE relationship -->
                 <dt><span jhiTranslate="app.hostRequest.hostStudent">Host Student</span></dt>
                 <dd>
                     <div *ngIf="hostRequest.hostStudentId">

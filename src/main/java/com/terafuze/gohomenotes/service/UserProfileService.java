@@ -20,8 +20,6 @@ import com.terafuze.gohomenotes.web.mappers.UserProfileMapper;
 import com.terafuze.gohomenotes.web.models.UserProfileModel;
 
 
-
-
 /**
  * Service Implementation for managing User Profiles.
  */

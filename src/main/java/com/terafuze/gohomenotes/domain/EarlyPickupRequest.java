@@ -58,7 +58,8 @@ public class EarlyPickupRequest implements Serializable {
     @Column(name = "return_time")
     private LocalTime returnTime;
     
-    
+    @ManyToOne
+    private Student student;
     
     @Column(name = "submitted_by_username")
     private String submittedByUsername;
@@ -177,6 +178,18 @@ public class EarlyPickupRequest implements Serializable {
     
 
     
+    public Student getStudent() {
+        return this.student;
+    }
+
+    public EarlyPickupRequest student(Student student) {
+        this.student = student;
+        return this;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
 
     
     public String getSubmittedByUsername() {

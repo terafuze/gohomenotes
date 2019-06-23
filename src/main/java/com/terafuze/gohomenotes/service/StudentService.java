@@ -22,8 +22,6 @@ import com.terafuze.gohomenotes.web.models.ParentModel;
 import com.terafuze.gohomenotes.web.models.StudentModel;
 
 
-
-
 /**
  * Service Implementation for managing Students.
  */

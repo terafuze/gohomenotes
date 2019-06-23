@@ -18,8 +18,6 @@ import com.terafuze.gohomenotes.web.models.ParentRegistrationModel;
 import com.terafuze.gohomenotes.web.mappers.ParentRegistrationMapper;
 
 
-
-
 /**
  * Service Implementation for managing Parent Registrations.
  */
@@ -77,8 +75,9 @@ public class ParentRegistrationService {
     @Transactional(readOnly = true)
     public Optional<ParentRegistrationModel> findOne(Long id) {
         log.debug("Request to get ParentRegistration : {}", id);
-        return parentRegistrationRepository.findById(id)
-        	.map(parentRegistrationMapper::toModel);
+        Optional<ParentRegistration> parentRegistration = this.parentRegistrationRepository.findById(id);
+        Optional<ParentRegistrationModel> model = parentRegistration.map(this.parentRegistrationMapper::toModel);
+        return model;
     }
 
     /**

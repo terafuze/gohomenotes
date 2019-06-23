@@ -9,79 +9,65 @@
                     <input type="text" class="form-control" id="id" name="id" [ngModel]="hostRequest.id" readonly />
                 </div>
                 
-                
                 <!-- Comments Form Field -->
-                
                 <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.hostRequest.comments" for="comments">Comments</label>
-                <input type="text" class="form-control" name="comments" id="comments"
-                    [(ngModel)]="hostRequest.comments" required/>
-                <div [hidden]="!(editForm.controls.comments?.dirty && editForm.controls.comments?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.comments?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
-            </div>
+                    <label class="form-control-label" jhiTranslate="app.hostRequest.comments" for="comments">Comments</label>
+                    <input type="text" class="form-control" name="comments" id="comments"
+                        [(ngModel)]="hostRequest.comments" required/>
+                    <div [hidden]="!(editForm.controls.comments?.dirty && editForm.controls.comments?.invalid)">
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.comments?.errors?.required" jhiTranslate="entity.validation.required">
+                           This field is required.
+                        </small>
+                    </div>
                 </div>
-                
-                
                 <!-- Confirmation Notes Form Field -->
-                
                 <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.hostRequest.confirmationNotes" for="confirmation_notes">Confirmation Notes</label>
-                <input type="text" class="form-control" name="confirmationNotes" id="confirmation_notes"
-                    [(ngModel)]="hostRequest.confirmationNotes" required/>
-                <div [hidden]="!(editForm.controls.confirmationNotes?.dirty && editForm.controls.confirmationNotes?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.confirmationNotes?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
-            </div>
+                    <label class="form-control-label" jhiTranslate="app.hostRequest.confirmationNotes" for="confirmation_notes">Confirmation Notes</label>
+                    <input type="text" class="form-control" name="confirmationNotes" id="confirmation_notes"
+                        [(ngModel)]="hostRequest.confirmationNotes" required/>
+                    <div [hidden]="!(editForm.controls.confirmationNotes?.dirty && editForm.controls.confirmationNotes?.invalid)">
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.confirmationNotes?.errors?.required" jhiTranslate="entity.validation.required">
+                           This field is required.
+                        </small>
+                    </div>
                 </div>
-                
-                
                 <!-- Confirmed Form Field -->
                 <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.hostRequest.confirmed" for="confirmed">Confirmed</label>
-                <input type="checkbox" class="form-control" name="confirmed" id="confirmed"
-                    [(ngModel)]="hostRequest.confirmed" />
-            </div>
-                
-                
-                <!-- Confirmed By Username Form Field -->
-                
-                <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.hostRequest.confirmedByUsername" for="confirmed_by_username">Confirmed By Username</label>
-                <input type="text" class="form-control" name="confirmedByUsername" id="confirmed_by_username"
-                    [(ngModel)]="hostRequest.confirmedByUsername" required/>
-                <div [hidden]="!(editForm.controls.confirmedByUsername?.dirty && editForm.controls.confirmedByUsername?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.confirmedByUsername?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
-            </div>
+                    <label class="form-control-label" jhiTranslate="app.hostRequest.confirmed" for="confirmed">Confirmed</label>
+                    <input type="checkbox" class="form-control" name="confirmed" id="confirmed"
+                        [(ngModel)]="hostRequest.confirmed" />
                 </div>
-                
-                
+                <!-- Confirmed By Username Form Field -->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="app.hostRequest.confirmedByUsername" for="confirmed_by_username">Confirmed By Username</label>
+                    <input type="text" class="form-control" name="confirmedByUsername" id="confirmed_by_username"
+                        [(ngModel)]="hostRequest.confirmedByUsername" required/>
+                    <div [hidden]="!(editForm.controls.confirmedByUsername?.dirty && editForm.controls.confirmedByUsername?.invalid)">
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.confirmedByUsername?.errors?.required" jhiTranslate="entity.validation.required">
+                           This field is required.
+                        </small>
+                    </div>
+                </div>
                 <!-- Event Date Form Field -->
                 <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.hostRequest.eventDate" for="event_date">Event Date</label>
-                <div class="input-group">
-                    <input id="event_date" type="text" class="form-control" name="eventDate" ngbDatepicker  #eventDateDp="ngbDatepicker" [(ngModel)]="hostRequest.eventDate"
-                    required/>
-                    <span class="input-group-append">
-                        <button type="button" class="btn btn-secondary" (click)="eventDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                    </span>
-                    <div [hidden]="!(editForm.controls.eventDate?.dirty && editForm.controls.eventDate?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.eventDate?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
-            </div>
+                    <label class="form-control-label" jhiTranslate="app.hostRequest.eventDate" for="event_date">Event Date</label>
+                    <div class="input-group">
+                        <input id="event_date" type="text" class="form-control" name="eventDate" ngbDatepicker  #eventDateDp="ngbDatepicker" [(ngModel)]="hostRequest.eventDate"
+                        required/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="eventDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                        <div [hidden]="!(editForm.controls.eventDate?.dirty && editForm.controls.eventDate?.invalid)">
+                            <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.eventDate?.errors?.required" jhiTranslate="entity.validation.required">
+                               This field is required.
+                            </small>
+                        </div>
                     </div>
-            </div>
-                
-                
+                </div>
                 <!-- Guest Student Form Field -->
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="app.hostRequest.guestStudent" for="guest_student">Guest Student</label>
@@ -100,27 +86,23 @@
                 </div>
                 <!-- Manually Confirmed Form Field -->
                 <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.hostRequest.manuallyConfirmed" for="manually_confirmed">Manually Confirmed</label>
-                <input type="checkbox" class="form-control" name="manuallyConfirmed" id="manually_confirmed"
-                    [(ngModel)]="hostRequest.manuallyConfirmed" />
-            </div>
-                
-                
+                    <label class="form-control-label" jhiTranslate="app.hostRequest.manuallyConfirmed" for="manually_confirmed">Manually Confirmed</label>
+                    <input type="checkbox" class="form-control" name="manuallyConfirmed" id="manually_confirmed"
+                        [(ngModel)]="hostRequest.manuallyConfirmed" />
+                </div>
                 <!-- Submitted By Username Form Field -->
-                
                 <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.hostRequest.submittedByUsername" for="submitted_by_username">Submitted By Username</label>
-                <input type="text" class="form-control" name="submittedByUsername" id="submitted_by_username"
-                    [(ngModel)]="hostRequest.submittedByUsername" required/>
-                <div [hidden]="!(editForm.controls.submittedByUsername?.dirty && editForm.controls.submittedByUsername?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.submittedByUsername?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
+                    <label class="form-control-label" jhiTranslate="app.hostRequest.submittedByUsername" for="submitted_by_username">Submitted By Username</label>
+                    <input type="text" class="form-control" name="submittedByUsername" id="submitted_by_username"
+                        [(ngModel)]="hostRequest.submittedByUsername" required/>
+                    <div [hidden]="!(editForm.controls.submittedByUsername?.dirty && editForm.controls.submittedByUsername?.invalid)">
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.submittedByUsername?.errors?.required" jhiTranslate="entity.validation.required">
+                           This field is required.
+                        </small>
+                    </div>
+                </div>
             </div>
-                </div>
-                
-                </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>

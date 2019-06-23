@@ -7,6 +7,10 @@ import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { ITransportationChangeRequest } from 'app/shared/model/transportation-change-request.model';
 import { TransportationChangeRequestService } from './transportation-change-request.service';
 
+import { IDismissalLocation } from 'app/shared/model/dismissal-location.model';
+import { DismissalLocationService } from 'app/features/dismissal-location';
+import { IStudent } from 'app/shared/model/student.model';
+import { StudentService } from 'app/features/student';
 
 @Component({
     selector: 'app-edit-transportation-change-request',
@@ -18,12 +22,18 @@ export class EditTransportationChangeRequestComponent implements OnInit {
 
     isSaving: boolean;
 
+    // The list of Dismissal Locations from which to select
+    dismissalLocations: IDismissalLocation[];
+    // The list of Students from which to select
+    students: IStudent[];
     
     
 
     constructor(
         private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
+        private dismissalLocationService: DismissalLocationService,
+        private studentService: StudentService,
         private transportationChangeRequestService: TransportationChangeRequestService,
         private activatedRoute: ActivatedRoute
     ) {}
@@ -34,6 +44,18 @@ export class EditTransportationChangeRequestComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ transportationChangeRequest }) => {
             this.transportationChangeRequest = transportationChangeRequest;
         });
+        this.dismissalLocationService.query().subscribe(
+            (res: HttpResponse<IDismissalLocation[]>) => {
+                this.dismissalLocations = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.studentService.query().subscribe(
+            (res: HttpResponse<IStudent[]>) => {
+                this.students = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
         
     }
 
@@ -80,6 +102,14 @@ export class EditTransportationChangeRequestComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
+    
+    trackDismissalLocationById(index: number, item: IDismissalLocation) {
+        return item.id;
+    }
+    
+    trackStudentById(index: number, item: IStudent) {
+        return item.id;
+    }
     
 
     // TODO if not needed, remove this function

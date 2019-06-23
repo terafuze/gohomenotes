@@ -17,21 +17,19 @@ import com.terafuze.gohomenotes.repository.SchoolRepository;
 import com.terafuze.gohomenotes.web.models.SchoolModel;
 import com.terafuze.gohomenotes.web.mappers.SchoolMapper;
 import com.terafuze.gohomenotes.web.mappers.AfterSchoolProgramMapper;
-import com.terafuze.gohomenotes.web.mappers.DismissalLocationMapper;
-import com.terafuze.gohomenotes.web.mappers.SchoolGradeMapper;
-import com.terafuze.gohomenotes.web.mappers.StudentMapper;
-import com.terafuze.gohomenotes.web.mappers.TeacherMapper;
-
 import com.terafuze.gohomenotes.web.models.AfterSchoolProgramModel;
-import com.terafuze.gohomenotes.web.models.DismissalLocationModel;
-import com.terafuze.gohomenotes.web.models.SchoolGradeModel;
-import com.terafuze.gohomenotes.web.models.StudentModel;
-import com.terafuze.gohomenotes.web.models.TeacherModel;
-
 import com.terafuze.gohomenotes.domain.AfterSchoolProgram;
+import com.terafuze.gohomenotes.web.mappers.DismissalLocationMapper;
+import com.terafuze.gohomenotes.web.models.DismissalLocationModel;
 import com.terafuze.gohomenotes.domain.DismissalLocation;
+import com.terafuze.gohomenotes.web.mappers.SchoolGradeMapper;
+import com.terafuze.gohomenotes.web.models.SchoolGradeModel;
 import com.terafuze.gohomenotes.domain.SchoolGrade;
+import com.terafuze.gohomenotes.web.mappers.StudentMapper;
+import com.terafuze.gohomenotes.web.models.StudentModel;
 import com.terafuze.gohomenotes.domain.Student;
+import com.terafuze.gohomenotes.web.mappers.TeacherMapper;
+import com.terafuze.gohomenotes.web.models.TeacherModel;
 import com.terafuze.gohomenotes.domain.Teacher;
 
 
@@ -102,8 +100,8 @@ public class SchoolService {
         log.debug("Get After School Programs for School : {}", id);
         Optional<School> school = schoolRepository.findById(id);
         return school.get().getAfterSchoolPrograms().stream()
-        	.map(afterSchoolProgramMapper::toModel)
-        	.collect(Collectors.toCollection(LinkedList::new));
+            .map(afterSchoolProgramMapper::toModel)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
     /**
      * Get all Dismissal Locations for a given School
@@ -116,8 +114,8 @@ public class SchoolService {
         log.debug("Get Dismissal Locations for School : {}", id);
         Optional<School> school = schoolRepository.findById(id);
         return school.get().getDismissalLocations().stream()
-        	.map(dismissalLocationMapper::toModel)
-        	.collect(Collectors.toCollection(LinkedList::new));
+            .map(dismissalLocationMapper::toModel)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
     /**
      * Get all School Grades for a given School
@@ -130,8 +128,8 @@ public class SchoolService {
         log.debug("Get School Grades for School : {}", id);
         Optional<School> school = schoolRepository.findById(id);
         return school.get().getSchoolGrades().stream()
-        	.map(schoolGradeMapper::toModel)
-        	.collect(Collectors.toCollection(LinkedList::new));
+            .map(schoolGradeMapper::toModel)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
     /**
      * Get all Students for a given School
@@ -144,8 +142,8 @@ public class SchoolService {
         log.debug("Get Students for School : {}", id);
         Optional<School> school = schoolRepository.findById(id);
         return school.get().getStudents().stream()
-        	.map(studentMapper::toModel)
-        	.collect(Collectors.toCollection(LinkedList::new));
+            .map(studentMapper::toModel)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
     /**
      * Get all Teachers for a given School
@@ -158,8 +156,8 @@ public class SchoolService {
         log.debug("Get Teachers for School : {}", id);
         Optional<School> school = schoolRepository.findById(id);
         return school.get().getTeachers().stream()
-        	.map(teacherMapper::toModel)
-        	.collect(Collectors.toCollection(LinkedList::new));
+            .map(teacherMapper::toModel)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
     
 
@@ -172,8 +170,9 @@ public class SchoolService {
     @Transactional(readOnly = true)
     public Optional<SchoolModel> findOne(Long id) {
         log.debug("Request to get School : {}", id);
-        return schoolRepository.findById(id)
-        	.map(schoolMapper::toModel);
+        Optional<School> school = this.schoolRepository.findById(id);
+        Optional<SchoolModel> model = school.map(this.schoolMapper::toModel);
+        return model;
     }
 
     /**

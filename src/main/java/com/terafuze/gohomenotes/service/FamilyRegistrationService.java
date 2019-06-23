@@ -17,12 +17,10 @@ import com.terafuze.gohomenotes.repository.FamilyRegistrationRepository;
 import com.terafuze.gohomenotes.web.models.FamilyRegistrationModel;
 import com.terafuze.gohomenotes.web.mappers.FamilyRegistrationMapper;
 import com.terafuze.gohomenotes.web.mappers.ParentRegistrationMapper;
-import com.terafuze.gohomenotes.web.mappers.StudentRegistrationMapper;
-
 import com.terafuze.gohomenotes.web.models.ParentRegistrationModel;
-import com.terafuze.gohomenotes.web.models.StudentRegistrationModel;
-
 import com.terafuze.gohomenotes.domain.ParentRegistration;
+import com.terafuze.gohomenotes.web.mappers.StudentRegistrationMapper;
+import com.terafuze.gohomenotes.web.models.StudentRegistrationModel;
 import com.terafuze.gohomenotes.domain.StudentRegistration;
 
 
@@ -87,8 +85,8 @@ public class FamilyRegistrationService {
         log.debug("Get Parent Registrations for Family Registration : {}", id);
         Optional<FamilyRegistration> familyRegistration = familyRegistrationRepository.findById(id);
         return familyRegistration.get().getParentRegistrations().stream()
-        	.map(parentRegistrationMapper::toModel)
-        	.collect(Collectors.toCollection(LinkedList::new));
+            .map(parentRegistrationMapper::toModel)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
     /**
      * Get all Student Registrations for a given Family Registration
@@ -101,8 +99,8 @@ public class FamilyRegistrationService {
         log.debug("Get Student Registrations for Family Registration : {}", id);
         Optional<FamilyRegistration> familyRegistration = familyRegistrationRepository.findById(id);
         return familyRegistration.get().getStudentRegistrations().stream()
-        	.map(studentRegistrationMapper::toModel)
-        	.collect(Collectors.toCollection(LinkedList::new));
+            .map(studentRegistrationMapper::toModel)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
     
 
@@ -115,8 +113,9 @@ public class FamilyRegistrationService {
     @Transactional(readOnly = true)
     public Optional<FamilyRegistrationModel> findOne(Long id) {
         log.debug("Request to get FamilyRegistration : {}", id);
-        return familyRegistrationRepository.findById(id)
-        	.map(familyRegistrationMapper::toModel);
+        Optional<FamilyRegistration> familyRegistration = this.familyRegistrationRepository.findById(id);
+        Optional<FamilyRegistrationModel> model = familyRegistration.map(this.familyRegistrationMapper::toModel);
+        return model;
     }
 
     /**

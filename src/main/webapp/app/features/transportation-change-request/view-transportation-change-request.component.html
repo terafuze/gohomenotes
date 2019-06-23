@@ -10,10 +10,24 @@
                 <dd>
                     <span>{{transportationChangeRequest.comments}}</span>
                 </dd>
+                <!-- Dismissal Location Form Field based on MANY_TO_ONE relationship -->
+                <dt><span jhiTranslate="app.transportationChangeRequest.dismissalLocation">Dismissal Location</span></dt>
+                <dd>
+                    <div *ngIf="transportationChangeRequest.dismissalLocationId">
+                        <a [routerLink]="['/dismissal-locations', transportationChangeRequest.dismissalLocationId, 'view']">{{transportationChangeRequest.dismissalLocationIdentifier}}</a>
+                    </div>
+                </dd>
                 
                 <dt><span jhiTranslate="app.transportationChangeRequest.eventDate">Event Date</span></dt>
                 <dd>
                     <span>{{transportationChangeRequest.eventDate}}</span>
+                </dd>
+                <!-- Student Form Field based on MANY_TO_ONE relationship -->
+                <dt><span jhiTranslate="app.transportationChangeRequest.student">Student</span></dt>
+                <dd>
+                    <div *ngIf="transportationChangeRequest.studentId">
+                        <a [routerLink]="['/students', transportationChangeRequest.studentId, 'view']">{{transportationChangeRequest.studentIdentifier}}</a>
+                    </div>
                 </dd>
                 
                 <dt><span jhiTranslate="app.transportationChangeRequest.submittedByUsername">Submitted By Username</span></dt>

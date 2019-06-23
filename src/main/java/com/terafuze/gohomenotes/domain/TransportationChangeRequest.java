@@ -42,13 +42,15 @@ public class TransportationChangeRequest implements Serializable {
     @Column(name = "comments")
     private String comments;
     
-    
+    @ManyToOne
+    private DismissalLocation dismissalLocation;
     
     @NotNull
     @Column(name = "event_date", nullable = false)
     private LocalDate eventDate;
     
-    
+    @ManyToOne
+    private Student student;
     
     @Column(name = "submitted_by_username")
     private String submittedByUsername;
@@ -77,6 +79,18 @@ public class TransportationChangeRequest implements Serializable {
     
 
     
+    public DismissalLocation getDismissalLocation() {
+        return this.dismissalLocation;
+    }
+
+    public TransportationChangeRequest dismissalLocation(DismissalLocation dismissalLocation) {
+        this.dismissalLocation = dismissalLocation;
+        return this;
+    }
+
+    public void setDismissalLocation(DismissalLocation dismissalLocation) {
+        this.dismissalLocation = dismissalLocation;
+    }
 
     
     public LocalDate getEventDate() {
@@ -94,6 +108,18 @@ public class TransportationChangeRequest implements Serializable {
     
 
     
+    public Student getStudent() {
+        return this.student;
+    }
+
+    public TransportationChangeRequest student(Student student) {
+        this.student = student;
+        return this;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
 
     
     public String getSubmittedByUsername() {

@@ -9,44 +9,51 @@
                     <input type="text" class="form-control" id="id" name="id" [ngModel]="transportationChangeRequest.id" readonly />
                 </div>
                 
-                
                 <!-- Comments Form Field -->
-                
                 <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.transportationChangeRequest.comments" for="comments">Comments</label>
-                <input type="text" class="form-control" name="comments" id="comments"
-                    [(ngModel)]="transportationChangeRequest.comments" /></div>
-                
-                
-                
+                    <label class="form-control-label" jhiTranslate="app.transportationChangeRequest.comments" for="comments">Comments</label>
+                    <input type="text" class="form-control" name="comments" id="comments"
+                        [(ngModel)]="transportationChangeRequest.comments" />
+                </div>
+                <!-- Dismissal Location Form Field -->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="app.transportationChangeRequest.dismissalLocation" for="dismissal_location">Dismissal Location</label>
+                    <select class="form-control" id="dismissal_location" name="dismissalLocation" [(ngModel)]="transportationChangeRequest.dismissalLocationId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="dismissalLocationOption.id" *ngFor="let dismissalLocationOption of dismissalLocations; trackBy: trackDismissalLocationById">{{dismissalLocationOption.identifier}}</option>
+                    </select>
+                </div>
                 <!-- Event Date Form Field -->
                 <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.transportationChangeRequest.eventDate" for="event_date">Event Date</label>
-                <div class="input-group">
-                    <input id="event_date" type="text" class="form-control" name="eventDate" ngbDatepicker  #eventDateDp="ngbDatepicker" [(ngModel)]="transportationChangeRequest.eventDate"
-                    required/>
-                    <span class="input-group-append">
-                        <button type="button" class="btn btn-secondary" (click)="eventDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
-                    </span>
-                    <div [hidden]="!(editForm.controls.eventDate?.dirty && editForm.controls.eventDate?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.eventDate?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
-            </div>
+                    <label class="form-control-label" jhiTranslate="app.transportationChangeRequest.eventDate" for="event_date">Event Date</label>
+                    <div class="input-group">
+                        <input id="event_date" type="text" class="form-control" name="eventDate" ngbDatepicker  #eventDateDp="ngbDatepicker" [(ngModel)]="transportationChangeRequest.eventDate"
+                        required/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="eventDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                        <div [hidden]="!(editForm.controls.eventDate?.dirty && editForm.controls.eventDate?.invalid)">
+                            <small class="form-text text-danger"
+                               [hidden]="!editForm.controls.eventDate?.errors?.required" jhiTranslate="entity.validation.required">
+                               This field is required.
+                            </small>
+                        </div>
                     </div>
-            </div>
-                
-                
-                
-                <!-- Submitted By Username Form Field -->
-                
+                </div>
+                <!-- Student Form Field -->
                 <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.transportationChangeRequest.submittedByUsername" for="submitted_by_username">Submitted By Username</label>
-                <input type="text" class="form-control" name="submittedByUsername" id="submitted_by_username"
-                    [(ngModel)]="transportationChangeRequest.submittedByUsername" /></div>
-                
-                
+                    <label class="form-control-label" jhiTranslate="app.transportationChangeRequest.student" for="student">Student</label>
+                    <select class="form-control" id="student" name="student" [(ngModel)]="transportationChangeRequest.studentId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="studentOption.id" *ngFor="let studentOption of students; trackBy: trackStudentById">{{studentOption.identifier}}</option>
+                    </select>
+                </div>
+                <!-- Submitted By Username Form Field -->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="app.transportationChangeRequest.submittedByUsername" for="submitted_by_username">Submitted By Username</label>
+                    <input type="text" class="form-control" name="submittedByUsername" id="submitted_by_username"
+                        [(ngModel)]="transportationChangeRequest.submittedByUsername" />
+                </div>
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">

@@ -22,7 +22,6 @@ import com.terafuze.gohomenotes.web.mappers.UserProfileMapper;
 import com.terafuze.gohomenotes.web.models.StudentModel;
 import com.terafuze.gohomenotes.web.models.TeacherModel;
 
-
 /**
  * Service Implementation for managing Teachers.
  */
@@ -107,8 +106,8 @@ public class TeacherService {
         log.debug("Get Students for Teacher : {}", id);
         Optional<Teacher> teacher = teacherRepository.findById(id);
         return teacher.get().getStudents().stream()
-        	.map(studentMapper::toModel)
-        	.collect(Collectors.toCollection(LinkedList::new));
+            .map(studentMapper::toModel)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
     
 

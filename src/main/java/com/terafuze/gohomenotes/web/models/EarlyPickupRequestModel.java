@@ -40,6 +40,10 @@ public class EarlyPickupRequestModel implements Serializable {
     private LocalTime returnTime;
     
     
+    private Long studentId;
+
+    private String studentIdentifier;
+    
     
     private String submittedByUsername;
     
@@ -123,6 +127,22 @@ public class EarlyPickupRequestModel implements Serializable {
         this.returnTime = returnTime;
     }
     
+    
+    public Long getStudentId() {
+        return this.studentId;
+    }
+
+    public void setStudentId(Long studentId) {
+        this.studentId = studentId;
+    }
+
+    public String getStudentIdentifier() {
+        return this.studentIdentifier;
+    }
+
+    public void setStudentIdentifier(String studentIdentifier) {
+        this.studentIdentifier = studentIdentifier;
+    }
     
     
     public String getSubmittedByUsername() {

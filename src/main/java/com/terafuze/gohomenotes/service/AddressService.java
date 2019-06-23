@@ -17,9 +17,7 @@ import com.terafuze.gohomenotes.repository.AddressRepository;
 import com.terafuze.gohomenotes.web.models.AddressModel;
 import com.terafuze.gohomenotes.web.mappers.AddressMapper;
 import com.terafuze.gohomenotes.web.mappers.UserProfileMapper;
-
 import com.terafuze.gohomenotes.web.models.UserProfileModel;
-
 import com.terafuze.gohomenotes.domain.UserProfile;
 
 
@@ -82,8 +80,8 @@ public class AddressService {
         log.debug("Get User Profiles for Address : {}", id);
         Optional<Address> address = addressRepository.findById(id);
         return address.get().getUserProfiles().stream()
-        	.map(userProfileMapper::toModel)
-        	.collect(Collectors.toCollection(LinkedList::new));
+            .map(userProfileMapper::toModel)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
     
 
@@ -96,8 +94,9 @@ public class AddressService {
     @Transactional(readOnly = true)
     public Optional<AddressModel> findOne(Long id) {
         log.debug("Request to get Address : {}", id);
-        return addressRepository.findById(id)
-        	.map(addressMapper::toModel);
+        Optional<Address> address = this.addressRepository.findById(id);
+        Optional<AddressModel> model = address.map(this.addressMapper::toModel);
+        return model;
     }
 
     /**

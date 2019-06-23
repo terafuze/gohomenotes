@@ -77,8 +77,6 @@ public class EarlyPickupRequestService {
         log.debug("Request to get EarlyPickupRequest : {}", id);
         Optional<EarlyPickupRequest> earlyPickupRequest = this.earlyPickupRequestRepository.findById(id);
         Optional<EarlyPickupRequestModel> model = earlyPickupRequest.map(this.earlyPickupRequestMapper::toModel);
-        
-
         return model;
     }
 

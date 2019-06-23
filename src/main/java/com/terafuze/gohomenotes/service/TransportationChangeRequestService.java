@@ -48,7 +48,6 @@ public class TransportationChangeRequestService {
     public TransportationChangeRequestModel save(TransportationChangeRequestModel transportationChangeRequestModel) {
         log.debug("Request to save TransportationChangeRequest : {}", transportationChangeRequestModel);
         TransportationChangeRequest transportationChangeRequest = transportationChangeRequestMapper.toEntity(transportationChangeRequestModel);
-        
         transportationChangeRequest = transportationChangeRequestRepository.save(transportationChangeRequest);
         return transportationChangeRequestMapper.toModel(transportationChangeRequest);
     }
@@ -79,8 +78,6 @@ public class TransportationChangeRequestService {
         log.debug("Request to get TransportationChangeRequest : {}", id);
         Optional<TransportationChangeRequest> transportationChangeRequest = this.transportationChangeRequestRepository.findById(id);
         Optional<TransportationChangeRequestModel> model = transportationChangeRequest.map(this.transportationChangeRequestMapper::toModel);
-        
-
         return model;
     }
 

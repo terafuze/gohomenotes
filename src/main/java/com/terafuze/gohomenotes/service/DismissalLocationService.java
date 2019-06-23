@@ -18,8 +18,6 @@ import com.terafuze.gohomenotes.web.models.DismissalLocationModel;
 import com.terafuze.gohomenotes.web.mappers.DismissalLocationMapper;
 
 
-
-
 /**
  * Service Implementation for managing Dismissal Locations.
  */
@@ -77,8 +75,9 @@ public class DismissalLocationService {
     @Transactional(readOnly = true)
     public Optional<DismissalLocationModel> findOne(Long id) {
         log.debug("Request to get DismissalLocation : {}", id);
-        return dismissalLocationRepository.findById(id)
-        	.map(dismissalLocationMapper::toModel);
+        Optional<DismissalLocation> dismissalLocation = this.dismissalLocationRepository.findById(id);
+        Optional<DismissalLocationModel> model = dismissalLocation.map(this.dismissalLocationMapper::toModel);
+        return model;
     }
 
     /**
