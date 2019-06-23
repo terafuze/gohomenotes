@@ -8,90 +8,92 @@
                     <label for="id" jhiTranslate="global.field.id">ID</label>
                     <input type="text" class="form-control" id="id" name="id" [ngModel]="address.id" readonly />
                 </div>
-                
-                
-                <!-- City Form Field -->
-                
-                <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.address.city" for="city">City</label>
-                <input type="text" class="form-control" name="city" id="city"
-                    [(ngModel)]="address.city" required/>
-                <div [hidden]="!(editForm.controls.city?.dirty && editForm.controls.city?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.city?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
-            </div>
-                </div>
-                
-                
+
+
+
+
+
                 <!-- Line 1 Form Field -->
-                
+
                 <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.address.line1" for="line_1">Line 1</label>
-                <input type="text" class="form-control" name="line1" id="line_1"
-                    [(ngModel)]="address.line1" required/>
-                <div [hidden]="!(editForm.controls.line1?.dirty && editForm.controls.line1?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.line1?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
-            </div>
+                    <label class="form-control-label" jhiTranslate="app.address.line1" for="line_1">Line 1</label>
+                    <input type="text" class="form-control" name="line1" id="line_1" [(ngModel)]="address.line1"
+                        required />
+                    <div [hidden]="!(editForm.controls.line1?.dirty && editForm.controls.line1?.invalid)">
+                        <small class="form-text text-danger" [hidden]="!editForm.controls.line1?.errors?.required"
+                            jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
                 </div>
-                
-                
+
+
                 <!-- Line 2 Form Field -->
-                
+
                 <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.address.line2" for="line_2">Line 2</label>
-                <input type="text" class="form-control" name="line2" id="line_2"
-                    [(ngModel)]="address.line2" required/>
-                <div [hidden]="!(editForm.controls.line2?.dirty && editForm.controls.line2?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.line2?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
-            </div>
+                    <label class="form-control-label" jhiTranslate="app.address.line2" for="line_2">Line 2</label>
+                    <input type="text" class="form-control" name="line2" id="line_2" [(ngModel)]="address.line2"
+                        required />
+                    <div [hidden]="!(editForm.controls.line2?.dirty && editForm.controls.line2?.invalid)">
+                        <small class="form-text text-danger" [hidden]="!editForm.controls.line2?.errors?.required"
+                            jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
                 </div>
-                
-                
+
+                <!-- City Form Field -->
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="app.address.city" for="city">City</label>
+                    <input type="text" class="form-control" name="city" id="city" [(ngModel)]="address.city" required />
+                    <div [hidden]="!(editForm.controls.city?.dirty && editForm.controls.city?.invalid)">
+                        <small class="form-text text-danger" [hidden]="!editForm.controls.city?.errors?.required"
+                            jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+
+
                 <!-- State Form Field -->
                 <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.address.state" for="state">State</label>
-                <select class="form-control" name="state" name="state" id="state" [(ngModel)]="address.state">
-                    <option [ngValue]="null"></option>
-                    <option value="MARYLAND">{{'app.state.MARYLAND' | translate }}</option>
-                    <option value="VIRGINIA">{{'app.state.VIRGINIA' | translate }}</option>
-                </select>
-                <div [hidden]="!(editForm.controls.state?.dirty && editForm.controls.state?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.state?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
-            </div>
+                    <label class="form-control-label" jhiTranslate="app.address.state" for="state">State</label>
+                    <select class="form-control" name="state" name="state" id="state" [(ngModel)]="address.state">
+                        <option [ngValue]="null"></option>
+                        <option value="MARYLAND">{{'app.state.MARYLAND' | translate }}</option>
+                        <option value="VIRGINIA">{{'app.state.VIRGINIA' | translate }}</option>
+                    </select>
+                    <div [hidden]="!(editForm.controls.state?.dirty && editForm.controls.state?.invalid)">
+                        <small class="form-text text-danger" [hidden]="!editForm.controls.state?.errors?.required"
+                            jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
                 </div>
-                
-                
+
+
                 <!-- Zip Code Form Field -->
-                
+
                 <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.address.zipCode" for="zip_code">Zip Code</label>
-                <input type="text" class="form-control" name="zipCode" id="zip_code"
-                    [(ngModel)]="address.zipCode" required/>
-                <div [hidden]="!(editForm.controls.zipCode?.dirty && editForm.controls.zipCode?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.zipCode?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
+                    <label class="form-control-label" jhiTranslate="app.address.zipCode" for="zip_code">Zip Code</label>
+                    <input type="text" class="form-control" name="zipCode" id="zip_code" [(ngModel)]="address.zipCode"
+                        required />
+                    <div [hidden]="!(editForm.controls.zipCode?.dirty && editForm.controls.zipCode?.invalid)">
+                        <small class="form-text text-danger" [hidden]="!editForm.controls.zipCode?.errors?.required"
+                            jhiTranslate="entity.validation.required">
+                            This field is required.
+                        </small>
+                    </div>
+                </div>
+
             </div>
-                </div>
-                
-                </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
-                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving"
+                    class="btn btn-primary">
                     <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>
