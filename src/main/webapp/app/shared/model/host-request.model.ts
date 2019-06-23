@@ -7,6 +7,10 @@ export interface IHostRequest {
     confirmed?: boolean;
     confirmedByUsername?: string;
     eventDate?: Moment;
+    guestStudentId?: number;
+    guestStudentIdentifier?: string;
+    hostStudentId?: number;
+    hostStudentIdentifier?: string;
     manuallyConfirmed?: boolean;
     submittedByUsername?: string;
 }
@@ -20,7 +24,11 @@ export class HostRequest implements IHostRequest {
         public confirmed?: boolean,
         public confirmedByUsername?: string,
         public eventDate?: Moment,
+        public guestStudentId?: number,
+        public guestStudentIdentifier?: string,
+        public hostStudentId?: number,
+        public hostStudentIdentifier?: string,
         public manuallyConfirmed?: boolean,
         public submittedByUsername?: string
-    ) { }
+    ) {}
 }
