@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 import { UserRouteAccessService } from 'app/core';
-import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { ISchoolGrade } from 'app/shared/model/school-grade.model';
 import { SchoolGrade } from 'app/shared/model/school-grade.model';
 import { SchoolGradeService } from './school-grade.service';
@@ -16,10 +16,13 @@ import { ViewSchoolGradeComponent } from './view-school-grade.component';
 export class SchoolGradeResolve implements Resolve<ISchoolGrade> {
     constructor(private service: SchoolGradeService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ISchoolGrade> {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
-            return this.service.find(id).pipe(map((schoolGrade: HttpResponse<SchoolGrade>) => schoolGrade.body));
+            return this.service.find(id).pipe(
+                filter((response: HttpResponse<SchoolGrade>) => response.ok),
+                map((schoolGrade: HttpResponse<SchoolGrade>) => schoolGrade.body)
+            );
         }
         return of(new SchoolGrade());
     }

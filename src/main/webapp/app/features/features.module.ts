@@ -1,5 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-
+import { RouterModule } from '@angular/router';
 import { AddressModule } from './address/address.module';
 import { AfterSchoolProgramModule } from './after-school-program/after-school-program.module';
 import { DailyVerificationRecordModule } from './daily-verification-record/daily-verification-record.module';
@@ -18,9 +18,7 @@ import { TeacherModule } from './teacher/teacher.module';
 import { TransportationChangeRequestModule } from './transportation-change-request/transportation-change-request.module';
 import { UserProfileModule } from './user-profile/user-profile.module';
 
-
 @NgModule({
-    // prettier-ignore
     imports: [
         AddressModule,
         AfterSchoolProgramModule,
@@ -38,14 +36,11 @@ import { UserProfileModule } from './user-profile/user-profile.module';
         StudentRegistrationModule,
         TeacherModule,
         TransportationChangeRequestModule,
-        UserProfileModule,
-        
+        UserProfileModule
     ],
     declarations: [],
     entryComponents: [],
     providers: [],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
-export class FeaturesModule {
-
-}
+export class FeaturesModule {}

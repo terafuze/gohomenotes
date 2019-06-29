@@ -25,15 +25,10 @@
             <tr *ngFor="let school of schools ;trackBy: trackId">
                 <td><a [routerLink]="['/schools', school.id, 'view']">{{school.id}}</a></td>
                 <td>{{school.abbreviation}}</td>
-                
                 <td>{{school.goHomeNotesDailyCutoffTime}}</td>
-                
                 <td>{{school.goHomeNotesStartDate}}</td>
-                
                 <td>{{school.goHomeNotesStopDate}}</td>
-                
                 <td>{{school.name}}</td>
-                
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

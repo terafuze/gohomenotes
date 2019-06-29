@@ -45,7 +45,7 @@ public class LoggingAspect {
      */
     @Pointcut("within(com.terafuze.gohomenotes.repository..*)"+
         " || within(com.terafuze.gohomenotes.service..*)"+
-        " || within(com.terafuze.gohomenotes.web..*)")
+        " || within(com.terafuze.gohomenotes.web.controllers..*)")
     public void applicationPackagePointcut() {
         // Method is empty as this is just a Pointcut, the implementations are in the advices.
     }

@@ -1,13 +1,14 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
-import { ActivatedRoute } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
+import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
-import { Principal } from 'app/core';
+import { AccountService } from 'app/core';
+import { ITEMS_PER_PAGE } from 'app/shared';
 import { ITransportationChangeRequest } from 'app/shared/model/transportation-change-request.model';
 import { TransportationChangeRequestService } from './transportation-change-request.service';
-
 
 @Component({
     selector: 'app-list-transportation-change-requests',
@@ -17,15 +18,15 @@ export class ListTransportationChangeRequestsComponent implements OnInit, OnDest
     transportationChangeRequests: ITransportationChangeRequest[];
     currentAccount: any;
     eventSubscriber: Subscription;
-    
 
     constructor(
-        private transportationChangeRequestService: TransportationChangeRequestService,
-        private activatedRoute: ActivatedRoute,
-        private jhiAlertService: JhiAlertService,
-        private dataUtils: JhiDataUtils,
-        private eventManager: JhiEventManager,
-        private principal: Principal
+        protected transportationChangeRequestService: TransportationChangeRequestService,
+        protected parseLinks: JhiParseLinks,
+        protected jhiAlertService: JhiAlertService,
+        protected accountService: AccountService,
+        protected activatedRoute: ActivatedRoute,
+        protected router: Router,
+        protected eventManager: JhiEventManager
     ) {}
 
     loadAll() {
@@ -43,7 +44,7 @@ export class ListTransportationChangeRequestsComponent implements OnInit, OnDest
 
     ngOnInit() {
         this.loadAll();
-        this.principal.identity().then(account => {
+        this.accountService.identity().then(account => {
             this.currentAccount = account;
         });
         this.registerChangeInTransportationChangeRequests();
@@ -61,7 +62,7 @@ export class ListTransportationChangeRequestsComponent implements OnInit, OnDest
         this.eventSubscriber = this.eventManager.subscribe('transportationChangeRequestListModification', response => this.loadAll());
     }
 
-    private onError(errorMessage: string) {
+    protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 }

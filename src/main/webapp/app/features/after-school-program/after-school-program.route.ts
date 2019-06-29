@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 import { UserRouteAccessService } from 'app/core';
-import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { IAfterSchoolProgram } from 'app/shared/model/after-school-program.model';
 import { AfterSchoolProgram } from 'app/shared/model/after-school-program.model';
 import { AfterSchoolProgramService } from './after-school-program.service';
@@ -16,10 +16,13 @@ import { ViewAfterSchoolProgramComponent } from './view-after-school-program.com
 export class AfterSchoolProgramResolve implements Resolve<IAfterSchoolProgram> {
     constructor(private service: AfterSchoolProgramService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IAfterSchoolProgram> {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
-            return this.service.find(id).pipe(map((afterSchoolProgram: HttpResponse<AfterSchoolProgram>) => afterSchoolProgram.body));
+            return this.service.find(id).pipe(
+                filter((response: HttpResponse<AfterSchoolProgram>) => response.ok),
+                map((afterSchoolProgram: HttpResponse<AfterSchoolProgram>) => afterSchoolProgram.body)
+            );
         }
         return of(new AfterSchoolProgram());
     }

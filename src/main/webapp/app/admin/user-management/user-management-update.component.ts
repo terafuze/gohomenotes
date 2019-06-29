@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { JhiLanguageHelper, User, UserService } from 'app/core';
 
 @Component({
-    selector: 'app-user-mgmt-update',
+    selector: 'jhi-user-mgmt-update',
     templateUrl: './user-management-update.component.html'
 })
 export class UserMgmtUpdateComponent implements OnInit {
@@ -35,7 +35,7 @@ export class UserMgmtUpdateComponent implements OnInit {
     }
 
     previousState() {
-        this.router.navigate(['/admin/user-management']);
+        window.history.back();
     }
 
     save() {

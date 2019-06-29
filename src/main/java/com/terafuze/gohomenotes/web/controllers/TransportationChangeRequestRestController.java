@@ -1,6 +1,5 @@
 package com.terafuze.gohomenotes.web.controllers;
 
-import java.io.ByteArrayInputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -11,9 +10,6 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,15 +18,15 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.codahale.metrics.annotation.Timed;
-import io.swagger.annotations.Api;
-import io.github.jhipster.web.util.ResponseUtil;
-
-import com.terafuze.gohomenotes.web.errors.BadRequestAlertException;
-import com.terafuze.gohomenotes.web.utils.HeaderUtil;
 
 import com.terafuze.gohomenotes.service.TransportationChangeRequestService;
+import com.terafuze.gohomenotes.web.errors.BadRequestAlertException;
 import com.terafuze.gohomenotes.web.models.TransportationChangeRequestModel;
+import com.terafuze.gohomenotes.web.utils.HeaderUtil;
+
+import io.github.jhipster.web.util.ResponseUtil;
+import io.micrometer.core.annotation.Timed;
+import io.swagger.annotations.Api;
 
 
 /**

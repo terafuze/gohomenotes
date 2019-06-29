@@ -4,7 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiHealthService } from './health.service';
 
 @Component({
-    selector: 'app-health-modal',
+    selector: 'jhi-health-modal',
     templateUrl: './health-modal.component.html'
 })
 export class JhiHealthModalComponent {

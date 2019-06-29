@@ -12,15 +12,13 @@ import { ParentRegistrationService } from './parent-registration.service';
     templateUrl: './delete-parent-registration.component.html'
 })
 export class DeleteParentRegistrationComponent {
-
     parentRegistration: IParentRegistration;
 
     constructor(
-        private parentRegistrationService: ParentRegistrationService,
+        protected parentRegistrationService: ParentRegistrationService,
         public activeModal: NgbActiveModal,
-        private eventManager: JhiEventManager
-    ) {
-    }
+        protected eventManager: JhiEventManager
+    ) {}
 
     clear() {
         this.activeModal.dismiss('cancel');
@@ -44,7 +42,7 @@ export class DeleteParentRegistrationComponent {
 export class DeleteParentRegistrationPopupComponent implements OnInit, OnDestroy {
     private ngbModalRef: NgbModalRef;
 
-    constructor(private activatedRoute: ActivatedRoute, private router: Router, private modalService: NgbModal) {}
+    constructor(protected activatedRoute: ActivatedRoute, protected router: Router, protected modalService: NgbModal) {}
 
     ngOnInit() {
         this.activatedRoute.data.subscribe(({ parentRegistration }) => {
@@ -56,17 +54,18 @@ export class DeleteParentRegistrationPopupComponent implements OnInit, OnDestroy
                 this.ngbModalRef.componentInstance.parentRegistration = parentRegistration;
                 this.ngbModalRef.result.then(
                     result => {
-                        this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
+                        this.router.navigate(['/parent-registrations', { outlets: { popup: null } }]);
                         this.ngbModalRef = null;
                     },
                     reason => {
-                        this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
+                        this.router.navigate(['/parent-registrations', { outlets: { popup: null } }]);
                         this.ngbModalRef = null;
                     }
                 );
             }, 0);
         });
     }
+
     ngOnDestroy() {
         this.ngbModalRef = null;
     }

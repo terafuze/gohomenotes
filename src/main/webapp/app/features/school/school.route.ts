@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 import { UserRouteAccessService } from 'app/core';
-import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { ISchool } from 'app/shared/model/school.model';
 import { School } from 'app/shared/model/school.model';
 import { SchoolService } from './school.service';
@@ -16,10 +16,13 @@ import { ViewSchoolComponent } from './view-school.component';
 export class SchoolResolve implements Resolve<ISchool> {
     constructor(private service: SchoolService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ISchool> {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
-            return this.service.find(id).pipe(map((school: HttpResponse<School>) => school.body));
+            return this.service.find(id).pipe(
+                filter((response: HttpResponse<School>) => response.ok),
+                map((school: HttpResponse<School>) => school.body)
+            );
         }
         return of(new School());
     }

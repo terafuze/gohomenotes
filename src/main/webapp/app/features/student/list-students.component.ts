@@ -1,16 +1,18 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
-import { ActivatedRoute } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
+import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
-import { Principal } from 'app/core';
+import { AccountService } from 'app/core';
+import { ITEMS_PER_PAGE } from 'app/shared';
 import { IStudent } from 'app/shared/model/student.model';
 import { StudentService } from './student.service';
 import { ParentService } from '../parent/parent.service';
 import { SchoolService } from '../school/school.service';
-import { SchoolGradeService } from '../school-grade/school-grade.service';
 import { TeacherService } from '../teacher/teacher.service';
+
 @Component({
     selector: 'app-list-students',
     templateUrl: './list-students.component.html'
@@ -21,21 +23,19 @@ export class ListStudentsComponent implements OnInit, OnDestroy {
     eventSubscriber: Subscription;
     parentId: number;
     schoolId: number;
-    schoolGradeId: number;
     teacherId: number;
-    
 
     constructor(
-        private studentService: StudentService,
-        private parentService: ParentService,
-        private schoolService: SchoolService,
-        private schoolGradeService: SchoolGradeService,
-        private teacherService: TeacherService,
-        private activatedRoute: ActivatedRoute,
-        private jhiAlertService: JhiAlertService,
-        private dataUtils: JhiDataUtils,
-        private eventManager: JhiEventManager,
-        private principal: Principal
+        protected studentService: StudentService,
+        protected parentService: ParentService,
+        protected schoolService: SchoolService,
+        protected teacherService: TeacherService,
+        protected parseLinks: JhiParseLinks,
+        protected jhiAlertService: JhiAlertService,
+        protected accountService: AccountService,
+        protected activatedRoute: ActivatedRoute,
+        protected router: Router,
+        protected eventManager: JhiEventManager
     ) {}
 
     loadAll() {
@@ -51,15 +51,6 @@ export class ListStudentsComponent implements OnInit, OnDestroy {
         }
         if (this.schoolId) {
             this.schoolService.getStudents(this.schoolId).subscribe(
-                (res: HttpResponse<IStudent[]>) => {
-                    this.students = res.body;
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
-            dataLoaded = true;
-        }
-        if (this.schoolGradeId) {
-            this.schoolGradeService.getStudents(this.schoolGradeId).subscribe(
                 (res: HttpResponse<IStudent[]>) => {
                     this.students = res.body;
                 },
@@ -90,10 +81,9 @@ export class ListStudentsComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.parentId = this.activatedRoute.snapshot.queryParams['parentId'];
         this.schoolId = this.activatedRoute.snapshot.queryParams['schoolId'];
-        this.schoolGradeId = this.activatedRoute.snapshot.queryParams['schoolGradeId'];
         this.teacherId = this.activatedRoute.snapshot.queryParams['teacherId'];
         this.loadAll();
-        this.principal.identity().then(account => {
+        this.accountService.identity().then(account => {
             this.currentAccount = account;
         });
         this.registerChangeInStudents();
@@ -111,7 +101,7 @@ export class ListStudentsComponent implements OnInit, OnDestroy {
         this.eventSubscriber = this.eventManager.subscribe('studentListModification', response => this.loadAll());
     }
 
-    private onError(errorMessage: string) {
+    protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 }

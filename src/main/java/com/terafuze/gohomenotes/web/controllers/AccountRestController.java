@@ -1,27 +1,38 @@
 package com.terafuze.gohomenotes.web.controllers;
 
-import com.codahale.metrics.annotation.Timed;
+import java.util.Optional;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.terafuze.gohomenotes.domain.User;
 import com.terafuze.gohomenotes.repository.UserRepository;
 import com.terafuze.gohomenotes.security.SecurityUtils;
 import com.terafuze.gohomenotes.service.MailService;
 import com.terafuze.gohomenotes.service.UserService;
-import com.terafuze.gohomenotes.web.models.UserModel;
-import com.terafuze.gohomenotes.web.errors.*;
+import com.terafuze.gohomenotes.web.errors.EmailAlreadyUsedException;
+import com.terafuze.gohomenotes.web.errors.EmailNotFoundException;
+import com.terafuze.gohomenotes.web.errors.InternalServerErrorException;
+import com.terafuze.gohomenotes.web.errors.InvalidPasswordException;
+import com.terafuze.gohomenotes.web.errors.LoginAlreadyUsedException;
 import com.terafuze.gohomenotes.web.models.KeyAndPasswordModel;
 import com.terafuze.gohomenotes.web.models.ManagedUserModel;
-
-import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
 import com.terafuze.gohomenotes.web.models.PasswordChangeModel;
-import java.util.*;
+import com.terafuze.gohomenotes.web.models.UserModel;
+
+import io.micrometer.core.annotation.Timed;
 
 /**
  * REST controller for managing the current user's account.

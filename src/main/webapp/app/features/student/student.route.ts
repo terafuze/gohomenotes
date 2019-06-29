@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 import { UserRouteAccessService } from 'app/core';
-import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { IStudent } from 'app/shared/model/student.model';
 import { Student } from 'app/shared/model/student.model';
 import { StudentService } from './student.service';
@@ -16,10 +16,13 @@ import { ViewStudentComponent } from './view-student.component';
 export class StudentResolve implements Resolve<IStudent> {
     constructor(private service: StudentService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IStudent> {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
-            return this.service.find(id).pipe(map((student: HttpResponse<Student>) => student.body));
+            return this.service.find(id).pipe(
+                filter((response: HttpResponse<Student>) => response.ok),
+                map((student: HttpResponse<Student>) => student.body)
+            );
         }
         return of(new Student());
     }

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 import { UserRouteAccessService } from 'app/core';
-import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { IStudentRegistration } from 'app/shared/model/student-registration.model';
 import { StudentRegistration } from 'app/shared/model/student-registration.model';
 import { StudentRegistrationService } from './student-registration.service';
@@ -16,10 +16,13 @@ import { ViewStudentRegistrationComponent } from './view-student-registration.co
 export class StudentRegistrationResolve implements Resolve<IStudentRegistration> {
     constructor(private service: StudentRegistrationService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IStudentRegistration> {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
-            return this.service.find(id).pipe(map((studentRegistration: HttpResponse<StudentRegistration>) => studentRegistration.body));
+            return this.service.find(id).pipe(
+                filter((response: HttpResponse<StudentRegistration>) => response.ok),
+                map((studentRegistration: HttpResponse<StudentRegistration>) => studentRegistration.body)
+            );
         }
         return of(new StudentRegistration());
     }

@@ -1,10 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
-import { ActivatedRoute } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
+import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
-import { Principal } from 'app/core';
+import { AccountService } from 'app/core';
+import { ITEMS_PER_PAGE } from 'app/shared';
 import { IUserProfile } from 'app/shared/model/user-profile.model';
 import { UserProfileService } from './user-profile.service';
 import { AddressService } from '../address/address.service';
@@ -20,17 +22,17 @@ export class ListUserProfilesComponent implements OnInit, OnDestroy {
     addressId: number;
     teacherId: number;
     parentId: number;
-    
 
     constructor(
-        private userProfileService: UserProfileService,
-        private addressService: AddressService,
+        protected userProfileService: UserProfileService,
+        protected addressService: AddressService,
         private teacherService: TeacherService,
-        private activatedRoute: ActivatedRoute,
-        private jhiAlertService: JhiAlertService,
-        private dataUtils: JhiDataUtils,
-        private eventManager: JhiEventManager,
-        private principal: Principal
+        protected parseLinks: JhiParseLinks,
+        protected jhiAlertService: JhiAlertService,
+        protected accountService: AccountService,
+        protected activatedRoute: ActivatedRoute,
+        protected router: Router,
+        protected eventManager: JhiEventManager
     ) {}
 
     loadAll() {
@@ -61,7 +63,7 @@ export class ListUserProfilesComponent implements OnInit, OnDestroy {
         this.teacherId = this.activatedRoute.snapshot.queryParams['teacherId'];
         this.parentId = this.activatedRoute.snapshot.queryParams['parentId'];
         this.loadAll();
-        this.principal.identity().then(account => {
+        this.accountService.identity().then(account => {
             this.currentAccount = account;
         });
         this.registerChangeInUserProfiles();
@@ -79,7 +81,7 @@ export class ListUserProfilesComponent implements OnInit, OnDestroy {
         this.eventSubscriber = this.eventManager.subscribe('userProfileListModification', response => this.loadAll());
     }
 
-    private onError(errorMessage: string) {
+    protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 }

@@ -146,4 +146,8 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
-application-local.yml
+
+*.aux
+*.gz
+*.toc
+src/main/resources/config/application-local.yml

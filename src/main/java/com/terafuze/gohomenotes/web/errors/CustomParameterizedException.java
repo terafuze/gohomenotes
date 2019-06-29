@@ -18,7 +18,7 @@ import static org.zalando.problem.Status.BAD_REQUEST;
  * Can be translated with:
  *
  * <pre>
- * "error.myCustomError" :  "The server says {{param0}} to {{param1}}"
+ * "error.myCustomError" :  "The server says  to "
  * </pre>
  */
 public class CustomParameterizedException extends AbstractThrowableProblem {

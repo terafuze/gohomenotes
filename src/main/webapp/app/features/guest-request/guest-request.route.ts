@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 import { UserRouteAccessService } from 'app/core';
-import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { IGuestRequest } from 'app/shared/model/guest-request.model';
 import { GuestRequest } from 'app/shared/model/guest-request.model';
 import { GuestRequestService } from './guest-request.service';
@@ -16,10 +16,13 @@ import { ViewGuestRequestComponent } from './view-guest-request.component';
 export class GuestRequestResolve implements Resolve<IGuestRequest> {
     constructor(private service: GuestRequestService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IGuestRequest> {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
-            return this.service.find(id).pipe(map((guestRequest: HttpResponse<GuestRequest>) => guestRequest.body));
+            return this.service.find(id).pipe(
+                filter((response: HttpResponse<GuestRequest>) => response.ok),
+                map((guestRequest: HttpResponse<GuestRequest>) => guestRequest.body)
+            );
         }
         return of(new GuestRequest());
     }

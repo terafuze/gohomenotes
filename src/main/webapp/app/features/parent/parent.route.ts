@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 import { UserRouteAccessService } from 'app/core';
-import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { IParent } from 'app/shared/model/parent.model';
 import { Parent } from 'app/shared/model/parent.model';
 import { ParentService } from './parent.service';
@@ -16,10 +16,13 @@ import { ViewParentComponent } from './view-parent.component';
 export class ParentResolve implements Resolve<IParent> {
     constructor(private service: ParentService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IParent> {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
-            return this.service.find(id).pipe(map((parent: HttpResponse<Parent>) => parent.body));
+            return this.service.find(id).pipe(
+                filter((response: HttpResponse<Parent>) => response.ok),
+                map((parent: HttpResponse<Parent>) => parent.body)
+            );
         }
         return of(new Parent());
     }

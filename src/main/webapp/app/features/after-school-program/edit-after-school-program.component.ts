@@ -2,30 +2,30 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
+import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IAfterSchoolProgram } from 'app/shared/model/after-school-program.model';
 import { AfterSchoolProgramService } from './after-school-program.service';
-
 
 @Component({
     selector: 'app-edit-after-school-program',
     templateUrl: './edit-after-school-program.component.html'
 })
 export class EditAfterSchoolProgramComponent implements OnInit {
-
     private _afterSchoolProgram: IAfterSchoolProgram;
 
     isSaving: boolean;
 
-    
     schoolId: number;
 
     constructor(
-        private dataUtils: JhiDataUtils,
-        private jhiAlertService: JhiAlertService,
-        private afterSchoolProgramService: AfterSchoolProgramService,
-        private activatedRoute: ActivatedRoute
+        protected jhiAlertService: JhiAlertService,
+        protected jhiDataUtils: JhiDataUtils,
+        protected afterSchoolProgramService: AfterSchoolProgramService,
+        protected activatedRoute: ActivatedRoute
     ) {}
 
     ngOnInit() {
@@ -34,19 +34,6 @@ export class EditAfterSchoolProgramComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ afterSchoolProgram }) => {
             this.afterSchoolProgram = afterSchoolProgram;
         });
-        
-    }
-
-    byteSize(field) {
-        return this.dataUtils.byteSize(field);
-    }
-
-    openFile(contentType, field) {
-        return this.dataUtils.openFile(contentType, field);
-    }
-
-    setFileData(event, entity, field, isImage) {
-        this.dataUtils.setFileData(event, entity, field, isImage);
     }
 
     previousState() {
@@ -63,23 +50,22 @@ export class EditAfterSchoolProgramComponent implements OnInit {
         }
     }
 
-    private subscribeToSaveResponse(result: Observable<HttpResponse<IAfterSchoolProgram>>) {
+    protected subscribeToSaveResponse(result: Observable<HttpResponse<IAfterSchoolProgram>>) {
         result.subscribe((res: HttpResponse<IAfterSchoolProgram>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
     }
 
-    private onSaveSuccess() {
+    protected onSaveSuccess() {
         this.isSaving = false;
         this.previousState();
     }
 
-    private onSaveError() {
+    protected onSaveError() {
         this.isSaving = false;
     }
 
-    private onError(errorMessage: string) {
+    protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }
-    
 
     // TODO if not needed, remove this function
     getSelected(selectedVals: Array<any>, option: any) {

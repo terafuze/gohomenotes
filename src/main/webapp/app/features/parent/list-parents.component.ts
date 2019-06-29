@@ -1,10 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
-import { ActivatedRoute } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
+import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
-import { Principal } from 'app/core';
+import { AccountService } from 'app/core';
+import { ITEMS_PER_PAGE } from 'app/shared';
 import { IParent } from 'app/shared/model/parent.model';
 import { ParentService } from './parent.service';
 import { StudentService } from '../student/student.service';
@@ -17,16 +19,16 @@ export class ListParentsComponent implements OnInit, OnDestroy {
     currentAccount: any;
     eventSubscriber: Subscription;
     studentId: number;
-    
 
     constructor(
-        private parentService: ParentService,
-        private studentService: StudentService,
-        private activatedRoute: ActivatedRoute,
-        private jhiAlertService: JhiAlertService,
-        private dataUtils: JhiDataUtils,
-        private eventManager: JhiEventManager,
-        private principal: Principal
+        protected parentService: ParentService,
+        protected studentService: StudentService,
+        protected parseLinks: JhiParseLinks,
+        protected jhiAlertService: JhiAlertService,
+        protected accountService: AccountService,
+        protected activatedRoute: ActivatedRoute,
+        protected router: Router,
+        protected eventManager: JhiEventManager
     ) {}
 
     loadAll() {
@@ -54,7 +56,7 @@ export class ListParentsComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.studentId = this.activatedRoute.snapshot.queryParams['studentId'];
         this.loadAll();
-        this.principal.identity().then(account => {
+        this.accountService.identity().then(account => {
             this.currentAccount = account;
         });
         this.registerChangeInParents();
@@ -72,7 +74,7 @@ export class ListParentsComponent implements OnInit, OnDestroy {
         this.eventSubscriber = this.eventManager.subscribe('parentListModification', response => this.loadAll());
     }
 
-    private onError(errorMessage: string) {
+    protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 }

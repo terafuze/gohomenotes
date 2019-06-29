@@ -13,10 +13,9 @@ export class JhiLanguageHelper {
 
     constructor(
         private translateService: TranslateService,
-        // tslint:disable-next-line: no-unused-variable
-        private rootRenderer: RendererFactory2,
         private titleService: Title,
-        private router: Router
+        private router: Router,
+        rootRenderer: RendererFactory2
     ) {
         this._language = new BehaviorSubject<string>(this.translateService.currentLang);
         this.renderer = rootRenderer.createRenderer(document.querySelector('html'), null);
@@ -57,7 +56,8 @@ export class JhiLanguageHelper {
     }
 
     private getPageTitle(routeSnapshot: ActivatedRouteSnapshot) {
-        let title: string = routeSnapshot.data && routeSnapshot.data['pageTitle'] ? routeSnapshot.data['pageTitle'] : 'codegenApp';
+        let title: string =
+            routeSnapshot.data && routeSnapshot.data['pageTitle'] ? routeSnapshot.data['pageTitle'] : 'lendwithconfidenceApp';
         if (routeSnapshot.firstChild) {
             title = this.getPageTitle(routeSnapshot.firstChild) || title;
         }

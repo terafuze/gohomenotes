@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
+import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IEarlyPickupRequest } from 'app/shared/model/early-pickup-request.model';
 import { EarlyPickupRequestService } from './early-pickup-request.service';
@@ -15,49 +18,34 @@ import { StudentService } from 'app/features/student';
     templateUrl: './edit-early-pickup-request.component.html'
 })
 export class EditEarlyPickupRequestComponent implements OnInit {
-
     private _earlyPickupRequest: IEarlyPickupRequest;
 
     isSaving: boolean;
 
     // The list of Students from which to select
     students: IStudent[];
-    
-    
 
     constructor(
-        private dataUtils: JhiDataUtils,
-        private jhiAlertService: JhiAlertService,
-        private studentService: StudentService,
-        private earlyPickupRequestService: EarlyPickupRequestService,
-        private activatedRoute: ActivatedRoute
+        protected jhiAlertService: JhiAlertService,
+        protected jhiDataUtils: JhiDataUtils,
+        protected studentService: StudentService,
+        protected earlyPickupRequestService: EarlyPickupRequestService,
+        protected activatedRoute: ActivatedRoute
     ) {}
 
     ngOnInit() {
         this.isSaving = false;
-        
+
         this.activatedRoute.data.subscribe(({ earlyPickupRequest }) => {
             this.earlyPickupRequest = earlyPickupRequest;
         });
-        this.studentService.query().subscribe(
-            (res: HttpResponse<IStudent[]>) => {
-                this.students = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
-        
-    }
-
-    byteSize(field) {
-        return this.dataUtils.byteSize(field);
-    }
-
-    openFile(contentType, field) {
-        return this.dataUtils.openFile(contentType, field);
-    }
-
-    setFileData(event, entity, field, isImage) {
-        this.dataUtils.setFileData(event, entity, field, isImage);
+        this.studentService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IStudent[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IStudent[]>) => response.body)
+            )
+            .subscribe((res: IStudent[]) => (this.students = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {
@@ -69,33 +57,30 @@ export class EditEarlyPickupRequestComponent implements OnInit {
         if (this.earlyPickupRequest.id !== undefined) {
             this.subscribeToSaveResponse(this.earlyPickupRequestService.update(this.earlyPickupRequest));
         } else {
-            
             this.subscribeToSaveResponse(this.earlyPickupRequestService.create(this.earlyPickupRequest));
         }
     }
 
-    private subscribeToSaveResponse(result: Observable<HttpResponse<IEarlyPickupRequest>>) {
+    protected subscribeToSaveResponse(result: Observable<HttpResponse<IEarlyPickupRequest>>) {
         result.subscribe((res: HttpResponse<IEarlyPickupRequest>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
     }
 
-    private onSaveSuccess() {
+    protected onSaveSuccess() {
         this.isSaving = false;
         this.previousState();
     }
 
-    private onSaveError() {
+    protected onSaveError() {
         this.isSaving = false;
     }
 
-    private onError(errorMessage: string) {
+    protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    
     trackStudentById(index: number, item: IStudent) {
         return item.id;
     }
-    
 
     // TODO if not needed, remove this function
     getSelected(selectedVals: Array<any>, option: any) {

@@ -9,11 +9,9 @@ import { UserContext } from 'app/core';
     templateUrl: './view-school.component.html'
 })
 export class ViewSchoolComponent implements OnInit {
-
     school: ISchool;
 
-    constructor(private activatedRoute: ActivatedRoute,
-        private userContext: UserContext) {}
+    constructor(protected activatedRoute: ActivatedRoute, private userContext: UserContext) {}
 
     ngOnInit() {
         this.activatedRoute.data.subscribe(({ school }) => {

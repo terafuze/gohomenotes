@@ -20,7 +20,6 @@ module.exports = (options) => ({
     },
     module: {
         rules: [
-            { test: /bootstrap\/dist\/js\/umd\//, loader: 'imports-loader?jQuery=jquery' },
             {
                 test: /\.html$/,
                 loader: 'html-loader',
@@ -31,15 +30,23 @@ module.exports = (options) => ({
                     minifyJS:false,
                     minifyCSS:false
                 },
-                exclude: ['./src/main/webapp/index.html']
+                exclude: /(src\/main\/webapp\/index.html)/
             },
             {
                 test: /\.(jpe?g|png|gif|svg|woff2?|ttf|eot)$/i,
-                loaders: ['file-loader?hash=sha512&digest=hex&name=content/[hash].[ext]']
+                loader: 'file-loader',
+                options: {
+                    digest: 'hex',
+                    hash: 'sha512',
+                    name: 'content/[hash].[ext]'
+                }
             },
             {
                 test: /manifest.webapp$/,
-                loader: 'file-loader?name=manifest.webapp'
+                loader: 'file-loader',
+                options: {
+                    name: 'manifest.webapp'
+                }
             },
             // Ignore warnings about System.import in Angular
             { test: /[\/\\]@angular[\/\\].+\.js$/, parser: { system: true } },
@@ -69,22 +76,16 @@ module.exports = (options) => ({
             { from: './src/main/webapp/manifest.webapp', to: 'manifest.webapp' },
             { from: './src/main/webapp/robots.txt', to: 'robots.txt' }
         ]),
-        new webpack.ProvidePlugin({
-            $: "jquery",
-            jQuery: "jquery"
-        }),
         new MergeJsonWebpackPlugin({
             output: {
                 groupBy: [
-                    { pattern: "./src/main/webapp/i18n/en/*.json", fileName: "./i18n/en.json" },
-                    { pattern: "./src/main/webapp/i18n/fr/*.json", fileName: "./i18n/fr.json" },
-                    { pattern: "./src/main/webapp/i18n/es/*.json", fileName: "./i18n/es.json" }
+                    { pattern: "./src/main/webapp/i18n/en/*.json", fileName: "./i18n/en.json" }
                 ]
             }
         }),
         new HtmlWebpackPlugin({
             template: './src/main/webapp/index.html',
-            chunks: ['vendors', 'polyfills', 'global', 'main'],
+            chunks: ['vendors', 'polyfills', 'main', 'global'],
             chunksSortMode: 'manual',
             inject: 'body'
         })

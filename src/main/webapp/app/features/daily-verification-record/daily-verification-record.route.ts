@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 import { UserRouteAccessService } from 'app/core';
-import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { IDailyVerificationRecord } from 'app/shared/model/daily-verification-record.model';
 import { DailyVerificationRecord } from 'app/shared/model/daily-verification-record.model';
 import { DailyVerificationRecordService } from './daily-verification-record.service';
@@ -16,10 +16,13 @@ import { ViewDailyVerificationRecordComponent } from './view-daily-verification-
 export class DailyVerificationRecordResolve implements Resolve<IDailyVerificationRecord> {
     constructor(private service: DailyVerificationRecordService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IDailyVerificationRecord> {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
-            return this.service.find(id).pipe(map((dailyVerificationRecord: HttpResponse<DailyVerificationRecord>) => dailyVerificationRecord.body));
+            return this.service.find(id).pipe(
+                filter((response: HttpResponse<DailyVerificationRecord>) => response.ok),
+                map((dailyVerificationRecord: HttpResponse<DailyVerificationRecord>) => dailyVerificationRecord.body)
+            );
         }
         return of(new DailyVerificationRecord());
     }

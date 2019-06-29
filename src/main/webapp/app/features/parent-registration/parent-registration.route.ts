@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 import { UserRouteAccessService } from 'app/core';
-import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { IParentRegistration } from 'app/shared/model/parent-registration.model';
 import { ParentRegistration } from 'app/shared/model/parent-registration.model';
 import { ParentRegistrationService } from './parent-registration.service';
@@ -16,10 +16,13 @@ import { ViewParentRegistrationComponent } from './view-parent-registration.comp
 export class ParentRegistrationResolve implements Resolve<IParentRegistration> {
     constructor(private service: ParentRegistrationService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IParentRegistration> {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
-            return this.service.find(id).pipe(map((parentRegistration: HttpResponse<ParentRegistration>) => parentRegistration.body));
+            return this.service.find(id).pipe(
+                filter((response: HttpResponse<ParentRegistration>) => response.ok),
+                map((parentRegistration: HttpResponse<ParentRegistration>) => parentRegistration.body)
+            );
         }
         return of(new ParentRegistration());
     }

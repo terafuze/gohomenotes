@@ -2,51 +2,36 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
+import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IDailyVerificationRecord } from 'app/shared/model/daily-verification-record.model';
 import { DailyVerificationRecordService } from './daily-verification-record.service';
-
 
 @Component({
     selector: 'app-edit-daily-verification-record',
     templateUrl: './edit-daily-verification-record.component.html'
 })
 export class EditDailyVerificationRecordComponent implements OnInit {
-
     private _dailyVerificationRecord: IDailyVerificationRecord;
 
     isSaving: boolean;
 
-    
-    
-
     constructor(
-        private dataUtils: JhiDataUtils,
-        private jhiAlertService: JhiAlertService,
-        private dailyVerificationRecordService: DailyVerificationRecordService,
-        private activatedRoute: ActivatedRoute
+        protected jhiAlertService: JhiAlertService,
+        protected jhiDataUtils: JhiDataUtils,
+        protected dailyVerificationRecordService: DailyVerificationRecordService,
+        protected activatedRoute: ActivatedRoute
     ) {}
 
     ngOnInit() {
         this.isSaving = false;
-        
+
         this.activatedRoute.data.subscribe(({ dailyVerificationRecord }) => {
             this.dailyVerificationRecord = dailyVerificationRecord;
         });
-        
-    }
-
-    byteSize(field) {
-        return this.dataUtils.byteSize(field);
-    }
-
-    openFile(contentType, field) {
-        return this.dataUtils.openFile(contentType, field);
-    }
-
-    setFileData(event, entity, field, isImage) {
-        this.dataUtils.setFileData(event, entity, field, isImage);
     }
 
     previousState() {
@@ -58,29 +43,29 @@ export class EditDailyVerificationRecordComponent implements OnInit {
         if (this.dailyVerificationRecord.id !== undefined) {
             this.subscribeToSaveResponse(this.dailyVerificationRecordService.update(this.dailyVerificationRecord));
         } else {
-            
             this.subscribeToSaveResponse(this.dailyVerificationRecordService.create(this.dailyVerificationRecord));
         }
     }
 
-    private subscribeToSaveResponse(result: Observable<HttpResponse<IDailyVerificationRecord>>) {
-        result.subscribe((res: HttpResponse<IDailyVerificationRecord>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+    protected subscribeToSaveResponse(result: Observable<HttpResponse<IDailyVerificationRecord>>) {
+        result.subscribe(
+            (res: HttpResponse<IDailyVerificationRecord>) => this.onSaveSuccess(),
+            (res: HttpErrorResponse) => this.onSaveError()
+        );
     }
 
-    private onSaveSuccess() {
+    protected onSaveSuccess() {
         this.isSaving = false;
         this.previousState();
     }
 
-    private onSaveError() {
+    protected onSaveError() {
         this.isSaving = false;
     }
 
-    private onError(errorMessage: string) {
+    protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }
-
-    
 
     // TODO if not needed, remove this function
     getSelected(selectedVals: Array<any>, option: any) {

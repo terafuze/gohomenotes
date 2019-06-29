@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
+import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { ITransportationChangeRequest } from 'app/shared/model/transportation-change-request.model';
 import { TransportationChangeRequestService } from './transportation-change-request.service';
@@ -17,7 +20,6 @@ import { StudentService } from 'app/features/student';
     templateUrl: './edit-transportation-change-request.component.html'
 })
 export class EditTransportationChangeRequestComponent implements OnInit {
-
     private _transportationChangeRequest: ITransportationChangeRequest;
 
     isSaving: boolean;
@@ -26,49 +28,39 @@ export class EditTransportationChangeRequestComponent implements OnInit {
     dismissalLocations: IDismissalLocation[];
     // The list of Students from which to select
     students: IStudent[];
-    
-    
 
     constructor(
-        private dataUtils: JhiDataUtils,
-        private jhiAlertService: JhiAlertService,
-        private dismissalLocationService: DismissalLocationService,
-        private studentService: StudentService,
-        private transportationChangeRequestService: TransportationChangeRequestService,
-        private activatedRoute: ActivatedRoute
+        protected jhiAlertService: JhiAlertService,
+        protected jhiDataUtils: JhiDataUtils,
+        protected dismissalLocationService: DismissalLocationService,
+        protected studentService: StudentService,
+        protected transportationChangeRequestService: TransportationChangeRequestService,
+        protected activatedRoute: ActivatedRoute
     ) {}
 
     ngOnInit() {
         this.isSaving = false;
-        
+
         this.activatedRoute.data.subscribe(({ transportationChangeRequest }) => {
             this.transportationChangeRequest = transportationChangeRequest;
         });
-        this.dismissalLocationService.query().subscribe(
-            (res: HttpResponse<IDismissalLocation[]>) => {
-                this.dismissalLocations = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
-        this.studentService.query().subscribe(
-            (res: HttpResponse<IStudent[]>) => {
-                this.students = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
-        
-    }
-
-    byteSize(field) {
-        return this.dataUtils.byteSize(field);
-    }
-
-    openFile(contentType, field) {
-        return this.dataUtils.openFile(contentType, field);
-    }
-
-    setFileData(event, entity, field, isImage) {
-        this.dataUtils.setFileData(event, entity, field, isImage);
+        this.dismissalLocationService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IDismissalLocation[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IDismissalLocation[]>) => response.body)
+            )
+            .subscribe(
+                (res: IDismissalLocation[]) => (this.dismissalLocations = res),
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
+        this.studentService
+            .query()
+            .pipe(
+                filter((mayBeOk: HttpResponse<IStudent[]>) => mayBeOk.ok),
+                map((response: HttpResponse<IStudent[]>) => response.body)
+            )
+            .subscribe((res: IStudent[]) => (this.students = res), (res: HttpErrorResponse) => this.onError(res.message));
     }
 
     previousState() {
@@ -80,37 +72,37 @@ export class EditTransportationChangeRequestComponent implements OnInit {
         if (this.transportationChangeRequest.id !== undefined) {
             this.subscribeToSaveResponse(this.transportationChangeRequestService.update(this.transportationChangeRequest));
         } else {
-            
             this.subscribeToSaveResponse(this.transportationChangeRequestService.create(this.transportationChangeRequest));
         }
     }
 
-    private subscribeToSaveResponse(result: Observable<HttpResponse<ITransportationChangeRequest>>) {
-        result.subscribe((res: HttpResponse<ITransportationChangeRequest>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+    protected subscribeToSaveResponse(result: Observable<HttpResponse<ITransportationChangeRequest>>) {
+        result.subscribe(
+            (res: HttpResponse<ITransportationChangeRequest>) => this.onSaveSuccess(),
+            (res: HttpErrorResponse) => this.onSaveError()
+        );
     }
 
-    private onSaveSuccess() {
+    protected onSaveSuccess() {
         this.isSaving = false;
         this.previousState();
     }
 
-    private onSaveError() {
+    protected onSaveError() {
         this.isSaving = false;
     }
 
-    private onError(errorMessage: string) {
+    protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    
     trackDismissalLocationById(index: number, item: IDismissalLocation) {
         return item.id;
     }
-    
+
     trackStudentById(index: number, item: IStudent) {
         return item.id;
     }
-    
 
     // TODO if not needed, remove this function
     getSelected(selectedVals: Array<any>, option: any) {

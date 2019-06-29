@@ -30,7 +30,7 @@ export class JhiLoginModalComponent implements AfterViewInit {
     }
 
     ngAfterViewInit() {
-        this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#username'), 'focus', []);
+        setTimeout(() => this.renderer.invokeElementMethod(this.elementRef.nativeElement.querySelector('#username'), 'focus', []), 0);
     }
 
     cancel() {
@@ -44,7 +44,12 @@ export class JhiLoginModalComponent implements AfterViewInit {
     }
 
     login() {
-        this.loginService.login({username: this.username, password: this.password,rememberMe: this.rememberMe})
+        this.loginService
+            .login({
+                username: this.username,
+                password: this.password,
+                rememberMe: this.rememberMe
+            })
             .then(() => {
                 this.authenticationError = false;
                 this.activeModal.dismiss('login success');
@@ -57,8 +62,8 @@ export class JhiLoginModalComponent implements AfterViewInit {
                     content: 'Sending Authentication Success'
                 });
 
-                // // previousState was set in the authExpiredInterceptor before being redirected to login modal.
-                // // since login is succesful, go to stored previousState and clear previousState
+                // previousState was set in the authExpiredInterceptor before being redirected to login modal.
+                // since login is successful, go to stored previousState and clear previousState
                 const redirect = this.stateStorageService.getUrl();
                 if (redirect) {
                     this.stateStorageService.storeUrl(null);

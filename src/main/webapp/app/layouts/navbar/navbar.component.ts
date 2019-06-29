@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { JhiLanguageService, JhiAlertService } from 'ng-jhipster';
+import { JhiLanguageService } from 'ng-jhipster';
+import { SessionStorageService } from 'ngx-webstorage';
 
 import { VERSION } from 'app/app.constants';
-import { JhiLanguageHelper, Principal, LoginModalService, LoginService, UserContext } from 'app/core';
-import { ProfileService } from '../profiles/profile.service';
-import { UserProfileService } from 'app/features/user-profile';
-import { IUserProfile } from 'app/shared/model/user-profile.model';
-import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import { JhiLanguageHelper, AccountService, LoginModalService, LoginService } from 'app/core';
+import { ProfileService } from 'app/layouts/profiles/profile.service';
 
 @Component({
     selector: 'app-navbar',
@@ -22,18 +20,15 @@ export class NavbarComponent implements OnInit {
     swaggerEnabled: boolean;
     modalRef: NgbModalRef;
     version: string;
-    userProfileId: number;
 
     constructor(
-        private jhiAlertService: JhiAlertService,
         private loginService: LoginService,
         private languageService: JhiLanguageService,
         private languageHelper: JhiLanguageHelper,
-        private principal: Principal,
+        private sessionStorage: SessionStorageService,
+        private accountService: AccountService,
         private loginModalService: LoginModalService,
         private profileService: ProfileService,
-        private userProfileService: UserProfileService,
-        private userContext: UserContext,
         private router: Router
     ) {
         this.version = VERSION ? 'v' + VERSION : '';
@@ -41,17 +36,9 @@ export class NavbarComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.userProfileId = this.userContext.userProfile.id;
         this.languageHelper.getAll().then(languages => {
             this.languages = languages;
         });
-
-        this.userProfileService.forCurrentUser().subscribe(
-            (res: HttpResponse<IUserProfile>) => {
-                this.userContext.userProfile = res.body;
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
 
         this.profileService.getProfileInfo().then(profileInfo => {
             this.inProduction = profileInfo.inProduction;
@@ -59,11 +46,8 @@ export class NavbarComponent implements OnInit {
         });
     }
 
-    private onError(errorMessage: string) {
-        this.jhiAlertService.error(errorMessage, null, null);
-    }
-
     changeLanguage(languageKey: string) {
+        this.sessionStorage.store('locale', languageKey);
         this.languageService.changeLanguage(languageKey);
     }
 
@@ -72,7 +56,7 @@ export class NavbarComponent implements OnInit {
     }
 
     isAuthenticated() {
-        return this.principal.isAuthenticated();
+        return this.accountService.isAuthenticated();
     }
 
     login() {
@@ -90,6 +74,6 @@ export class NavbarComponent implements OnInit {
     }
 
     getImageUrl() {
-        return this.isAuthenticated() ? this.principal.getImageUrl() : null;
+        return this.isAuthenticated() ? this.accountService.getImageUrl() : null;
     }
 }

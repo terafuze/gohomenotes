@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 import { UserRouteAccessService } from 'app/core';
-import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { IFamilyRegistration } from 'app/shared/model/family-registration.model';
 import { FamilyRegistration } from 'app/shared/model/family-registration.model';
 import { FamilyRegistrationService } from './family-registration.service';
@@ -16,10 +16,13 @@ import { ViewFamilyRegistrationComponent } from './view-family-registration.comp
 export class FamilyRegistrationResolve implements Resolve<IFamilyRegistration> {
     constructor(private service: FamilyRegistrationService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IFamilyRegistration> {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
-            return this.service.find(id).pipe(map((familyRegistration: HttpResponse<FamilyRegistration>) => familyRegistration.body));
+            return this.service.find(id).pipe(
+                filter((response: HttpResponse<FamilyRegistration>) => response.ok),
+                map((familyRegistration: HttpResponse<FamilyRegistration>) => familyRegistration.body)
+            );
         }
         return of(new FamilyRegistration());
     }

@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import * as moment from 'moment';
+import { DATE_FORMAT } from 'app/shared/constants/input.constants';
+import { map } from 'rxjs/operators';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { ISchool } from 'app/shared/model/school.model';
@@ -10,13 +13,11 @@ import { ISchoolGrade } from 'app/shared/model/school-grade.model';
 import { IStudent } from 'app/shared/model/student.model';
 import { ITeacher } from 'app/shared/model/teacher.model';
 
-
 @Injectable({ providedIn: 'root' })
 export class SchoolService {
+    private resourceUrl = SERVER_API_URL + 'api/schools';
 
-    private resourceUrl =  SERVER_API_URL + 'api/schools';
-
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {}
 
     create(school: ISchool): Observable<HttpResponse<ISchool>> {
         return this.http.post<ISchool>(this.resourceUrl, school, { observe: 'response' });

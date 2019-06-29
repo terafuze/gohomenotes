@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 import { UserRouteAccessService } from 'app/core';
-import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { IUserProfile } from 'app/shared/model/user-profile.model';
 import { UserProfile } from 'app/shared/model/user-profile.model';
 import { UserProfileService } from './user-profile.service';
@@ -16,10 +16,13 @@ import { ViewUserProfileComponent } from './view-user-profile.component';
 export class UserProfileResolve implements Resolve<IUserProfile> {
     constructor(private service: UserProfileService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IUserProfile> {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
-            return this.service.find(id).pipe(map((userProfile: HttpResponse<UserProfile>) => userProfile.body));
+            return this.service.find(id).pipe(
+                filter((response: HttpResponse<UserProfile>) => response.ok),
+                map((userProfile: HttpResponse<UserProfile>) => userProfile.body)
+            );
         }
         return of(new UserProfile());
     }

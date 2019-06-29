@@ -2,30 +2,30 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
+import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IDismissalLocation } from 'app/shared/model/dismissal-location.model';
 import { DismissalLocationService } from './dismissal-location.service';
-
 
 @Component({
     selector: 'app-edit-dismissal-location',
     templateUrl: './edit-dismissal-location.component.html'
 })
 export class EditDismissalLocationComponent implements OnInit {
-
     private _dismissalLocation: IDismissalLocation;
 
     isSaving: boolean;
 
-    
     schoolId: number;
 
     constructor(
-        private dataUtils: JhiDataUtils,
-        private jhiAlertService: JhiAlertService,
-        private dismissalLocationService: DismissalLocationService,
-        private activatedRoute: ActivatedRoute
+        protected jhiAlertService: JhiAlertService,
+        protected jhiDataUtils: JhiDataUtils,
+        protected dismissalLocationService: DismissalLocationService,
+        protected activatedRoute: ActivatedRoute
     ) {}
 
     ngOnInit() {
@@ -34,19 +34,6 @@ export class EditDismissalLocationComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ dismissalLocation }) => {
             this.dismissalLocation = dismissalLocation;
         });
-        
-    }
-
-    byteSize(field) {
-        return this.dataUtils.byteSize(field);
-    }
-
-    openFile(contentType, field) {
-        return this.dataUtils.openFile(contentType, field);
-    }
-
-    setFileData(event, entity, field, isImage) {
-        this.dataUtils.setFileData(event, entity, field, isImage);
     }
 
     previousState() {
@@ -63,23 +50,22 @@ export class EditDismissalLocationComponent implements OnInit {
         }
     }
 
-    private subscribeToSaveResponse(result: Observable<HttpResponse<IDismissalLocation>>) {
+    protected subscribeToSaveResponse(result: Observable<HttpResponse<IDismissalLocation>>) {
         result.subscribe((res: HttpResponse<IDismissalLocation>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
     }
 
-    private onSaveSuccess() {
+    protected onSaveSuccess() {
         this.isSaving = false;
         this.previousState();
     }
 
-    private onSaveError() {
+    protected onSaveError() {
         this.isSaving = false;
     }
 
-    private onError(errorMessage: string) {
+    protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }
-    
 
     // TODO if not needed, remove this function
     getSelected(selectedVals: Array<any>, option: any) {

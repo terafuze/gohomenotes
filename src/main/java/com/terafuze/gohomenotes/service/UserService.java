@@ -1,16 +1,13 @@
 package com.terafuze.gohomenotes.service;
 
-import com.terafuze.gohomenotes.config.CacheConfiguration;
-import com.terafuze.gohomenotes.domain.Authority;
-import com.terafuze.gohomenotes.domain.User;
-import com.terafuze.gohomenotes.repository.AuthorityRepository;
-import com.terafuze.gohomenotes.config.Constants;
-import com.terafuze.gohomenotes.repository.UserRepository;
-import com.terafuze.gohomenotes.security.AuthoritiesConstants;
-import com.terafuze.gohomenotes.security.SecurityUtils;
-import com.terafuze.gohomenotes.web.utils.RandomUtils;
-import com.terafuze.gohomenotes.web.models.UserModel;
-import com.terafuze.gohomenotes.web.errors.InvalidPasswordException;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,10 +19,18 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-import java.util.*;
-import java.util.stream.Collectors;
+import com.terafuze.gohomenotes.config.Constants;
+import com.terafuze.gohomenotes.domain.Authority;
+import com.terafuze.gohomenotes.domain.User;
+import com.terafuze.gohomenotes.repository.AuthorityRepository;
+import com.terafuze.gohomenotes.repository.UserRepository;
+import com.terafuze.gohomenotes.security.AuthoritiesConstants;
+import com.terafuze.gohomenotes.security.SecurityUtils;
+import com.terafuze.gohomenotes.web.errors.EmailAlreadyUsedException;
+import com.terafuze.gohomenotes.web.errors.InvalidPasswordException;
+import com.terafuze.gohomenotes.web.errors.LoginAlreadyUsedException;
+import com.terafuze.gohomenotes.web.models.UserModel;
+import com.terafuze.gohomenotes.web.utils.RandomUtils;
 
 /**
  * Service class for managing users.
@@ -65,11 +70,10 @@ public class UserService {
     }
 
     public Optional<User> completePasswordReset(String newPassword, String key) {
-       log.debug("Reset user password for reset key {}", key);
-
-       return userRepository.findOneByResetKey(key)
-           .filter(user -> user.getResetDate().isAfter(Instant.now().minusSeconds(86400)))
-           .map(user -> {
+        log.debug("Reset user password for reset key {}", key);
+        return userRepository.findOneByResetKey(key)
+            .filter(user -> user.getResetDate().isAfter(Instant.now().minusSeconds(86400)))
+            .map(user -> {
                 user.setPassword(passwordEncoder.encode(newPassword));
                 user.setResetKey(null);
                 user.setResetDate(null);
@@ -90,15 +94,26 @@ public class UserService {
     }
 
     public User registerUser(UserModel userModel, String password) {
-
+        userRepository.findOneByLogin(userModel.getLogin().toLowerCase()).ifPresent(existingUser -> {
+            boolean removed = removeNonActivatedUser(existingUser);
+            if (!removed) {
+                throw new LoginAlreadyUsedException();
+            }
+        });
+        userRepository.findOneByEmailIgnoreCase(userModel.getEmail()).ifPresent(existingUser -> {
+            boolean removed = removeNonActivatedUser(existingUser);
+            if (!removed) {
+                throw new EmailAlreadyUsedException();
+            }
+        });
         User newUser = new User();
         String encryptedPassword = passwordEncoder.encode(password);
-        newUser.setLogin(userModel.getLogin());
+        newUser.setLogin(userModel.getLogin().toLowerCase());
         // new user gets initially a generated password
         newUser.setPassword(encryptedPassword);
         newUser.setFirstName(userModel.getFirstName());
         newUser.setLastName(userModel.getLastName());
-        newUser.setEmail(userModel.getEmail());
+        newUser.setEmail(userModel.getEmail().toLowerCase());
         newUser.setImageUrl(userModel.getImageUrl());
         newUser.setLangKey(userModel.getLangKey());
         // new user is not active
@@ -114,18 +129,33 @@ public class UserService {
         return newUser;
     }
 
+    private boolean removeNonActivatedUser(User existingUser){
+        if (existingUser.getActivated()) {
+             return false;
+        }
+        userRepository.delete(existingUser);
+        userRepository.flush();
+        this.clearUserCaches(existingUser);
+        return true;
+    }
+
     public User createUser(UserModel userModel) {
         User user = new User();
-        user.setLogin(userModel.getLogin());
+        user.setLogin(userModel.getLogin().toLowerCase());
         user.setFirstName(userModel.getFirstName());
         user.setLastName(userModel.getLastName());
-        user.setEmail(userModel.getEmail());
+        user.setEmail(userModel.getEmail().toLowerCase());
         user.setImageUrl(userModel.getImageUrl());
         if (userModel.getLangKey() == null) {
             user.setLangKey(Constants.DEFAULT_LANGUAGE); // default language
         } else {
             user.setLangKey(userModel.getLangKey());
         }
+        String encryptedPassword = passwordEncoder.encode(RandomUtils.generatePassword());
+        user.setPassword(encryptedPassword);
+        user.setResetKey(RandomUtils.generateResetKey());
+        user.setResetDate(Instant.now());
+        user.setActivated(true);
         if (userModel.getAuthorities() != null) {
             Set<Authority> authorities = userModel.getAuthorities().stream()
                 .map(authorityRepository::findById)
@@ -134,11 +164,6 @@ public class UserService {
                 .collect(Collectors.toSet());
             user.setAuthorities(authorities);
         }
-        String encryptedPassword = passwordEncoder.encode(RandomUtils.generatePassword());
-        user.setPassword(encryptedPassword);
-        user.setResetKey(RandomUtils.generateResetKey());
-        user.setResetDate(Instant.now());
-        user.setActivated(true);
         userRepository.save(user);
         this.clearUserCaches(user);
         log.debug("Created Information for User: {}", user);
@@ -160,7 +185,7 @@ public class UserService {
             .ifPresent(user -> {
                 user.setFirstName(firstName);
                 user.setLastName(lastName);
-                user.setEmail(email);
+                user.setEmail(email.toLowerCase());
                 user.setLangKey(langKey);
                 user.setImageUrl(imageUrl);
                 this.clearUserCaches(user);
@@ -252,12 +277,13 @@ public class UserService {
      */
     @Scheduled(cron = "0 0 1 * * ?")
     public void removeNotActivatedUsers() {
-        List<User> users = userRepository.findAllByActivatedIsFalseAndCreatedDateBefore(Instant.now().minus(3, ChronoUnit.DAYS));
-        for (User user : users) {
-            log.debug("Deleting not activated user {}", user.getLogin());
-            userRepository.delete(user);
-            this.clearUserCaches(user);
-        }
+        userRepository
+            .findAllByActivatedIsFalseAndCreatedDateBefore(Instant.now().minus(3, ChronoUnit.DAYS))
+            .forEach(user -> {
+                log.debug("Deleting not activated user {}", user.getLogin());
+                userRepository.delete(user);
+                this.clearUserCaches(user);
+            });
     }
 
     /**

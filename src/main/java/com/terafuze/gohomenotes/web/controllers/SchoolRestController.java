@@ -18,20 +18,20 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.codahale.metrics.annotation.Timed;
-import io.swagger.annotations.Api;
-import io.github.jhipster.web.util.ResponseUtil;
-
-import com.terafuze.gohomenotes.web.errors.BadRequestAlertException;
-import com.terafuze.gohomenotes.web.utils.HeaderUtil;
 
 import com.terafuze.gohomenotes.service.SchoolService;
-import com.terafuze.gohomenotes.web.models.SchoolModel;
+import com.terafuze.gohomenotes.web.errors.BadRequestAlertException;
 import com.terafuze.gohomenotes.web.models.AfterSchoolProgramModel;
 import com.terafuze.gohomenotes.web.models.DismissalLocationModel;
 import com.terafuze.gohomenotes.web.models.SchoolGradeModel;
+import com.terafuze.gohomenotes.web.models.SchoolModel;
 import com.terafuze.gohomenotes.web.models.StudentModel;
 import com.terafuze.gohomenotes.web.models.TeacherModel;
+import com.terafuze.gohomenotes.web.utils.HeaderUtil;
+
+import io.github.jhipster.web.util.ResponseUtil;
+import io.micrometer.core.annotation.Timed;
+import io.swagger.annotations.Api;
 
 
 /**

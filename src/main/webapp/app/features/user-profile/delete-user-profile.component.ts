@@ -12,15 +12,13 @@ import { UserProfileService } from './user-profile.service';
     templateUrl: './delete-user-profile.component.html'
 })
 export class DeleteUserProfileComponent {
-
     userProfile: IUserProfile;
 
     constructor(
-        private userProfileService: UserProfileService,
+        protected userProfileService: UserProfileService,
         public activeModal: NgbActiveModal,
-        private eventManager: JhiEventManager
-    ) {
-    }
+        protected eventManager: JhiEventManager
+    ) {}
 
     clear() {
         this.activeModal.dismiss('cancel');
@@ -44,7 +42,7 @@ export class DeleteUserProfileComponent {
 export class DeleteUserProfilePopupComponent implements OnInit, OnDestroy {
     private ngbModalRef: NgbModalRef;
 
-    constructor(private activatedRoute: ActivatedRoute, private router: Router, private modalService: NgbModal) {}
+    constructor(protected activatedRoute: ActivatedRoute, protected router: Router, protected modalService: NgbModal) {}
 
     ngOnInit() {
         this.activatedRoute.data.subscribe(({ userProfile }) => {
@@ -56,17 +54,18 @@ export class DeleteUserProfilePopupComponent implements OnInit, OnDestroy {
                 this.ngbModalRef.componentInstance.userProfile = userProfile;
                 this.ngbModalRef.result.then(
                     result => {
-                        this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
+                        this.router.navigate(['/user-profiles', { outlets: { popup: null } }]);
                         this.ngbModalRef = null;
                     },
                     reason => {
-                        this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
+                        this.router.navigate(['/user-profiles', { outlets: { popup: null } }]);
                         this.ngbModalRef = null;
                     }
                 );
             }, 0);
         });
     }
+
     ngOnDestroy() {
         this.ngbModalRef = null;
     }

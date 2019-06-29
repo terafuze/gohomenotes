@@ -9,11 +9,9 @@ import { UserContext } from 'app/core';
     templateUrl: './view-user-profile.component.html'
 })
 export class ViewUserProfileComponent implements OnInit {
-
     userProfile: IUserProfile;
 
-    constructor(private activatedRoute: ActivatedRoute,
-        private userContext: UserContext) {}
+    constructor(protected activatedRoute: ActivatedRoute, private userContext: UserContext) {}
 
     ngOnInit() {
         this.activatedRoute.data.subscribe(({ userProfile }) => {

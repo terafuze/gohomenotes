@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 import { UserRouteAccessService } from 'app/core';
-import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { IAddress } from 'app/shared/model/address.model';
 import { Address } from 'app/shared/model/address.model';
 import { AddressService } from './address.service';
@@ -16,10 +16,13 @@ import { ViewAddressComponent } from './view-address.component';
 export class AddressResolve implements Resolve<IAddress> {
     constructor(private service: AddressService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IAddress> {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
-            return this.service.find(id).pipe(map((address: HttpResponse<Address>) => address.body));
+            return this.service.find(id).pipe(
+                filter((response: HttpResponse<Address>) => response.ok),
+                map((address: HttpResponse<Address>) => address.body)
+            );
         }
         return of(new Address());
     }

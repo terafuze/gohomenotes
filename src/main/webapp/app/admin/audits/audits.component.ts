@@ -9,7 +9,7 @@ import { Audit } from './audit.model';
 import { AuditsService } from './audits.service';
 
 @Component({
-    selector: 'app-audit',
+    selector: 'jhi-audit',
     templateUrl: './audits.component.html'
 })
 export class AuditsComponent implements OnInit, OnDestroy {
@@ -17,7 +17,6 @@ export class AuditsComponent implements OnInit, OnDestroy {
     fromDate: string;
     itemsPerPage: any;
     links: any;
-    queryCount: number;
     page: number;
     routeData: any;
     predicate: any;
@@ -118,7 +117,6 @@ export class AuditsComponent implements OnInit, OnDestroy {
     private onSuccess(data, headers) {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = headers.get('X-Total-Count');
-        this.queryCount = this.totalItems;
         this.audits = data;
     }
 

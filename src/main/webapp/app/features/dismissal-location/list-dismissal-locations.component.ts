@@ -1,10 +1,12 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { JhiEventManager, JhiAlertService, JhiDataUtils } from 'ng-jhipster';
-import { ActivatedRoute } from '@angular/router';
+import { filter, map } from 'rxjs/operators';
+import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 
-import { Principal } from 'app/core';
+import { AccountService } from 'app/core';
+import { ITEMS_PER_PAGE } from 'app/shared';
 import { IDismissalLocation } from 'app/shared/model/dismissal-location.model';
 import { DismissalLocationService } from './dismissal-location.service';
 @Component({
@@ -16,19 +18,19 @@ export class ListDismissalLocationsComponent implements OnInit, OnDestroy {
     currentAccount: any;
     eventSubscriber: Subscription;
     schoolId: number;
-    
 
     constructor(
-        private dismissalLocationService: DismissalLocationService,
-        private activatedRoute: ActivatedRoute,
-        private jhiAlertService: JhiAlertService,
-        private dataUtils: JhiDataUtils,
-        private eventManager: JhiEventManager,
-        private principal: Principal
+        protected dismissalLocationService: DismissalLocationService,
+        protected parseLinks: JhiParseLinks,
+        protected jhiAlertService: JhiAlertService,
+        protected accountService: AccountService,
+        protected activatedRoute: ActivatedRoute,
+        protected router: Router,
+        protected eventManager: JhiEventManager
     ) {}
 
     loadAll() {
-        let dataLoaded: boolean = false;
+        let dataLoaded = false;
         // If no items loaded so far, then load all of them
         if (!dataLoaded) {
             this.dismissalLocationService.query().subscribe(
@@ -42,7 +44,7 @@ export class ListDismissalLocationsComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.loadAll();
-        this.principal.identity().then(account => {
+        this.accountService.identity().then(account => {
             this.currentAccount = account;
         });
         this.registerChangeInDismissalLocations();
@@ -60,7 +62,7 @@ export class ListDismissalLocationsComponent implements OnInit, OnDestroy {
         this.eventSubscriber = this.eventManager.subscribe('dismissalLocationListModification', response => this.loadAll());
     }
 
-    private onError(errorMessage: string) {
+    protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 }

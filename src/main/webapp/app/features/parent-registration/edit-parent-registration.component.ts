@@ -2,30 +2,30 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
+import * as moment from 'moment';
+import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IParentRegistration } from 'app/shared/model/parent-registration.model';
 import { ParentRegistrationService } from './parent-registration.service';
-
 
 @Component({
     selector: 'app-edit-parent-registration',
     templateUrl: './edit-parent-registration.component.html'
 })
 export class EditParentRegistrationComponent implements OnInit {
-
     private _parentRegistration: IParentRegistration;
 
     isSaving: boolean;
 
-    
     familyRegistrationId: number;
 
     constructor(
-        private dataUtils: JhiDataUtils,
-        private jhiAlertService: JhiAlertService,
-        private parentRegistrationService: ParentRegistrationService,
-        private activatedRoute: ActivatedRoute
+        protected jhiAlertService: JhiAlertService,
+        protected jhiDataUtils: JhiDataUtils,
+        protected parentRegistrationService: ParentRegistrationService,
+        protected activatedRoute: ActivatedRoute
     ) {}
 
     ngOnInit() {
@@ -34,19 +34,6 @@ export class EditParentRegistrationComponent implements OnInit {
         this.activatedRoute.data.subscribe(({ parentRegistration }) => {
             this.parentRegistration = parentRegistration;
         });
-        
-    }
-
-    byteSize(field) {
-        return this.dataUtils.byteSize(field);
-    }
-
-    openFile(contentType, field) {
-        return this.dataUtils.openFile(contentType, field);
-    }
-
-    setFileData(event, entity, field, isImage) {
-        this.dataUtils.setFileData(event, entity, field, isImage);
     }
 
     previousState() {
@@ -63,23 +50,22 @@ export class EditParentRegistrationComponent implements OnInit {
         }
     }
 
-    private subscribeToSaveResponse(result: Observable<HttpResponse<IParentRegistration>>) {
+    protected subscribeToSaveResponse(result: Observable<HttpResponse<IParentRegistration>>) {
         result.subscribe((res: HttpResponse<IParentRegistration>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
     }
 
-    private onSaveSuccess() {
+    protected onSaveSuccess() {
         this.isSaving = false;
         this.previousState();
     }
 
-    private onSaveError() {
+    protected onSaveError() {
         this.isSaving = false;
     }
 
-    private onError(errorMessage: string) {
+    protected onError(errorMessage: string) {
         this.jhiAlertService.error(errorMessage, null, null);
     }
-    
 
     // TODO if not needed, remove this function
     getSelected(selectedVals: Array<any>, option: any) {

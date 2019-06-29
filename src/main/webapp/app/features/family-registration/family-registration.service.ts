@@ -1,19 +1,20 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import * as moment from 'moment';
+import { DATE_FORMAT } from 'app/shared/constants/input.constants';
+import { map } from 'rxjs/operators';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared';
 import { IFamilyRegistration } from 'app/shared/model/family-registration.model';
 import { IParentRegistration } from 'app/shared/model/parent-registration.model';
 import { IStudentRegistration } from 'app/shared/model/student-registration.model';
 
-
 @Injectable({ providedIn: 'root' })
 export class FamilyRegistrationService {
+    private resourceUrl = SERVER_API_URL + 'api/family-registrations';
 
-    private resourceUrl =  SERVER_API_URL + 'api/family-registrations';
-
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) {}
 
     create(familyRegistration: IFamilyRegistration): Observable<HttpResponse<IFamilyRegistration>> {
         return this.http.post<IFamilyRegistration>(this.resourceUrl, familyRegistration, { observe: 'response' });

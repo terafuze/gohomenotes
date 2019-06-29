@@ -1,19 +1,11 @@
 package com.terafuze.gohomenotes.web.controllers;
 
-import com.terafuze.gohomenotes.config.Constants;
-import com.codahale.metrics.annotation.Timed;
-import com.terafuze.gohomenotes.domain.User;
-import com.terafuze.gohomenotes.repository.UserRepository;
-import com.terafuze.gohomenotes.security.AuthoritiesConstants;
-import com.terafuze.gohomenotes.service.MailService;
-import com.terafuze.gohomenotes.service.UserService;
-import com.terafuze.gohomenotes.web.models.UserModel;
-import com.terafuze.gohomenotes.web.errors.BadRequestAlertException;
-import com.terafuze.gohomenotes.web.errors.EmailAlreadyUsedException;
-import com.terafuze.gohomenotes.web.errors.LoginAlreadyUsedException;
-import com.terafuze.gohomenotes.web.utils.HeaderUtil;
-import com.terafuze.gohomenotes.web.utils.PaginationUtil;
-import io.github.jhipster.web.util.ResponseUtil;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.util.List;
+import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,12 +15,30 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.validation.Valid;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.util.*;
+import com.terafuze.gohomenotes.config.Constants;
+import com.terafuze.gohomenotes.domain.User;
+import com.terafuze.gohomenotes.repository.UserRepository;
+import com.terafuze.gohomenotes.security.AuthoritiesConstants;
+import com.terafuze.gohomenotes.service.MailService;
+import com.terafuze.gohomenotes.service.UserService;
+import com.terafuze.gohomenotes.web.errors.BadRequestAlertException;
+import com.terafuze.gohomenotes.web.errors.EmailAlreadyUsedException;
+import com.terafuze.gohomenotes.web.errors.LoginAlreadyUsedException;
+import com.terafuze.gohomenotes.web.models.UserModel;
+import com.terafuze.gohomenotes.web.utils.HeaderUtil;
+import com.terafuze.gohomenotes.web.utils.PaginationUtil;
+
+import io.github.jhipster.web.util.ResponseUtil;
+import io.micrometer.core.annotation.Timed;
 
 /**
  * REST controller for managing users.

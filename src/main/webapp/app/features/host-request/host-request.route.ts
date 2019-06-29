@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 import { UserRouteAccessService } from 'app/core';
-import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { IHostRequest } from 'app/shared/model/host-request.model';
 import { HostRequest } from 'app/shared/model/host-request.model';
 import { HostRequestService } from './host-request.service';
@@ -16,10 +16,13 @@ import { ViewHostRequestComponent } from './view-host-request.component';
 export class HostRequestResolve implements Resolve<IHostRequest> {
     constructor(private service: HostRequestService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IHostRequest> {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
-            return this.service.find(id).pipe(map((hostRequest: HttpResponse<HostRequest>) => hostRequest.body));
+            return this.service.find(id).pipe(
+                filter((response: HttpResponse<HostRequest>) => response.ok),
+                map((hostRequest: HttpResponse<HostRequest>) => hostRequest.body)
+            );
         }
         return of(new HostRequest());
     }

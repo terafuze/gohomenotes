@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 import { UserRouteAccessService } from 'app/core';
-import { of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { filter, map } from 'rxjs/operators';
 import { ITransportationChangeRequest } from 'app/shared/model/transportation-change-request.model';
 import { TransportationChangeRequest } from 'app/shared/model/transportation-change-request.model';
 import { TransportationChangeRequestService } from './transportation-change-request.service';
@@ -16,10 +16,13 @@ import { ViewTransportationChangeRequestComponent } from './view-transportation-
 export class TransportationChangeRequestResolve implements Resolve<ITransportationChangeRequest> {
     constructor(private service: TransportationChangeRequestService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ITransportationChangeRequest> {
         const id = route.params['id'] ? route.params['id'] : null;
         if (id) {
-            return this.service.find(id).pipe(map((transportationChangeRequest: HttpResponse<TransportationChangeRequest>) => transportationChangeRequest.body));
+            return this.service.find(id).pipe(
+                filter((response: HttpResponse<TransportationChangeRequest>) => response.ok),
+                map((transportationChangeRequest: HttpResponse<TransportationChangeRequest>) => transportationChangeRequest.body)
+            );
         }
         return of(new TransportationChangeRequest());
     }

@@ -12,15 +12,9 @@ import { TeacherService } from './teacher.service';
     templateUrl: './delete-teacher.component.html'
 })
 export class DeleteTeacherComponent {
-
     teacher: ITeacher;
 
-    constructor(
-        private teacherService: TeacherService,
-        public activeModal: NgbActiveModal,
-        private eventManager: JhiEventManager
-    ) {
-    }
+    constructor(protected teacherService: TeacherService, public activeModal: NgbActiveModal, protected eventManager: JhiEventManager) {}
 
     clear() {
         this.activeModal.dismiss('cancel');
@@ -44,7 +38,7 @@ export class DeleteTeacherComponent {
 export class DeleteTeacherPopupComponent implements OnInit, OnDestroy {
     private ngbModalRef: NgbModalRef;
 
-    constructor(private activatedRoute: ActivatedRoute, private router: Router, private modalService: NgbModal) {}
+    constructor(protected activatedRoute: ActivatedRoute, protected router: Router, protected modalService: NgbModal) {}
 
     ngOnInit() {
         this.activatedRoute.data.subscribe(({ teacher }) => {
@@ -56,17 +50,18 @@ export class DeleteTeacherPopupComponent implements OnInit, OnDestroy {
                 this.ngbModalRef.componentInstance.teacher = teacher;
                 this.ngbModalRef.result.then(
                     result => {
-                        this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
+                        this.router.navigate(['/teachers', { outlets: { popup: null } }]);
                         this.ngbModalRef = null;
                     },
                     reason => {
-                        this.router.navigate([{ outlets: { popup: null } }], { replaceUrl: true, queryParamsHandling: 'merge' });
+                        this.router.navigate(['/teachers', { outlets: { popup: null } }]);
                         this.ngbModalRef = null;
                     }
                 );
             }, 0);
         });
     }
+
     ngOnDestroy() {
         this.ngbModalRef = null;
     }
