@@ -1,0 +1,5 @@
+#!/bin/bash
+
+./mvnw -Dspring.profiles.active=local,swagger,liquibase
+
+exit

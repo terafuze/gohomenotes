@@ -213,16 +213,31 @@ See the [Liquibase Website](www.liquibase.org) for general information about Liq
 
 ## Building for production
 
+You can test the production build configuration locally by executing the following:
+
+```
+./mvnw -Pprod
+```
+
+You should be able to access the app by going to `localhost:8080` in a browser.
+
+This build will use `src/main/resources/config/application-prod.yml`.
+
+See also: https://www.jhipster.tech/production/
+
 To optimize the gohomenotes application for production, run:
 
     ./mvnw clean package -Pprod -DskipTests
 
 This will concatenate and minify the client CSS and JavaScript files. It will also modify `index.html` so it references these new files.
+
 To ensure everything worked, run:
 
-    java -jar target/*.war
+    java -jar target/gohomenotes3-0.0.1-SNAPSHOT.war
 
-Then navigate to [http://localhost:8080](http://localhost:8080) in your browser.
+(Or whatever the current version of the webapp rather than `0.0.1-SNAPSHOT` per the pom.xml file)
+
+And then navigate to [http://localhost:8080](http://localhost:8080) in your browser.
 
 ## Deploying to AWS using BoxFuse
 
