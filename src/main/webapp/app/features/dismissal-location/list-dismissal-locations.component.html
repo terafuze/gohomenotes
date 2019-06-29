@@ -28,13 +28,9 @@
             <tr *ngFor="let dismissalLocation of dismissalLocations ;trackBy: trackId">
                 <td><a [routerLink]="['/dismissal-locations', dismissalLocation.id, 'view']">{{dismissalLocation.id}}</a></td>
                 <td>{{dismissalLocation.abbreviation}}</td>
-                
                 <td>{{dismissalLocation.assignedPassengers}}</td>
-                
                 <td>{{dismissalLocation.maxGuestsPerStudent}}</td>
-                
                 <td>{{dismissalLocation.maxPassengers}}</td>
-                
                 <td>{{dismissalLocation.name}}</td>
                 
                 <td>

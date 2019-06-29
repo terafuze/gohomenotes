@@ -9,91 +9,60 @@
                     <input type="text" class="form-control" id="id" name="id" [ngModel]="parent.id" readonly />
                 </div>
                 
-                
-                <!-- Address Form Field -->
-                
-                <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.parent.address" for="address">Address</label>
-                <input type="text" class="form-control" name="address" id="address"
-                    [(ngModel)]="parent.address" required/>
-                <div [hidden]="!(editForm.controls.address?.dirty && editForm.controls.address?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.address?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
-            </div>
-                </div>
-                
-                
                 <!-- Email Address Form Field -->
-                
                 <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.parent.emailAddress" for="email_address">Email Address</label>
-                <input type="text" class="form-control" name="emailAddress" id="email_address"
-                    [(ngModel)]="parent.emailAddress" required/>
-                <div [hidden]="!(editForm.controls.emailAddress?.dirty && editForm.controls.emailAddress?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.emailAddress?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
-            </div>
+                    <label class="form-control-label" jhiTranslate="app.parent.emailAddress" for="email_address">Email Address</label>
+                    <input type="text" class="form-control" name="emailAddress" id="email_address"
+                        [(ngModel)]="parent.emailAddress" required/>
+                    <div [hidden]="!(editForm.controls.emailAddress?.dirty && editForm.controls.emailAddress?.invalid)">
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.emailAddress?.errors?.required" jhiTranslate="entity.validation.required">
+                           This field is required.
+                        </small>
+                    </div>
                 </div>
-                
-                
                 <!-- First Name Form Field -->
-                
                 <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.parent.firstName" for="first_name">First Name</label>
-                <input type="text" class="form-control" name="firstName" id="first_name"
-                    [(ngModel)]="parent.firstName" required/>
-                <div [hidden]="!(editForm.controls.firstName?.dirty && editForm.controls.firstName?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.firstName?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
-            </div>
+                    <label class="form-control-label" jhiTranslate="app.parent.firstName" for="first_name">First Name</label>
+                    <input type="text" class="form-control" name="firstName" id="first_name"
+                        [(ngModel)]="parent.firstName" required/>
+                    <div [hidden]="!(editForm.controls.firstName?.dirty && editForm.controls.firstName?.invalid)">
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.firstName?.errors?.required" jhiTranslate="entity.validation.required">
+                           This field is required.
+                        </small>
+                    </div>
                 </div>
-                
-                
                 <!-- Last Name Form Field -->
-                
                 <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.parent.lastName" for="last_name">Last Name</label>
-                <input type="text" class="form-control" name="lastName" id="last_name"
-                    [(ngModel)]="parent.lastName" required/>
-                <div [hidden]="!(editForm.controls.lastName?.dirty && editForm.controls.lastName?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.lastName?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
-            </div>
+                    <label class="form-control-label" jhiTranslate="app.parent.lastName" for="last_name">Last Name</label>
+                    <input type="text" class="form-control" name="lastName" id="last_name"
+                        [(ngModel)]="parent.lastName" required/>
+                    <div [hidden]="!(editForm.controls.lastName?.dirty && editForm.controls.lastName?.invalid)">
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.lastName?.errors?.required" jhiTranslate="entity.validation.required">
+                           This field is required.
+                        </small>
+                    </div>
                 </div>
-                
-                
                 <!-- Primary Phone Number Form Field -->
-                
                 <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.parent.primaryPhoneNumber" for="primary_phone_number">Primary Phone Number</label>
-                <input type="text" class="form-control" name="primaryPhoneNumber" id="primary_phone_number"
-                    [(ngModel)]="parent.primaryPhoneNumber" required/>
-                <div [hidden]="!(editForm.controls.primaryPhoneNumber?.dirty && editForm.controls.primaryPhoneNumber?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.primaryPhoneNumber?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
-            </div>
+                    <label class="form-control-label" jhiTranslate="app.parent.primaryPhoneNumber" for="primary_phone_number">Primary Phone Number</label>
+                    <input type="text" class="form-control" name="primaryPhoneNumber" id="primary_phone_number"
+                        [(ngModel)]="parent.primaryPhoneNumber" required/>
+                    <div [hidden]="!(editForm.controls.primaryPhoneNumber?.dirty && editForm.controls.primaryPhoneNumber?.invalid)">
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.primaryPhoneNumber?.errors?.required" jhiTranslate="entity.validation.required">
+                           This field is required.
+                        </small>
+                    </div>
                 </div>
-                
-                
                 <!-- Secondary Phone Number Form Field -->
-                
                 <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.parent.secondaryPhoneNumber" for="secondary_phone_number">Secondary Phone Number</label>
-                <input type="text" class="form-control" name="secondaryPhoneNumber" id="secondary_phone_number"
-                    [(ngModel)]="parent.secondaryPhoneNumber" /></div>
-                
-                
-                
+                    <label class="form-control-label" jhiTranslate="app.parent.secondaryPhoneNumber" for="secondary_phone_number">Secondary Phone Number</label>
+                    <input type="text" class="form-control" name="secondaryPhoneNumber" id="secondary_phone_number"
+                        [(ngModel)]="parent.secondaryPhoneNumber" />
+                </div>
                 <!-- Students Form Field -->
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="app.parent.students" for="students">Students</label>
@@ -101,7 +70,9 @@
                         <option [ngValue]="getSelected(parent.students, studentOption)" *ngFor="let studentOption of students; trackBy: trackStudentById">{{studentOption.id}}</option>
                     </select>
                 </div>
-			</div>
+                    </select>
+                </div>
+            </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>

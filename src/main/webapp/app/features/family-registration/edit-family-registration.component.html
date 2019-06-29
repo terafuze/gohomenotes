@@ -9,9 +9,21 @@
                     <input type="text" class="form-control" id="id" name="id" [ngModel]="familyRegistration.id" readonly />
                 </div>
                 
-                
-                
+                <!-- Parent Registrations Form Field -->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="app.familyRegistration.parentRegistrations" for="parent_registrations">Parent Registrations</label>
+                    <select class="form-control" id="parent_registrations" name="parentRegistrations" multiple [(ngModel)]="familyRegistration.parentRegistrations">
+                        <option [ngValue]="getSelected(familyRegistration.parentRegistrations, parentRegistrationOption)" *ngFor="let parentRegistrationOption of parentRegistrations; trackBy: trackParentRegistrationById">{{parentRegistrationOption.id}}</option>
+                    </select>
                 </div>
+                <!-- Student Registrations Form Field -->
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="app.familyRegistration.studentRegistrations" for="student_registrations">Student Registrations</label>
+                    <select class="form-control" id="student_registrations" name="studentRegistrations" multiple [(ngModel)]="familyRegistration.studentRegistrations">
+                        <option [ngValue]="getSelected(familyRegistration.studentRegistrations, studentRegistrationOption)" *ngFor="let studentRegistrationOption of studentRegistrations; trackBy: trackStudentRegistrationById">{{studentRegistrationOption.id}}</option>
+                    </select>
+                </div>
+            </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>

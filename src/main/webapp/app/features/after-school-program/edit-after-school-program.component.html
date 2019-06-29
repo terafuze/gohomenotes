@@ -14,36 +14,31 @@
                 </div>
                 
                 <!-- Abbreviation Form Field -->
-                
                 <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.afterSchoolProgram.abbreviation" for="abbreviation">Abbreviation</label>
-                <input type="text" class="form-control" name="abbreviation" id="abbreviation"
-                    [(ngModel)]="afterSchoolProgram.abbreviation" required/>
-                <div [hidden]="!(editForm.controls.abbreviation?.dirty && editForm.controls.abbreviation?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.abbreviation?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
-            </div>
+                    <label class="form-control-label" jhiTranslate="app.afterSchoolProgram.abbreviation" for="abbreviation">Abbreviation</label>
+                    <input type="text" class="form-control" name="abbreviation" id="abbreviation"
+                        [(ngModel)]="afterSchoolProgram.abbreviation" required/>
+                    <div [hidden]="!(editForm.controls.abbreviation?.dirty && editForm.controls.abbreviation?.invalid)">
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.abbreviation?.errors?.required" jhiTranslate="entity.validation.required">
+                           This field is required.
+                        </small>
+                    </div>
                 </div>
-                
-                
                 <!-- Name Form Field -->
-                
                 <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.afterSchoolProgram.name" for="name">Name</label>
-                <input type="text" class="form-control" name="name" id="name"
-                    [(ngModel)]="afterSchoolProgram.name" required/>
-                <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
+                    <label class="form-control-label" jhiTranslate="app.afterSchoolProgram.name" for="name">Name</label>
+                    <input type="text" class="form-control" name="name" id="name"
+                        [(ngModel)]="afterSchoolProgram.name" required/>
+                    <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.name?.errors?.required" jhiTranslate="entity.validation.required">
+                           This field is required.
+                        </small>
+                    </div>
+                </div>
+                
             </div>
-                </div>
-                
-                
-                </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
                     <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>

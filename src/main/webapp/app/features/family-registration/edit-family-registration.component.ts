@@ -7,34 +7,52 @@ import { JhiAlertService, JhiDataUtils } from 'ng-jhipster';
 import { IFamilyRegistration } from 'app/shared/model/family-registration.model';
 import { FamilyRegistrationService } from './family-registration.service';
 
+import { IParentRegistration } from 'app/shared/model/parent-registration.model';
+import { ParentRegistrationService } from 'app/features/parent-registration';
+import { IStudentRegistration } from 'app/shared/model/student-registration.model';
+import { StudentRegistrationService } from 'app/features/student-registration';
 
 @Component({
     selector: 'app-edit-family-registration',
     templateUrl: './edit-family-registration.component.html'
 })
 export class EditFamilyRegistrationComponent implements OnInit {
-
     private _familyRegistration: IFamilyRegistration;
 
     isSaving: boolean;
 
-    
-    
+    // The list of Parent Registrations from which to select
+    parentRegistrations: IParentRegistration[];
+    // The list of Student Registrations from which to select
+    studentRegistrations: IStudentRegistration[];
 
     constructor(
         private dataUtils: JhiDataUtils,
         private jhiAlertService: JhiAlertService,
+        private parentRegistrationService: ParentRegistrationService,
+        private studentRegistrationService: StudentRegistrationService,
         private familyRegistrationService: FamilyRegistrationService,
         private activatedRoute: ActivatedRoute
     ) {}
 
     ngOnInit() {
         this.isSaving = false;
-        
+
         this.activatedRoute.data.subscribe(({ familyRegistration }) => {
             this.familyRegistration = familyRegistration;
         });
-        
+        this.parentRegistrationService.query().subscribe(
+            (res: HttpResponse<IParentRegistration[]>) => {
+                this.parentRegistrations = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
+        this.studentRegistrationService.query().subscribe(
+            (res: HttpResponse<IStudentRegistration[]>) => {
+                this.studentRegistrations = res.body;
+            },
+            (res: HttpErrorResponse) => this.onError(res.message)
+        );
     }
 
     byteSize(field) {
@@ -58,7 +76,6 @@ export class EditFamilyRegistrationComponent implements OnInit {
         if (this.familyRegistration.id !== undefined) {
             this.subscribeToSaveResponse(this.familyRegistrationService.update(this.familyRegistration));
         } else {
-            
             this.subscribeToSaveResponse(this.familyRegistrationService.create(this.familyRegistration));
         }
     }
@@ -80,7 +97,13 @@ export class EditFamilyRegistrationComponent implements OnInit {
         this.jhiAlertService.error(errorMessage, null, null);
     }
 
-    
+    trackParentRegistrationById(index: number, item: IParentRegistration) {
+        return item.id;
+    }
+
+    trackStudentRegistrationById(index: number, item: IStudentRegistration) {
+        return item.id;
+    }
 
     // TODO if not needed, remove this function
     getSelected(selectedVals: Array<any>, option: any) {

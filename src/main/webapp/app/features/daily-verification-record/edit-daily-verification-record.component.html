@@ -9,7 +9,6 @@
                     <input type="text" class="form-control" id="id" name="id" [ngModel]="dailyVerificationRecord.id" readonly />
                 </div>
                 
-                
                 <!-- Go Home Notes Report Form Field -->
                 <div class="form-group">
                 <label class="form-control-label" jhiTranslate="app.dailyVerificationRecord.goHomeNotesReport" for="go_home_notes_report">Go Home Notes Report</label>
@@ -29,18 +28,16 @@
                 </div>
                 <!-- Timestamp Form Field -->
                 <div class="form-group">
-                <label class="form-control-label" jhiTranslate="app.dailyVerificationRecord.timestamp" for="timestamp">Timestamp</label>
-                <input type="text" class="form-control" name="timestamp" id="timestamp"
-                    [(ngModel)]="dailyVerificationRecord.timestamp" required/>
-                <div [hidden]="!(editForm.controls.timestamp?.dirty && editForm.controls.timestamp?.invalid)">
-                <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.timestamp?.errors?.required" jhiTranslate="entity.validation.required">
-                   This field is required.
-                </small>
-            </div>
+                    <label class="form-control-label" jhiTranslate="app.dailyVerificationRecord.timestamp" for="timestamp">Timestamp</label>
+                    <input type="text" class="form-control" name="timestamp" id="timestamp"
+                        [(ngModel)]="dailyVerificationRecord.timestamp" required/>
+                    <div [hidden]="!(editForm.controls.timestamp?.dirty && editForm.controls.timestamp?.invalid)">
+                        <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.timestamp?.errors?.required" jhiTranslate="entity.validation.required">
+                           This field is required.
+                        </small>
+                    </div>
                 </div>
-                
-                
             </div>
             <div>
                 <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
