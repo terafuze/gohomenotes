@@ -79,6 +79,20 @@ export class EditDailyVerificationRecordComponent implements OnInit {
         return option;
     }
 
+    // TODO remove the following three methods if this page does not include file upload capabitilies
+    // File Upload related methods
+    byteSize(field) {
+        return this.jhiDataUtils.byteSize(field);
+    }
+
+    openFile(contentType, field) {
+        return this.jhiDataUtils.openFile(contentType, field);
+    }
+
+    setFileData(event, entity, field, isImage) {
+        this.jhiDataUtils.setFileData(event, entity, field, isImage);
+    }
+
     get dailyVerificationRecord() {
         return this._dailyVerificationRecord;
     }
