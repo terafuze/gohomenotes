@@ -39,7 +39,9 @@ public class StudentModel implements Serializable {
     
     private Long teacherId;
 
-    private String teacherIdentifier;
+    private String teacherFirstName;
+    
+    private String teacherLastName;
     
     public String getIdentifier() {
         return this.identifier;
@@ -121,16 +123,24 @@ public class StudentModel implements Serializable {
     public void setTeacherId(Long teacherId) {
         this.teacherId = teacherId;
     }
-
-    public String getTeacherIdentifier() {
-        return this.teacherIdentifier;
-    }
-
-    public void setTeacherIdentifier(String teacherIdentifier) {
-        this.teacherIdentifier = teacherIdentifier;
-    }
     
-    @Override
+    public String getTeacherFirstName() {
+		return teacherFirstName;
+	}
+
+	public void setTeacherFirstName(String teacherFirstName) {
+		this.teacherFirstName = teacherFirstName;
+	}
+
+	public String getTeacherLastName() {
+		return teacherLastName;
+	}
+
+	public void setTeacherLastName(String teacherLastName) {
+		this.teacherLastName = teacherLastName;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) {
             return true;

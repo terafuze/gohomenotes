@@ -28,5 +28,9 @@ export class Teacher implements ITeacher {
         public students?: IStudent[],
         public userProfileId?: number,
         public userProfileIdentifier?: string
-    ) { }
+    ) {}
+
+    static deriveIdentifier(teacher: ITeacher) {
+        return teacher.firstName + ' ' + teacher.lastName;
+    }
 }

@@ -12,6 +12,8 @@ export interface IStudent {
     schoolGradeIdentifier?: string;
     teacherId?: number;
     teacherIdentifier?: string;
+    teacherFirstName?: string;
+    teacherLastName?: string;
 }
 
 export class Student implements IStudent {
@@ -27,6 +29,13 @@ export class Student implements IStudent {
         public schoolGradeId?: number,
         public schoolGradeIdentifier?: string,
         public teacherId?: number,
-        public teacherIdentifier?: string
-    ) { }
+        public teacherIdentifier?: string,
+        public teacherFirstName?: string,
+        public teacherLastName?: string
+    ) {}
+
+    static deriveTeacherIdentifier(student: IStudent): IStudent {
+        student.teacherIdentifier = student.teacherFirstName + ' ' + student.teacherLastName;
+        return student;
+    }
 }

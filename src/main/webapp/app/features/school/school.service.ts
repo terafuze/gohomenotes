@@ -10,7 +10,7 @@ import { ISchool } from 'app/shared/model/school.model';
 import { IAfterSchoolProgram } from 'app/shared/model/after-school-program.model';
 import { IDismissalLocation } from 'app/shared/model/dismissal-location.model';
 import { ISchoolGrade } from 'app/shared/model/school-grade.model';
-import { IStudent } from 'app/shared/model/student.model';
+import { IStudent, Student } from 'app/shared/model/student.model';
 import { ITeacher } from 'app/shared/model/teacher.model';
 
 @Injectable({ providedIn: 'root' })
@@ -46,8 +46,18 @@ export class SchoolService {
         return this.http.get<ISchoolGrade[]>(`${this.resourceUrl}/${id}/school-grades`, { observe: 'response' });
     }
     getStudents(id: number): Observable<HttpResponse<IStudent[]>> {
-        return this.http.get<IStudent[]>(`${this.resourceUrl}/${id}/students`, { observe: 'response' });
+        return this.http
+            .get<IStudent[]>(`${this.resourceUrl}/${id}/students`, { observe: 'response' })
+            .pipe(map((res: HttpResponse<IStudent[]>) => this.deriveTeacherIdentifierFromArray(res)));
     }
+
+    deriveTeacherIdentifierFromArray(res: HttpResponse<IStudent[]>): HttpResponse<IStudent[]> {
+        res.body.forEach((student: IStudent) => {
+            student = Student.deriveTeacherIdentifier(student);
+        });
+        return res;
+    }
+
     getTeachers(id: number): Observable<HttpResponse<ITeacher[]>> {
         return this.http.get<ITeacher[]>(`${this.resourceUrl}/${id}/teachers`, { observe: 'response' });
     }

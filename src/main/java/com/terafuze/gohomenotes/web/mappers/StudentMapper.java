@@ -18,7 +18,8 @@ public interface StudentMapper extends IEntityMapper<StudentModel, Student> {
     @Mapping(source = "schoolGrade.id", target = "schoolGradeId")
     @Mapping(source = "schoolGrade.name", target = "schoolGradeIdentifier")
     @Mapping(source = "teacher.id", target = "teacherId")
-    @Mapping(source = "teacher.id", target = "teacherIdentifier")
+    @Mapping(source = "teacher.userProfile.firstName", target = "teacherFirstName")
+    @Mapping(source = "teacher.userProfile.lastName", target = "teacherLastName")
     StudentModel toModel(Student student);
 
     @Mapping(source = "schoolId", target = "school")
