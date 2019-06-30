@@ -21,21 +21,7 @@
                         </small>
                     </div>
                 </div>
-                <!-- After School Programs Form Field -->
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="app.school.afterSchoolPrograms" for="after_school_programs">After School Programs</label>
-                    <select class="form-control" id="after_school_programs" name="afterSchoolPrograms" multiple [(ngModel)]="school.afterSchoolPrograms">
-                        <option [ngValue]="getSelected(school.afterSchoolPrograms, afterSchoolProgramOption)" *ngFor="let afterSchoolProgramOption of afterSchoolPrograms; trackBy: trackAfterSchoolProgramById">{{afterSchoolProgramOption.id}}</option>
-                    </select>
-                </div>
-                <!-- Dismissal Locations Form Field -->
-                <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="app.school.dismissalLocations" for="dismissal_locations">Dismissal Locations</label>
-                    <select class="form-control" id="dismissal_locations" name="dismissalLocations" multiple [(ngModel)]="school.dismissalLocations">
-                        <option [ngValue]="getSelected(school.dismissalLocations, dismissalLocationOption)" *ngFor="let dismissalLocationOption of dismissalLocations; trackBy: trackDismissalLocationById">{{dismissalLocationOption.id}}</option>
-                    </select>
-                </div>
-                <!-- Go Home Notes Daily Cutoff Time Form Field -->
+                 <!-- Go Home Notes Daily Cutoff Time Form Field -->
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="app.school.goHomeNotesDailyCutoffTime" for="go_home_notes_daily_cutoff_time">Go Home Notes Daily Cutoff Time</label>
                     <div class="input-group">
