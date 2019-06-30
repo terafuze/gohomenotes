@@ -5,7 +5,7 @@ import { JhiLanguageService } from 'ng-jhipster';
 import { SessionStorageService } from 'ngx-webstorage';
 
 import { VERSION } from 'app/app.constants';
-import { JhiLanguageHelper, AccountService, LoginModalService, LoginService } from 'app/core';
+import { JhiLanguageHelper, AccountService, LoginModalService, LoginService, UserContext } from 'app/core';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
 
 @Component({
@@ -20,6 +20,7 @@ export class NavbarComponent implements OnInit {
     swaggerEnabled: boolean;
     modalRef: NgbModalRef;
     version: string;
+    userProfileId: number;
 
     constructor(
         private loginService: LoginService,
@@ -29,6 +30,7 @@ export class NavbarComponent implements OnInit {
         private accountService: AccountService,
         private loginModalService: LoginModalService,
         private profileService: ProfileService,
+        private userContext: UserContext,
         private router: Router
     ) {
         this.version = VERSION ? 'v' + VERSION : '';
@@ -36,6 +38,7 @@ export class NavbarComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.userProfileId = this.userContext.userProfile.id;
         this.languageHelper.getAll().then(languages => {
             this.languages = languages;
         });
