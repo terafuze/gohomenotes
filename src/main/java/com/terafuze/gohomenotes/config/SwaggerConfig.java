@@ -19,10 +19,10 @@ public class SwaggerConfig {
                 .tags(
                     new Tag("address-resource", "Address Resource"),
                     new Tag("after-school-program-resource", "After School Program Resource"),
-                    new Tag("daily-verification-record-resource", "Daily Verification Record Resource"),
                     new Tag("dismissal-location-resource", "Dismissal Location Resource"),
                     new Tag("early-pickup-request-resource", "Early Pickup Request Resource"),
                     new Tag("family-registration-resource", "Family Registration Resource"),
+                    new Tag("go-home-notes-report-resource", "Go Home Notes Report Resource"),
                     new Tag("guest-request-resource", "Guest Request Resource"),
                     new Tag("host-request-resource", "Host Request Resource"),
                     new Tag("parent-resource", "Parent Resource"),

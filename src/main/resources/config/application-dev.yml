@@ -14,90 +14,64 @@
 # ===================================================================
 
 logging:
-    level:
-        ROOT: DEBUG
-        com.terafuze.gohomenotes: DEBUG
-        io.github.jhipster: DEBUG
-        org.hibernate.stat: DEBUG
-        # org.hibernate.type logs SQL parameters if set to TRACE log level
-        org.hibernate.type: TRACE
+  level:
+    ROOT: DEBUG
+    com.terafuze.gohomenotes: DEBUG
+    io.github.jhipster: DEBUG
+    org.hibernate.stat: DEBUG
+    # org.hibernate.type logs SQL parameters if set to TRACE log level
+    org.hibernate.type: TRACE
 
 spring:
-    profiles:
-        active: dev
-        include: swagger
-    devtools:
-        restart:
-            enabled: true
-            additional-exclude: .h2.server.properties
-        livereload:
-            enabled: false # we use Webpack dev server + BrowserSync for livereload
-    jackson:
-        serialization.indent_output: true
+  profiles:
+    active: dev
+    include:
+      - swagger
+      # Uncomment to activate TLS for the dev profile
+      #- tls
+  devtools:
+    restart:
+      enabled: true
+    livereload:
+      enabled: false # we use Webpack dev server + BrowserSync for livereload
+  jackson:
+    serialization:
+      indent-output: true
+  # Also, change the liquibase-hibernate settings in the pom.xml file so that you can use ./mvnw liquibase:diff
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:postgresql://localhost:5444/gohomenotes3
+    username: postgres
+    password: password
+    hikari:
+      poolName: Hikari
+      auto-commit: false
+  jpa:
+    database-platform: io.github.jhipster.domain.util.FixedPostgreSQL95Dialect
+    database: POSTGRESQL
+    show-sql: false
+    properties:
+      hibernate.id.new_generator_mappings: true
+      hibernate.connection.provider_disables_autocommit: true
+      hibernate.cache.use_second_level_cache: true
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: false
+  liquibase:
+    # Remove 'faker' if you do not want the sample data to be loaded automatically
+    contexts: dev, faker
+    drop-first: false
+  mail:
+    host: localhost
+    port: 1025
+    username:
+    password:
+  messages:
+    cache-duration: PT1S # 1 second, see the ISO 8601 standard
+  thymeleaf:
+    cache: false
 
-# Database Settings
-#    datasource:
-#        type: com.zaxxer.hikari.HikariDataSource
-#        url: jdbc:h2:mem:gohomenotes;DB_CLOSE_DELAY=-1
-#        url: jdbc:h2:file:./target/h2db/db/gohomenotes;DB_CLOSE_DELAY=-1
-#        username: gohomenotes
-#        password:
-#    h2:
-#        console:
-#            enabled: false
-#    jpa:
-# We typically use liquibase even for initial, local development to initialize the database instead of the
-# hiberate ddl-auto feature, but we leave it here commented out because some developers may want to use it
-# until they get used to using liquibase.
-#        hibernate:
-#          ddl-auto: create-drop
-#        database-platform: io.github.jhipster.domain.util.FixedH2Dialect
-#        database: H2
-#        show-sql: true
-#        properties:
-#            hibernate.id.new_generator_mappings: true
-#            hibernate.cache.use_second_level_cache: true
-#            hibernate.cache.use_query_cache: false
-#            hibernate.generate_statistics: true
-#            # Format the SQL shown in stdout inthe case that show-sql is set to true.
-#            # This gets annoying to look at, so we usually disable this unless we are debugging a Hibernate/JPA issue.
-#            hibernate.format_sql: false
-#            hibernate.cache.region.factory_class: io.github.jhipster.config.jcache.BeanClassLoaderAwareJCacheRegionFactory
-# In order to use Postgres for local development instead, use the following setting and comment out or remove
-# the above database settings (replace the placeholders in angle brackets below before using).
-# Also, change the liquibase-hibernate settings in the pom.xml file so that you can use ./mvnw liquibase:diff
-    datasource:
-        type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:postgresql://localhost:5444/gohomenotes3
-        username: postgres
-        password: password
-    jpa:
-        database-platform: io.github.jhipster.domain.util.FixedPostgreSQL82Dialect
-        database: POSTGRESQL
-        show-sql: false
-        properties:
-            hibernate.id.new_generator_mappings: true
-            hibernate.cache.use_second_level_cache: true
-            hibernate.cache.use_query_cache: false
-            hibernate.generate_statistics: true
-            hibernate.cache.region.factory_class: io.github.jhipster.config.jcache.BeanClassLoaderAwareJCacheRegionFactory
-
-    mail:
-        host: localhost
-        port: 1025
-        username:
-        password:
-    messages:
-        cache-duration: PT1S # 1 second, see the ISO 8601 standard
-    thymeleaf:
-        cache: false
-
-    liquibase:
-        contexts: dev
-        enabled: true
-        drop-first: false
 server:
-    port: 8080
+  port: 8080
 
 # ===================================================================
 # JHipster specific properties
@@ -106,42 +80,40 @@ server:
 # ===================================================================
 
 jhipster:
-    http:
-        version: V_1_1 # To use HTTP/2 you will need to activate TLS (see application-tls.yml)
-    cache: # Cache configuration
-        ehcache: # Ehcache configuration
-            time-to-live-seconds: 3600 # By default objects stay 1 hour in the cache
-            max-entries: 100 # Number of objects in each cache entry
-    # CORS is only enabled by default with the "dev" profile, so BrowserSync can access the API
-    cors:
-        allowed-origins: "*"
-        allowed-methods: "*"
-        allowed-headers: "*"
-        exposed-headers: "Authorization,Link,X-Total-Count"
-        allow-credentials: true
-        max-age: 1800
-    security:
-        authentication:
-            jwt:
-                # This token must be encoded using Base64 and be at least 256 bits long (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
-                base64-secret: NTA2YTExY2NiN2RhMzY4YzYwZTlkMTM5NWFhYWFkMDRmNDVlYTE0Y2NhZDk1N2RiYjNjNjg0Y2EyMmQxNmQxZGUwNDM1OTEzZDRkZjY0NjVlMDgyZGI3YjU5MTMyODMzM2JmNDc2ZmUzZGFkNWExOGYwNTk3MDJlNjNmNzQwMzE=
-                # Token is valid 24 hours
-                token-validity-in-seconds: 86400
-                token-validity-in-seconds-for-remember-me: 2592000
-    mail: # specific JHipster mail property, for standard properties see MailProperties
-        from: go-home-notes@localhost
-        base-url: http://127.0.0.1:8080
-    metrics:
-        logs: # Reports metrics in the logs
-            enabled: false
-            report-frequency: 60 # in seconds
-    logging:
-        logstash: # Forward logs to logstash over a socket, used by LoggingConfiguration
-            enabled: false
-            host: localhost
-            port: 5000
-            queue-size: 512
-
+  cache: # Cache configuration
+    ehcache: # Ehcache configuration
+      time-to-live-seconds: 3600 # By default objects stay 1 hour in the cache
+      max-entries: 100 # Number of objects in each cache entry
+  # CORS is only enabled by default with the "dev" profile, so BrowserSync can access the API
+  cors:
+    allowed-origins: '*'
+    allowed-methods: '*'
+    allowed-headers: '*'
+    exposed-headers: 'Authorization,Link,X-Total-Count'
+    allow-credentials: true
+    max-age: 1800
+  security:
+    authentication:
+      jwt:
+        # This token must be encoded using Base64 and be at least 256 bits long (you can type `openssl rand -base64 64` on your command line to generate a 512 bits one)
+        base64-secret: NTNlZGEzZWRiZmE1ZTIxZDY0MGYxMzJmZTVhYTU4ODRkNWEzNzFiZWM5YWYyYmM0ZGQ5YjUxZDU2ZDk1MWIzNTg1YWMyNTQ5NDY1OTljYTVkNzk4OGI3YTU0ODVkMGNhMzVmNmY2NTJkMzhmNjQ5ZWMzN2YyNjJiOWJkYTk5YTc=
+        # Token is valid 24 hours
+        token-validity-in-seconds: 86400
+        token-validity-in-seconds-for-remember-me: 2592000
+  mail: # specific JHipster mail property, for standard properties see MailProperties
+    from: lendwithconfidence@localhost
+    base-url: http://127.0.0.1:8080
+  metrics:
+    logs: # Reports metrics in the logs
+      enabled: false
+      report-frequency: 60 # in seconds
+  logging:
+    use-json-format: false # By default, logs are not in Json format
+    logstash: # Forward logs to logstash over a socket, used by LoggingConfiguration
+      enabled: false
+      host: localhost
+      port: 5000
+      queue-size: 512
 # ===================================================================
 # Application specific properties
 # Add your own application properties here, see the ApplicationProperties class

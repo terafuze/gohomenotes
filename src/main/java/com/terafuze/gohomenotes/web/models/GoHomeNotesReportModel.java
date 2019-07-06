@@ -1,19 +1,20 @@
 package com.terafuze.gohomenotes.web.models;
 
-
 import java.io.Serializable;
+import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 import javax.persistence.Lob;
-
+import javax.validation.constraints.NotNull;
 
 
 
 /**
- * A Model based on the Daily Verification Record entity.
+ * A Model based on the Go Home Notes Report entity.
  */
-public class DailyVerificationRecordModel implements Serializable {
+public class GoHomeNotesReportModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -22,12 +23,25 @@ public class DailyVerificationRecordModel implements Serializable {
     public String identifier;
 
     
+    @NotNull
+    private LocalDate eventDate;
+    
+    private Boolean finalized;
+    
+    private String generatedByUsername;
+    
     @Lob
     private byte[] goHomeNotesReport;
 
     private String goHomeNotesReportMimeType;
 
     private Long goHomeNotesReportContentLength;
+    
+    
+    private Long schoolId;
+
+    private String schoolIdentifier;
+    
     
     private LocalDateTime timestamp;
     
@@ -48,6 +62,33 @@ public class DailyVerificationRecordModel implements Serializable {
         this.id = id;
     }
 
+    
+    public LocalDate getEventDate() {
+        return this.eventDate;
+    }
+
+    public void setEventDate(LocalDate eventDate) {
+        this.eventDate = eventDate;
+    }
+    
+    
+    public Boolean getFinalized() {
+        return this.finalized;
+    }
+
+    public void setFinalized(Boolean finalized) {
+        this.finalized = finalized;
+    }
+    
+    
+    public String getGeneratedByUsername() {
+        return this.generatedByUsername;
+    }
+
+    public void setGeneratedByUsername(String generatedByUsername) {
+        this.generatedByUsername = generatedByUsername;
+    }
+    
     
     public void setGoHomeNotesReport(byte[] goHomeNotesReport) {
         this.goHomeNotesReport = goHomeNotesReport;
@@ -74,6 +115,23 @@ public class DailyVerificationRecordModel implements Serializable {
     }
     
     
+    public Long getSchoolId() {
+        return this.schoolId;
+    }
+
+    public void setSchoolId(Long schoolId) {
+        this.schoolId = schoolId;
+    }
+
+    public String getSchoolIdentifier() {
+        return this.schoolIdentifier;
+    }
+
+    public void setSchoolIdentifier(String schoolIdentifier) {
+        this.schoolIdentifier = schoolIdentifier;
+    }
+    
+    
     public LocalDateTime getTimestamp() {
         return this.timestamp;
     }
@@ -93,11 +151,11 @@ public class DailyVerificationRecordModel implements Serializable {
             return false;
         }
 
-        DailyVerificationRecordModel dailyVerificationRecordModel = (DailyVerificationRecordModel) o;
-        if (dailyVerificationRecordModel.getId() == null || getId() == null) {
+        GoHomeNotesReportModel goHomeNotesReportModel = (GoHomeNotesReportModel) o;
+        if (goHomeNotesReportModel.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), dailyVerificationRecordModel.getId());
+        return Objects.equals(getId(), goHomeNotesReportModel.getId());
     }
 
     @Override
@@ -107,8 +165,11 @@ public class DailyVerificationRecordModel implements Serializable {
 
     @Override
     public String toString() {
-        return "DailyVerificationRecordModel{" +
+        return "GoHomeNotesReportModel{" +
             "id=" + getId() +
+            ", eventDate='" + this.getEventDate() + "'" +
+            ", finalized='" + this.getFinalized() + "'" +
+            ", generatedByUsername='" + this.getGeneratedByUsername() + "'" +
             ", timestamp='" + this.getTimestamp() + "'" +
             "}";
     }

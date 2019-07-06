@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const { BaseHrefWebpackPlugin } = require('base-href-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const rxPaths = require('rxjs/_esm5/path-mapping');
@@ -74,20 +75,23 @@ module.exports = (options) => ({
             { from: './src/main/webapp/content/', to: 'content' },
             { from: './src/main/webapp/favicon.ico', to: 'favicon.ico' },
             { from: './src/main/webapp/manifest.webapp', to: 'manifest.webapp' },
+            // jhipster-needle-add-assets-to-webpack - JHipster will add/remove third-party resources in this array
             { from: './src/main/webapp/robots.txt', to: 'robots.txt' }
         ]),
         new MergeJsonWebpackPlugin({
             output: {
                 groupBy: [
                     { pattern: "./src/main/webapp/i18n/en/*.json", fileName: "./i18n/en.json" }
+                    // jhipster-needle-i18n-language-webpack - JHipster will add/remove languages in this array
                 ]
             }
         }),
         new HtmlWebpackPlugin({
             template: './src/main/webapp/index.html',
-            chunks: ['vendors', 'polyfills', 'main', 'global'],
+            chunks: ['polyfills', 'main', 'global'],
             chunksSortMode: 'manual',
             inject: 'body'
-        })
+        }),
+        new BaseHrefWebpackPlugin({ baseHref: '/' })
     ]
 });

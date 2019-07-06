@@ -51,7 +51,10 @@ public class School implements Serializable {
 	
     @Column(name = "go_home_notes_daily_cutoff_time")
     private LocalTime goHomeNotesDailyCutoffTime;
-
+    
+    @OneToMany(mappedBy = "school")
+    private List<GoHomeNotesReport> goHomeNotesReports = new ArrayList<>();
+    
     @Column(name = "go_home_notes_start_date")
     private LocalDate goHomeNotesStartDate;
 
@@ -155,6 +158,29 @@ public class School implements Serializable {
 
     public void setGoHomeNotesDailyCutoffTime(LocalTime goHomeNotesDailyCutoffTime) {
         this.goHomeNotesDailyCutoffTime = goHomeNotesDailyCutoffTime;
+    }
+    
+
+    
+    public List<GoHomeNotesReport> getGoHomeNotesReports() {
+        return goHomeNotesReports;
+    }
+
+    public School goHomeNotesReports(List<GoHomeNotesReport> goHomeNotesReports) {
+        this.goHomeNotesReports = goHomeNotesReports;
+        return this;
+    }
+
+    public School addGoHomeNotesReports(GoHomeNotesReport goHomeNotesReport) {
+        this.goHomeNotesReports.add(goHomeNotesReport);
+        goHomeNotesReport.setSchool(this);
+        return this;
+    }
+
+    public School removeGoHomeNotesReports(GoHomeNotesReport goHomeNotesReport) {
+        this.goHomeNotesReports.remove(goHomeNotesReport);
+        goHomeNotesReport.setSchool(null);
+        return this;
     }
 
     

@@ -12,60 +12,60 @@ import { AfterSchoolProgramService } from './after-school-program.service';
 import { SchoolService } from '../school/school.service';
 
 @Component({
-    selector: 'app-list-after-school-programs',
-    templateUrl: './list-after-school-programs.component.html'
+  selector: 'app-list-after-school-programs',
+  templateUrl: './list-after-school-programs.component.html'
 })
 export class ListAfterSchoolProgramsComponent implements OnInit, OnDestroy {
-    afterSchoolPrograms: IAfterSchoolProgram[];
-    currentAccount: any;
-    eventSubscriber: Subscription;
-    schoolId: number;
+  afterSchoolPrograms: IAfterSchoolProgram[];
+  currentAccount: any;
+  eventSubscriber: Subscription;
+  schoolId: number;
 
-    constructor(
-        protected afterSchoolProgramService: AfterSchoolProgramService,
-        protected schoolService: SchoolService,
-        protected parseLinks: JhiParseLinks,
-        protected jhiAlertService: JhiAlertService,
-        protected accountService: AccountService,
-        protected activatedRoute: ActivatedRoute,
-        protected router: Router,
-        protected eventManager: JhiEventManager
-    ) {}
+  constructor(
+    protected afterSchoolProgramService: AfterSchoolProgramService,
+    protected schoolService: SchoolService,
+    protected parseLinks: JhiParseLinks,
+    protected jhiAlertService: JhiAlertService,
+    protected accountService: AccountService,
+    protected activatedRoute: ActivatedRoute,
+    protected router: Router,
+    protected eventManager: JhiEventManager
+  ) {}
 
-    loadAll() {
-        let dataLoaded: boolean = false;
-        // If no items loaded so far, then load all of them
-        if (!dataLoaded) {
-            this.afterSchoolProgramService.query().subscribe(
-                (res: HttpResponse<IAfterSchoolProgram[]>) => {
-                    this.afterSchoolPrograms = res.body;
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
-        }
+  loadAll() {
+    let dataLoaded = false;
+    // If no items loaded so far, then load all of them
+    if (!dataLoaded) {
+      this.afterSchoolProgramService.query().subscribe(
+        (res: HttpResponse<IAfterSchoolProgram[]>) => {
+          this.afterSchoolPrograms = res.body;
+        },
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
     }
+  }
 
-    ngOnInit() {
-        this.loadAll();
-        this.accountService.identity().then(account => {
-            this.currentAccount = account;
-        });
-        this.registerChangeInAfterSchoolPrograms();
-    }
+  ngOnInit() {
+    this.loadAll();
+    this.accountService.identity().then(account => {
+      this.currentAccount = account;
+    });
+    this.registerChangeInAfterSchoolPrograms();
+  }
 
-    ngOnDestroy() {
-        this.eventManager.destroy(this.eventSubscriber);
-    }
+  ngOnDestroy() {
+    this.eventManager.destroy(this.eventSubscriber);
+  }
 
-    trackId(index: number, item: IAfterSchoolProgram) {
-        return item.id;
-    }
+  trackId(index: number, item: IAfterSchoolProgram) {
+    return item.id;
+  }
 
-    registerChangeInAfterSchoolPrograms() {
-        this.eventSubscriber = this.eventManager.subscribe('afterSchoolProgramListModification', response => this.loadAll());
-    }
+  registerChangeInAfterSchoolPrograms() {
+    this.eventSubscriber = this.eventManager.subscribe('afterSchoolProgramListModification', response => this.loadAll());
+  }
 
-    protected onError(errorMessage: string) {
-        this.jhiAlertService.error(errorMessage, null, null);
-    }
+  protected onError(errorMessage: string) {
+    this.jhiAlertService.error(errorMessage, null, null);
+  }
 }

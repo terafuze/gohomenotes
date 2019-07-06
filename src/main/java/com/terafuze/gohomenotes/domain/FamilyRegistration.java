@@ -75,12 +75,6 @@ public class FamilyRegistration implements Serializable {
         return this;
     }
 
-    public void setParentRegistrations(List<ParentRegistration> parentRegistrations) {
-        this.parentRegistrations = parentRegistrations;
-    }
-
-
-    
     
     public List<StudentRegistration> getStudentRegistrations() {
         return studentRegistrations;
@@ -102,11 +96,6 @@ public class FamilyRegistration implements Serializable {
         studentRegistration.setFamilyRegistration(null);
         return this;
     }
-
-    public void setStudentRegistrations(List<StudentRegistration> studentRegistrations) {
-        this.studentRegistrations = studentRegistrations;
-    }
-
 
 
     @Override
@@ -133,8 +122,6 @@ public class FamilyRegistration implements Serializable {
     public String toString() {
         return "FamilyRegistration{" +
             "id=" + getId() +
-            ", parentRegistrations='" + getParentRegistrations() + "'" +
-            ", studentRegistrations='" + getStudentRegistrations() + "'" +
-            "}";
+        "}";
     }
 }

@@ -5,8 +5,8 @@ import javax.validation.Valid;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,11 +28,11 @@ public class UserJWTRestController {
 
     private final TokenProvider tokenProvider;
 
-    private final AuthenticationManager authenticationManager;
+    private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
-    public UserJWTRestController(TokenProvider tokenProvider, AuthenticationManager authenticationManager) {
+    public UserJWTRestController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder) {
         this.tokenProvider = tokenProvider;
-        this.authenticationManager = authenticationManager;
+        this.authenticationManagerBuilder = authenticationManagerBuilder;
     }
 
     @PostMapping("/authenticate")
@@ -41,7 +41,7 @@ public class UserJWTRestController {
         UsernamePasswordAuthenticationToken authenticationToken =
             new UsernamePasswordAuthenticationToken(loginModel.getUsername(), loginModel.getPassword());
 
-        Authentication authentication = this.authenticationManager.authenticate(authenticationToken);
+        Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
         boolean rememberMe = (loginModel.isRememberMe() == null) ? false : loginModel.isRememberMe();
         String jwt = tokenProvider.createToken(authentication, rememberMe);

@@ -10,59 +10,59 @@ import { ITEMS_PER_PAGE } from 'app/shared';
 import { IParentRegistration } from 'app/shared/model/parent-registration.model';
 import { ParentRegistrationService } from './parent-registration.service';
 @Component({
-    selector: 'app-list-parent-registrations',
-    templateUrl: './list-parent-registrations.component.html'
+  selector: 'app-list-parent-registrations',
+  templateUrl: './list-parent-registrations.component.html'
 })
 export class ListParentRegistrationsComponent implements OnInit, OnDestroy {
-    parentRegistrations: IParentRegistration[];
-    currentAccount: any;
-    eventSubscriber: Subscription;
-    familyRegistrationId: number;
+  parentRegistrations: IParentRegistration[];
+  currentAccount: any;
+  eventSubscriber: Subscription;
+  familyRegistrationId: number;
 
-    constructor(
-        protected parentRegistrationService: ParentRegistrationService,
-        protected parseLinks: JhiParseLinks,
-        protected jhiAlertService: JhiAlertService,
-        protected accountService: AccountService,
-        protected activatedRoute: ActivatedRoute,
-        protected router: Router,
-        protected eventManager: JhiEventManager
-    ) {}
+  constructor(
+    protected parentRegistrationService: ParentRegistrationService,
+    protected parseLinks: JhiParseLinks,
+    protected jhiAlertService: JhiAlertService,
+    protected accountService: AccountService,
+    protected activatedRoute: ActivatedRoute,
+    protected router: Router,
+    protected eventManager: JhiEventManager
+  ) {}
 
-    loadAll() {
-        let dataLoaded: boolean = false;
-        // If no items loaded so far, then load all of them
-        if (!dataLoaded) {
-            this.parentRegistrationService.query().subscribe(
-                (res: HttpResponse<IParentRegistration[]>) => {
-                    this.parentRegistrations = res.body;
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
-        }
+  loadAll() {
+    let dataLoaded = false;
+    // If no items loaded so far, then load all of them
+    if (!dataLoaded) {
+      this.parentRegistrationService.query().subscribe(
+        (res: HttpResponse<IParentRegistration[]>) => {
+          this.parentRegistrations = res.body;
+        },
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
     }
+  }
 
-    ngOnInit() {
-        this.loadAll();
-        this.accountService.identity().then(account => {
-            this.currentAccount = account;
-        });
-        this.registerChangeInParentRegistrations();
-    }
+  ngOnInit() {
+    this.loadAll();
+    this.accountService.identity().then(account => {
+      this.currentAccount = account;
+    });
+    this.registerChangeInParentRegistrations();
+  }
 
-    ngOnDestroy() {
-        this.eventManager.destroy(this.eventSubscriber);
-    }
+  ngOnDestroy() {
+    this.eventManager.destroy(this.eventSubscriber);
+  }
 
-    trackId(index: number, item: IParentRegistration) {
-        return item.id;
-    }
+  trackId(index: number, item: IParentRegistration) {
+    return item.id;
+  }
 
-    registerChangeInParentRegistrations() {
-        this.eventSubscriber = this.eventManager.subscribe('parentRegistrationListModification', response => this.loadAll());
-    }
+  registerChangeInParentRegistrations() {
+    this.eventSubscriber = this.eventManager.subscribe('parentRegistrationListModification', response => this.loadAll());
+  }
 
-    protected onError(errorMessage: string) {
-        this.jhiAlertService.error(errorMessage, null, null);
-    }
+  protected onError(errorMessage: string) {
+    this.jhiAlertService.error(errorMessage, null, null);
+  }
 }

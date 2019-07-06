@@ -12,61 +12,61 @@ import { StudentRegistrationService } from './student-registration.service';
 import { FamilyRegistrationService } from '../family-registration/family-registration.service';
 
 @Component({
-    selector: 'app-list-student-registrations',
-    templateUrl: './list-student-registrations.component.html'
+  selector: 'app-list-student-registrations',
+  templateUrl: './list-student-registrations.component.html'
 })
 export class ListStudentRegistrationsComponent implements OnInit, OnDestroy {
-    studentRegistrations: IStudentRegistration[];
-    currentAccount: any;
-    eventSubscriber: Subscription;
-    familyRegistrationId: number;
-    schoolGradeId: number;
+  studentRegistrations: IStudentRegistration[];
+  currentAccount: any;
+  eventSubscriber: Subscription;
+  familyRegistrationId: number;
+  schoolGradeId: number;
 
-    constructor(
-        protected studentRegistrationService: StudentRegistrationService,
-        protected familyRegistrationService: FamilyRegistrationService,
-        protected parseLinks: JhiParseLinks,
-        protected jhiAlertService: JhiAlertService,
-        protected accountService: AccountService,
-        protected activatedRoute: ActivatedRoute,
-        protected router: Router,
-        protected eventManager: JhiEventManager
-    ) {}
+  constructor(
+    protected studentRegistrationService: StudentRegistrationService,
+    protected familyRegistrationService: FamilyRegistrationService,
+    protected parseLinks: JhiParseLinks,
+    protected jhiAlertService: JhiAlertService,
+    protected accountService: AccountService,
+    protected activatedRoute: ActivatedRoute,
+    protected router: Router,
+    protected eventManager: JhiEventManager
+  ) {}
 
-    loadAll() {
-        let dataLoaded: boolean = false;
-        // If no items loaded so far, then load all of them
-        if (!dataLoaded) {
-            this.studentRegistrationService.query().subscribe(
-                (res: HttpResponse<IStudentRegistration[]>) => {
-                    this.studentRegistrations = res.body;
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
-        }
+  loadAll() {
+    let dataLoaded = false;
+    // If no items loaded so far, then load all of them
+    if (!dataLoaded) {
+      this.studentRegistrationService.query().subscribe(
+        (res: HttpResponse<IStudentRegistration[]>) => {
+          this.studentRegistrations = res.body;
+        },
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
     }
+  }
 
-    ngOnInit() {
-        this.loadAll();
-        this.accountService.identity().then(account => {
-            this.currentAccount = account;
-        });
-        this.registerChangeInStudentRegistrations();
-    }
+  ngOnInit() {
+    this.loadAll();
+    this.accountService.identity().then(account => {
+      this.currentAccount = account;
+    });
+    this.registerChangeInStudentRegistrations();
+  }
 
-    ngOnDestroy() {
-        this.eventManager.destroy(this.eventSubscriber);
-    }
+  ngOnDestroy() {
+    this.eventManager.destroy(this.eventSubscriber);
+  }
 
-    trackId(index: number, item: IStudentRegistration) {
-        return item.id;
-    }
+  trackId(index: number, item: IStudentRegistration) {
+    return item.id;
+  }
 
-    registerChangeInStudentRegistrations() {
-        this.eventSubscriber = this.eventManager.subscribe('studentRegistrationListModification', response => this.loadAll());
-    }
+  registerChangeInStudentRegistrations() {
+    this.eventSubscriber = this.eventManager.subscribe('studentRegistrationListModification', response => this.loadAll());
+  }
 
-    protected onError(errorMessage: string) {
-        this.jhiAlertService.error(errorMessage, null, null);
-    }
+  protected onError(errorMessage: string) {
+    this.jhiAlertService.error(errorMessage, null, null);
+  }
 }

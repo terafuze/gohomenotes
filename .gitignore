@@ -2,11 +2,8 @@
 # Project Specific
 ######################
 /src/main/webapp/content/css/main.css
-/target/www/**
+/target/classes/static/**
 /src/test/javascript/coverage/
-
-yarn.lock
-.editorconfig
 
 ######################
 # Node
@@ -146,7 +143,6 @@ Desktop.ini
 # ESLint
 ######################
 .eslintcache
-
 *.aux
 *.gz
 *.toc

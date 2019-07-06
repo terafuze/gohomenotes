@@ -11,70 +11,70 @@ import { IParent } from 'app/shared/model/parent.model';
 import { ParentService } from './parent.service';
 import { StudentService } from '../student/student.service';
 @Component({
-    selector: 'app-list-parents',
-    templateUrl: './list-parents.component.html'
+  selector: 'app-list-parents',
+  templateUrl: './list-parents.component.html'
 })
 export class ListParentsComponent implements OnInit, OnDestroy {
-    parents: IParent[];
-    currentAccount: any;
-    eventSubscriber: Subscription;
-    studentId: number;
+  parents: IParent[];
+  currentAccount: any;
+  eventSubscriber: Subscription;
+  studentId: number;
 
-    constructor(
-        protected parentService: ParentService,
-        protected studentService: StudentService,
-        protected parseLinks: JhiParseLinks,
-        protected jhiAlertService: JhiAlertService,
-        protected accountService: AccountService,
-        protected activatedRoute: ActivatedRoute,
-        protected router: Router,
-        protected eventManager: JhiEventManager
-    ) {}
+  constructor(
+    protected parentService: ParentService,
+    protected studentService: StudentService,
+    protected parseLinks: JhiParseLinks,
+    protected jhiAlertService: JhiAlertService,
+    protected accountService: AccountService,
+    protected activatedRoute: ActivatedRoute,
+    protected router: Router,
+    protected eventManager: JhiEventManager
+  ) {}
 
-    loadAll() {
-        let dataLoaded: boolean = false;
-        if (this.studentId) {
-            this.studentService.getParents(this.studentId).subscribe(
-                (res: HttpResponse<IParent[]>) => {
-                    this.parents = res.body;
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
-            dataLoaded = true;
-        }
-        // If no items loaded so far, then load all of them
-        if (!dataLoaded) {
-            this.parentService.query().subscribe(
-                (res: HttpResponse<IParent[]>) => {
-                    this.parents = res.body;
-                },
-                (res: HttpErrorResponse) => this.onError(res.message)
-            );
-        }
+  loadAll() {
+    let dataLoaded = false;
+    if (this.studentId) {
+      this.studentService.getParents(this.studentId).subscribe(
+        (res: HttpResponse<IParent[]>) => {
+          this.parents = res.body;
+        },
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
+      dataLoaded = true;
     }
-
-    ngOnInit() {
-        this.studentId = this.activatedRoute.snapshot.queryParams['studentId'];
-        this.loadAll();
-        this.accountService.identity().then(account => {
-            this.currentAccount = account;
-        });
-        this.registerChangeInParents();
+    // If no items loaded so far, then load all of them
+    if (!dataLoaded) {
+      this.parentService.query().subscribe(
+        (res: HttpResponse<IParent[]>) => {
+          this.parents = res.body;
+        },
+        (res: HttpErrorResponse) => this.onError(res.message)
+      );
     }
+  }
 
-    ngOnDestroy() {
-        this.eventManager.destroy(this.eventSubscriber);
-    }
+  ngOnInit() {
+    this.studentId = this.activatedRoute.snapshot.queryParams['studentId'];
+    this.loadAll();
+    this.accountService.identity().then(account => {
+      this.currentAccount = account;
+    });
+    this.registerChangeInParents();
+  }
 
-    trackId(index: number, item: IParent) {
-        return item.id;
-    }
+  ngOnDestroy() {
+    this.eventManager.destroy(this.eventSubscriber);
+  }
 
-    registerChangeInParents() {
-        this.eventSubscriber = this.eventManager.subscribe('parentListModification', response => this.loadAll());
-    }
+  trackId(index: number, item: IParent) {
+    return item.id;
+  }
 
-    protected onError(errorMessage: string) {
-        this.jhiAlertService.error(errorMessage, null, null);
-    }
+  registerChangeInParents() {
+    this.eventSubscriber = this.eventManager.subscribe('parentListModification', response => this.loadAll());
+  }
+
+  protected onError(errorMessage: string) {
+    this.jhiAlertService.error(errorMessage, null, null);
+  }
 }

@@ -14,91 +14,91 @@ import { IUserProfile } from 'app/shared/model/user-profile.model';
 import { UserProfileService } from 'app/features/user-profile';
 
 @Component({
-    selector: 'app-edit-address',
-    templateUrl: './edit-address.component.html'
+  selector: 'app-edit-address',
+  templateUrl: './edit-address.component.html'
 })
 export class EditAddressComponent implements OnInit {
-    private _address: IAddress;
+  private _address: IAddress;
 
-    isSaving: boolean;
+  isSaving: boolean;
 
-    // The list of User Profiles from which to select
-    userProfiles: IUserProfile[];
+  // The list of User Profiles from which to select
+  userProfiles: IUserProfile[];
 
-    constructor(
-        protected jhiAlertService: JhiAlertService,
-        protected jhiDataUtils: JhiDataUtils,
-        protected userProfileService: UserProfileService,
-        protected addressService: AddressService,
-        protected activatedRoute: ActivatedRoute
-    ) {}
+  constructor(
+    protected jhiAlertService: JhiAlertService,
+    protected jhiDataUtils: JhiDataUtils,
+    protected userProfileService: UserProfileService,
+    protected addressService: AddressService,
+    protected activatedRoute: ActivatedRoute
+  ) {}
 
-    ngOnInit() {
-        this.isSaving = false;
+  ngOnInit() {
+    this.isSaving = false;
 
-        this.activatedRoute.data.subscribe(({ address }) => {
-            this.address = address;
-        });
-        this.userProfileService
-            .query()
-            .pipe(
-                filter((mayBeOk: HttpResponse<IUserProfile[]>) => mayBeOk.ok),
-                map((response: HttpResponse<IUserProfile[]>) => response.body)
-            )
-            .subscribe((res: IUserProfile[]) => (this.userProfiles = res), (res: HttpErrorResponse) => this.onError(res.message));
+    this.activatedRoute.data.subscribe(({ address }) => {
+      this.address = address;
+    });
+    this.userProfileService
+      .query()
+      .pipe(
+        filter((mayBeOk: HttpResponse<IUserProfile[]>) => mayBeOk.ok),
+        map((response: HttpResponse<IUserProfile[]>) => response.body)
+      )
+      .subscribe((res: IUserProfile[]) => (this.userProfiles = res), (res: HttpErrorResponse) => this.onError(res.message));
+  }
+
+  previousState() {
+    window.history.back();
+  }
+
+  save() {
+    this.isSaving = true;
+    if (this.address.id !== undefined) {
+      this.subscribeToSaveResponse(this.addressService.update(this.address));
+    } else {
+      this.subscribeToSaveResponse(this.addressService.create(this.address));
     }
+  }
 
-    previousState() {
-        window.history.back();
-    }
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<IAddress>>) {
+    result.subscribe((res: HttpResponse<IAddress>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+  }
 
-    save() {
-        this.isSaving = true;
-        if (this.address.id !== undefined) {
-            this.subscribeToSaveResponse(this.addressService.update(this.address));
-        } else {
-            this.subscribeToSaveResponse(this.addressService.create(this.address));
+  protected onSaveSuccess() {
+    this.isSaving = false;
+    this.previousState();
+  }
+
+  protected onSaveError() {
+    this.isSaving = false;
+  }
+
+  protected onError(errorMessage: string) {
+    this.jhiAlertService.error(errorMessage, null, null);
+  }
+
+  trackUserProfileById(index: number, item: IUserProfile) {
+    return item.id;
+  }
+
+  // TODO if not needed, remove this function
+  getSelected(selectedVals: Array<any>, option: any) {
+    if (selectedVals) {
+      for (let i = 0; i < selectedVals.length; i++) {
+        if (option.id === selectedVals[i].id) {
+          return selectedVals[i];
         }
+      }
     }
+    return option;
+  }
 
-    protected subscribeToSaveResponse(result: Observable<HttpResponse<IAddress>>) {
-        result.subscribe((res: HttpResponse<IAddress>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
-    }
+  get address() {
+    return this._address;
+  }
 
-    protected onSaveSuccess() {
-        this.isSaving = false;
-        this.previousState();
-    }
-
-    protected onSaveError() {
-        this.isSaving = false;
-    }
-
-    protected onError(errorMessage: string) {
-        this.jhiAlertService.error(errorMessage, null, null);
-    }
-
-    trackUserProfileById(index: number, item: IUserProfile) {
-        return item.id;
-    }
-
-    // TODO if not needed, remove this function
-    getSelected(selectedVals: Array<any>, option: any) {
-        if (selectedVals) {
-            for (let i = 0; i < selectedVals.length; i++) {
-                if (option.id === selectedVals[i].id) {
-                    return selectedVals[i];
-                }
-            }
-        }
-        return option;
-    }
-
-    get address() {
-        return this._address;
-    }
-
-    set address(address: IAddress) {
-        this._address = address;
-    }
+  set address(address: IAddress) {
+    this._address = address;
+  }
 }

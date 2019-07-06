@@ -1,5 +1,6 @@
 package com.terafuze.gohomenotes.web.controllers;
 
+import java.io.ByteArrayInputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -9,6 +10,10 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,14 +24,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.terafuze.gohomenotes.service.EarlyPickupRequestService;
-import com.terafuze.gohomenotes.web.errors.BadRequestAlertException;
-import com.terafuze.gohomenotes.web.models.EarlyPickupRequestModel;
-import com.terafuze.gohomenotes.web.utils.HeaderUtil;
-
+import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import io.micrometer.core.annotation.Timed;
 import io.swagger.annotations.Api;
+
+import com.terafuze.gohomenotes.web.errors.BadRequestAlertException;
+import com.terafuze.gohomenotes.service.EarlyPickupRequestService;
+import com.terafuze.gohomenotes.web.models.EarlyPickupRequestModel;
 
 
 /**
@@ -40,6 +45,9 @@ public class EarlyPickupRequestRestController {
     private final Logger log = LoggerFactory.getLogger(EarlyPickupRequestRestController.class);
 
     private static final String ENTITY_NAME = "earlyPickupRequest";
+
+    @Value("${jhipster.clientApp.name}")
+    private String applicationName;
 
     private final EarlyPickupRequestService earlyPickupRequestService;
 
@@ -55,7 +63,6 @@ public class EarlyPickupRequestRestController {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/early-pickup-requests")
-    @Timed
     public ResponseEntity<EarlyPickupRequestModel> createEarlyPickupRequest(@Valid @RequestBody EarlyPickupRequestModel earlyPickupRequestModel) throws URISyntaxException {
         log.debug("REST request to save EarlyPickupRequest : {}", earlyPickupRequestModel);
         if (earlyPickupRequestModel.getId() != null) {
@@ -63,7 +70,7 @@ public class EarlyPickupRequestRestController {
         }
         EarlyPickupRequestModel result = earlyPickupRequestService.save(earlyPickupRequestModel);
         return ResponseEntity.created(new URI("/api/early-pickup-requests/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 
@@ -77,7 +84,6 @@ public class EarlyPickupRequestRestController {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/early-pickup-requests")
-    @Timed
     public ResponseEntity<EarlyPickupRequestModel> updateEarlyPickupRequest(@Valid @RequestBody EarlyPickupRequestModel earlyPickupRequestModel) throws URISyntaxException {
         log.debug("REST request to update EarlyPickupRequest : {}", earlyPickupRequestModel);
         if (earlyPickupRequestModel.getId() == null) {
@@ -85,7 +91,7 @@ public class EarlyPickupRequestRestController {
         }
         EarlyPickupRequestModel result = earlyPickupRequestService.save(earlyPickupRequestModel);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, earlyPickupRequestModel.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, earlyPickupRequestModel.getId().toString()))
             .body(result);
     }
 
@@ -95,7 +101,6 @@ public class EarlyPickupRequestRestController {
      * @return the ResponseEntity with status 200 (OK) and the list of earlyPickupRequests in body
      */
     @GetMapping("/early-pickup-requests")
-    @Timed
     public List<EarlyPickupRequestModel> getAllEarlyPickupRequests() {
         log.debug("REST request to get all EarlyPickupRequests");
         return earlyPickupRequestService.findAll();
@@ -109,7 +114,6 @@ public class EarlyPickupRequestRestController {
      * @return the ResponseEntity with status 200 (OK) and with body the Early Pickup Request Model, or with status 404 (Not Found)
      */
     @GetMapping("/early-pickup-requests/{id}")
-    @Timed
     public ResponseEntity<EarlyPickupRequestModel> getEarlyPickupRequest(@PathVariable Long id) {
         log.debug("REST request to get EarlyPickupRequest : {}", id);
         Optional<EarlyPickupRequestModel> earlyPickupRequestModel = earlyPickupRequestService.findOne(id);
@@ -123,10 +127,9 @@ public class EarlyPickupRequestRestController {
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/early-pickup-requests/{id}")
-    @Timed
     public ResponseEntity<Void> deleteEarlyPickupRequest(@PathVariable Long id) {
         log.debug("REST request to delete EarlyPickupRequest : {}", id);
         earlyPickupRequestService.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 }

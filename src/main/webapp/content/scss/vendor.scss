@@ -5,6 +5,7 @@ put Sass variables here:
 eg $input-color: red;
 ****************************/
 // Override Boostrap variables
-@import 'bootstrap-variables';
-
+@import '~bootswatch/dist/spacelab/variables';
+// Import Bootstrap source files from node_modules
 @import '~bootstrap/scss/bootstrap';
+@import '~bootswatch/dist/spacelab/bootswatch';

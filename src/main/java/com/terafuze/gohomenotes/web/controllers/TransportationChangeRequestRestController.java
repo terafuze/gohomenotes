@@ -1,5 +1,6 @@
 package com.terafuze.gohomenotes.web.controllers;
 
+import java.io.ByteArrayInputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -9,6 +10,10 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,14 +24,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.terafuze.gohomenotes.service.TransportationChangeRequestService;
-import com.terafuze.gohomenotes.web.errors.BadRequestAlertException;
-import com.terafuze.gohomenotes.web.models.TransportationChangeRequestModel;
-import com.terafuze.gohomenotes.web.utils.HeaderUtil;
-
+import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import io.micrometer.core.annotation.Timed;
 import io.swagger.annotations.Api;
+
+import com.terafuze.gohomenotes.web.errors.BadRequestAlertException;
+import com.terafuze.gohomenotes.service.TransportationChangeRequestService;
+import com.terafuze.gohomenotes.web.models.TransportationChangeRequestModel;
 
 
 /**
@@ -40,6 +45,9 @@ public class TransportationChangeRequestRestController {
     private final Logger log = LoggerFactory.getLogger(TransportationChangeRequestRestController.class);
 
     private static final String ENTITY_NAME = "transportationChangeRequest";
+
+    @Value("${jhipster.clientApp.name}")
+    private String applicationName;
 
     private final TransportationChangeRequestService transportationChangeRequestService;
 
@@ -55,7 +63,6 @@ public class TransportationChangeRequestRestController {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/transportation-change-requests")
-    @Timed
     public ResponseEntity<TransportationChangeRequestModel> createTransportationChangeRequest(@Valid @RequestBody TransportationChangeRequestModel transportationChangeRequestModel) throws URISyntaxException {
         log.debug("REST request to save TransportationChangeRequest : {}", transportationChangeRequestModel);
         if (transportationChangeRequestModel.getId() != null) {
@@ -63,7 +70,7 @@ public class TransportationChangeRequestRestController {
         }
         TransportationChangeRequestModel result = transportationChangeRequestService.save(transportationChangeRequestModel);
         return ResponseEntity.created(new URI("/api/transportation-change-requests/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 
@@ -77,7 +84,6 @@ public class TransportationChangeRequestRestController {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/transportation-change-requests")
-    @Timed
     public ResponseEntity<TransportationChangeRequestModel> updateTransportationChangeRequest(@Valid @RequestBody TransportationChangeRequestModel transportationChangeRequestModel) throws URISyntaxException {
         log.debug("REST request to update TransportationChangeRequest : {}", transportationChangeRequestModel);
         if (transportationChangeRequestModel.getId() == null) {
@@ -85,7 +91,7 @@ public class TransportationChangeRequestRestController {
         }
         TransportationChangeRequestModel result = transportationChangeRequestService.save(transportationChangeRequestModel);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, transportationChangeRequestModel.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, transportationChangeRequestModel.getId().toString()))
             .body(result);
     }
 
@@ -95,7 +101,6 @@ public class TransportationChangeRequestRestController {
      * @return the ResponseEntity with status 200 (OK) and the list of transportationChangeRequests in body
      */
     @GetMapping("/transportation-change-requests")
-    @Timed
     public List<TransportationChangeRequestModel> getAllTransportationChangeRequests() {
         log.debug("REST request to get all TransportationChangeRequests");
         return transportationChangeRequestService.findAll();
@@ -109,7 +114,6 @@ public class TransportationChangeRequestRestController {
      * @return the ResponseEntity with status 200 (OK) and with body the Transportation Change Request Model, or with status 404 (Not Found)
      */
     @GetMapping("/transportation-change-requests/{id}")
-    @Timed
     public ResponseEntity<TransportationChangeRequestModel> getTransportationChangeRequest(@PathVariable Long id) {
         log.debug("REST request to get TransportationChangeRequest : {}", id);
         Optional<TransportationChangeRequestModel> transportationChangeRequestModel = transportationChangeRequestService.findOne(id);
@@ -123,10 +127,9 @@ public class TransportationChangeRequestRestController {
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/transportation-change-requests/{id}")
-    @Timed
     public ResponseEntity<Void> deleteTransportationChangeRequest(@PathVariable Long id) {
         log.debug("REST request to delete TransportationChangeRequest : {}", id);
         transportationChangeRequestService.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 }

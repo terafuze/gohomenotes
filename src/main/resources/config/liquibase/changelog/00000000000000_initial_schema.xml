@@ -83,7 +83,7 @@
                                 columnDataType="varchar(60)"
                                 tableName="jhi_user"/>
         <loadData encoding="UTF-8"
-                  file="config/liquibase/users.csv"
+                  file="config/liquibase/data/user.csv"
                   separator=";"
                   tableName="jhi_user">
             <column name="activated" type="boolean"/>
@@ -91,12 +91,12 @@
         </loadData>
         <dropDefaultValue tableName="jhi_user" columnName="created_date" columnDataType="datetime"/>
         <loadData encoding="UTF-8"
-                  file="config/liquibase/authorities.csv"
+                  file="config/liquibase/data/authority.csv"
                   separator=";"
                   tableName="jhi_authority"/>
 
         <loadData encoding="UTF-8"
-                  file="config/liquibase/users_authorities.csv"
+                  file="config/liquibase/data/user_authority.csv"
                   separator=";"
                   tableName="jhi_user_authority"/>
         <createTable tableName="jhi_persistent_audit_event">

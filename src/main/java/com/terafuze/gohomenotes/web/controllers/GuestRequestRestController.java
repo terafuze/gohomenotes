@@ -1,5 +1,6 @@
 package com.terafuze.gohomenotes.web.controllers;
 
+import java.io.ByteArrayInputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -9,6 +10,10 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,14 +24,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.terafuze.gohomenotes.service.GuestRequestService;
-import com.terafuze.gohomenotes.web.errors.BadRequestAlertException;
-import com.terafuze.gohomenotes.web.models.GuestRequestModel;
-import com.terafuze.gohomenotes.web.utils.HeaderUtil;
-
+import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import io.micrometer.core.annotation.Timed;
 import io.swagger.annotations.Api;
+
+import com.terafuze.gohomenotes.web.errors.BadRequestAlertException;
+import com.terafuze.gohomenotes.service.GuestRequestService;
+import com.terafuze.gohomenotes.web.models.GuestRequestModel;
 
 
 /**
@@ -40,6 +45,9 @@ public class GuestRequestRestController {
     private final Logger log = LoggerFactory.getLogger(GuestRequestRestController.class);
 
     private static final String ENTITY_NAME = "guestRequest";
+
+    @Value("${jhipster.clientApp.name}")
+    private String applicationName;
 
     private final GuestRequestService guestRequestService;
 
@@ -55,7 +63,6 @@ public class GuestRequestRestController {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/guest-requests")
-    @Timed
     public ResponseEntity<GuestRequestModel> createGuestRequest(@Valid @RequestBody GuestRequestModel guestRequestModel) throws URISyntaxException {
         log.debug("REST request to save GuestRequest : {}", guestRequestModel);
         if (guestRequestModel.getId() != null) {
@@ -63,7 +70,7 @@ public class GuestRequestRestController {
         }
         GuestRequestModel result = guestRequestService.save(guestRequestModel);
         return ResponseEntity.created(new URI("/api/guest-requests/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 
@@ -77,7 +84,6 @@ public class GuestRequestRestController {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/guest-requests")
-    @Timed
     public ResponseEntity<GuestRequestModel> updateGuestRequest(@Valid @RequestBody GuestRequestModel guestRequestModel) throws URISyntaxException {
         log.debug("REST request to update GuestRequest : {}", guestRequestModel);
         if (guestRequestModel.getId() == null) {
@@ -85,7 +91,7 @@ public class GuestRequestRestController {
         }
         GuestRequestModel result = guestRequestService.save(guestRequestModel);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, guestRequestModel.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, guestRequestModel.getId().toString()))
             .body(result);
     }
 
@@ -95,7 +101,6 @@ public class GuestRequestRestController {
      * @return the ResponseEntity with status 200 (OK) and the list of guestRequests in body
      */
     @GetMapping("/guest-requests")
-    @Timed
     public List<GuestRequestModel> getAllGuestRequests() {
         log.debug("REST request to get all GuestRequests");
         return guestRequestService.findAll();
@@ -109,7 +114,6 @@ public class GuestRequestRestController {
      * @return the ResponseEntity with status 200 (OK) and with body the Guest Request Model, or with status 404 (Not Found)
      */
     @GetMapping("/guest-requests/{id}")
-    @Timed
     public ResponseEntity<GuestRequestModel> getGuestRequest(@PathVariable Long id) {
         log.debug("REST request to get GuestRequest : {}", id);
         Optional<GuestRequestModel> guestRequestModel = guestRequestService.findOne(id);
@@ -123,10 +127,9 @@ public class GuestRequestRestController {
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/guest-requests/{id}")
-    @Timed
     public ResponseEntity<Void> deleteGuestRequest(@PathVariable Long id) {
         log.debug("REST request to delete GuestRequest : {}", id);
         guestRequestService.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 }

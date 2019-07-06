@@ -1,5 +1,6 @@
 package com.terafuze.gohomenotes.web.controllers;
 
+import java.io.ByteArrayInputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -9,6 +10,10 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,14 +24,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.terafuze.gohomenotes.service.ParentRegistrationService;
-import com.terafuze.gohomenotes.web.errors.BadRequestAlertException;
-import com.terafuze.gohomenotes.web.models.ParentRegistrationModel;
-import com.terafuze.gohomenotes.web.utils.HeaderUtil;
-
+import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import io.micrometer.core.annotation.Timed;
 import io.swagger.annotations.Api;
+
+import com.terafuze.gohomenotes.web.errors.BadRequestAlertException;
+import com.terafuze.gohomenotes.service.ParentRegistrationService;
+import com.terafuze.gohomenotes.web.models.ParentRegistrationModel;
 
 
 /**
@@ -40,6 +45,9 @@ public class ParentRegistrationRestController {
     private final Logger log = LoggerFactory.getLogger(ParentRegistrationRestController.class);
 
     private static final String ENTITY_NAME = "parentRegistration";
+
+    @Value("${jhipster.clientApp.name}")
+    private String applicationName;
 
     private final ParentRegistrationService parentRegistrationService;
 
@@ -55,7 +63,6 @@ public class ParentRegistrationRestController {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/parent-registrations")
-    @Timed
     public ResponseEntity<ParentRegistrationModel> createParentRegistration(@Valid @RequestBody ParentRegistrationModel parentRegistrationModel) throws URISyntaxException {
         log.debug("REST request to save ParentRegistration : {}", parentRegistrationModel);
         if (parentRegistrationModel.getId() != null) {
@@ -63,7 +70,7 @@ public class ParentRegistrationRestController {
         }
         ParentRegistrationModel result = parentRegistrationService.save(parentRegistrationModel);
         return ResponseEntity.created(new URI("/api/parent-registrations/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 
@@ -77,7 +84,6 @@ public class ParentRegistrationRestController {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/parent-registrations")
-    @Timed
     public ResponseEntity<ParentRegistrationModel> updateParentRegistration(@Valid @RequestBody ParentRegistrationModel parentRegistrationModel) throws URISyntaxException {
         log.debug("REST request to update ParentRegistration : {}", parentRegistrationModel);
         if (parentRegistrationModel.getId() == null) {
@@ -85,7 +91,7 @@ public class ParentRegistrationRestController {
         }
         ParentRegistrationModel result = parentRegistrationService.save(parentRegistrationModel);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, parentRegistrationModel.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, parentRegistrationModel.getId().toString()))
             .body(result);
     }
 
@@ -95,7 +101,6 @@ public class ParentRegistrationRestController {
      * @return the ResponseEntity with status 200 (OK) and the list of parentRegistrations in body
      */
     @GetMapping("/parent-registrations")
-    @Timed
     public List<ParentRegistrationModel> getAllParentRegistrations() {
         log.debug("REST request to get all ParentRegistrations");
         return parentRegistrationService.findAll();
@@ -109,7 +114,6 @@ public class ParentRegistrationRestController {
      * @return the ResponseEntity with status 200 (OK) and with body the Parent Registration Model, or with status 404 (Not Found)
      */
     @GetMapping("/parent-registrations/{id}")
-    @Timed
     public ResponseEntity<ParentRegistrationModel> getParentRegistration(@PathVariable Long id) {
         log.debug("REST request to get ParentRegistration : {}", id);
         Optional<ParentRegistrationModel> parentRegistrationModel = parentRegistrationService.findOne(id);
@@ -123,10 +127,9 @@ public class ParentRegistrationRestController {
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/parent-registrations/{id}")
-    @Timed
     public ResponseEntity<Void> deleteParentRegistration(@PathVariable Long id) {
         log.debug("REST request to delete ParentRegistration : {}", id);
         parentRegistrationService.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 }

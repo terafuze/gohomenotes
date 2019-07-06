@@ -1,5 +1,6 @@
 package com.terafuze.gohomenotes.web.controllers;
 
+import java.io.ByteArrayInputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -9,6 +10,10 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,14 +24,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.terafuze.gohomenotes.service.UserProfileService;
-import com.terafuze.gohomenotes.web.errors.BadRequestAlertException;
-import com.terafuze.gohomenotes.web.models.UserProfileModel;
-import com.terafuze.gohomenotes.web.utils.HeaderUtil;
-
+import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import io.micrometer.core.annotation.Timed;
 import io.swagger.annotations.Api;
+
+import com.terafuze.gohomenotes.web.errors.BadRequestAlertException;
+import com.terafuze.gohomenotes.service.UserProfileService;
+import com.terafuze.gohomenotes.web.models.UserProfileModel;
 
 
 /**
@@ -40,6 +45,9 @@ public class UserProfileRestController {
     private final Logger log = LoggerFactory.getLogger(UserProfileRestController.class);
 
     private static final String ENTITY_NAME = "userProfile";
+
+    @Value("${jhipster.clientApp.name}")
+    private String applicationName;
 
     private final UserProfileService userProfileService;
 
@@ -55,7 +63,6 @@ public class UserProfileRestController {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/user-profiles")
-    @Timed
     public ResponseEntity<UserProfileModel> createUserProfile(@Valid @RequestBody UserProfileModel userProfileModel) throws URISyntaxException {
         log.debug("REST request to save UserProfile : {}", userProfileModel);
         if (userProfileModel.getId() != null) {
@@ -63,7 +70,7 @@ public class UserProfileRestController {
         }
         UserProfileModel result = userProfileService.save(userProfileModel);
         return ResponseEntity.created(new URI("/api/user-profiles/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 
@@ -77,7 +84,6 @@ public class UserProfileRestController {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/user-profiles")
-    @Timed
     public ResponseEntity<UserProfileModel> updateUserProfile(@Valid @RequestBody UserProfileModel userProfileModel) throws URISyntaxException {
         log.debug("REST request to update UserProfile : {}", userProfileModel);
         if (userProfileModel.getId() == null) {
@@ -85,7 +91,7 @@ public class UserProfileRestController {
         }
         UserProfileModel result = userProfileService.save(userProfileModel);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, userProfileModel.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, userProfileModel.getId().toString()))
             .body(result);
     }
 
@@ -95,7 +101,6 @@ public class UserProfileRestController {
      * @return the ResponseEntity with status 200 (OK) and the list of userProfiles in body
      */
     @GetMapping("/user-profiles")
-    @Timed
     public List<UserProfileModel> getAllUserProfiles() {
         log.debug("REST request to get all UserProfiles");
         return userProfileService.findAll();
@@ -109,7 +114,6 @@ public class UserProfileRestController {
      * @return the ResponseEntity with status 200 (OK) and with body the User Profile Model, or with status 404 (Not Found)
      */
     @GetMapping("/user-profiles/{id}")
-    @Timed
     public ResponseEntity<UserProfileModel> getUserProfile(@PathVariable Long id) {
         log.debug("REST request to get UserProfile : {}", id);
         Optional<UserProfileModel> userProfileModel = userProfileService.findOne(id);
@@ -118,7 +122,6 @@ public class UserProfileRestController {
 
     // TODO should use URL query parameter rather than path parameter
     @GetMapping("/user-profiles/current-user")
-    @Timed
     public ResponseEntity<UserProfileModel> getUserProfile() {
         log.debug("REST request to get UserProfile for current user");
         Optional<UserProfileModel> userProfileModel = userProfileService.getUserProfileForCurrentUser();
@@ -132,10 +135,9 @@ public class UserProfileRestController {
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/user-profiles/{id}")
-    @Timed
     public ResponseEntity<Void> deleteUserProfile(@PathVariable Long id) {
         log.debug("REST request to delete UserProfile : {}", id);
         userProfileService.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 }

@@ -22,6 +22,9 @@ import com.terafuze.gohomenotes.domain.AfterSchoolProgram;
 import com.terafuze.gohomenotes.web.mappers.DismissalLocationMapper;
 import com.terafuze.gohomenotes.web.models.DismissalLocationModel;
 import com.terafuze.gohomenotes.domain.DismissalLocation;
+import com.terafuze.gohomenotes.web.mappers.GoHomeNotesReportMapper;
+import com.terafuze.gohomenotes.web.models.GoHomeNotesReportModel;
+import com.terafuze.gohomenotes.domain.GoHomeNotesReport;
 import com.terafuze.gohomenotes.web.mappers.SchoolGradeMapper;
 import com.terafuze.gohomenotes.web.models.SchoolGradeModel;
 import com.terafuze.gohomenotes.domain.SchoolGrade;
@@ -50,6 +53,8 @@ public class SchoolService {
     private final AfterSchoolProgramMapper afterSchoolProgramMapper = null;
     @Autowired
     private final DismissalLocationMapper dismissalLocationMapper = null;
+    @Autowired
+    private final GoHomeNotesReportMapper goHomeNotesReportMapper = null;
     @Autowired
     private final SchoolGradeMapper schoolGradeMapper = null;
     @Autowired
@@ -115,6 +120,20 @@ public class SchoolService {
         Optional<School> school = schoolRepository.findById(id);
         return school.get().getDismissalLocations().stream()
             .map(dismissalLocationMapper::toModel)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+    /**
+     * Get all Go Home Notes Reports for a given School
+     *
+     * @param id the id of an School
+     * @return list of Go Home Notes Reports that are owned by the School
+     */
+    @Transactional(readOnly = true)
+    public List<GoHomeNotesReportModel> getGoHomeNotesReports(Long id) {
+        log.debug("Get Go Home Notes Reports for School : {}", id);
+        Optional<School> school = schoolRepository.findById(id);
+        return school.get().getGoHomeNotesReports().stream()
+            .map(goHomeNotesReportMapper::toModel)
             .collect(Collectors.toCollection(LinkedList::new));
     }
     /**

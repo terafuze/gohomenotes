@@ -13,7 +13,6 @@ import java.time.LocalTime;
 import com.terafuze.gohomenotes.domain.State;
 
 
-
 /**
  * A Model based on the Address entity.
  */

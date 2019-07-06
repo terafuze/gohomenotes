@@ -1,5 +1,6 @@
 package com.terafuze.gohomenotes.web.controllers;
 
+import java.io.ByteArrayInputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -9,6 +10,10 @@ import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.InputStreamResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,15 +24,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.terafuze.gohomenotes.service.StudentService;
-import com.terafuze.gohomenotes.web.errors.BadRequestAlertException;
-import com.terafuze.gohomenotes.web.models.ParentModel;
-import com.terafuze.gohomenotes.web.models.StudentModel;
-import com.terafuze.gohomenotes.web.utils.HeaderUtil;
-
+import io.github.jhipster.web.util.HeaderUtil;
 import io.github.jhipster.web.util.ResponseUtil;
 import io.micrometer.core.annotation.Timed;
 import io.swagger.annotations.Api;
+
+import com.terafuze.gohomenotes.web.errors.BadRequestAlertException;
+import com.terafuze.gohomenotes.service.StudentService;
+import com.terafuze.gohomenotes.web.models.StudentModel;
+import com.terafuze.gohomenotes.web.models.ParentModel;
 
 
 /**
@@ -41,6 +46,9 @@ public class StudentRestController {
     private final Logger log = LoggerFactory.getLogger(StudentRestController.class);
 
     private static final String ENTITY_NAME = "student";
+
+    @Value("${jhipster.clientApp.name}")
+    private String applicationName;
 
     private final StudentService studentService;
 
@@ -56,7 +64,6 @@ public class StudentRestController {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/students")
-    @Timed
     public ResponseEntity<StudentModel> createStudent(@Valid @RequestBody StudentModel studentModel) throws URISyntaxException {
         log.debug("REST request to save Student : {}", studentModel);
         if (studentModel.getId() != null) {
@@ -64,7 +71,7 @@ public class StudentRestController {
         }
         StudentModel result = studentService.save(studentModel);
         return ResponseEntity.created(new URI("/api/students/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
 
@@ -78,7 +85,6 @@ public class StudentRestController {
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/students")
-    @Timed
     public ResponseEntity<StudentModel> updateStudent(@Valid @RequestBody StudentModel studentModel) throws URISyntaxException {
         log.debug("REST request to update Student : {}", studentModel);
         if (studentModel.getId() == null) {
@@ -86,7 +92,7 @@ public class StudentRestController {
         }
         StudentModel result = studentService.save(studentModel);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, studentModel.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, studentModel.getId().toString()))
             .body(result);
     }
 
@@ -96,7 +102,6 @@ public class StudentRestController {
      * @return the ResponseEntity with status 200 (OK) and the list of students in body
      */
     @GetMapping("/students")
-    @Timed
     public List<StudentModel> getAllStudents() {
         log.debug("REST request to get all Students");
         return studentService.findAll();
@@ -110,11 +115,12 @@ public class StudentRestController {
      * @return a ResponseEntity with status 200 (OK) and with body of Parents for the Student or with status 404 if the Student does not exist for the given ID.
      */
     @GetMapping("/students/{id}/parents")
-    @Timed
     public List<ParentModel> getParents(@PathVariable Long id) {
         log.debug("REST request to get all Parentses for Student : {}", id);
         return studentService.getParents(id);
     }
+
+    
     /**
      * GET  /students/:id : get the Student for a given "id".
      *
@@ -122,7 +128,6 @@ public class StudentRestController {
      * @return the ResponseEntity with status 200 (OK) and with body the Student Model, or with status 404 (Not Found)
      */
     @GetMapping("/students/{id}")
-    @Timed
     public ResponseEntity<StudentModel> getStudent(@PathVariable Long id) {
         log.debug("REST request to get Student : {}", id);
         Optional<StudentModel> studentModel = studentService.findOne(id);
@@ -136,10 +141,9 @@ public class StudentRestController {
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/students/{id}")
-    @Timed
     public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
         log.debug("REST request to delete Student : {}", id);
         studentService.delete(id);
-        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
 }

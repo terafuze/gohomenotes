@@ -1,7 +1,7 @@
 package com.terafuze.gohomenotes.domain;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -10,18 +10,19 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.content.commons.annotations.ContentId;
 import org.springframework.content.commons.annotations.ContentLength;
 
 /**
- * Record that the Go Home Notes have been finalized for a specific day
  */
 @Entity
-@Table(name = "daily_verification_record")
-public class DailyVerificationRecord implements Serializable {
+@Table(name = "go_home_notes_report")
+public class GoHomeNotesReport implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -31,11 +32,22 @@ public class DailyVerificationRecord implements Serializable {
     private Long id;
 
     
+    @NotNull
+    @Column(name = "event_date", nullable = false)
+    private LocalDate eventDate;
+    
+    @Column(name = "finalized")
+    private Boolean finalized;
+    
+    @Column(name = "generated_by_username")
+    private String generatedByUsername;
+    
     /**
      * Used by Spring Content to associate a stream of binary data with the this entity.
      *
      * Automatically managed by Spring Content.
      */
+    
     @ContentId
     private String goHomeNotesReportContentId;
 
@@ -52,10 +64,14 @@ public class DailyVerificationRecord implements Serializable {
      */
     private String goHomeNotesReportMimeType = "application/pdf";
 
+    
+    @ManyToOne
+    private School school;
+    
     @Column(name = "timestamp")
     private LocalDateTime timestamp;
-
     
+
     public Long getId() {
         return id;
     }
@@ -63,11 +79,56 @@ public class DailyVerificationRecord implements Serializable {
     public void setId(Long id) {
         this.id = id;
     }
+    
+    public LocalDate getEventDate() {
+        return this.eventDate;
+    }
+
+    public GoHomeNotesReport eventDate(LocalDate eventDate) {
+        this.eventDate = eventDate;
+        return this;
+    }
+
+    public void setEventDate(LocalDate eventDate) {
+        this.eventDate = eventDate;
+    }
+    
+
+    
+    public Boolean getFinalized() {
+        return this.finalized;
+    }
+
+    public GoHomeNotesReport finalized(Boolean finalized) {
+        this.finalized = finalized;
+        return this;
+    }
+
+    public void setFinalized(Boolean finalized) {
+        this.finalized = finalized;
+    }
+    
+
+    
+    public String getGeneratedByUsername() {
+        return this.generatedByUsername;
+    }
+
+    public GoHomeNotesReport generatedByUsername(String generatedByUsername) {
+        this.generatedByUsername = generatedByUsername;
+        return this;
+    }
+
+    public void setGeneratedByUsername(String generatedByUsername) {
+        this.generatedByUsername = generatedByUsername;
+    }
+    
+
     public String getGoHomeNotesReportContentId() {
         return this.goHomeNotesReportContentId;
     }
 
-    public DailyVerificationRecord goHomeNotesReportContentId(String contentId) {
+    public GoHomeNotesReport goHomeNotesReportContentId(String contentId) {
         this.goHomeNotesReportContentId = contentId;
         return this;
     }
@@ -80,7 +141,7 @@ public class DailyVerificationRecord implements Serializable {
         return this.goHomeNotesReportContentLength;
     }
 
-    public DailyVerificationRecord goHomeNotesReportContentLength(long contentLength) {
+    public GoHomeNotesReport goHomeNotesReportContentLength(long contentLength) {
         this.goHomeNotesReportContentLength = contentLength;
         return this;
     }
@@ -93,7 +154,7 @@ public class DailyVerificationRecord implements Serializable {
         return this.goHomeNotesReportMimeType;
     }
 
-    public DailyVerificationRecord goHomeNotesReportMimeType(String mimeType) {
+    public GoHomeNotesReport goHomeNotesReportMimeType(String mimeType) {
         this.goHomeNotesReportMimeType = mimeType;
         return this;
     }
@@ -102,13 +163,25 @@ public class DailyVerificationRecord implements Serializable {
         this.goHomeNotesReportMimeType = mimeType;
     }
     
+    public School getSchool() {
+        return this.school;
+    }
+
+    public GoHomeNotesReport school(School school) {
+        this.school = school;
+        return this;
+    }
+
+    public void setSchool(School school) {
+        this.school = school;
+    }
 
     
     public LocalDateTime getTimestamp() {
         return this.timestamp;
     }
 
-    public DailyVerificationRecord timestamp(LocalDateTime timestamp) {
+    public GoHomeNotesReport timestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
         return this;
     }
@@ -116,8 +189,7 @@ public class DailyVerificationRecord implements Serializable {
     public void setTimestamp(LocalDateTime timestamp) {
         this.timestamp = timestamp;
     }
-
-
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -126,11 +198,11 @@ public class DailyVerificationRecord implements Serializable {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        DailyVerificationRecord dailyVerificationRecord = (DailyVerificationRecord) o;
-        if (dailyVerificationRecord.getId() == null || getId() == null) {
+        GoHomeNotesReport goHomeNotesReport = (GoHomeNotesReport) o;
+        if (goHomeNotesReport.getId() == null || getId() == null) {
             return false;
         }
-        return Objects.equals(getId(), dailyVerificationRecord.getId());
+        return Objects.equals(getId(), goHomeNotesReport.getId());
     }
 
     @Override
@@ -140,8 +212,11 @@ public class DailyVerificationRecord implements Serializable {
 
     @Override
     public String toString() {
-        return "DailyVerificationRecord{" +
+        return "GoHomeNotesReport{" +
             "id=" + getId() +
+            ", eventDate='" + getEventDate() + "'" +
+            ", finalized='" + getFinalized() + "'" +
+            ", generatedByUsername='" + getGeneratedByUsername() + "'" +
             ", timestamp='" + getTimestamp() + "'" +
         "}";
     }

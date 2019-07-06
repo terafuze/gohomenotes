@@ -1,4 +1,4 @@
-<form name="deleteForm" (ngSubmit)="confirmDelete(dailyVerificationRecord.id)">
+<form name="deleteForm" (ngSubmit)="confirmDelete(goHomeNotesReport.id)">
     <div class="modal-header">
         <h4 class="modal-title" jhiTranslate="entity.delete.title">Confirm delete operation</h4>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
@@ -6,7 +6,7 @@
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
-        <p jhiTranslate="app.dailyVerificationRecord.delete.question" translateValues="{id: '{{dailyVerificationRecord.id}}'}">Are you sure you want to delete this Daily Verification Record?</p>
+        <p jhiTranslate="app.goHomeNotesReport.delete.question" translateValues="{id: '{{goHomeNotesReport.id}}'}">Are you sure you want to delete this Go Home Notes Report?</p>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
