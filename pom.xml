@@ -489,6 +489,7 @@
 			    <configuration>
 			        <user>3d166a47cd8d4d54a8e50496981b8d52</user>
 			        <secret>FbmiSrwxWwQkjD6baaDx5BuBcLpDqyyN0MyAcnyqgO2WwWlUPqaxJzE2hRjZLKnp</secret>
+			        <image>go-home-notes:${project.version}</image>
 			        <envvars>
 			        	<SPRING_PROFILES_ACTIVE>prod,swagger</SPRING_PROFILES_ACTIVE>
 			        </envvars>
