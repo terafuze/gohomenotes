@@ -1,11 +1,11 @@
-/* after changing this file run 'yarn run webpack:build' */
+/* after changing this file run 'npm run webpack:build' */
 
 /***************************
 put Sass variables here:
 eg $input-color: red;
 ****************************/
 // Override Boostrap variables
-@import '~bootswatch/dist/spacelab/variables';
+@import '~bootswatch/dist/lumen/variables';
 // Import Bootstrap source files from node_modules
 @import '~bootstrap/scss/bootstrap';
-@import '~bootswatch/dist/spacelab/bootswatch';
+@import '~bootswatch/dist/lumen/bootswatch';
