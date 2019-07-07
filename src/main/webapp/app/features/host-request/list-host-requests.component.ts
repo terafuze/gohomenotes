@@ -29,16 +29,12 @@ export class ListHostRequestsComponent implements OnInit, OnDestroy {
   ) {}
 
   loadAll() {
-    let dataLoaded = false;
-    // If no items loaded so far, then load all of them
-    if (!dataLoaded) {
-      this.hostRequestService.query().subscribe(
-        (res: HttpResponse<IHostRequest[]>) => {
-          this.hostRequests = res.body;
-        },
-        (res: HttpErrorResponse) => this.onError(res.message)
-      );
-    }
+    this.hostRequestService.query().subscribe(
+      (res: HttpResponse<IHostRequest[]>) => {
+        this.hostRequests = res.body;
+      },
+      (res: HttpErrorResponse) => this.onError(res.message)
+    );
   }
 
   ngOnInit() {

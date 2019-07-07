@@ -9,74 +9,75 @@ import { JhiLanguageHelper, AccountService, LoginModalService, LoginService, Use
 import { ProfileService } from 'app/layouts/profiles/profile.service';
 
 @Component({
-    selector: 'app-navbar',
-    templateUrl: './navbar.component.html',
-    styleUrls: ['navbar.scss']
+  selector: 'app-navbar',
+  templateUrl: './navbar.component.html',
+  styleUrls: ['navbar.scss']
 })
 export class NavbarComponent implements OnInit {
-    inProduction: boolean;
-    isNavbarCollapsed: boolean;
-    languages: any[];
-    swaggerEnabled: boolean;
-    modalRef: NgbModalRef;
-    version: string;
-    userProfileId: number;
+  inProduction: boolean;
+  isNavbarCollapsed: boolean;
+  languages: any[];
+  swaggerEnabled: boolean;
+  modalRef: NgbModalRef;
+  version: string;
+  userProfileId: number;
 
-    constructor(
-        private loginService: LoginService,
-        private languageService: JhiLanguageService,
-        private languageHelper: JhiLanguageHelper,
-        private sessionStorage: SessionStorageService,
-        private accountService: AccountService,
-        private loginModalService: LoginModalService,
-        private profileService: ProfileService,
-        private userContext: UserContext,
-        private router: Router
-    ) {
-        this.version = VERSION ? 'v' + VERSION : '';
-        this.isNavbarCollapsed = true;
+  constructor(
+    private loginService: LoginService,
+    private languageService: JhiLanguageService,
+    private languageHelper: JhiLanguageHelper,
+    private sessionStorage: SessionStorageService,
+    private accountService: AccountService,
+    private loginModalService: LoginModalService,
+    private profileService: ProfileService,
+    private userContext: UserContext,
+    private router: Router
+  ) {
+    this.version = VERSION ? 'v' + VERSION : '';
+    this.isNavbarCollapsed = true;
+  }
+
+  ngOnInit() {
+    if (this.accountService.isAuthenticated()) {
+      this.userProfileId = this.userContext.userProfileId;
     }
+    this.languageHelper.getAll().then(languages => {
+      this.languages = languages;
+    });
+    this.profileService.getProfileInfo().then(profileInfo => {
+      this.inProduction = profileInfo.inProduction;
+      this.swaggerEnabled = profileInfo.swaggerEnabled;
+    });
+  }
 
-    ngOnInit() {
-        this.userProfileId = this.userContext.userProfile.id;
-        this.languageHelper.getAll().then(languages => {
-            this.languages = languages;
-        });
+  changeLanguage(languageKey: string) {
+    this.sessionStorage.store('locale', languageKey);
+    this.languageService.changeLanguage(languageKey);
+  }
 
-        this.profileService.getProfileInfo().then(profileInfo => {
-            this.inProduction = profileInfo.inProduction;
-            this.swaggerEnabled = profileInfo.swaggerEnabled;
-        });
-    }
+  collapseNavbar() {
+    this.isNavbarCollapsed = true;
+  }
 
-    changeLanguage(languageKey: string) {
-        this.sessionStorage.store('locale', languageKey);
-        this.languageService.changeLanguage(languageKey);
-    }
+  isAuthenticated() {
+    return this.accountService.isAuthenticated();
+  }
 
-    collapseNavbar() {
-        this.isNavbarCollapsed = true;
-    }
+  login() {
+    this.modalRef = this.loginModalService.open();
+  }
 
-    isAuthenticated() {
-        return this.accountService.isAuthenticated();
-    }
+  logout() {
+    this.collapseNavbar();
+    this.loginService.logout();
+    this.router.navigate(['']);
+  }
 
-    login() {
-        this.modalRef = this.loginModalService.open();
-    }
+  toggleNavbar() {
+    this.isNavbarCollapsed = !this.isNavbarCollapsed;
+  }
 
-    logout() {
-        this.collapseNavbar();
-        this.loginService.logout();
-        this.router.navigate(['']);
-    }
-
-    toggleNavbar() {
-        this.isNavbarCollapsed = !this.isNavbarCollapsed;
-    }
-
-    getImageUrl() {
-        return this.isAuthenticated() ? this.accountService.getImageUrl() : null;
-    }
+  getImageUrl() {
+    return this.isAuthenticated() ? this.accountService.getImageUrl() : null;
+  }
 }

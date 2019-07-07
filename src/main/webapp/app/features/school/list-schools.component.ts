@@ -29,16 +29,12 @@ export class ListSchoolsComponent implements OnInit, OnDestroy {
   ) {}
 
   loadAll() {
-    let dataLoaded = false;
-    // If no items loaded so far, then load all of them
-    if (!dataLoaded) {
-      this.schoolService.query().subscribe(
-        (res: HttpResponse<ISchool[]>) => {
-          this.schools = res.body;
-        },
-        (res: HttpErrorResponse) => this.onError(res.message)
-      );
-    }
+    this.schoolService.query().subscribe(
+      (res: HttpResponse<ISchool[]>) => {
+        this.schools = res.body;
+      },
+      (res: HttpErrorResponse) => this.onError(res.message)
+    );
   }
 
   ngOnInit() {

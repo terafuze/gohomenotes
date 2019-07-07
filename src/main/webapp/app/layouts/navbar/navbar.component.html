@@ -18,7 +18,7 @@
                     </span>
                 </a>
             </li>
-            <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <li *jhiHasAnyAuthority="'ROLE_USER'" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link" [routerLink]="['/user-profiles', userProfileId, 'view']" (click)="collapseNavbar()">
                     <span>
                         <fa-icon [icon]="'user'"></fa-icon>

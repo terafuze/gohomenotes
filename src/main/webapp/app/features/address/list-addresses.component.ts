@@ -30,16 +30,12 @@ export class ListAddressesComponent implements OnInit, OnDestroy {
   ) {}
 
   loadAll() {
-    let dataLoaded = false;
-    // If no items loaded so far, then load all of them
-    if (!dataLoaded) {
-      this.addressService.query().subscribe(
-        (res: HttpResponse<IAddress[]>) => {
-          this.addresses = res.body;
-        },
-        (res: HttpErrorResponse) => this.onError(res.message)
-      );
-    }
+    this.addressService.query().subscribe(
+      (res: HttpResponse<IAddress[]>) => {
+        this.addresses = res.body;
+      },
+      (res: HttpErrorResponse) => this.onError(res.message)
+    );
   }
 
   ngOnInit() {

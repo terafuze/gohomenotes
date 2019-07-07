@@ -30,16 +30,12 @@ export class ListEarlyPickupRequestsComponent implements OnInit, OnDestroy {
   ) {}
 
   loadAll() {
-    let dataLoaded = false;
-    // If no items loaded so far, then load all of them
-    if (!dataLoaded) {
-      this.earlyPickupRequestService.query().subscribe(
-        (res: HttpResponse<IEarlyPickupRequest[]>) => {
-          this.earlyPickupRequests = res.body;
-        },
-        (res: HttpErrorResponse) => this.onError(res.message)
-      );
-    }
+    this.earlyPickupRequestService.query().subscribe(
+      (res: HttpResponse<IEarlyPickupRequest[]>) => {
+        this.earlyPickupRequests = res.body;
+      },
+      (res: HttpErrorResponse) => this.onError(res.message)
+    );
   }
 
   ngOnInit() {

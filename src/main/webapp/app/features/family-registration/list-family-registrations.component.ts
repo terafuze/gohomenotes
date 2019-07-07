@@ -30,16 +30,12 @@ export class ListFamilyRegistrationsComponent implements OnInit, OnDestroy {
   ) {}
 
   loadAll() {
-    let dataLoaded = false;
-    // If no items loaded so far, then load all of them
-    if (!dataLoaded) {
-      this.familyRegistrationService.query().subscribe(
-        (res: HttpResponse<IFamilyRegistration[]>) => {
-          this.familyRegistrations = res.body;
-        },
-        (res: HttpErrorResponse) => this.onError(res.message)
-      );
-    }
+    this.familyRegistrationService.query().subscribe(
+      (res: HttpResponse<IFamilyRegistration[]>) => {
+        this.familyRegistrations = res.body;
+      },
+      (res: HttpErrorResponse) => this.onError(res.message)
+    );
   }
 
   ngOnInit() {

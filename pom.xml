@@ -5,7 +5,7 @@
 
     <groupId>com.terafuze.gohomenotes</groupId>
     <artifactId>go-home-notes</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <packaging>jar</packaging>
     <name>Go Home Notes</name>
 
@@ -24,7 +24,10 @@
     </repositories>
 
     <pluginRepositories>
-
+        <pluginRepository>
+	    <id>boxfuse-repo</id>
+	    <url>https://files.boxfuse.com</url>
+	</pluginRepository>
     </pluginRepositories>
 
 

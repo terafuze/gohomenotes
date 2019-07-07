@@ -30,16 +30,12 @@ export class ListGuestRequestsComponent implements OnInit, OnDestroy {
   ) {}
 
   loadAll() {
-    let dataLoaded = false;
-    // If no items loaded so far, then load all of them
-    if (!dataLoaded) {
-      this.guestRequestService.query().subscribe(
-        (res: HttpResponse<IGuestRequest[]>) => {
-          this.guestRequests = res.body;
-        },
-        (res: HttpErrorResponse) => this.onError(res.message)
-      );
-    }
+    this.guestRequestService.query().subscribe(
+      (res: HttpResponse<IGuestRequest[]>) => {
+        this.guestRequests = res.body;
+      },
+      (res: HttpErrorResponse) => this.onError(res.message)
+    );
   }
 
   ngOnInit() {
