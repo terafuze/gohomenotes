@@ -25,51 +25,30 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="app.school.goHomeNotesDailyCutoffTime" for="go_home_notes_daily_cutoff_time">Go Home Notes Daily Cutoff Time</label>
                     <div class="input-group">
-                        <input id="go_home_notes_daily_cutoff_time" type="text" class="form-control" name="goHomeNotesDailyCutoffTime" ngbDatepicker  #goHomeNotesDailyCutoffTimeDp="ngbDatepicker" [(ngModel)]="school.goHomeNotesDailyCutoffTime"
-                        required/>
+                        <input id="go_home_notes_daily_cutoff_time" type="text" class="form-control" name="goHomeNotesDailyCutoffTime" ngbDatepicker  #goHomeNotesDailyCutoffTimeDp="ngbDatepicker" [(ngModel)]="school.goHomeNotesDailyCutoffTime"/>
                         <span class="input-group-append">
                             <button type="button" class="btn btn-secondary" (click)="goHomeNotesDailyCutoffTimeDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
                         </span>
-                        <div [hidden]="!(editForm.controls.goHomeNotesDailyCutoffTime?.dirty && editForm.controls.goHomeNotesDailyCutoffTime?.invalid)">
-                            <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.goHomeNotesDailyCutoffTime?.errors?.required" jhiTranslate="entity.validation.required">
-                               This field is required.
-                            </small>
-                        </div>
                     </div>
                 </div>
                 <!-- Go Home Notes Start Date Form Field -->
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="app.school.goHomeNotesStartDate" for="go_home_notes_start_date">Go Home Notes Start Date</label>
                     <div class="input-group">
-                        <input id="go_home_notes_start_date" type="text" class="form-control" name="goHomeNotesStartDate" ngbDatepicker  #goHomeNotesStartDateDp="ngbDatepicker" [(ngModel)]="school.goHomeNotesStartDate"
-                        required/>
+                        <input id="go_home_notes_start_date" type="text" class="form-control" name="goHomeNotesStartDate" ngbDatepicker  #goHomeNotesStartDateDp="ngbDatepicker" [(ngModel)]="school.goHomeNotesStartDate"/>
                         <span class="input-group-append">
                             <button type="button" class="btn btn-secondary" (click)="goHomeNotesStartDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
                         </span>
-                        <div [hidden]="!(editForm.controls.goHomeNotesStartDate?.dirty && editForm.controls.goHomeNotesStartDate?.invalid)">
-                            <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.goHomeNotesStartDate?.errors?.required" jhiTranslate="entity.validation.required">
-                               This field is required.
-                            </small>
-                        </div>
                     </div>
                 </div>
                 <!-- Go Home Notes Stop Date Form Field -->
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="app.school.goHomeNotesStopDate" for="go_home_notes_stop_date">Go Home Notes Stop Date</label>
                     <div class="input-group">
-                        <input id="go_home_notes_stop_date" type="text" class="form-control" name="goHomeNotesStopDate" ngbDatepicker  #goHomeNotesStopDateDp="ngbDatepicker" [(ngModel)]="school.goHomeNotesStopDate"
-                        required/>
+                        <input id="go_home_notes_stop_date" type="text" class="form-control" name="goHomeNotesStopDate" ngbDatepicker  #goHomeNotesStopDateDp="ngbDatepicker" [(ngModel)]="school.goHomeNotesStopDate"/>
                         <span class="input-group-append">
                             <button type="button" class="btn btn-secondary" (click)="goHomeNotesStopDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
                         </span>
-                        <div [hidden]="!(editForm.controls.goHomeNotesStopDate?.dirty && editForm.controls.goHomeNotesStopDate?.invalid)">
-                            <small class="form-text text-danger"
-                               [hidden]="!editForm.controls.goHomeNotesStopDate?.errors?.required" jhiTranslate="entity.validation.required">
-                               This field is required.
-                            </small>
-                        </div>
                     </div>
                 </div>
                 <!-- Name Form Field -->

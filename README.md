@@ -116,15 +116,11 @@ A bunch of log messages will scroll by. The Spring Boot web application is runni
 
 Execute the following commnand in a separate terminal command line window to start the Angular web application, which provides the user interface.
 
-    yarn start
+    npm start
 
 A browser window will automatically be opened in your browser and the main web page for the user interface will be displayed in the browser window. Notice that the web address in the browser window is `localhost:9000`. This will mean more to you later as you work with the code more.
 
-[Yarn][] is also used to manage CSS and JavaScript dependencies used in this application. You can upgrade dependencies by
-specifying a newer version in [package.json](package.json). You can also run `yarn update` and `yarn install` to manage dependencies.
-Add the `help` flag on any command to see how you can use it. For example, `yarn help update`.
-
-The `yarn run` command will list all of the scripts available to run for this project.
+The `npm run` command will list all of the scripts available to run for this project.
 
 ### Technologies and Frameworks
 
@@ -269,13 +265,21 @@ To run the boxfuse image on VirtualBox on your laptop...
 ./mvnw boxfuse:run -Dboxfuse.env=dev
 ```
 
+To stop a deployed image on the local VirtualBox/your laptop...
+
+```
+$ ./mvnw boxfuse:kill -Dboxfuse.image=nward1234/go-home-notes:0.0.0.1562522814356 -Dboxfuse.env=dev
+```
+
+Where the `boxfuse.image` property is the name of the image that was deployed (use `./mvnw boxfuse:ls` to see the possible images)
+
 To deploy the boxfuse image on AWS account associated with the Boxfuse username and secret specified in the `pom.xml` file...
 
 ```
 ./mvnw boxfuse:run -Dboxfuse.env=prod
 ```
 
-To remote a deployment from AWS...
+To remote a deployment image from AWS...
 
 ```
 ./mvnw boxfuse:kill -Dboxfuse.env=prod
