@@ -97,7 +97,7 @@ Run the following command in a terminal command line to start the Spring Boot Ja
 
 #### Start the Spring Boot web application using Maven
 
-`$ ./mvnw` from a command line on Linux/Mac OC, `$ mvnw.cmd` on Windows.
+`$ ./mvnw spring-boot:run` from a command line on Linux/Mac OS, `$ mvnw.cmd spring-boot:run` on Windows.
 
 This command is the **Maven Wrapper** command. It is a command line script, which is a file in the current directory. [Maven](https://maven.apache.org/) is a Java based build tool. The Maven Wrapper is a utility that manages the version of the Maven build tool so that the same version of Maven will be used across different machines where when different people build the software. Maven uses a file named `pom.xml` that is located in the same directory to know how to build the project. All you really need to remember though is the command shown above and you will eventually want to undersatnd Maven and the `pom.xml` file, but for now, it will just work.
 
