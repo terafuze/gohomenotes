@@ -8,86 +8,62 @@ import { IAddress } from 'app/shared/model/address.model';
 import { Address } from 'app/shared/model/address.model';
 import { AddressService } from './address.service';
 import { DeleteAddressPopupComponent } from './delete-address.component';
-import { EditAddressComponent } from './edit-address.component';
-import { ListAddressesComponent } from './list-addresses.component';
-import { ViewAddressComponent } from './view-address.component';
+import { GoHomeNotesEditAddressComponent } from './edit-address.component';
+import { GoHomeNotesListAddressesComponent } from './list-addresses.component';
+import { GoHomeNotesViewAddressComponent } from './view-address.component';
 
 @Injectable({ providedIn: 'root' })
 export class AddressResolve implements Resolve<IAddress> {
-    constructor(private service: AddressService) {}
+  constructor(private service: AddressService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IAddress> {
-        const id = route.params['id'] ? route.params['id'] : null;
-        if (id) {
-            return this.service.find(id).pipe(
-                filter((response: HttpResponse<Address>) => response.ok),
-                map((address: HttpResponse<Address>) => address.body)
-            );
-        }
-        return of(new Address());
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<IAddress> {
+    const id = route.params['id'] ? route.params['id'] : null;
+    if (id) {
+      return this.service.find(id).pipe(
+        filter((response: HttpResponse<Address>) => response.ok),
+        map((address: HttpResponse<Address>) => address.body)
+      );
     }
+    return of(new Address());
+  }
 }
 
 export const addressRoute: Routes = [
-    {
-        path: 'address/new',
-        component: EditAddressComponent,
-        resolve: {
-            address: AddressResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.address.home.title'
-        },
-        canActivate: [UserRouteAccessService]
+  {
+    path: 'addresses',
+    component: GoHomeNotesListAddressesComponent,
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'app.address.home.title'
     },
-    {
-        path: 'addresses',
-        component: ListAddressesComponent,
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.address.home.title'
-        },
-        canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: 'addresses/:id/view',
+    component: GoHomeNotesViewAddressComponent,
+    resolve: {
+      address: AddressResolve
     },
-    {
-        path: 'addresses/:id/view',
-        component: ViewAddressComponent,
-        resolve: {
-            address: AddressResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.address.home.title'
-        },
-        canActivate: [UserRouteAccessService]
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'app.address.home.title'
     },
-    {
-        path: 'addresses/:id/edit',
-        component: EditAddressComponent,
-        resolve: {
-            address: AddressResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.address.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    }
+    canActivate: [UserRouteAccessService]
+  }
 ];
 
 export const addressPopupRoute: Routes = [
-    {
-        path: 'address/:id/delete',
-        component: DeleteAddressPopupComponent,
-        resolve: {
-            address: AddressResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.address.home.title'
-        },
-        canActivate: [UserRouteAccessService],
-        outlet: 'popup'
-    }
+  {
+    path: 'address/:id/delete',
+    component: DeleteAddressPopupComponent,
+    resolve: {
+      address: AddressResolve
+    },
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'app.address.home.title'
+    },
+    canActivate: [UserRouteAccessService],
+    outlet: 'popup'
+  }
 ];

@@ -8,7 +8,7 @@ import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 import { AccountService } from 'app/core';
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { IUserProfile } from 'app/shared/model/user-profile.model';
-import { UserProfileService } from './user-profile.service';
+import { GoHomeNotesUserProfileService } from './user-profile.service';
 import { AddressService } from '../address/address.service';
 import { TeacherService } from '../teacher/teacher.service';
 @Component({
@@ -24,7 +24,7 @@ export class ListUserProfilesComponent implements OnInit, OnDestroy {
   parentId: number;
 
   constructor(
-    protected userProfileService: UserProfileService,
+    protected userProfileService: GoHomeNotesUserProfileService,
     protected addressService: AddressService,
     private teacherService: TeacherService,
     protected parseLinks: JhiParseLinks,

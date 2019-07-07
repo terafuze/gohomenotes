@@ -14,7 +14,7 @@ import { AddressService } from './address.service';
   selector: 'app-list-addresses',
   templateUrl: './list-addresses.component.html'
 })
-export class ListAddressesComponent implements OnInit, OnDestroy {
+export class GoHomeNotesListAddressesComponent implements OnInit, OnDestroy {
   addresses: IAddress[];
   currentAccount: any;
   eventSubscriber: Subscription;

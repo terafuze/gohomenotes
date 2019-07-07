@@ -6,7 +6,7 @@ import { createRequestOption } from 'app/shared';
 import { IUserProfile } from 'app/shared/model/user-profile.model';
 
 @Injectable({ providedIn: 'root' })
-export class UserProfileService {
+export class GoHomeNotesUserProfileService {
   private resourceUrl = SERVER_API_URL + 'api/user-profiles';
 
   constructor(private http: HttpClient) {}

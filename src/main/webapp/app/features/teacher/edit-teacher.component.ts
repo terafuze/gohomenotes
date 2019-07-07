@@ -13,104 +13,104 @@ import { TeacherService } from './teacher.service';
 import { ISchoolGrade } from 'app/shared/model/school-grade.model';
 import { SchoolGradeService } from 'app/features/school-grade';
 import { IUserProfile } from 'app/shared/model/user-profile.model';
-import { UserProfileService } from 'app/features/user-profile';
+import { GoHomeNotesUserProfileService } from 'app/features/user-profile';
 
 @Component({
-    selector: 'app-edit-teacher',
-    templateUrl: './edit-teacher.component.html'
+  selector: 'app-edit-teacher',
+  templateUrl: './edit-teacher.component.html'
 })
 export class EditTeacherComponent implements OnInit {
-    private _teacher: ITeacher;
+  private _teacher: ITeacher;
 
-    isSaving: boolean;
+  isSaving: boolean;
 
-    // The list of School Grades from which to select
-    schoolGrades: ISchoolGrade[];
-    // The list of User Profiles from which to select
-    userProfiles: IUserProfile[];
+  // The list of School Grades from which to select
+  schoolGrades: ISchoolGrade[];
+  // The list of User Profiles from which to select
+  userProfiles: IUserProfile[];
 
-    schoolId: number;
+  schoolId: number;
 
-    constructor(
-        protected jhiAlertService: JhiAlertService,
-        protected jhiDataUtils: JhiDataUtils,
-        protected schoolGradeService: SchoolGradeService,
-        protected userProfileService: UserProfileService,
-        protected teacherService: TeacherService,
-        protected activatedRoute: ActivatedRoute
-    ) {}
+  constructor(
+    protected jhiAlertService: JhiAlertService,
+    protected jhiDataUtils: JhiDataUtils,
+    protected schoolGradeService: SchoolGradeService,
+    protected userProfileService: GoHomeNotesUserProfileService,
+    protected teacherService: TeacherService,
+    protected activatedRoute: ActivatedRoute
+  ) {}
 
-    ngOnInit() {
-        this.isSaving = false;
-        this.schoolId = this.activatedRoute.snapshot.params['schoolId'];
-        this.activatedRoute.data.subscribe(({ teacher }) => {
-            this.teacher = teacher;
-        });
-        this.schoolGradeService
-            .query()
-            .pipe(
-                filter((mayBeOk: HttpResponse<ISchoolGrade[]>) => mayBeOk.ok),
-                map((response: HttpResponse<ISchoolGrade[]>) => response.body)
-            )
-            .subscribe((res: ISchoolGrade[]) => (this.schoolGrades = res), (res: HttpErrorResponse) => this.onError(res.message));
+  ngOnInit() {
+    this.isSaving = false;
+    this.schoolId = this.activatedRoute.snapshot.params['schoolId'];
+    this.activatedRoute.data.subscribe(({ teacher }) => {
+      this.teacher = teacher;
+    });
+    this.schoolGradeService
+      .query()
+      .pipe(
+        filter((mayBeOk: HttpResponse<ISchoolGrade[]>) => mayBeOk.ok),
+        map((response: HttpResponse<ISchoolGrade[]>) => response.body)
+      )
+      .subscribe((res: ISchoolGrade[]) => (this.schoolGrades = res), (res: HttpErrorResponse) => this.onError(res.message));
+  }
+
+  previousState() {
+    window.history.back();
+  }
+
+  save() {
+    this.isSaving = true;
+    if (this.teacher.id !== undefined) {
+      this.subscribeToSaveResponse(this.teacherService.update(this.teacher));
+    } else {
+      this.teacher.schoolId = this.schoolId;
+      this.subscribeToSaveResponse(this.teacherService.create(this.teacher));
     }
+  }
 
-    previousState() {
-        window.history.back();
-    }
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<ITeacher>>) {
+    result.subscribe((res: HttpResponse<ITeacher>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
+  }
 
-    save() {
-        this.isSaving = true;
-        if (this.teacher.id !== undefined) {
-            this.subscribeToSaveResponse(this.teacherService.update(this.teacher));
-        } else {
-            this.teacher.schoolId = this.schoolId;
-            this.subscribeToSaveResponse(this.teacherService.create(this.teacher));
+  protected onSaveSuccess() {
+    this.isSaving = false;
+    this.previousState();
+  }
+
+  protected onSaveError() {
+    this.isSaving = false;
+  }
+
+  protected onError(errorMessage: string) {
+    this.jhiAlertService.error(errorMessage, null, null);
+  }
+
+  trackSchoolGradeById(index: number, item: ISchoolGrade) {
+    return item.id;
+  }
+
+  trackUserProfileById(index: number, item: IUserProfile) {
+    return item.id;
+  }
+
+  // TODO if not needed, remove this function
+  getSelected(selectedVals: Array<any>, option: any) {
+    if (selectedVals) {
+      for (let i = 0; i < selectedVals.length; i++) {
+        if (option.id === selectedVals[i].id) {
+          return selectedVals[i];
         }
+      }
     }
+    return option;
+  }
 
-    protected subscribeToSaveResponse(result: Observable<HttpResponse<ITeacher>>) {
-        result.subscribe((res: HttpResponse<ITeacher>) => this.onSaveSuccess(), (res: HttpErrorResponse) => this.onSaveError());
-    }
+  get teacher() {
+    return this._teacher;
+  }
 
-    protected onSaveSuccess() {
-        this.isSaving = false;
-        this.previousState();
-    }
-
-    protected onSaveError() {
-        this.isSaving = false;
-    }
-
-    protected onError(errorMessage: string) {
-        this.jhiAlertService.error(errorMessage, null, null);
-    }
-
-    trackSchoolGradeById(index: number, item: ISchoolGrade) {
-        return item.id;
-    }
-
-    trackUserProfileById(index: number, item: IUserProfile) {
-        return item.id;
-    }
-
-    // TODO if not needed, remove this function
-    getSelected(selectedVals: Array<any>, option: any) {
-        if (selectedVals) {
-            for (let i = 0; i < selectedVals.length; i++) {
-                if (option.id === selectedVals[i].id) {
-                    return selectedVals[i];
-                }
-            }
-        }
-        return option;
-    }
-
-    get teacher() {
-        return this._teacher;
-    }
-
-    set teacher(teacher: ITeacher) {
-        this._teacher = teacher;
-    }
+  set teacher(teacher: ITeacher) {
+    this._teacher = teacher;
+  }
 }

@@ -11,13 +11,13 @@ import { IAddress } from 'app/shared/model/address.model';
 import { AddressService } from './address.service';
 
 import { IUserProfile } from 'app/shared/model/user-profile.model';
-import { UserProfileService } from 'app/features/user-profile';
+import { GoHomeNotesUserProfileService } from 'app/features/user-profile';
 
 @Component({
   selector: 'app-edit-address',
   templateUrl: './edit-address.component.html'
 })
-export class EditAddressComponent implements OnInit {
+export class GoHomeNotesEditAddressComponent implements OnInit {
   private _address: IAddress;
 
   isSaving: boolean;
@@ -28,7 +28,7 @@ export class EditAddressComponent implements OnInit {
   constructor(
     protected jhiAlertService: JhiAlertService,
     protected jhiDataUtils: JhiDataUtils,
-    protected userProfileService: UserProfileService,
+    protected userProfileService: GoHomeNotesUserProfileService,
     protected addressService: AddressService,
     protected activatedRoute: ActivatedRoute
   ) {}
