@@ -1,0 +1,23 @@
+{
+    "test": {
+        "awscloudformation": {
+            "AuthRoleName": "gohomenotes-test-20190720124949-authRole",
+            "UnauthRoleArn": "arn:aws:iam::774655577160:role/gohomenotes-test-20190720124949-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::774655577160:role/gohomenotes-test-20190720124949-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "gohomenotes-test-20190720124949-deployment",
+            "UnauthRoleName": "gohomenotes-test-20190720124949-unauthRole",
+            "StackName": "gohomenotes-test-20190720124949",
+            "StackId": "arn:aws:cloudformation:us-east-1:774655577160:stack/gohomenotes-test-20190720124949/637c67a0-ab0e-11e9-bb14-12f81177eb92"
+        },
+        "categories": {
+            "auth": {
+                "gohomenotesed112ed1": {
+                    "googleAppIdUserPool": "428422803827-b30ofv5iurpovhlt0e8n5fri9nk6d3gs.apps.googleusercontent.com",
+                    "googleAppSecretUserPool": "towztgGdNjx6dq5f0SoDb8Qd",
+                    "hostedUIProviderCreds": "[{\"ProviderName\":\"Google\",\"client_id\":\"428422803827-b30ofv5iurpovhlt0e8n5fri9nk6d3gs.apps.googleusercontent.com\",\"client_secret\":\"towztgGdNjx6dq5f0SoDb8Qd\"}]"
+                }
+            }
+        }
+    }
+}

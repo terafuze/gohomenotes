@@ -35,9 +35,9 @@ spring:
       enabled: false
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5444/gohomenotes3
-    username: postgres
-    password: password
+    url: jdbc:postgresql://aaclxu1xuv2n09.cb3tjr4f9fw0.us-east-1.rds.amazonaws.com:5432/gohomenotes3
+    username: gohomenotes
+    password: Jul2019#1
     hikari:
       poolName: Hikari
       auto-commit: false
