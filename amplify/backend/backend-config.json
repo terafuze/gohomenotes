@@ -1,9 +1,9 @@
 {
-	"auth": {
-		"gohomenotesed112ed1": {
-			"service": "Cognito",
-			"providerPlugin": "awscloudformation",
-			"dependsOn": []
-		}
-	}
+    "auth": {
+        "gohomenotesed112ed1": {
+            "service": "Cognito",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": []
+        }
+    }
 }

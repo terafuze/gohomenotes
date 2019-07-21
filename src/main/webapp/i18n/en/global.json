@@ -35,6 +35,7 @@
         "password": "Password",
         "sessions": "Sessions",
         "login": "Sign in",
+        "federatedLogin": "Federated Login",
         "logout": "Sign out",
         "register": "Register"
       },

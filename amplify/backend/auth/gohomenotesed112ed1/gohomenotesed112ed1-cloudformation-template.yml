@@ -116,24 +116,54 @@ Parameters:
   authProvidersUserPool:
     Type: CommaDelimitedList
       
+  hostedUIProviderMeta:
+    Type: String
+                      
+  dependsOn:
+    Type: CommaDelimitedList
+              
+  AllowedOAuthFlows:
+    Type: CommaDelimitedList
+              
+  AllowedOAuthScopes:
+    Type: CommaDelimitedList
+              
+  CallbackURLs:
+    Type: CommaDelimitedList
+              
+  LogoutURLs:
+    Type: CommaDelimitedList
+              
+  googleAuthorizeScopes:
+    Type: CommaDelimitedList
+      
+  updateFlow:
+    Type: String
+                
+  addCallbackOnUpdate:
+    Type: String
+              
+  addLogoutOnUpdate:
+    Type: String
+            
   googleAppIdUserPool:
     Type: String
               
   googleAppSecretUserPool:
     Type: String
               
-  hostedUIProviderMeta:
+  hostedUIProviderCreds:
     Type: String
               
-  hostedUIProviderCreds:
+  facebookAppIdUserPool:
+    Type: String
+              
+  facebookAppSecretUserPool:
     Type: String
               
   oAuthMetadata:
     Type: String
-                      
-  dependsOn:
-    Type: CommaDelimitedList
-    
+            
 Conditions:
   ShouldNotCreateEnvResources: !Equals [ !Ref env, NONE ]
 

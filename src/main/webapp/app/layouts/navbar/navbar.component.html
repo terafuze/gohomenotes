@@ -260,7 +260,7 @@
                             <span jhiTranslate="global.menu.account.password">Password</span>
                         </a>
                     </li>
-                    <li *ngSwitchCase="true">
+                    <li>
                         <a class="dropdown-item" (click)="logout()" id="logout">
                             <fa-icon [icon]="'sign-out-alt'" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.account.logout">Sign out</span>
@@ -271,7 +271,13 @@
                             <fa-icon [icon]="'sign-in-alt'" [fixedWidth]="true"></fa-icon>
                             <span jhiTranslate="global.menu.account.login">Sign in</span>
                         </a>
-                    </li>
+                    </li>                    
+                    <li *ngSwitchCase="false">
+                            <a class="dropdown-item" (click)="federatedLogin()" id="login">
+                                <fa-icon [icon]="'sign-in-alt'" [fixedWidth]="true"></fa-icon>
+                                <span jhiTranslate="global.menu.account.federatedLogin">Federated Sign in</span>
+                            </a>
+                        </li>
                     <li *ngSwitchCase="false">
                         <a class="dropdown-item" routerLink="register" routerLinkActive="active" (click)="collapseNavbar()">
                             <fa-icon [icon]="'user-plus'" [fixedWidth]="true"></fa-icon>

@@ -7,6 +7,7 @@ import { SessionStorageService } from 'ngx-webstorage';
 import { VERSION } from 'app/app.constants';
 import { JhiLanguageHelper, AccountService, LoginModalService, LoginService, UserContext } from 'app/core';
 import { ProfileService } from 'app/layouts/profiles/profile.service';
+import { AmplifyService } from 'aws-amplify-angular';
 
 @Component({
   selector: 'app-navbar',
@@ -31,7 +32,8 @@ export class NavbarComponent implements OnInit {
     private loginModalService: LoginModalService,
     private profileService: ProfileService,
     private userContext: UserContext,
-    private router: Router
+    private router: Router,
+    private amplifyService: AmplifyService
   ) {
     this.version = VERSION ? 'v' + VERSION : '';
     this.isNavbarCollapsed = true;
@@ -67,9 +69,14 @@ export class NavbarComponent implements OnInit {
     this.modalRef = this.loginModalService.open();
   }
 
+  federatedLogin() {
+    this.amplifyService.auth().federatedSignIn();
+  }
+
   logout() {
     this.collapseNavbar();
     this.loginService.logout();
+    this.amplifyService.auth().signOut();
     this.router.navigate(['']);
   }
 

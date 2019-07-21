@@ -18,6 +18,8 @@ import { HomeModule } from './home/home.module';
 import { AccountModule } from './account/account.module';
 import { FeaturesModule } from './features/features.module';
 import * as moment from 'moment';
+import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
+
 import {
   JhiMainComponent,
   NavbarComponent,
@@ -44,7 +46,8 @@ import {
     HomeModule,
     AccountModule,
     FeaturesModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AmplifyAngularModule
   ],
   declarations: [
     JhiMainComponent,
@@ -75,7 +78,8 @@ import {
       provide: HTTP_INTERCEPTORS,
       useClass: NotificationInterceptor,
       multi: true
-    }
+    },
+    AmplifyService
   ],
   bootstrap: [JhiMainComponent]
 })

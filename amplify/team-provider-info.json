@@ -13,9 +13,11 @@
         "categories": {
             "auth": {
                 "gohomenotesed112ed1": {
+                    "facebookAppIdUserPool": "2277603469018809",
+                    "facebookAppSecretUserPool": "dea4f7729c117af04464075afd5dae2f",
                     "googleAppIdUserPool": "428422803827-b30ofv5iurpovhlt0e8n5fri9nk6d3gs.apps.googleusercontent.com",
                     "googleAppSecretUserPool": "towztgGdNjx6dq5f0SoDb8Qd",
-                    "hostedUIProviderCreds": "[{\"ProviderName\":\"Google\",\"client_id\":\"428422803827-b30ofv5iurpovhlt0e8n5fri9nk6d3gs.apps.googleusercontent.com\",\"client_secret\":\"towztgGdNjx6dq5f0SoDb8Qd\"}]"
+                    "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"2277603469018809\",\"client_secret\":\"dea4f7729c117af04464075afd5dae2f\"},{\"ProviderName\":\"Google\",\"client_id\":\"428422803827-b30ofv5iurpovhlt0e8n5fri9nk6d3gs.apps.googleusercontent.com\",\"client_secret\":\"towztgGdNjx6dq5f0SoDb8Qd\"}]"
                 }
             }
         }
