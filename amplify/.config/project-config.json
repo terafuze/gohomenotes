@@ -5,8 +5,8 @@
     "javascript": {
         "framework": "angular",
         "config": {
-            "SourceDir": "src",
-            "DistributionDir": "dist/gohomenotes",
+            "SourceDir": "src/main/webapp/app",
+            "DistributionDir": "target/classes/static/app",
             "BuildCommand": "npm webpack:build",
             "StartCommand": "npm start"
         }

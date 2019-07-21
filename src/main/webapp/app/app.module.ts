@@ -18,7 +18,8 @@ import { HomeModule } from './home/home.module';
 import { AccountModule } from './account/account.module';
 import { FeaturesModule } from './features/features.module';
 import * as moment from 'moment';
-import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
+import { AmplifyAngularModule, AmplifyService, AmplifyModules } from 'aws-amplify-angular';
+import Auth from '@aws-amplify/auth';
 
 import {
   JhiMainComponent,
@@ -79,7 +80,14 @@ import {
       useClass: NotificationInterceptor,
       multi: true
     },
-    AmplifyService
+    {
+      provide: AmplifyService,
+      useFactory: () => {
+        return AmplifyModules({
+          Auth
+        });
+      }
+    }
   ],
   bootstrap: [JhiMainComponent]
 })
