@@ -22,8 +22,6 @@ Here's a summary of the main things that are required in order to build and run 
    - Or Use [SDK Man](https://sdkman.io/install) to install the Java JDK 1.8 (i.e. Java 8) Be sure to open a new terminal window after installing the JDK.
    - You can check if the correct verison is installed by executing `java -version` in a command line. The version should be 1.8 something.
 
-## PRACTICE
-
 Configuring the Database
 
 1. Download the [Postgres app](https://postgresapp.com/downloads.html) and make sure to move it to your applications folder.
