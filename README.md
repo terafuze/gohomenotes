@@ -103,7 +103,9 @@ This command is the **Maven Wrapper** command. It is a command line script, whic
 
 On Linux or Mac OS terminal command lines, the `./<filename>` tells the operating system to execute the specified filename as a command where the `./` tells the operating system that this file is in the current directory. The dot means _the current directory_ and the slash just means the path from the current directory. It is just a Linux nuance.
 
-A bunch of log messages will scroll by. The Spring Boot web application is running when the following is displayed in the terminal window. The web application is now runing as a "server" and is waiting for JSON API requests from the user interface over HTTP.
+A bunch of log messages will scroll by. The Spring Boot web application is running when the following is displayed in the terminal window. The web application is now running.
+
+You should see the following in the terminal window:
 
 ```
 ----------------------------------------------------------
