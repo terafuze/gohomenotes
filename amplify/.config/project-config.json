@@ -1,12 +1,12 @@
 {
-    "projectName": "gohomenotes",
+    "projectName": "gohomenotes3",
     "version": "2.0",
     "frontend": "javascript",
     "javascript": {
         "framework": "angular",
         "config": {
-            "SourceDir": "src/main/webapp/app",
-            "DistributionDir": "target/classes/static/app",
+            "SourceDir": "src",
+            "DistributionDir": "dist/gohomenotes",
             "BuildCommand": "npm webpack:build",
             "StartCommand": "npm start"
         }

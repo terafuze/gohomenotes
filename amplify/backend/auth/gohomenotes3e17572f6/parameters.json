@@ -1,9 +1,9 @@
 {
-    "identityPoolName": "gohomenotesed112ed1_identitypool_ed112ed1",
+    "identityPoolName": "gohomenotes3e17572f6_identitypool_e17572f6",
     "allowUnauthenticatedIdentities": false,
-    "openIdLambdaRoleName": "gohomeed112ed1_openid_lambda_role",
-    "resourceNameTruncated": "gohomeed112ed1",
-    "userPoolName": "gohomenotesed112ed1_userpool_ed112ed1",
+    "openIdLambdaRoleName": "gohomee17572f6_openid_lambda_role",
+    "resourceNameTruncated": "gohomee17572f6",
+    "userPoolName": "gohomenotes3e17572f6_userpool_e17572f6",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -21,7 +21,7 @@
     "requiredAttributes": [
         "email"
     ],
-    "userpoolClientName": "gohomeed112ed1_app_client",
+    "userpoolClientName": "gohomee17572f6_app_client",
     "userpoolClientGenerateSecret": true,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [
@@ -30,10 +30,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "mfaLambdaRole": "gohomeed112ed1_totp_lambda_role",
-    "userpoolClientLambdaRole": "gohomeed112ed1_userpoolclient_lambda_role",
+    "mfaLambdaRole": "gohomee17572f6_totp_lambda_role",
+    "userpoolClientLambdaRole": "gohomee17572f6_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "resourceName": "gohomenotesed112ed1",
+    "resourceName": "gohomenotes3e17572f6",
     "authSelections": "identityPoolAndUserPool",
     "authRoleName": {
         "Ref": "AuthRoleName"
@@ -55,41 +55,22 @@
     },
     "useDefault": "defaultSocial",
     "hostedUI": true,
+    "usernameAttributes": [
+        "email, phone_number"
+    ],
     "additionalQuestions": [],
-    "hostedUIDomainName": "gohomenotes-test",
+    "hostedUIDomainName": "gohomenotes3-10-20-2019",
     "newCallbackURLs": [
-        "https://gohomenotes.net/"
+        "http://localhost:9000/"
     ],
     "newLogoutURLs": [
-        "hptps://gohomenotes.net/signout/"
+        "http://localhost:9000/"
     ],
     "authProvidersUserPool": [
         "Facebook",
         "Google"
     ],
     "hostedUIProviderMeta": "[{\"ProviderName\":\"Facebook\",\"authorize_scopes\":\"email,public_profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"id\"}},{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
-    "dependsOn": [],
-    "AllowedOAuthFlows": [
-        "code"
-    ],
-    "AllowedOAuthScopes": [
-        "phone",
-        "email",
-        "openid",
-        "profile",
-        "aws.cognito.signin.user.admin"
-    ],
-    "CallbackURLs": [
-        "http://localhost:9000/"
-    ],
-    "LogoutURLs": [
-        "http://localhost:9000/"
-    ],
-    "googleAuthorizeScopes": [
-        "openid email profile"
-    ],
-    "updateFlow": "providers",
-    "addCallbackOnUpdate": false,
-    "addLogoutOnUpdate": false,
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:9000/\"],\"LogoutURLs\":[\"http://localhost:9000/\"]}"
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:9000/\"],\"LogoutURLs\":[\"http://localhost:9000/\"]}",
+    "dependsOn": []
 }
