@@ -1,9 +1,9 @@
 {
-	"auth": {
-		"gohomenotes3e17572f6": {
-			"service": "Cognito",
-			"providerPlugin": "awscloudformation",
-			"dependsOn": []
-		}
-	}
+    "auth": {
+        "gohomenotes3e17572f6": {
+            "service": "Cognito",
+            "providerPlugin": "awscloudformation",
+            "dependsOn": []
+        }
+    }
 }

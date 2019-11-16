@@ -11,83 +11,91 @@ import { DeleteSchoolPopupComponent } from './delete-school.component';
 import { EditSchoolComponent } from './edit-school.component';
 import { ListSchoolsComponent } from './list-schools.component';
 import { ViewSchoolComponent } from './view-school.component';
+import { LogonCallbackComponent } from './login-callback.component';
 
 @Injectable({ providedIn: 'root' })
 export class SchoolResolve implements Resolve<ISchool> {
-    constructor(private service: SchoolService) {}
+  constructor(private service: SchoolService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ISchool> {
-        const id = route.params['id'] ? route.params['id'] : null;
-        if (id) {
-            return this.service.find(id).pipe(
-                filter((response: HttpResponse<School>) => response.ok),
-                map((school: HttpResponse<School>) => school.body)
-            );
-        }
-        return of(new School());
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<ISchool> {
+    const id = route.params['id'] ? route.params['id'] : null;
+    if (id) {
+      return this.service.find(id).pipe(
+        filter((response: HttpResponse<School>) => response.ok),
+        map((school: HttpResponse<School>) => school.body)
+      );
     }
+    return of(new School());
+  }
 }
 
 export const schoolRoute: Routes = [
-    {
-        path: 'school/new',
-        component: EditSchoolComponent,
-        resolve: {
-            school: SchoolResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.school.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
-        path: 'schools',
-        component: ListSchoolsComponent,
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.school.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
-        path: 'schools/:id/view',
-        component: ViewSchoolComponent,
-        resolve: {
-            school: SchoolResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.school.home.title'
-        },
-        canActivate: [UserRouteAccessService]
-    },
-    {
-        path: 'schools/:id/edit',
-        component: EditSchoolComponent,
-        resolve: {
-            school: SchoolResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.school.home.title'
-        },
-        canActivate: [UserRouteAccessService]
+  {
+    path: 'signin/callback',
+    component: LogonCallbackComponent,
+    data: {
+      authorities: []
     }
+  },
+  {
+    path: 'school/new',
+    component: EditSchoolComponent,
+    resolve: {
+      school: SchoolResolve
+    },
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'app.school.home.title'
+    },
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: 'schools',
+    component: ListSchoolsComponent,
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'app.school.home.title'
+    },
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: 'schools/:id/view',
+    component: ViewSchoolComponent,
+    resolve: {
+      school: SchoolResolve
+    },
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'app.school.home.title'
+    },
+    canActivate: [UserRouteAccessService]
+  },
+  {
+    path: 'schools/:id/edit',
+    component: EditSchoolComponent,
+    resolve: {
+      school: SchoolResolve
+    },
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'app.school.home.title'
+    },
+    canActivate: [UserRouteAccessService]
+  }
 ];
 
 export const schoolPopupRoute: Routes = [
-    {
-        path: 'school/:id/delete',
-        component: DeleteSchoolPopupComponent,
-        resolve: {
-            school: SchoolResolve
-        },
-        data: {
-            authorities: ['ROLE_USER'],
-            pageTitle: 'app.school.home.title'
-        },
-        canActivate: [UserRouteAccessService],
-        outlet: 'popup'
-    }
+  {
+    path: 'school/:id/delete',
+    component: DeleteSchoolPopupComponent,
+    resolve: {
+      school: SchoolResolve
+    },
+    data: {
+      authorities: ['ROLE_USER'],
+      pageTitle: 'app.school.home.title'
+    },
+    canActivate: [UserRouteAccessService],
+    outlet: 'popup'
+  }
 ];

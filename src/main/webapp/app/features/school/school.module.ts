@@ -5,30 +5,45 @@ import { JhiLanguageHelper } from 'app/core';
 
 import { SharedModule } from 'app/shared';
 import {
-    DeleteSchoolComponent,
-    DeleteSchoolPopupComponent,
-    EditSchoolComponent,
-    ListSchoolsComponent,
-    ViewSchoolComponent,
-    schoolRoute,
-    schoolPopupRoute
+  LogonCallbackComponent,
+  DeleteSchoolComponent,
+  DeleteSchoolPopupComponent,
+  EditSchoolComponent,
+  ListSchoolsComponent,
+  ViewSchoolComponent,
+  schoolRoute,
+  schoolPopupRoute
 } from './';
 
 const ENTITY_STATES = [...schoolRoute, ...schoolPopupRoute];
 
 @NgModule({
-    imports: [SharedModule, RouterModule.forChild(ENTITY_STATES)],
-    declarations: [DeleteSchoolComponent, DeleteSchoolPopupComponent, EditSchoolComponent, ListSchoolsComponent, ViewSchoolComponent],
-    entryComponents: [DeleteSchoolComponent, DeleteSchoolPopupComponent, EditSchoolComponent, ListSchoolsComponent, ViewSchoolComponent],
-    providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  imports: [SharedModule, RouterModule.forChild(ENTITY_STATES)],
+  declarations: [
+    LogonCallbackComponent,
+    DeleteSchoolComponent,
+    DeleteSchoolPopupComponent,
+    EditSchoolComponent,
+    ListSchoolsComponent,
+    ViewSchoolComponent
+  ],
+  entryComponents: [
+    LogonCallbackComponent,
+    DeleteSchoolComponent,
+    DeleteSchoolPopupComponent,
+    EditSchoolComponent,
+    ListSchoolsComponent,
+    ViewSchoolComponent
+  ],
+  providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SchoolModule {
-    constructor(private languageService: JhiLanguageService, private languageHelper: JhiLanguageHelper) {
-        this.languageHelper.language.subscribe((languageKey: string) => {
-            if (languageKey !== undefined) {
-                this.languageService.changeLanguage(languageKey);
-            }
-        });
-    }
+  constructor(private languageService: JhiLanguageService, private languageHelper: JhiLanguageHelper) {
+    this.languageHelper.language.subscribe((languageKey: string) => {
+      if (languageKey !== undefined) {
+        this.languageService.changeLanguage(languageKey);
+      }
+    });
+  }
 }
