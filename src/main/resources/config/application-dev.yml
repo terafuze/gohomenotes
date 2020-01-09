@@ -40,20 +40,26 @@ spring:
   # Also, change the liquibase-hibernate settings in the pom.xml file so that you can use ./mvnw liquibase:diff
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5444/gohomenotes3
-    username: postgres
-    password: password
+    #    url: jdbc:postgresql://localhost:5432/gohomenotes3
+    url: jdbc:h2:mem:gohomenotes;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    username: gohomenotes
+    password:
     hikari:
       poolName: Hikari
       auto-commit: false
+  h2:
+    console:
+      enabled: false
   jpa:
-    database-platform: io.github.jhipster.domain.util.FixedPostgreSQL95Dialect
-    database: POSTGRESQL
-    show-sql: false
+    #    database-platform: io.github.jhipster.domain.util.FixedPostgreSQL95Dialect
+    #    database: POSTGRESQL
+    database-platform: io.github.jhipster.domain.util.FixedH2Dialect
+    database: H2
+    show-sql: true
     properties:
       hibernate.id.new_generator_mappings: true
       hibernate.connection.provider_disables_autocommit: true
-      hibernate.cache.use_second_level_cache: true
+      hibernate.cache.use_second_level_cache: false
       hibernate.cache.use_query_cache: false
       hibernate.generate_statistics: false
   liquibase:
