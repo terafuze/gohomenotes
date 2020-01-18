@@ -11,7 +11,6 @@ import { DeleteSchoolPopupComponent } from './delete-school.component';
 import { EditSchoolComponent } from './edit-school.component';
 import { ListSchoolsComponent } from './list-schools.component';
 import { ViewSchoolComponent } from './view-school.component';
-import { LogonCallbackComponent } from './login-callback.component';
 
 @Injectable({ providedIn: 'root' })
 export class SchoolResolve implements Resolve<ISchool> {
@@ -30,13 +29,6 @@ export class SchoolResolve implements Resolve<ISchool> {
 }
 
 export const schoolRoute: Routes = [
-  {
-    path: 'signin/callback',
-    component: LogonCallbackComponent,
-    data: {
-      authorities: []
-    }
-  },
   {
     path: 'school/new',
     component: EditSchoolComponent,

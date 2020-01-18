@@ -1,4 +1,3 @@
-export * from './login-callback.component';
 export * from './school.service';
 export * from './school.route';
 export * from './delete-school.component';

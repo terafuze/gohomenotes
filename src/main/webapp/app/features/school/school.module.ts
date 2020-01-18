@@ -5,7 +5,6 @@ import { JhiLanguageHelper } from 'app/core';
 
 import { SharedModule } from 'app/shared';
 import {
-  LogonCallbackComponent,
   DeleteSchoolComponent,
   DeleteSchoolPopupComponent,
   EditSchoolComponent,
@@ -19,22 +18,8 @@ const ENTITY_STATES = [...schoolRoute, ...schoolPopupRoute];
 
 @NgModule({
   imports: [SharedModule, RouterModule.forChild(ENTITY_STATES)],
-  declarations: [
-    LogonCallbackComponent,
-    DeleteSchoolComponent,
-    DeleteSchoolPopupComponent,
-    EditSchoolComponent,
-    ListSchoolsComponent,
-    ViewSchoolComponent
-  ],
-  entryComponents: [
-    LogonCallbackComponent,
-    DeleteSchoolComponent,
-    DeleteSchoolPopupComponent,
-    EditSchoolComponent,
-    ListSchoolsComponent,
-    ViewSchoolComponent
-  ],
+  declarations: [DeleteSchoolComponent, DeleteSchoolPopupComponent, EditSchoolComponent, ListSchoolsComponent, ViewSchoolComponent],
+  entryComponents: [DeleteSchoolComponent, DeleteSchoolPopupComponent, EditSchoolComponent, ListSchoolsComponent, ViewSchoolComponent],
   providers: [{ provide: JhiLanguageService, useClass: JhiLanguageService }],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

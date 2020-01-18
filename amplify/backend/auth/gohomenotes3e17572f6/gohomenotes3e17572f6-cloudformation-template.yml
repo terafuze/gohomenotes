@@ -124,22 +124,7 @@ Parameters:
                       
   dependsOn:
     Type: CommaDelimitedList
-      
-  facebookAppIdUserPool:
-    Type: String
               
-  facebookAppSecretUserPool:
-    Type: String
-              
-  googleAppIdUserPool:
-    Type: String
-              
-  googleAppSecretUserPool:
-    Type: String
-              
-  hostedUIProviderCreds:
-    Type: String
-                      
   AllowedOAuthFlows:
     Type: CommaDelimitedList
               
@@ -170,6 +155,21 @@ Parameters:
   addLogoutOnUpdate:
     Type: String
             
+  facebookAppIdUserPool:
+    Type: String
+              
+  facebookAppSecretUserPool:
+    Type: String
+              
+  googleAppIdUserPool:
+    Type: String
+              
+  googleAppSecretUserPool:
+    Type: String
+              
+  hostedUIProviderCreds:
+    Type: String
+              
   oAuthMetadata:
     Type: String
             

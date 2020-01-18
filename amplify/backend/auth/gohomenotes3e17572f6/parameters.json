@@ -83,7 +83,7 @@
         "aws.cognito.signin.user.admin"
     ],
     "CallbackURLs": [
-        "http://localhost:9000/signin/callback/"
+        "http://localhost:9000/"
     ],
     "LogoutURLs": [
         "http://localhost:9000/"
@@ -99,5 +99,5 @@
     "addCallbackOnUpdate": false,
     "editLogoutURLs": [],
     "addLogoutOnUpdate": false,
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:9000/signin/callback/\"],\"LogoutURLs\":[\"http://localhost:9000/\"]}"
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"http://localhost:9000/\"],\"LogoutURLs\":[\"http://localhost:9000/\"]}"
 }
